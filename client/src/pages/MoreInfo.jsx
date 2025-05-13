@@ -9,7 +9,7 @@ import {
   FaGlobe,
   FaBriefcase,
 } from 'react-icons/fa';
-import Business from "../components/AboutPage/business-model.jsx"
+import Business from "../components/AboutPage/business-model.jsx";
 import VideoText from "../components/AboutPage/videoText.jsx";
 import AnimatedOverlay from '../components/AboutPage/AnimatedOverlay.jsx';
 import AboutGrid from '../components/AboutPage/AboutGrid.jsx';
@@ -20,32 +20,27 @@ import InnovativeApproach from '../components/AboutPage/InnovativeApproach.jsx';
 import SocietalImpact from '../components/AboutPage/SocietalImpact.jsx';
 
 const About = () => {
-  // References for scroll-triggered animations
   const headerRef = useRef(null);
   const introRef = useRef(null);
   const featuresRef = useRef(null);
   const impactRef = useRef(null);
-  
-  // For the tractor animation based on scroll
-  const { scrollYProgress } = useScroll();
-  const tractorX = useTransform(scrollYProgress, [0, 1], ['-5%', '925%']); // Tractor moves completely from left edge to right edge
 
-  // For floating animation and flip card state
+  const { scrollYProgress } = useScroll();
+  const tractorX = useTransform(scrollYProgress, [0, 1], ['-5%', '1200%']);
+
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [flippedCards, setFlippedCards] = useState({});
 
-  // Define the styles that were previously in a CSS module
   const flipCardStyles = {
     flipCard: "cursor-pointer perspective-1000 h-full",
     flipCardInner: "relative w-full h-full transition-transform duration-700 transform-style-preserve-3d",
     flipped: "rotate-y-180",
   };
 
-  // Throttled mouse movement for parallax effects
   useEffect(() => {
     let rafId;
     let lastUpdate = 0;
-    const throttleMs = 16; // ~60fps
+    const throttleMs = 16;
 
     const handleMouseMove = (e) => {
       const now = Date.now();
@@ -64,13 +59,11 @@ const About = () => {
     };
   }, []);
 
-  // Detect when sections are in view
   const isHeaderInView = useInView(headerRef, { once: true, margin: '-100px' });
   const isIntroInView = useInView(introRef, { once: true, margin: '-100px' });
   const isFeaturesInView = useInView(featuresRef, { once: true, margin: '-100px' });
   const isImpactInView = useInView(impactRef, { once: true, margin: '-100px' });
 
-  // Animation variants
   const fadeInUp = {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
@@ -91,7 +84,6 @@ const About = () => {
     },
   };
 
-  // Parallax movement for decorative elements
   const calculateParallaxMovement = (factor = 1) => {
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
@@ -102,7 +94,6 @@ const About = () => {
     return { x: offsetX, y: offsetY };
   };
 
-  // Toggle flip card state
   const toggleFlip = (index) => {
     setFlippedCards((prev) => ({
       ...prev,
@@ -112,69 +103,51 @@ const About = () => {
 
   return (
     <div className='bg-white text-black'>
-      {/* Fixed Tractor Animation at the bottom of the viewport */}
-      <div className="fixed bottom-0 left-0 right-0 h-24 bg-transparent z-50 pointer-events-none ">
-        {/* Tractor - much larger size */}
-        <motion.div
-          className="absolute bottom-4  transform scaleX(-1)"
-          style={{ x: tractorX }}
-        >
-          <img src="/images/tractor.png" alt="" className='h-25'/>
-        </motion.div>
+      
+      {/* Tractor animation - hidden on small screens */}
+      <div className="hidden md:block">
+        <div className="fixed bottom-0 left-0 right-0 h-24 bg-transparent z-50 pointer-events-none">
+          <motion.div
+            className="absolute bottom-4 transform scaleX(-1)"
+            style={{ x: tractorX }}
+          >
+            <img src="/images/tractor.png" alt="" className='h-20' />
+          </motion.div>
 
-        {/* Ground */}
-        <div className="absolute bottom-0 left-0 right-0 h-3 bg-green-800" />
+          <div className="absolute bottom-0 left-0 right-0 h-3 bg-green-800" />
 
-        {/* Crop rows */}
-        <div className="absolute bottom-3 left-0 right-0 h-6">
-          <div className="flex justify-between">
-            {[...Array(40)].map((_, i) => (
-              <div
-                key={i}
-                className="w-1.5 h-6 bg-green-700"
-              />
-            ))}
+          <div className="absolute bottom-3 left-0 right-0 h-6">
+            <div className="flex justify-between">
+              {[...Array(40)].map((_, i) => (
+                <div key={i} className="w-1.5 h-6 bg-green-700" />
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Header with animated gradients */}
+      {/* Header Section */}
       <header
         className="bg-fixed bg-center bg-cover bg-no-repeat relative h-96 overflow-hidden"
         style={{
           backgroundImage: "url('/images/sub-header.png')"
         }}
       >
-        {/* Animated overlay component */}
         <AnimatedOverlay />
       </header>
 
-      {/* About Content */}
-      <div className='mx-auto w-full  md:px-8'>
-        <OurApproach/>
-        <OverallModel/>
-        <Business/>
-        <AboutModel/>
-       <InnovativeApproach/>
-        <AboutGrid/>
+      {/* Main Content */}
+      <div className='mx-auto w-full md:px-8'>
+        <OurApproach />
+        <OverallModel />
+        <Business />
+        <AboutModel />
+        <InnovativeApproach />
+        <AboutGrid />
       </div>
 
-      
       <section className="w-full mx-auto py-16 px-4 md:px-8">
-        {/* Introduction with animated highlight */}
-
-        {/* Key Features with growing highlight on hover */}
-        
-
-
-        {/* Societal Impact with flip-card effect */}
-        <SocietalImpact/>
-       
-
-
-
-        {/* Add some extra space at the bottom to ensure scrolling has enough room to complete tractor animation */}
-        
+        <SocietalImpact />
       </section>
     </div>
   );

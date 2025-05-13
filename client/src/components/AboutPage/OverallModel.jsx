@@ -1,211 +1,169 @@
-import React from 'react';
+import { useState } from "react";
 
-const BusinessModelDiagram = () => {
+export default function FarmerDistributionNetwork() {
+  const [isHovered, setIsHovered] = useState(false);
+  
   return (
-    <div className="bg-cyan-50 p-8 min-h-screen w-full relative overflow-hidden">
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute left-0 top-0 h-full w-1/3">
-          <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="h-full w-full">
-            <path d="M0,0 C50,20 50,80 0,100" stroke="green" fill="none" strokeWidth="0.5" />
-            <path d="M0,0 C30,40 70,60 0,100" stroke="green" fill="none" strokeWidth="0.5" />
-            <path d="M0,0 C70,30 30,70 0,100" stroke="green" fill="none" strokeWidth="0.5" />
-          </svg>
-        </div>
-        <div className="absolute right-0 top-0 h-full w-1/3 transform scale-x-[-1]">
-          <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="h-full w-full">
-            <path d="M0,0 C50,20 50,80 0,100" stroke="green" fill="none" strokeWidth="0.5" />
-            <path d="M0,0 C30,40 70,60 0,100" stroke="green" fill="none" strokeWidth="0.5" />
-            <path d="M0,0 C70,30 30,70 0,100" stroke="green" fill="none" strokeWidth="0.5" />
-          </svg>
-        </div>
-      </div>
-
-      {/* Header */}
-      <div className="relative mb-16">
-        <h1 className="text-5xl font-bold text-green-800 pb-2">BUSINESS MODEL</h1>
-        <div className="w-72 h-1 bg-orange-500"></div>
-        <div className="absolute right-4 top-0">
+    <div className="bg-green-50 min-h-screen p-6">
+      <div className="max-w-6xl mx-auto">
+        <header className="flex items-center justify-between mb-8 bg-green-800 text-white p-4 rounded-lg shadow-lg">
           <div className="flex items-center">
-            <div className="text-green-500 text-4xl">villa</div>
-            <div className="text-orange-500 text-4xl">mart</div>
-            <div className="text-xs align-top mt-1">®</div>
-            <div className="ml-2 mt-1">
-              <svg viewBox="0 0 24 24" className="h-8 w-8 text-green-500 fill-current">
-                <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" />
-                <path d="M12,7L9,15H15L12,7Z" fill="white" />
+            <div className="bg-white p-2 rounded-full mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-800" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <path d="M8 10h8" />
+                <path d="M12 14V6" />
               </svg>
             </div>
+            <h1 className="text-2xl font-bold">Farmer Distribution Network</h1>
+          </div>
+          <div className="hidden md:flex items-center space-x-2">
+            <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md transition cursor-pointer">
+              Learn More
+            </button>
+            <a href="/contact">
+            <button className="bg-green-700 hover:bg-green-900 text-white px-4 py-2 rounded-md transition cursor-pointer">
+              Contact Us
+            </button>
+            </a>
+          </div>
+        </header>
+        
+        <div className="bg-white rounded-xl shadow-xl overflow-hidden mb-8">
+          <div className="bg-green-800 p-4 text-white">
+            <h2 className="text-xl font-semibold">Distribution Network Model</h2>
+            <p className="text-green-100">From farm to consumers through efficient distribution channels</p>
+          </div>
+          
+          <div className="p-4 flex justify-center" 
+               onMouseEnter={() => setIsHovered(true)}
+               onMouseLeave={() => setIsHovered(false)}>
+            <div className={`relative transition-transform duration-300 ${isHovered ? 'scale-102' : 'scale-100'}`}>
+              <img 
+                src="/images/business.png" 
+                alt="Farmer Distribution Network Diagram" 
+                className="max-w-full h-auto rounded-lg "
+              />
+              
+            </div>
+          </div>
+          
+          <div className="p-4 bg-orange-100 border-t-4 border-orange-500">
+            <h3 className="text-lg font-bold text-green-800 mb-2">Key Distribution Channels</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-white p-4 rounded shadow-md border-l-4 border-green-600">
+                <div className="flex items-center mb-2">
+                  <div className="bg-green-100 p-2 rounded-full mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                  </div>
+                  <h4 className="font-bold text-green-800">PFC Centers</h4>
+                </div>
+                <p className="text-sm text-gray-600">Procurement and fulfillment hubs that collect and process farm goods</p>
+              </div>
+              
+              <div className="bg-white p-4 rounded shadow-md border-l-4 border-orange-500">
+                <div className="flex items-center mb-2">
+                  <div className="bg-orange-100 p-2 rounded-full mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                  </div>
+                  <h4 className="font-bold text-orange-600">Franchise Outlets</h4>
+                </div>
+                <p className="text-sm text-gray-600">Retail locations that sell directly to consumers</p>
+              </div>
+              
+              <div className="bg-white p-4 rounded shadow-md border-l-4 border-green-600">
+                <div className="flex items-center mb-2">
+                  <div className="bg-green-100 p-2 rounded-full mr-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
+                  <h4 className="font-bold text-green-800">Villa Basket</h4>
+                </div>
+                <p className="text-sm text-gray-600">Subscription-based delivery of farm-fresh products to communities</p>
+              </div>
+            </div>
           </div>
         </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div className="bg-green-700 text-white p-3">
+              <h3 className="font-bold">Farmer Benefits</h3>
+            </div>
+            <div className="p-4">
+              <ul className="space-y-2">
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Direct market access without middlemen</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Better price realization for produce</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Reduced wastage through efficient logistics</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-orange-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Technical support and farming guidance</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div className="bg-orange-500 text-white p-3">
+              <h3 className="font-bold">Consumer Benefits</h3>
+            </div>
+            <div className="p-4">
+              <ul className="space-y-2">
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-green-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Fresh farm produce at competitive prices</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-green-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Traceability of products to source farms</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-green-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Consistent quality and supply</span>
+                </li>
+                <li className="flex items-start">
+                  <svg className="h-5 w-5 text-green-600 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Supporting local farmers and sustainable practices</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        
       </div>
-
-      {/* Flow Diagram */}
-      <div className="relative flex justify-center items-center">
-        {/* Flow diagram layout */}
-        <div className="flex flex-col md:flex-row items-center justify-center w-full gap-4">
-          {/* Farmers Group */}
-          <div className="relative">
-            <div className="bg-green-800 rounded-lg p-4 w-64 flex flex-col items-center justify-center text-white">
-              <div className="bg-white rounded-full p-2 mb-2">
-                <svg viewBox="0 0 24 24" className="h-10 w-10 text-green-800 fill-current">
-                  <path d="M15,14C12.33,14 7,15.33 7,18V20H23V18C23,15.33 17.67,14 15,14M15,12A4,4 0 0,0 19,8A4,4 0 0,0 15,4A4,4 0 0,0 11,8A4,4 0 0,0 15,12M5,13.28L7.45,14.77L6.8,11.96L9,10.08L6.11,9.83L5,7.19L3.89,9.83L1,10.08L3.18,11.96L2.5,14.77L5,13.28Z" />
-                </svg>
-              </div>
-              <div className="text-xl font-bold text-center">FARMERS GROUP</div>
-            </div>
-          </div>
-
-          {/* Horizontal line connecting Farmers to PFC */}
-          <div className="hidden md:block w-12 h-1 bg-black"></div>
-
-          {/* PFC */}
-          <div className="relative">
-            <div className="bg-green-800 rounded-lg p-4 w-64 flex flex-col items-center justify-center text-white">
-              <div className="bg-white rounded-full p-2 mb-2">
-                <svg viewBox="0 0 24 24" className="h-10 w-10 text-green-800 fill-current">
-                  <path d="M19,2H5A2,2 0 0,0 3,4V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V4A2,2 0 0,0 19,2M11,16H9V18H7V16H5V14H7V12H9V14H11V16M15,16H13V18H11V16H9V14H11V12H13V14H15V16M19,16H17V18H15V16H13V14H15V12H17V14H19V16Z" />
-                </svg>
-              </div>
-              <div className="text-xl font-bold text-center">PROCUREMENT CUM</div>
-              <div className="text-xl font-bold text-center">FULFILMENT CENTER</div>
-              <div className="text-xl font-bold text-center">(PFC)</div>
-            </div>
-          </div>
-
-          {/* Three distribution channels - position them to the right of PFC */}
-          <div className="flex flex-col gap-8 ml-8">
-            {/* Lines connecting PFC to distribution channels */}
-            <div className="hidden md:flex flex-col gap-8">
-              {/* Upper distribution path */}
-              <div className="flex items-center">
-                <div className="w-12 h-1 bg-black"></div>
-                <div className="bg-green-800 rounded-lg p-4 w-64 flex flex-col items-center justify-center text-white">
-                  <div className="bg-white rounded-full p-2 mb-2">
-                    <svg viewBox="0 0 24 24" className="h-10 w-10 text-green-800 fill-current">
-                      <path d="M17,18A2,2 0 0,1 19,20A2,2 0 0,1 17,22C15.89,22 15,21.1 15,20C15,18.89 15.89,18 17,18M1,2H4.27L5.21,4H20A1,1 0 0,1 21,5C21,5.17 20.95,5.34 20.88,5.5L17.3,11.97C16.96,12.58 16.3,13 15.55,13H8.1L7.2,14.63L7.17,14.75A0.25,0.25 0 0,0 7.42,15H19V17H7C5.89,17 5,16.1 5,15C5,14.65 5.09,14.32 5.24,14.04L6.6,11.59L3,4H1V2M7,18A2,2 0 0,1 9,20A2,2 0 0,1 7,22C5.89,22 5,21.1 5,20C5,18.89 5.89,18 7,18M16,11L18.78,6H6.14L8.5,11H16Z" />
-                    </svg>
-                  </div>
-                  <div className="text-xl font-bold text-center">FRANCHISE OUTLETS</div>
-                </div>
-                <div className="w-12 h-1 bg-black"></div>
-                <div className="bg-green-800 rounded-lg p-4 w-64 flex flex-col items-center justify-center text-white">
-                  <div className="text-xl font-bold text-center">COLONY, APT,</div>
-                  <div className="text-xl font-bold text-center">SOCIETY</div>
-                </div>
-              </div>
-
-              {/* Middle distribution path */}
-              <div className="flex items-center">
-                <div className="w-12 h-1 bg-black"></div>
-                <div className="bg-green-800 rounded-lg p-4 w-64 flex flex-col items-center justify-center text-white">
-                  <div className="bg-white rounded-full p-2 mb-2">
-                    <svg viewBox="0 0 24 24" className="h-10 w-10 text-green-800 fill-current">
-                      <path d="M9,20A2,2 0 0,1 7,22A2,2 0 0,1 5,20A2,2 0 0,1 7,18A2,2 0 0,1 9,20M17,18A2,2 0 0,1 19,20A2,2 0 0,1 17,22C15.89,22 15,21.1 15,20C15,18.89 15.89,18 17,18M7.17,14.75L7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.59 17.3,11.97L20.88,5.5C20.96,5.34 21,5.17 21,5A1,1 0 0,0 20,4H5.21L4.27,2H1V4H3L6.6,11.59L5.25,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42C7.29,15 7.17,14.89 7.17,14.75M18,2.76L16.59,1.35L11.76,6.18L9.41,3.82L8,5.23L11.76,9L18,2.76Z" />
-                    </svg>
-                  </div>
-                  <div className="text-xl font-bold text-center">VILLA BASKET</div>
-                </div>
-                <div className="w-12 h-1 bg-black"></div>
-                <div className="bg-green-800 rounded-lg p-4 w-64 flex flex-col items-center justify-center text-white">
-                  <div className="text-xl font-bold text-center">COLONY, APT,</div>
-                  <div className="text-xl font-bold text-center">SOCIETY</div>
-                </div>
-              </div>
-
-              {/* Lower distribution path */}
-              <div className="flex items-center">
-                <div className="w-12 h-1 bg-black"></div>
-                <div className="bg-green-800 rounded-lg p-4 w-64 flex flex-col items-center justify-center text-white">
-                  <div className="bg-white rounded-full p-2 mb-2">
-                    <svg viewBox="0 0 24 24" className="h-10 w-10 text-green-800 fill-current">
-                      <path d="M15,11V5.83C15,5.3 15.3,4.83 15.77,4.71L19.27,3.71C19.76,3.58 20.25,3.94 20.38,4.43C20.4,4.54 20.42,4.66 20.42,4.77V10.42C20.42,10.95 20.11,11.43 19.63,11.55L16.13,12.55C15.64,12.68 15.14,12.31 15.01,11.82C15,11.71 14.98,11.6 14.98,11.5V7.08L7.92,8.5V15.92C7.92,16.45 7.61,16.93 7.13,17.05L3.63,18.05C3.14,18.18 2.64,17.82 2.5,17.33C2.5,17.22 2.5,17.11 2.5,17V11.35C2.5,10.82 2.81,10.34 3.29,10.22L6.79,9.22C7.28,9.09 7.78,9.45 7.91,9.94C7.92,10.05 7.92,10.16 7.92,10.27V14.67L14.98,13.25V5.83Z" />
-                    </svg>
-                  </div>
-                  <div className="text-xl font-bold text-center">HORECA (B2B)</div>
-                </div>
-                <div className="w-12 h-1 bg-black"></div>
-                <div className="bg-green-800 rounded-lg p-4 w-64 flex flex-col items-center justify-center text-white">
-                  <div className="text-xl font-bold text-center">HOTEL/ HOSTEL/</div>
-                  <div className="text-xl font-bold text-center">CANTEEN/ SCHOOL</div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Mobile view stacked layout */}
-            <div className="md:hidden flex flex-col gap-8">
-              {/* Distribution channels - stacked vertically for mobile */}
-              <div className="flex flex-col gap-4">
-                <div className="bg-green-800 rounded-lg p-4 w-64 flex flex-col items-center justify-center text-white">
-                  <div className="bg-white rounded-full p-2 mb-2">
-                    <svg viewBox="0 0 24 24" className="h-10 w-10 text-green-800 fill-current">
-                      <path d="M17,18A2,2 0 0,1 19,20A2,2 0 0,1 17,22C15.89,22 15,21.1 15,20C15,18.89 15.89,18 17,18M1,2H4.27L5.21,4H20A1,1 0 0,1 21,5C21,5.17 20.95,5.34 20.88,5.5L17.3,11.97C16.96,12.58 16.3,13 15.55,13H8.1L7.2,14.63L7.17,14.75A0.25,0.25 0 0,0 7.42,15H19V17H7C5.89,17 5,16.1 5,15C5,14.65 5.09,14.32 5.24,14.04L6.6,11.59L3,4H1V2M7,18A2,2 0 0,1 9,20A2,2 0 0,1 7,22C5.89,22 5,21.1 5,20C5,18.89 5.89,18 7,18M16,11L18.78,6H6.14L8.5,11H16Z" />
-                    </svg>
-                  </div>
-                  <div className="text-xl font-bold text-center">FRANCHISE OUTLETS</div>
-                </div>
-                <div className="h-8 w-1 bg-black mx-auto"></div>
-                <div className="bg-green-800 rounded-lg p-4 w-64 flex flex-col items-center justify-center text-white">
-                  <div className="text-xl font-bold text-center">COLONY, APT,</div>
-                  <div className="text-xl font-bold text-center">SOCIETY</div>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-4">
-                <div className="bg-green-800 rounded-lg p-4 w-64 flex flex-col items-center justify-center text-white">
-                  <div className="bg-white rounded-full p-2 mb-2">
-                    <svg viewBox="0 0 24 24" className="h-10 w-10 text-green-800 fill-current">
-                      <path d="M9,20A2,2 0 0,1 7,22A2,2 0 0,1 5,20A2,2 0 0,1 7,18A2,2 0 0,1 9,20M17,18A2,2 0 0,1 19,20A2,2 0 0,1 17,22C15.89,22 15,21.1 15,20C15,18.89 15.89,18 17,18M7.17,14.75L7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.59 17.3,11.97L20.88,5.5C20.96,5.34 21,5.17 21,5A1,1 0 0,0 20,4H5.21L4.27,2H1V4H3L6.6,11.59L5.25,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42C7.29,15 7.17,14.89 7.17,14.75M18,2.76L16.59,1.35L11.76,6.18L9.41,3.82L8,5.23L11.76,9L18,2.76Z" />
-                    </svg>
-                  </div>
-                  <div className="text-xl font-bold text-center">VILLA BASKET</div>
-                </div>
-                <div className="h-8 w-1 bg-black mx-auto"></div>
-                <div className="bg-green-800 rounded-lg p-4 w-64 flex flex-col items-center justify-center text-white">
-                  <div className="text-xl font-bold text-center">COLONY, APT,</div>
-                  <div className="text-xl font-bold text-center">SOCIETY</div>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-4">
-                <div className="bg-green-800 rounded-lg p-4 w-64 flex flex-col items-center justify-center text-white">
-                  <div className="bg-white rounded-full p-2 mb-2">
-                    <svg viewBox="0 0 24 24" className="h-10 w-10 text-green-800 fill-current">
-                      <path d="M15,11V5.83C15,5.3 15.3,4.83 15.77,4.71L19.27,3.71C19.76,3.58 20.25,3.94 20.38,4.43C20.4,4.54 20.42,4.66 20.42,4.77V10.42C20.42,10.95 20.11,11.43 19.63,11.55L16.13,12.55C15.64,12.68 15.14,12.31 15.01,11.82C15,11.71 14.98,11.6 14.98,11.5V7.08L7.92,8.5V15.92C7.92,16.45 7.61,16.93 7.13,17.05L3.63,18.05C3.14,18.18 2.64,17.82 2.5,17.33C2.5,17.22 2.5,17.11 2.5,17V11.35C2.5,10.82 2.81,10.34 3.29,10.22L6.79,9.22C7.28,9.09 7.78,9.45 7.91,9.94C7.92,10.05 7.92,10.16 7.92,10.27V14.67L14.98,13.25V5.83Z" />
-                    </svg>
-                  </div>
-                  <div className="text-xl font-bold text-center">HORECA (B2B)</div>
-                </div>
-                <div className="h-8 w-1 bg-black mx-auto"></div>
-                <div className="bg-green-800 rounded-lg p-4 w-64 flex flex-col items-center justify-center text-white">
-                  <div className="text-xl font-bold text-center">HOTEL/ HOSTEL/</div>
-                  <div className="text-xl font-bold text-center">CANTEEN/ SCHOOL</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Connecting lines for desktop */}
-        <div className="hidden md:block absolute top-1/2 left-1/2 transform -translate-x-1/4 -translate-y-1/2">
-          {/* Vertical lines from PFC to 3 distribution channels */}
-          <svg className="absolute top-0 left-0" width="180" height="300" viewBox="0 0 180 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-            {/* Top line to Franchise Outlets */}
-            <path d="M0 50 H 180" stroke="black" strokeWidth="4" />
-            
-            {/* Middle Line to Villa Basket */}
-            <path d="M0 150 H 180" stroke="black" strokeWidth="4" />
-            
-            {/* Bottom Line to HORECA */}
-            <path d="M0 250 H 180" stroke="black" strokeWidth="4" />
-            
-            {/* Vertical connector */}
-            <path d="M0 50 V 250" stroke="black" strokeWidth="4" />
-          </svg>
-        </div>
-      </div>
+      
+     
     </div>
   );
-};
-
-export default BusinessModelDiagram;
+}

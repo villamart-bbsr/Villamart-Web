@@ -39,8 +39,8 @@ const EmpoweringEveryLink = () => {
         </div>
       </div>
       
-      {/* Right Image Strip */}
-      <div className="lg:w-1/2 w-full flex justify-center">
+      {/* Right Image Strip - hidden on small screens */}
+      <div className="lg:w-1/2 w-full justify-center hidden md:flex">
         <div className="flex h-[500px] gap-4 overflow-visible">
           {images.map((img, idx) => (
             <div

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 export default function PFCComponent() {
   const [activeStep, setActiveStep] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentVideoStep, setCurrentVideoStep] = useState(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -12,6 +13,11 @@ export default function PFCComponent() {
     }, 800);
     return () => clearTimeout(timer);
   }, [activeStep]);
+
+  const openVideoModal = (stepId) => {
+    setCurrentVideoStep(stepId);
+    setIsModalOpen(true);
+  };
 
   const steps = [
     {
@@ -25,12 +31,16 @@ export default function PFCComponent() {
       icon: "⚖️",
       title: "Sorting / Grading / Packaging",
       description: "Quality assessment",
+      hasVideo: true,
+      videoSrc: "/videos/sorting-grading.mp4",
     },
     {
       id: 3,
       icon: "💧",
       title: "Cleaning of Chemicals / Pesticides",
       description: "Ozone treatment process",
+      hasVideo: true,
+      videoSrc: "/videos/OzoneCleaning.mp4",
     },
     {
       id: 4,
@@ -51,6 +61,18 @@ export default function PFCComponent() {
       description: "Zero waste initiative",
     },
   ];
+
+  const getCurrentVideoInfo = () => {
+    const step = steps.find(step => step.id === currentVideoStep);
+    return {
+      title: step ? step.title : "",
+      icon: step ? step.icon : "",
+      videoSrc: step ? step.videoSrc : "",
+      description: step && step.id === 2 
+        ? "Our advanced sorting and grading system uses computer vision to assess produce quality, ensuring consistent standards and premium pricing for farmers."
+        : "Our ozone cleaning system removes residual chemicals and pesticides from produce using ozone-enriched water. This eco-friendly process ensures higher hygiene standards and extends shelf life by up to 40%."
+    };
+  };
 
   return (
     <div className="font-sans">
@@ -130,7 +152,6 @@ export default function PFCComponent() {
           <div className="h-1 w-16 bg-green-600 rounded-full mx-2"></div>
         </div>
         <div className="text-center mb-4">
-
           <p className="text-center text-green-800 font-medium bg-green-50 inline-block px-4 py-1 rounded-full mx-auto block w-fit">
             A 6 Step Process for Agricultural Excellence
           </p>
@@ -164,7 +185,6 @@ export default function PFCComponent() {
             <div className="space-y-4">
               {steps.map((step, index) => {
                 const isActive = index <= activeStep;
-                const isVideoStep = step.id === 3;
 
                 return (
                   <div
@@ -200,9 +220,9 @@ export default function PFCComponent() {
                       <p className="text-sm text-gray-600">{step.description}</p>
                     </div>
 
-                    {isVideoStep && (
+                    {step.hasVideo && isActive && (
                       <button
-                        onClick={() => setIsModalOpen(true)}
+                        onClick={() => openVideoModal(step.id)}
                         className="cursor-pointer ml-2 bg-yellow-500 text-white rounded-full p-3 mega-glow-play flex items-center justify-center w-12 h-12 text-xl hover:bg-yellow-600 transition-all"
                         title="Watch video"
                       >
@@ -219,52 +239,51 @@ export default function PFCComponent() {
 
       {/* Modal */}
       {isModalOpen && (
-  <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4">
-    <div className="bg-white rounded-xl shadow-2xl w-full max-w-4xl p-6 relative">
-      {/* Close Button */}
-      <button
-        onClick={() => setIsModalOpen(false)}
-        className="cursor-pointer absolute top-4 right-4 text-gray-500 hover:text-gray-700 bg-gray-100 rounded-full w-8 h-8 flex items-center justify-center"
-      >
-        ✕
-      </button>
-      
-      {/* Responsive Layout - Stacked on mobile, side by side on larger screens */}
-      <div className="flex flex-col md:flex-row gap-6">
-        {/* Left: Video - Now optimized for vertical video */}
-        <div className="md:w-2/5">
-          <div className="aspect-[9/16] bg-black rounded-lg overflow-hidden">
-            <video
-              className="w-full h-full object-contain"
-              src="/videos/OzoneCleaning.mp4"
-              controls
-            />
-          </div>
-        </div>
-        
-        {/* Right: Text Content */}
-        <div className="md:w-3/5 flex flex-col justify-center">
-          <div className="mb-4 flex items-center">
-            <div className="bg-green-100 p-3 rounded-full mr-4">
-              <span className="text-green-700 text-2xl">💧</span>
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4">
+          <div className="bg-white rounded-xl shadow-2xl w-full max-w-4xl p-6 relative">
+            {/* Close Button */}
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="cursor-pointer absolute top-4 right-4 text-gray-500 hover:text-gray-700 bg-gray-100 rounded-full w-8 h-8 flex items-center justify-center"
+            >
+              ✕
+            </button>
+            
+            {/* Responsive Layout - Stacked on mobile, side by side on larger screens */}
+            <div className="flex flex-col md:flex-row gap-6">
+              {/* Left: Video - Now optimized for vertical video */}
+              <div className="md:w-2/5">
+                <div className="aspect-[9/16] bg-black rounded-lg overflow-hidden">
+                  <video
+                    className="w-full h-full object-contain "
+                    muted
+                    loop
+                    src={getCurrentVideoInfo().videoSrc}
+                    autoPlay
+                    controls
+                  />
+                </div>
+              </div>
+              
+              {/* Right: Text Content */}
+              <div className="md:w-3/5 flex flex-col justify-center">
+                <div className="mb-4 flex items-center">
+                  <div className="bg-green-100 p-3 rounded-full mr-4">
+                    <span className="text-green-700 text-2xl">{getCurrentVideoInfo().icon}</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-green-700">
+                    {getCurrentVideoInfo().title}
+                  </h3>
+                </div>
+                
+                <p className="text-base text-gray-700 leading-relaxed">
+                  {getCurrentVideoInfo().description}
+                </p>
+              </div>
             </div>
-            <h3 className="text-2xl font-bold text-green-700">
-              Ozone Cleaning Technology
-            </h3>
           </div>
-          
-          <p className="text-base text-gray-700 leading-relaxed">
-            Our ozone cleaning system removes residual chemicals and pesticides from produce
-            using ozone-enriched water. This eco-friendly process ensures higher hygiene standards
-            and extends shelf life by up to 40%.
-          </p>
         </div>
-      </div>
-    </div>
-  </div>
-)}
-
-
+      )}
     </div>
   );
 }
