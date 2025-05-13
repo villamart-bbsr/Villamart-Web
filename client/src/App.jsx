@@ -19,13 +19,13 @@ import BlogPage from "./pages/blog/BlogPage";
 import Navbar from "./components/common/Navbar.jsx"
 import Footer from "./components/HomePage/Footer.jsx";
 import Home from "./pages/Home.jsx"
-import MoreInfo from "./Pages/MoreInfo.jsx";
-import Journey from "./Pages/Journey.jsx";
-import FranchisePage from "./Pages/FranchiseModel.jsx";
-import ContactUs from "./Pages/ContactUs.jsx";
+import MoreInfo from "./pages/MoreInfo.jsx";
+import Journey from "./pages/Journey.jsx";
+import FranchisePage from "./pages/FranchiseModel.jsx";
+import ContactUs from "./pages/ContactUs.jsx";
 
-import MediaPage from "./Pages/mediaPage.jsx";
-import GalleryPage from "./Pages/GalleryPage.jsx";
+import MediaPage from "./pages/mediaPage.jsx";
+import GalleryPage from "./pages/GalleryPage.jsx";
 
 function App() {
   return (
