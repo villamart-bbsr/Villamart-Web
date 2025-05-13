@@ -151,17 +151,17 @@ const About = () => {
 
       {/* About Content */}
       <div className='mx-auto w-full  md:px-8'>
+        <OurApproach/>
+        <OverallModel/>
         <Business/>
+        <AboutModel/>
+       <InnovativeApproach/>
         <AboutGrid/>
       </div>
-        <AboutModel/>
-        <OverallModel/>
 
       
       <section className="w-full mx-auto py-16 px-4 md:px-8">
-        <OurApproach/>
         {/* Introduction with animated highlight */}
-       <InnovativeApproach/>
 
         {/* Key Features with growing highlight on hover */}
         

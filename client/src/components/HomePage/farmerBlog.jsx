@@ -1,8 +1,96 @@
+import { useState, useEffect } from 'react';
 import {
   Tractor, Sun, Cloud, BookOpen, PenTool, ArrowRight, Leaf, Calendar, User
 } from 'lucide-react';
 
 export default function FarmerBlog() {
+  // Animation states
+  const [sunPosition, setSunPosition] = useState(0);
+  const [cloudPosition, setCloudPosition] = useState(0);
+  const [hoveredButton, setHoveredButton] = useState(null);
+  
+  // Set up animations
+  useEffect(() => {
+    const sunInterval = setInterval(() => {
+      setSunPosition(prev => (prev + 1) % 100);
+    }, 200);
+    
+    const cloudInterval = setInterval(() => {
+      setCloudPosition(prev => (prev + 0.5) % 100);
+    }, 100);
+    
+    return () => {
+      clearInterval(sunInterval);
+      clearInterval(cloudInterval);
+    };
+  }, []);
+  
+  // CSS animations
+  const animationStyles = `
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    @keyframes bounce-x {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(3px); }
+    }
+    
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    .animate-bounce-x {
+      animation: bounce-x 0.7s infinite;
+    }
+    
+    .hover-grow {
+      transition: all 0.3s ease;
+    }
+    
+    .hover-grow:hover {
+      transform: scale(1.03);
+    }
+    
+    .card-hover {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card-hover::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(76,175,80,0.1) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .card-hover:hover::after {
+      opacity: 1;
+    }
+    
+    .card-overlay {
+      position: absolute;
+      bottom: -40px;
+      left: 0;
+      right: 0;
+      background-color: rgba(52, 211, 153, 0.9);
+      color: white;
+      padding: 8px;
+      transition: bottom 0.3s ease;
+    }
+    
+    .hover-card:hover .card-overlay {
+      bottom: 0;
+    }
+  `;
+  
   // Static data
   const samplePosts = [
     {
@@ -46,19 +134,32 @@ export default function FarmerBlog() {
 
   return (
     <div className="w-full min-h-screen bg-white font-sans relative overflow-hidden">
-      {/* Animated Background - Static Now */}
+      {/* Add custom animations */}
+      <style>{animationStyles}</style>
+      {/* Animated Background */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
-        <div className="absolute text-yellow-400" style={{ left: '50%', top: '15%' }}>
-          <Sun size={64} />
+        <div className="absolute text-yellow-400" 
+             style={{ 
+               left: `${sunPosition}%`, 
+               top: '15%', 
+               transition: 'left 0.2s linear',
+               filter: 'drop-shadow(0 0 8px rgba(250, 204, 21, 0.5))'
+             }}>
+          <Sun size={64} className="animate-pulse" />
         </div>
-        <div className="absolute text-gray-200" style={{ left: '20%', top: '10%' }}>
+        <div className="absolute text-gray-200" 
+             style={{ 
+               left: `${cloudPosition}%`, 
+               top: '10%', 
+               transition: 'left 0.1s linear' 
+             }}>
           <Cloud size={64} />
         </div>
       </div>
 
       {/* Header */}
       <div className="pt-12 pb-6 text-center relative z-10">
-        <div className="inline-block mb-4 relative">
+        <div className="inline-block mb-4 relative animate-float">
           <Tractor size={48} className="inline-block text-green-600 mr-3" />
           <h1 className="text-5xl font-bold text-green-800 inline-block">Harvest Insights</h1>
         </div>
@@ -72,7 +173,7 @@ export default function FarmerBlog() {
         <div className="max-w-6xl mx-auto px-4 flex items-center justify-center space-x-2 overflow-x-auto">
           <span className="text-green-800 font-semibold">Season's Bounty:</span>
           {seasonalProduce.map((item, i) => (
-            <span key={i} className={`${item.color} text-white px-3 py-1 rounded-full text-sm font-medium`}>
+            <span key={i} className={`${item.color} text-white px-3 py-1 rounded-full text-sm font-medium transform transition-all hover:scale-110 hover:shadow-md cursor-pointer`}>
               {item.name}
             </span>
           ))}
@@ -93,16 +194,42 @@ export default function FarmerBlog() {
 
             <div className="flex flex-col sm:flex-row gap-4 mt-2">
               {/* Write Blog Button */}
-              <button className="flex items-center justify-center px-6 py-3 rounded-lg font-medium bg-white text-green-700 border-2 border-green-600 shadow-md">
+              <a href="/blogPage">
+              <button 
+                className={`flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all cursor-pointer duration-300 ${
+                  hoveredButton === 'write'
+                    ? 'bg-green-600 text-white shadow-lg transform scale-105'
+                    : 'bg-white text-green-700 border-2 border-green-600 shadow-md'
+                }`}
+                onMouseEnter={() => setHoveredButton('write')}
+                onMouseLeave={() => setHoveredButton(null)}
+              >
                 <PenTool size={20} className="mr-2" />
-                Write a Blog
+                Blog Page
+                {hoveredButton === 'write' && (
+                  <ArrowRight size={16} className="ml-2 animate-bounce-x" />
+                )}
               </button>
+              </a>
 
               {/* Read Blog Button */}
-              <button className="flex items-center justify-center px-6 py-3 rounded-lg font-medium bg-white text-amber-700 border-2 border-amber-600 shadow-md">
+              <a href='/blog'>
+              <button 
+                className={`flex items-center justify-center cursor-pointer px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
+                  hoveredButton === 'read'
+                    ? 'bg-amber-600 text-white shadow-lg transform scale-105'
+                    : 'bg-white text-amber-700 border-2 border-amber-600 shadow-md'
+                }`}
+                onMouseEnter={() => setHoveredButton('read')}
+                onMouseLeave={() => setHoveredButton(null)}
+              >
                 <BookOpen size={20} className="mr-2" />
                 Read Blogs
+                {hoveredButton === 'read' && (
+                  <ArrowRight size={16} className="ml-2 animate-bounce-x" />
+                )}
               </button>
+              </a>
             </div>
           </div>
 
@@ -123,18 +250,24 @@ export default function FarmerBlog() {
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
             {samplePosts.map((post, i) => (
-              <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden border border-green-100 hover:shadow-lg transition-shadow duration-300">
+              <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden border border-green-100 hover:shadow-lg transition-all duration-300 hover-grow card-hover hover-card">
                 <div className={`h-40 relative overflow-hidden ${post.color}`}>
-                  <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+                  <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
                   <div className="absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-medium text-green-800">
                     {post.category.charAt(0).toUpperCase() + post.category.slice(1)}
                   </div>
+                  <div className="card-overlay text-center">
+                    <span className="text-xs font-medium">Read {post.readTime} read</span>
+                  </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="text-lg font-bold text-green-800 hover:text-green-600 transition-colors">{post.title}</h3>
+                  <h3 className="text-lg font-bold text-green-800 hover:text-green-600 transition-colors group">
+                    {post.title}
+                    <ArrowRight size={16} className="inline ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </h3>
                   <p className="text-green-600 mt-2 text-sm line-clamp-2">{post.excerpt}</p>
                   <div className="flex justify-between items-center mt-4 pt-2 border-t border-green-100 text-xs text-gray-500">
-                    <div className="flex items-center">
+                    <div className="flex items-center hover:text-green-700 transition-colors cursor-pointer">
                       <User size={14} className="mr-1" />
                       {post.author}
                     </div>
@@ -155,9 +288,9 @@ export default function FarmerBlog() {
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h3 className="text-xl font-bold mb-2">Join Our Growing Community</h3>
           <p className="mb-4">Get seasonal growing tips, recipes, and more delivered to your inbox.</p>
-          <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-            <input type="email" placeholder="Enter your email" className="px-4 py-2 rounded-lg text-green-800 flex-grow" />
-            <button className="bg-yellow-500 hover:bg-yellow-400 text-green-900 px-6 py-2 rounded-lg">Subscribe</button>
+          <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto ">
+            <input type="email" placeholder="Enter your email" className="px-4 py-2 rounded-lg text-black flex-grow focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all border-white border-2" />
+            <button className="bg-yellow-500 cursor-pointer hover:bg-yellow-400 text-green-900 px-6 py-2 rounded-lg transition-colors duration-300 hover:shadow-lg transform hover:scale-105">Subscribe</button>
           </div>
         </div>
       </div>
