@@ -1,30 +1,82 @@
 import { useState, useEffect } from 'react';
-import { Play, Image, Newspaper, ChevronRight, ChevronLeft } from 'lucide-react';
+import { Play, Newspaper, ChevronRight, ChevronLeft, Link as LinkIcon } from 'lucide-react';
 
 export default function FarmMediaPage() {
-  const [activeTab, setActiveTab] = useState('photos');
+  const [activeTab, setActiveTab] = useState('videos');
   const [currentSlide, setCurrentSlide] = useState(0);
   
   // Sample media data
   const mediaItems = {
-    photos: [
-      { id: 1, title: "Spring Harvest", description: "Our team gathering the season's first crops", category: "Harvest" },
-      { id: 2, title: "New Tractor", description: "The latest addition to our farming equipment", category: "Equipment" },
-      { id: 3, title: "Organic Vegetables", description: "Fresh produce from our organic fields", category: "Produce" },
-      { id: 4, title: "Farm Animals", description: "Meet our friendly farm animals", category: "Animals" },
-      { id: 5, title: "Sunset at the Farm", description: "Beautiful evening views of our farmland", category: "Landscape" },
-      { id: 6, title: "Irrigation System", description: "Our new sustainable irrigation setup", category: "Technology" },
-    ],
     videos: [
-      { id: 1, title: "Planting Season Timelapse", duration: "3:45", category: "Farm Work" },
-      { id: 2, title: "Meet the Farmers", duration: "5:20", category: "Team" },
-      { id: 3, title: "Harvesting Techniques", duration: "4:12", category: "Education" },
-      { id: 4, title: "Farm Tour", duration: "7:30", category: "Tour" },
+      { id: 1, title: "Planting Season Timelapse", duration: "3:45" },
+      { id: 2, title: "Meet the Farmers", duration: "5:20" },
+      { id: 3, title: "Harvesting Techniques", duration: "4:12" },
+      { id: 4, title: "Farm Tour", duration: "7:30" },
     ],
     news: [
-      { id: 1, title: "Farm Wins Sustainability Award", date: "April 15, 2025", excerpt: "Our commitment to sustainable farming practices has been recognized..." },
-      { id: 2, title: "New Community Program Launched", date: "March 22, 2025", excerpt: "We're excited to announce our new program connecting local schools with farming education..." },
-      { id: 3, title: "Seasonal Produce Update", date: "February 10, 2025", excerpt: "This season we're featuring our award-winning organic vegetables and fruits..." },
+      { 
+        id: 1, 
+        title: "Farm Wins Sustainability Award", 
+        date: "April 15, 2025", 
+        excerpt: "Our commitment to sustainable farming practices has been recognized...",
+        link: "https://example.com/sustainability-award"
+      },
+      { 
+        id: 2, 
+        title: "New Community Program Launched", 
+        date: "March 22, 2025", 
+        excerpt: "We're excited to announce our new program connecting local schools with farming education...",
+        link: "https://example.com/community-program"
+      },
+      { 
+        id: 3, 
+        title: "Seasonal Produce Update", 
+        date: "February 10, 2025", 
+        excerpt: "This season we're featuring our award-winning organic vegetables and fruits...",
+        link: "https://example.com/seasonal-update"
+      },
+      { 
+        id: 4, 
+        title: "Farm-to-Table Partnership with Local Restaurants", 
+        date: "January 25, 2025", 
+        excerpt: "We've partnered with five local restaurants to provide fresh, organic produce directly from our farm...",
+        link: "https://example.com/farm-to-table"
+      },
+      { 
+        id: 5, 
+        title: "New Organic Certification Achieved", 
+        date: "December 18, 2024", 
+        excerpt: "Our farm has received the highest level of organic certification after rigorous evaluation...",
+        link: "https://example.com/organic-certification"
+      },
+      { 
+        id: 6, 
+        title: "Winter Workshop Series Announced", 
+        date: "November 30, 2024", 
+        excerpt: "Join us for our winter workshop series covering topics from home gardening to sustainable farming practices...",
+        link: "https://example.com/winter-workshops"
+      },
+      { 
+        id: 7, 
+        title: "Expanded CSA Program for Next Season", 
+        date: "October 15, 2024", 
+        excerpt: "Due to popular demand, we're expanding our Community Supported Agriculture program for the upcoming season...",
+        link: "https://example.com/csa-expansion"
+      },
+      { 
+        id: 8, 
+        title: "Innovative Irrigation System Reduces Water Usage by 40%", 
+        date: "September 5, 2024", 
+        excerpt: "Our newly implemented smart irrigation system has significantly reduced our water consumption while maintaining crop yields...",
+        link: "https://example.com/irrigation-innovation"
+      },
+      { 
+        id: 9, 
+        title: "Annual Farm Festival Dates Announced", 
+        date: "August 20, 2024", 
+        excerpt: "Mark your calendars for our biggest event of the year! The Annual Farm Festival will take place on...",
+        link: "https://example.com/farm-festival"
+      }
     ]
   };
 
@@ -41,17 +93,20 @@ export default function FarmMediaPage() {
     {
       title: "Our Award-Winning Produce",
       description: "Discover the fresh, organic vegetables and fruits grown with care on our farm.",
-      image: "produce"
+      bgColor: "bg-orange-500",
+      image: "/api/placeholder/1200/700?text=Produce"
     },
     {
       title: "Sustainable Farming Practices",
       description: "Learn about our commitment to environmentally friendly farming methods.",
-      image: "sustainable"
+      bgColor: "bg-green-700",
+      image: "/api/placeholder/1200/700?text=Sustainable"
     },
     {
       title: "Farm Tours Now Available",
       description: "Book a tour to experience our beautiful farm firsthand.",
-      image: "tour"
+      bgColor: "bg-green-600",
+      image: "/api/placeholder/1200/700?text=Tours"
     }
   ];
 
@@ -62,20 +117,6 @@ export default function FarmMediaPage() {
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev === 0 ? featuredItems.length - 1 : prev - 1));
-  };
-
-  // Filter by category
-  const [activeFilter, setActiveFilter] = useState('All');
-  
-  const filteredMedia = (type) => {
-    if (activeFilter === 'All') return mediaItems[type];
-    return mediaItems[type].filter(item => item.category === activeFilter);
-  };
-
-  // Get unique categories for the active tab
-  const getCategories = (type) => {
-    const categories = mediaItems[type].map(item => item.category);
-    return ['All', ...new Set(categories)];
   };
 
   // Animation classes for items
@@ -90,15 +131,15 @@ export default function FarmMediaPage() {
             key={index}
             className={`absolute inset-0 transition-opacity duration-1000 flex items-center ${currentSlide === index ? 'opacity-100' : 'opacity-0'}`}
           >
-            {/* Placeholder image with appropriate color based on content */}
-            <div className={`absolute inset-0 ${item.image === 'produce' ? 'bg-orange-500' : item.image === 'sustainable' ? 'bg-green-700' : 'bg-green-600'} opacity-80`}>
-              <img src="/api/placeholder/1200/700" alt="placeholder" className="w-full h-full object-cover opacity-30" />
+            {/* Placeholder with background color */}
+            <div className={`absolute inset-0 ${item.bgColor} opacity-80`}>
+              <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-30" />
             </div>
             
             <div className="relative z-10 container mx-auto px-6 text-white">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">{item.title}</h1>
               <p className="text-xl mb-8 max-w-2xl">{item.description}</p>
-              <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition duration-300 transform hover:scale-105">
+              <button className="cursor-pointer bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition duration-300 transform hover:scale-105">
                 Learn More
               </button>
             </div>
@@ -109,7 +150,7 @@ export default function FarmMediaPage() {
         <div className="absolute inset-y-0 left-0 flex items-center">
           <button 
             onClick={prevSlide} 
-            className="bg-black bg-opacity-30 text-white p-2 rounded-r-lg hover:bg-opacity-50 transition duration-300"
+            className="cursor-pointer bg-black bg-opacity-30 text-white p-2 rounded-r-lg hover:bg-opacity-50 transition duration-300"
           >
             <ChevronLeft size={24} />
           </button>
@@ -117,7 +158,7 @@ export default function FarmMediaPage() {
         <div className="absolute inset-y-0 right-0 flex items-center">
           <button 
             onClick={nextSlide} 
-            className="bg-black bg-opacity-30 text-white p-2 rounded-l-lg hover:bg-opacity-50 transition duration-300"
+            className="cursor-pointer bg-black bg-opacity-30 text-white p-2 rounded-l-lg hover:bg-opacity-50 transition duration-300"
           >
             <ChevronRight size={24} />
           </button>
@@ -129,7 +170,7 @@ export default function FarmMediaPage() {
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index ? 'bg-white w-6' : 'bg-white bg-opacity-50'}`}
+              className={`cursor-pointer w-3 h-3 rounded-full transition-all duration-300 ${currentSlide === index ? 'bg-white w-6' : 'bg-white bg-opacity-50'}`}
             />
           ))}
         </div>
@@ -140,85 +181,32 @@ export default function FarmMediaPage() {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-green-800 mb-4">Farm Media Center</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Explore photos, videos, and news from our farm. See our daily operations, meet our team, and stay updated with our latest news and events.
+            Explore videos and news from our farm. See our daily operations, meet our team, and stay updated with our latest news and events.
           </p>
         </div>
         
         {/* Media Navigation Tabs */}
         <div className="flex flex-wrap justify-center mb-8 border-b border-gray-200">
           <button 
-            onClick={() => {setActiveTab('photos'); setActiveFilter('All');}}
-            className={`flex items-center px-6 py-3 font-medium text-lg transition-all duration-200 ${activeTab === 'photos' ? 'text-orange-500 border-b-2 border-orange-500' : 'text-gray-600 hover:text-green-700'}`}
-          >
-            <Image className="mr-2" size={20} />
-            Photos
-          </button>
-          <button 
-            onClick={() => {setActiveTab('videos'); setActiveFilter('All');}}
-            className={`flex items-center px-6 py-3 font-medium text-lg transition-all duration-200 ${activeTab === 'videos' ? 'text-orange-500 border-b-2 border-orange-500' : 'text-gray-600 hover:text-green-700'}`}
+            onClick={() => setActiveTab('videos')}
+            className={`cursor-pointer flex items-center px-6 py-3 font-medium text-lg transition-all duration-200 ${activeTab === 'videos' ? 'text-orange-500 border-b-2 border-orange-500' : 'text-gray-600 hover:text-green-700'}`}
           >
             <Play className="mr-2" size={20} />
             Videos
           </button>
           <button 
-            onClick={() => {setActiveTab('news'); setActiveFilter('All');}}
-            className={`flex items-center px-6 py-3 font-medium text-lg transition-all duration-200 ${activeTab === 'news' ? 'text-orange-500 border-b-2 border-orange-500' : 'text-gray-600 hover:text-green-700'}`}
+            onClick={() => setActiveTab('news')}
+            className={`cursor-pointer flex items-center px-6 py-3 font-medium text-lg transition-all duration-200 ${activeTab === 'news' ? 'text-orange-500 border-b-2 border-orange-500' : 'text-gray-600 hover:text-green-700'}`}
           >
             <Newspaper className="mr-2" size={20} />
             News
           </button>
         </div>
         
-        {/* Category Filters */}
-        {activeTab !== 'news' && (
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
-            {getCategories(activeTab).map((category, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveFilter(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                  activeFilter === category 
-                    ? 'bg-green-600 text-white' 
-                    : 'bg-gray-100 text-gray-700 hover:bg-green-100'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        )}
-        
-        {/* Photos Grid */}
-        {activeTab === 'photos' && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {filteredMedia('photos').map((photo) => (
-              <div 
-                key={photo.id} 
-                className={`${itemAnimationClass} bg-white rounded-lg overflow-hidden shadow-md group`}
-              >
-                <div className="relative h-48 bg-gray-200">
-                  <img 
-                    src={`/api/placeholder/400/300`} 
-                    alt={photo.title} 
-                    className="w-full h-full object-cover" 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                    <span className="text-white p-4 font-medium">{photo.category}</span>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="font-bold text-lg text-green-800 mb-1">{photo.title}</h3>
-                  <p className="text-gray-600">{photo.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-        
         {/* Videos Grid */}
         {activeTab === 'videos' && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-            {filteredMedia('videos').map((video) => (
+            {mediaItems.videos.map((video) => (
               <div 
                 key={video.id} 
                 className={`${itemAnimationClass} bg-white rounded-lg overflow-hidden shadow-md`}
@@ -239,11 +227,8 @@ export default function FarmMediaPage() {
                   </div>
                 </div>
                 <div className="p-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-bold text-lg text-green-800">{video.title}</h3>
-                    <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">{video.category}</span>
-                  </div>
-                  <button className="text-orange-500 hover:text-orange-600 font-medium flex items-center">
+                  <h3 className="font-bold text-lg text-green-800 mb-2">{video.title}</h3>
+                  <button className="cursor-pointer text-orange-500 hover:text-orange-600 font-medium flex items-center">
                     Watch Video <ChevronRight size={16} className="ml-1" />
                   </button>
                 </div>
@@ -252,10 +237,10 @@ export default function FarmMediaPage() {
           </div>
         )}
         
-        {/* News List */}
+        {/* News List with Links */}
         {activeTab === 'news' && (
           <div className="space-y-6">
-            {filteredMedia('news').map((article) => (
+            {mediaItems.news.map((article) => (
               <div 
                 key={article.id} 
                 className={`${itemAnimationClass} bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row`}
@@ -267,9 +252,22 @@ export default function FarmMediaPage() {
                   <div className="text-sm text-orange-500 font-medium mb-2">{article.date}</div>
                   <h3 className="font-bold text-xl text-green-800 mb-2">{article.title}</h3>
                   <p className="text-gray-600 mb-4">{article.excerpt}</p>
-                  <button className="text-orange-500 hover:text-orange-600 font-medium flex items-center">
-                    Read Full Article <ChevronRight size={16} className="ml-1" />
-                  </button>
+                  <div className="flex justify-between items-center">
+                    <button className="cursor-pointer text-orange-500 hover:text-orange-600 font-medium flex items-center">
+                      Read Full Article <ChevronRight size={16} className="ml-1" />
+                    </button>
+                    {article.link && (
+                      <a 
+                        href={article.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="flex items-center text-green-600 hover:text-green-800 font-medium"
+                      >
+                        <LinkIcon size={16} className="mr-1" />
+                        View Source
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
@@ -277,29 +275,7 @@ export default function FarmMediaPage() {
         )}
         
         {/* Pagination Controls */}
-        <div className="mt-12 flex justify-center">
-          <nav className="flex items-center space-x-2">
-            <button className="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-              Previous
-            </button>
-            <button className="px-3 py-2 border border-green-600 rounded-md text-sm font-medium text-white bg-green-600">
-              1
-            </button>
-            <button className="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-              2
-            </button>
-            <button className="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-              3
-            </button>
-            <span className="px-2 text-gray-600">...</span>
-            <button className="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-              8
-            </button>
-            <button className="px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-              Next
-            </button>
-          </nav>
-        </div>
+        
         
         {/* Subscribe Section */}
         <div className="mt-16 bg-green-50 rounded-xl p-8 shadow-inner">
@@ -316,7 +292,7 @@ export default function FarmMediaPage() {
             />
             <button 
               type="submit" 
-              className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition duration-300"
+              className="cursor-pointer bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition duration-300"
             >
               Subscribe
             </button>
