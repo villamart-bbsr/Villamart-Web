@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import BreadCrumbs from "../../components/BreadCrumbs";
 import CommentsContainer from "../../components/comments/CommentsContainer";
@@ -43,69 +44,164 @@ const ArticleDetailPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
+
   return (
     <MainLayout>
-      {isLoading ? (
-        <ArticleDetailSkeleton />
-      ) : isError ? (
-        <ErrorMessage message="Couldn't fetch the post detail" />
-      ) : (
-        <section className="container mx-auto max-w-5xl flex flex-col px-5 py-5 lg:flex-row lg:gap-x-5 lg:items-start">
-          <article className="flex-1">
-            <BreadCrumbs data={breadCrumbsData} />
-            <img
-              className="rounded-xl w-full"
-              src={
-                data?.photo
-                  ? stables.UPLOAD_FOLDER_BASE_URL + data?.photo
-                  : images.samplePostImage
-              }
-              alt={data?.title}
-            />
-            <div className="mt-4 flex gap-2">
-              {data?.categories.map((category) => (
-                <Link
-                  to={`/blog?category=${category.name}`}
-                  className="text-primary text-sm font-roboto inline-block md:text-base"
-                >
-                  {category.name}
-                </Link>
-              ))}
-            </div>
-            <h1 className="text-xl font-medium font-roboto mt-4 text-dark-hard md:text-[26px]">
-              {data?.title}
-            </h1>
-            <div className="w-full">
-              {!isLoading && !isError && (
-                <Editor content={data?.body} editable={false} />
-              )}
-            </div>
-            <CommentsContainer
-              comments={data?.comments}
-              className="mt-10"
-              logginedUserId={userState?.userInfo?._id}
-              postSlug={slug}
-            />
-          </article>
-          <div>
-            <SuggestedPosts
-              header="Latest Article"
-              posts={postsData?.data}
-              tags={data?.tags}
-              className="mt-8 lg:mt-0 lg:max-w-xs"
-            />
-            <div className="mt-7">
-              <h2 className="font-roboto font-medium text-dark-hard mb-4 md:text-xl">
-                Share on:
-              </h2>
-              <SocialShareButtons
-                url={encodeURI(window.location.href)}
-                title={encodeURIComponent(data?.title)}
-              />
-            </div>
+      <div className="bg-gradient-to-b from-green-50 to-orange-50 min-h-screen py-8 text-black">
+        {isLoading ? (
+          <ArticleDetailSkeleton />
+        ) : isError ? (
+          <div className="container mx-auto max-w-7xl px-4">
+            <ErrorMessage message="Couldn't fetch the post detail" />
           </div>
-        </section>
-      )}
+        ) : (
+          <motion.div
+            initial="hidden"
+            animate="show"
+            variants={container}
+            className="container mx-auto max-w-7xl px-4"
+          >
+            {/* Breadcrumbs area */}
+            <motion.div variants={item} className="mb-6 px-4">
+              <BreadCrumbs data={breadCrumbsData} />
+            </motion.div>
+            
+            <div className="flex flex-col lg:flex-row gap-8">
+              {/* Main Content */}
+              <motion.article 
+                variants={item} 
+                className="flex-1 bg-white rounded-2xl shadow-xl overflow-hidden border-2 border-green-600"
+              >
+                {/* Featured Image */}
+                <div className="relative overflow-hidden border-b-4 border-orange-500">
+                  <motion.img
+                    variants={item}
+                    className="w-full h-auto object-cover max-h-96"
+                    src={
+                      data?.photo
+                        ? stables.UPLOAD_FOLDER_BASE_URL + data?.photo
+                        : images.samplePostImage
+                    }
+                    alt={data?.title}
+                  />
+                  <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent p-6">
+                    <h1 className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg">
+                      {data?.title}
+                    </h1>
+                    <div className="flex gap-2 mt-3 flex-wrap">
+                      {data?.categories.map((category, index) => (
+                        <Link
+                          key={index}
+                          to={`/blog?category=${category.name}`}
+                          className="text-white bg-green-700 px-3 py-1 rounded-full text-sm font-medium inline-block hover:bg-green-800 transition-colors shadow-md"
+                        >
+                          {category.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Article Body */}
+                <div className="p-6 md:p-8">
+                  <motion.div variants={item} className="prose prose-lg max-w-none">
+                    {!isLoading && !isError && (
+                      <Editor content={data?.body} editable={false} />
+                    )}
+                  </motion.div>
+                  
+                  {/* Tags Section */}
+                  {data?.tags && data.tags.length > 0 && (
+                    <motion.div variants={item} className="mt-8 border-t-2 border-green-100 pt-4">
+                      <h3 className="font-medium text-green-800 mb-3">Tagged with:</h3>
+                      <div className="flex flex-wrap gap-2">
+                        {data.tags.map((tag, index) => (
+                          <span 
+                            key={index}
+                            className="inline-block rounded-md px-3 py-1 bg-orange-100 text-orange-700 border border-orange-300 text-sm"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                  
+                  {/* Social Share */}
+                  <motion.div variants={item} className="mt-8 border-t-2 border-green-100 pt-6">
+                    <h3 className="font-medium text-green-800 mb-4">Share this article:</h3>
+                    <SocialShareButtons
+                      url={encodeURI(window.location.href)}
+                      title={encodeURIComponent(data?.title)}
+                    />
+                  </motion.div>
+                  
+                  {/* Comments Section */}
+                  <motion.div variants={item} className="mt-10 border-t-2 border-green-100 pt-8">
+                    <CommentsContainer
+                      comments={data?.comments}
+                      logginedUserId={userState?.userInfo?._id}
+                      postSlug={slug}
+                    />
+                  </motion.div>
+                </div>
+              </motion.article>
+              
+              {/* Sidebar */}
+              <motion.div variants={item} className="lg:w-1/3 space-y-8">
+                <SuggestedPosts
+                  header="Latest Articles"
+                  posts={postsData?.data}
+                  tags={data?.tags || []}
+                />
+                
+                <motion.div 
+                  variants={item}
+                  className="bg-white rounded-xl shadow-lg p-6 border-2 border-orange-500"
+                >
+                  <h2 className="font-medium text-xl text-green-800 mb-4 border-b-2 border-green-200 pb-2">
+                    About the Author
+                  </h2>
+                  <div className="flex items-center space-x-4">
+                    <div className="w-16 h-16 rounded-full bg-green-100 border-2 border-orange-300 flex items-center justify-center overflow-hidden">
+                      {/* Placeholder for author image */}
+                      <span className="text-green-600 text-lg font-bold">
+                        {data?.author?.name?.charAt(0) || "A"}
+                      </span>
+                    </div>
+                    <div>
+                      <h3 className="font-medium text-green-800">
+                        {data?.author?.name || "Blog Author"}
+                      </h3>
+                      <p className="text-sm text-green-600 mt-1">
+                        Published on {new Date(data?.createdAt).toLocaleDateString("en-US", {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                        })}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </div>
     </MainLayout>
   );
 };

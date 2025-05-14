@@ -30,47 +30,78 @@ const Comment = ({
 
   return (
     <div
-      className="flex flex-nowrap items-start gap-x-3 bg-[#F2F4F5] p-3 rounded-lg"
+      className={`flex flex-nowrap items-start gap-x-3 ${parentId ? "pl-6 border-l-2 border-green-200 mt-4" : "bg-white shadow-sm"} p-4 rounded-lg transition-all duration-300 hover:bg-green-50`}
       id={`comment-${comment?._id}`}
     >
-      <img
-        src={
-          comment?.user?.avatar
-            ? stables.UPLOAD_FOLDER_BASE_URL + comment.user.avatar
-            : images.userImage
-        }
-        alt="user profile"
-        className="w-9 h-9 object-cover rounded-full"
-      />
+      <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-orange-400 flex-shrink-0 shadow-sm">
+        <img
+          src={
+            comment?.user?.avatar
+              ? stables.UPLOAD_FOLDER_BASE_URL + comment.user.avatar
+              : images.userImage
+          }
+          alt="user profile"
+          className="w-full h-full object-cover"
+        />
+      </div>
       <div className="flex-1 flex flex-col">
-        <h5 className="font-bold text-dark-hard text-xs lg:text-sm">
-          {comment.user.name}
-        </h5>
-        <span className="text-xs text-dark-light">
-          {new Date(comment.createdAt).toLocaleDateString("en-US", {
-            day: "numeric",
-            month: "short",
-            year: "numeric",
-            hour: "2-digit",
-          })}
-        </span>
+        <div className="flex items-center justify-between">
+          <div>
+            <h5 className="font-bold text-green-800 text-sm">
+              {comment.user.name}
+            </h5>
+            <span className="text-xs text-green-600">
+              {new Date(comment.createdAt).toLocaleDateString("en-US", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+                hour: "2-digit",
+              })}
+            </span>
+          </div>
+          {commentBelongsToUser && (
+            <div className="flex space-x-2">
+              <button
+                className="text-green-700 hover:text-orange-600 transition-colors cursor-pointer"
+                onClick={() =>
+                  setAffectedComment({ type: "editing", _id: comment._id })
+                }
+                title="Edit comment"
+              >
+                <FiEdit2 className="w-4 h-auto" />
+              </button>
+              <button
+                className="text-red-500 hover:text-red-700 transition-colors cursor-pointer"
+                onClick={() => deleteComment(comment._id)}
+                title="Delete comment"
+              >
+                <FiTrash className="w-4 h-auto" />
+              </button>
+            </div>
+          )}
+        </div>
+        
         {!isEditing && (
-          <p className="font-opensans mt-[10px] text-dark-light">
-            {comment.desc}
-          </p>
+          <div className="mt-3 text-gray-700 bg-green-50 p-3 rounded-md border-l-2 border-green-300">
+            <p>{comment.desc}</p>
+          </div>
         )}
+        
         {isEditing && (
-          <CommentForm
-            btnLabel="Update"
-            formSubmitHanlder={(value) => updateComment(value, comment._id)}
-            formCancelHandler={() => setAffectedComment(null)}
-            initialText={comment.desc}
-          />
+          <div className="mt-3">
+            <CommentForm
+              btnLabel="Update"
+              formSubmitHanlder={(value) => updateComment(value, comment._id)}
+              formCancelHandler={() => setAffectedComment(null)}
+              initialText={comment.desc}
+            />
+          </div>
         )}
-        <div className="flex items-center gap-x-3 text-dark-light font-roboto text-sm mt-3 mb-3">
+        
+        <div className="flex items-center text-green-700 font-medium text-sm mt-3">
           {isUserLoggined && (
             <button
-              className="flex items-center space-x-2"
+              className="flex items-center space-x-1 hover:text-orange-600 transition-colors py-1 px-2 rounded-md hover:bg-green-100 cursor-pointer"
               onClick={() =>
                 setAffectedComment({ type: "replying", _id: comment._id })
               }
@@ -79,38 +110,22 @@ const Comment = ({
               <span>Reply</span>
             </button>
           )}
-          {commentBelongsToUser && (
-            <>
-              <button
-                className="flex items-center space-x-2"
-                onClick={() =>
-                  setAffectedComment({ type: "editing", _id: comment._id })
-                }
-              >
-                <FiEdit2 className="w-4 h-auto" />
-                <span>Edit</span>
-              </button>
-              <button
-                className="flex items-center space-x-2"
-                onClick={() => deleteComment(comment._id)}
-              >
-                <FiTrash className="w-4 h-auto" />
-                <span>Delete</span>
-              </button>
-            </>
-          )}
         </div>
+        
         {isReplying && (
-          <CommentForm
-            btnLabel="Reply"
-            formSubmitHanlder={(value) =>
-              addComment(value, repliedCommentId, replyOnUserId)
-            }
-            formCancelHandler={() => setAffectedComment(null)}
-          />
+          <div className="mt-3">
+            <CommentForm
+              btnLabel="Reply"
+              formSubmitHanlder={(value) =>
+                addComment(value, repliedCommentId, replyOnUserId)
+              }
+              formCancelHandler={() => setAffectedComment(null)}
+            />
+          </div>
         )}
+        
         {replies.length > 0 && (
-          <div>
+          <div className="mt-3 space-y-3">
             {replies.map((reply) => (
               <Comment
                 key={reply._id}

@@ -72,45 +72,69 @@ const BlogPage = () => {
 
   return (
     <MainLayout>
-      <section className="container flex flex-col px-5 py-10 mx-auto">
+      <div className="bg-gradient-to-b from-green-900 to-green-800 py-6">
+        <h1 className="text-4xl font-bold text-white mb-2 text-center">VillaMart Blog</h1>
+        <p className="text-center text-green-100 mb-0">Harvesting Knowledge, Growing Community</p>
+      </div>
+      
+      <section className="container flex flex-col px-5 py-10 mx-auto bg-stone-50">
         <div className="flex flex-col mb-10 space-y-3 lg:space-y-0 lg:flex-row lg:items-center lg:gap-x-4">
-          <Search className="w-full max-w-xl" onSearchKeyword={handleSearch} />
-          <AsyncMultiSelectTagDropdown
-            placeholder={"Search by categories..."}
-            loadOptions={promiseOptions}
-            onChange={(selectedValues) => {
-              setCategories(selectedValues.map((item) => item.value));
-            }}
-          />
+          <div className="flex-grow">
+            <Search 
+              className="w-full focus:ring-2 focus:ring-orange-500 focus:border-orange-500 rounded-lg" 
+              onSearchKeyword={handleSearch} 
+            />
+          </div>
+          <div className="lg:w-1/3">
+            <AsyncMultiSelectTagDropdown
+              placeholder={"Filter by categories..."}
+              loadOptions={promiseOptions}
+              onChange={(selectedValues) => {
+                setCategories(selectedValues.map((item) => item.value));
+              }}
+              className="border-green-600 focus:ring-2 focus:ring-orange-500"
+            />
+          </div>
         </div>
-        <div className="flex flex-wrap pb-10 md:gap-x-5 gap-y-5">
+        
+        <div className="flex flex-wrap pb-10 md:gap-x-6 gap-y-6">
           {isLoading || isFetching ? (
             [...Array(3)].map((item, index) => (
               <ArticleCardSkeleton
                 key={index}
-                className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]"
+                className="w-full md:w-[calc(50%-24px)] lg:w-[calc(33.33%-24px)] rounded-xl overflow-hidden shadow-lg bg-white"
               />
             ))
           ) : isError ? (
-            <ErrorMessage message="Couldn't fetch the posts data" />
+            <ErrorMessage 
+              message="Couldn't fetch the posts data" 
+              className="text-orange-600 font-semibold bg-orange-100 p-6 rounded-lg border-l-4 border-orange-500 shadow-md w-full" 
+            />
           ) : data?.data.length === 0 ? (
-            <p className="text-orange-500">No Posts Found!</p>
+            <div className="w-full flex items-center justify-center p-12">
+              <p className="text-orange-600 font-semibold bg-orange-50 p-6 rounded-lg border-l-4 border-orange-500 shadow-md">No Posts Found!</p>
+            </div>
           ) : (
             data?.data.map((post) => (
               <ArticleCard
                 key={post._id}
                 post={post}
-                className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]"
+                className="w-full md:w-[calc(50%-24px)] lg:w-[calc(33.33%-24px)] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 bg-white border-b-4 border-green-600 hover:border-orange-500"
               />
             ))
           )}
         </div>
+        
         {!isLoading && (
-          <Pagination
-            onPageChange={(page) => handlePageChange(page)}
-            currentPage={currentPage}
-            totalPageCount={JSON.parse(data?.headers?.["x-totalpagecount"])}
-          />
+          <div className="flex justify-center mt-4">
+            <div className="bg-white py-3 px-6 rounded-full shadow-md border border-green-200">
+              <Pagination
+                onPageChange={(page) => handlePageChange(page)}
+                currentPage={currentPage}
+                totalPageCount={JSON.parse(data?.headers?.["x-totalpagecount"])}
+              />
+            </div>
+          </div>
         )}
       </section>
     </MainLayout>

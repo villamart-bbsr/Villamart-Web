@@ -23,7 +23,7 @@ const ArticleCard = ({ post, className }) => {
             className="w-full object-cover object-center h-auto md:h-52 lg:h-48 xl:h-60 transition-transform duration-300 hover:scale-105"
           />
           <div className="absolute top-2 right-2 bg-amber-100 bg-opacity-80 rounded-full px-2 py-1 text-xs font-medium text-green-800">
-            Farming Article
+            {post.caption}
           </div>
         </div>
       </Link>
@@ -71,7 +71,7 @@ const ArticleCard = ({ post, className }) => {
                   )}
                 </span>
                 <span className="italic text-green-700 text-xs md:text-sm">
-                  {post.user.verified ? "Master" : "Learning"} farmer
+                  {post.user.verified ? "Verified" : "Not Verified"} 
                 </span>
               </div>
             </div>

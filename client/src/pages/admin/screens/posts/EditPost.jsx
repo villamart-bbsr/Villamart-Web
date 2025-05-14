@@ -116,7 +116,7 @@ const EditPost = () => {
   let isPostDataLoaded = !isLoading && !isError;
 
   return (
-    <div className="bg-green-50">
+    <div className="bg-green-50 text-black">
       {isLoading ? (
         <ArticleDetailSkeleton />
       ) : isError ? (
