@@ -41,11 +41,11 @@ const EmpoweringEveryLink = () => {
       
       {/* Right Image Strip - hidden on small screens */}
       <div className="lg:w-1/2 w-full justify-center hidden md:flex">
-        <div className="flex h-[500px] gap-4 overflow-visible">
+        <div className="flex h-[500px] gap-4 overflow-visible ">
           {images.map((img, idx) => (
             <div
               key={idx}
-              className={`relative transition-all duration-500 ease-in-out rounded-2xl overflow-hidden shadow-lg ${
+              className={`relative transition-all duration-500 ease-in-out rounded-2xl overflow-hidden shadow-lg cursor-pointer ${
                 activeIndex === idx 
                   ? 'w-40 md:w-64 border-4 border-orange-400' 
                   : 'w-12 md:w-16 border-2 border-orange-300 hover:border-orange-400'

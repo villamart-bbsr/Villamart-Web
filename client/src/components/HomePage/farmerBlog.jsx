@@ -43,11 +43,11 @@ export default function FarmerBlog() {
     }
     
     .animate-bounce-x {
-      animation: bounce-x 0.7s infinite;
+      animation: bounce-x 1.2s infinite;
     }
     
     .hover-grow {
-      transition: all 0.3s ease;
+      transition: all 0.5s ease;
     }
     
     .hover-grow:hover {
@@ -68,7 +68,7 @@ export default function FarmerBlog() {
       height: 100%;
       background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(76,175,80,0.1) 100%);
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.5s ease;
     }
     
     .card-hover:hover::after {
@@ -83,11 +83,61 @@ export default function FarmerBlog() {
       background-color: rgba(52, 211, 153, 0.9);
       color: white;
       padding: 8px;
-      transition: bottom 0.3s ease;
+      transition: bottom 0.5s ease;
     }
     
     .hover-card:hover .card-overlay {
       bottom: 0;
+    }
+    
+    /* Button hover fix - completely isolated from parent layout */
+    .button-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      width: 100%;
+      margin-top: 8px;
+    }
+    
+    @media (min-width: 640px) {
+      .button-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    .button-wrapper {
+      position: static;
+      height: auto;
+    }
+    
+    .hero-button {
+      transition: background-color 0.6s ease, color 0.6s ease, box-shadow 0.6s ease;
+      position: relative;
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+    }
+    
+    .button-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+    
+    /* Ensure no layout shift when arrow appears */
+    .arrow-placeholder {
+      width: 24px;
+      visibility: hidden;
+      margin-left: 8px;
+      display: inline-block;
+    }
+    
+    .arrow-animate {
+      position: absolute;
+      right: 16px;
     }
   `;
   
@@ -192,44 +242,54 @@ export default function FarmerBlog() {
               Join our thriving community of agricultural enthusiasts, from hobbyist gardeners to professional farmers. Share your knowledge, learn from others, and grow together.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mt-2">
-              {/* Write Blog Button */}
-              <a href="/blogPage">
-              <button 
-                className={`flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all cursor-pointer duration-300 ${
-                  hoveredButton === 'write'
-                    ? 'bg-green-600 text-white shadow-lg transform scale-105'
-                    : 'bg-white text-green-700 border-2 border-green-600 shadow-md'
-                }`}
-                onMouseEnter={() => setHoveredButton('write')}
-                onMouseLeave={() => setHoveredButton(null)}
-              >
-                <PenTool size={20} className="mr-2" />
-                Blog Page
-                {hoveredButton === 'write' && (
-                  <ArrowRight size={16} className="ml-2 animate-bounce-x" />
-                )}
-              </button>
-              </a>
+            {/* Fixed button container */}
+            {/* Fixed button container */}
+            <div className="button-container">
+              {/* Write Blog Button - Fixed with wrapper */}
+              <div className="button-wrapper">
+                <a href="/blogPage" className="block w-full">
+                  <button 
+                    className={`hero-button flex items-center justify-center px-6 py-3 rounded-lg font-medium cursor-pointer ${
+                      hoveredButton === 'write'
+                        ? 'bg-green-600 text-white shadow-lg'
+                        : 'bg-white text-green-700 border-2 border-green-600 shadow-md'
+                    }`}
+                    onMouseEnter={() => setHoveredButton('write')}
+                    onMouseLeave={() => setHoveredButton(null)}
+                  >
+                    <div className="button-content">
+                      <PenTool size={20} className="mr-2" />
+                      <span>Blog Page</span>
+                      {hoveredButton === 'write' && (
+                        <ArrowRight size={16} className="ml-2 animate-bounce-x" />
+                      )}
+                    </div>
+                  </button>
+                </a>
+              </div>
 
-              {/* Read Blog Button */}
-              <a href='/blog'>
-              <button 
-                className={`flex items-center justify-center cursor-pointer px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
-                  hoveredButton === 'read'
-                    ? 'bg-amber-600 text-white shadow-lg transform scale-105'
-                    : 'bg-white text-amber-700 border-2 border-amber-600 shadow-md'
-                }`}
-                onMouseEnter={() => setHoveredButton('read')}
-                onMouseLeave={() => setHoveredButton(null)}
-              >
-                <BookOpen size={20} className="mr-2" />
-                Read Blogs
-                {hoveredButton === 'read' && (
-                  <ArrowRight size={16} className="ml-2 animate-bounce-x" />
-                )}
-              </button>
-              </a>
+              {/* Read Blog Button - Fixed with wrapper */}
+              <div className="button-wrapper">
+                <a href='/blog' className="block w-full">
+                  <button 
+                    className={`hero-button flex items-center justify-center cursor-pointer px-6 py-3 rounded-lg font-medium ${
+                      hoveredButton === 'read'
+                        ? 'bg-amber-600 text-white shadow-lg'
+                        : 'bg-white text-amber-700 border-2 border-amber-600 shadow-md'
+                    }`}
+                    onMouseEnter={() => setHoveredButton('read')}
+                    onMouseLeave={() => setHoveredButton(null)}
+                  >
+                    <div className="button-content">
+                      <BookOpen size={20} className="mr-2" />
+                      <span>Read Blogs</span>
+                      {hoveredButton === 'read' && (
+                        <ArrowRight size={16} className="ml-2 animate-bounce-x" />
+                      )}
+                    </div>
+                  </button>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -288,9 +348,9 @@ export default function FarmerBlog() {
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h3 className="text-xl font-bold mb-2">Join Our Growing Community</h3>
           <p className="mb-4">Get seasonal growing tips, recipes, and more delivered to your inbox.</p>
-          <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto ">
+          <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
             <input type="email" placeholder="Enter your email" className="px-4 py-2 rounded-lg text-black flex-grow focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all border-white border-2" />
-            <button className="bg-yellow-500 cursor-pointer hover:bg-yellow-400 text-green-900 px-6 py-2 rounded-lg transition-colors duration-300 hover:shadow-lg transform hover:scale-105">Subscribe</button>
+            <button className="bg-yellow-500 cursor-pointer hover:bg-yellow-400 text-green-900 px-6 py-2 rounded-lg transition-all duration-700 hover:shadow-lg">Subscribe</button>
           </div>
         </div>
       </div>

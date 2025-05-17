@@ -63,49 +63,41 @@ export default function EnhancedApproach() {
       title: "Physical Marketplace",
       description: "Establishing a robust Physical Marketplace for farm products that connects farmers directly with consumers.",
       icon: <FaStore className="text-2xl" />,
-      color: "from-emerald-500 to-green-600"
     },
     {
       title: "Light Asset Model",
       description: "Adopting a Light Asset Model to facilitate easy and scalable expansion across different regions.",
       icon: <FaTruckLoading className="text-2xl" />,
-      color: "from-lime-500 to-emerald-600"
     },
     {
       title: "Franchise Partners",
       description: "Onboarding Roadside vegetable vendors and kirana stores as valuable franchise partners to support local businesses.",
       icon: <FaHandshake className="text-2xl" />,
-      color: "from-green-500 to-teal-600"
     },
     {
       title: "Wastage Reduction",
       description: "Leveraging technology for efficient wastage reduction throughout the supply chain to promote sustainability.",
       icon: <FaLeaf className="text-2xl" />,
-      color: "from-teal-500 to-cyan-600"
     },
     {
       title: "Smart Store Management",
       description: "Implementing user-friendly technology for streamlined store management that empowers our partners.",
       icon: <FaMobileAlt className="text-2xl" />,
-      color: "from-amber-500 to-orange-600"
     },
     {
       title: "AI-Based Procurement",
       description: "Incorporating AI-based procurement processes for enhanced efficiency and optimal pricing strategies.",
       icon: <FaRobot className="text-2xl" />,
-      color: "from-orange-500 to-red-600"
     },
     {
       title: "Nanotechnology Cleaning",
       description: "Utilizing Nanotechnology for cleaning of vegetables, removing surface chemicals and pesticides for healthier produce.",
       icon: <FaFlask className="text-2xl" />,
-      color: "from-cyan-500 to-blue-600"
     },
     {
       title: "Freshness Guarantee",
       description: "Ensuring freshness of green vegetables and leafy greens through integrated technological solutions.",
       icon: <FaSeedling className="text-2xl" />,
-      color: "from-blue-500 to-indigo-600"
     }
   ];
 
@@ -116,7 +108,7 @@ export default function EnhancedApproach() {
     >
       {/* Animated background elements */}
       <motion.div
-        className="absolute -z-10 top-0 right-0 w-96 h-96 bg-gradient-to-br from-green-200/30 to-emerald-100/30 rounded-full blur-3xl"
+        className="absolute -z-10 top-0 right-0 w-96 h-96 bg-green-100/30 rounded-full blur-3xl"
         style={{ 
           x: bgTranslateX,
           y: bgTranslateY,
@@ -125,7 +117,7 @@ export default function EnhancedApproach() {
       />
       
       <motion.div
-        className="absolute -z-10 bottom-20 -left-20 w-72 h-72 bg-gradient-to-tr from-orange-200/20 to-amber-100/20 rounded-full blur-3xl"
+        className="absolute -z-10 bottom-20 -left-20 w-72 h-72 bg-orange-100/20 rounded-full blur-3xl"
         style={{ 
           x: secondaryBgTranslateX,
           y: secondaryBgTranslateY,
@@ -133,18 +125,18 @@ export default function EnhancedApproach() {
         }} 
       />
       
-      {/* Section header with animated underline */}
+      {/* Section header */}
       <motion.div 
         className="relative mb-12 text-center"
         variants={headerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-700 to-emerald-600 bg-clip-text text-transparent inline-block">
+        <h2 className="text-4xl md:text-5xl font-bold text-green-600 inline-block">
           Our Innovative Approach
         </h2>
         <motion.div 
-          className="h-1 w-24 md:w-32 mx-auto mt-4 rounded-full bg-gradient-to-r from-green-500 to-orange-500"
+          className="h-1 w-24 md:w-32 mx-auto mt-4 rounded-full bg-orange-500"
           initial={{ scaleX: 0 }}
           animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -164,7 +156,7 @@ export default function EnhancedApproach() {
         {approaches.map((approach, index) => (
           <motion.div 
             key={index}
-            className="group relative rounded-xl overflow-hidden cursor-pointer transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl bg-white"
+            className="group relative rounded-xl overflow-hidden cursor-pointer transition-all duration-300 shadow-md hover:shadow-xl bg-white"
             onMouseEnter={() => setActiveItem(index)}
             onMouseLeave={() => setActiveItem(null)}
             variants={cardVariants}
@@ -172,27 +164,46 @@ export default function EnhancedApproach() {
             animate={isInView ? "visible" : "hidden"}
             transition={{ delay: index * 0.1 }}
           >
-            {/* Background gradient that animates on hover */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${approach.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+            {/* Corner accents that appear on hover */}
+            <motion.div 
+              className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-green-500 opacity-0 group-hover:opacity-100"
+              initial={{ x: -10, y: -10 }}
+              whileHover={{ x: 0, y: 0, transition: { duration: 0.3 } }}
+            />
             
-            {/* Content container */}
-            <div className="relative z-10 p-6 h-full flex flex-col">
+            <motion.div 
+              className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-orange-500 opacity-0 group-hover:opacity-100"
+              initial={{ x: 10, y: 10 }}
+              whileHover={{ x: 0, y: 0, transition: { duration: 0.3 } }}
+            />
+            
+            {/* Card content */}
+            <div className="relative z-10 p-6 h-full flex flex-col transition-all duration-300 group-hover:translate-y-2">
               {/* Icon with circular background */}
-              <div className={`p-3 rounded-full w-14 h-14 flex items-center justify-center bg-white text-green-600 group-hover:text-white group-hover:bg-white/20 mb-4 transition-all duration-300`}>
-                {approach.icon}
+              <div className="p-3 rounded-full w-14 h-14 flex items-center justify-center bg-green-100 mb-4 transition-all duration-300 group-hover:bg-green-500 group-hover:rotate-12 group-hover:scale-110">
+                <span className="text-green-600 transition-colors duration-300 group-hover:text-white">
+                  {approach.icon}
+                </span>
               </div>
               
-              {/* Title and description */}
-              <h3 className="text-xl font-bold text-gray-800 group-hover:text-white mb-2 transition-colors duration-300">
-                {approach.title}
-              </h3>
+              {/* Title with sliding underline effect */}
+              <div className="relative overflow-hidden mb-2">
+                <h3 className="text-xl font-bold text-gray-800 transition-colors duration-300 group-hover:text-green-600">
+                  {approach.title}
+                </h3>
+                <div className="absolute w-full h-0.5 bg-orange-500 -bottom-1 left-0 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></div>
+              </div>
               
-              <p className="text-gray-600 group-hover:text-white/90 transition-colors duration-300">
+              {/* Description */}
+              <p className="text-gray-600 transition-colors duration-300 mb-4">
                 {approach.description}
               </p>
               
-              {/* Animated progress line */}
-              <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-green-500 to-orange-500 w-0 group-hover:w-full transition-all duration-500" />
+              {/* Read more link that fades in on hover */}
+              
+              
+              {/* Side accent that grows on hover */}
+              <div className="absolute top-0 left-0 w-1 h-0 bg-green-500 transition-all duration-500 ease-out group-hover:h-full"></div>
             </div>
           </motion.div>
         ))}
@@ -210,7 +221,7 @@ export default function EnhancedApproach() {
       />
       
       <motion.div 
-        className="absolute -z-10 top-2/3 left-1/3 w-6 h-6 rounded-full bg-emerald-500/20"
+        className="absolute -z-10 top-2/3 left-1/3 w-6 h-6 rounded-full bg-green-500/20"
         style={{ y: float3Y, opacity: 0.6 }} 
       />
     </motion.div>

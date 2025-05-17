@@ -278,7 +278,7 @@ export default function FarmMediaPage() {
         
         
         {/* Subscribe Section */}
-        <div className="mt-16 bg-green-50 rounded-xl p-8 shadow-inner">
+        {/* <div className="mt-16 bg-green-50 rounded-xl p-8 shadow-inner">
           <div className="text-center mb-6">
             <h3 className="text-2xl font-bold text-green-800 mb-2">Stay Updated</h3>
             <p className="text-gray-600">Subscribe to our newsletter for the latest farm updates and seasonal offerings.</p>
@@ -297,7 +297,7 @@ export default function FarmMediaPage() {
               Subscribe
             </button>
           </form>
-        </div>
+        </div> */}
       </div>
       
       {/* Footer */}

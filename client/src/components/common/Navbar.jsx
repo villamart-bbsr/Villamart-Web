@@ -111,6 +111,7 @@ export default function Navbar() {
   // Improved logout handler
   const logoutHandler = () => {
     dispatch(logout());
+    navigate("/");
   };
   
   // Color scheme based on farming theme
@@ -241,7 +242,7 @@ export default function Navbar() {
             {/* Right Side - Sign In Button/Account Dropdown & Dark Mode Toggle */}
             <div className="hidden md:flex md:items-center space-x-2">
               {/* Dark mode toggle with animation */}
-              <button 
+              {/* <button 
                 onClick={toggleDarkMode} 
                 className="p-2 rounded-full focus:outline-none transition-all duration-500 hover:rotate-12 cursor-pointer"
               >
@@ -250,7 +251,7 @@ export default function Navbar() {
                 ) : (
                   <Moon size={20} className="text-gray-600 transition-all duration-500" />
                 )}
-              </button>
+              </button> */}
               
               {/* Sign In Button with animation OR Account Dropdown */}
               {userState?.userInfo ? (
@@ -431,79 +432,7 @@ export default function Navbar() {
             </a>
             
             {/* Mobile Account/Sign In & Dark Mode Toggle */}
-            <div className="pt-2 border-t border-gray-300 dark:border-gray-700">
-              <button 
-                onClick={toggleDarkMode} 
-                className={`w-full text-left px-3 py-2 rounded-md ${hoverColor} flex items-center transition-all duration-300 cursor-pointer`}
-              >
-                {darkMode ? (
-                  <>
-                    <Sun size={16} className="mr-2 text-yellow-300" />
-                    Light Mode
-                  </>
-                ) : (
-                  <>
-                    <Moon size={16} className="mr-2" />
-                    Dark Mode
-                  </>
-                )}
-              </button>
-              
-              {userState?.userInfo ? (
-                <div>
-                  <button 
-                    onClick={toggleMobileProfileDropdown}
-                    className={`w-full text-left px-3 py-2 rounded-md ${hoverColor} flex items-center justify-between transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`}
-                  >
-                    <div className="flex items-center">
-                      <MessageSquare size={16} className="mr-2" />
-                      Account
-                    </div>
-                    <ChevronDown 
-                      size={16} 
-                      className={`transition-transform duration-500 ${profileDropdownOpen ? "rotate-180" : ""}`} 
-                    />
-                  </button>
-                  
-                  <div 
-                    className={`pl-6 mt-1 space-y-1 overflow-hidden transition-all duration-300 ease-in-out
-                    ${profileDropdownOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}
-                  >
-                    {userState?.userInfo?.admin && (
-                      <button
-                        onClick={() => navigate("/admin")}
-                        type="button"
-                        className={`w-full text-left block px-3 py-2 rounded-md ${hoverColor} transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`}
-                      >
-                        Admin Dashboard
-                      </button>
-                    )}
-                    <button
-                      onClick={() => navigate("/profile")}
-                      type="button"
-                      className={`w-full text-left block px-3 py-2 rounded-md ${hoverColor} transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`}
-                    >
-                      Profile Page
-                    </button>
-                    <button
-                      onClick={logoutHandler}
-                      type="button"
-                      className={`w-full text-left block px-3 py-2 rounded-md ${hoverColor} transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`}
-                    >
-                      Logout
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <button 
-                  onClick={() => navigate("/login")}
-                  className={`mt-2 w-full px-3 py-2 bg-gradient-to-r from-green-600 to-green-500 text-white rounded-lg transition-all duration-300 flex items-center justify-center cursor-pointer`}
-                >
-                  <MessageSquare size={16} className="mr-2" />
-                  Sign In
-                </button>
-              )}
-            </div>
+           
           </div>
         </div>
       </nav>

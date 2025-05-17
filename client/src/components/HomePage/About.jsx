@@ -65,21 +65,22 @@ export default function AgriPlatformHero() {
       <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-10">
         {/* Text Content */}
         <div className="md:w-1/2 space-y-6">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
-            Empowering India's Agri Future <br />
-            <span className="text-orange-500">One Village at a Time</span>
-          </h1>
-          <div className="w-24 h-1 bg-orange-500"></div>
-          <p className="text-gray-700 text-lg">
-            VillaMart is transforming the rural economy by connecting small farmers directly to urban consumers through tech-enabled, sustainable, and inclusive platforms.
-          </p>
-          <p className="text-gray-700 text-base">
-            We enable FPOs, SHGs, and micro-entrepreneurs to thrive by providing access to markets, mobile supermarkets, and smart storage solutions — helping build a trusted farm-to-fork ecosystem.
-          </p>
-          <a href="/moreInfo" className="cursor-pointer mt-4 bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8 py-3 font-semibold transition duration-300">
-            Learn More About VillaMart
-          </a>
-        </div>
+  <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
+    <span className="whitespace-nowrap z-10 relative">Empowering India's Agri Future</span><br />
+    <span className="text-orange-500">One Village at a Time</span>
+  </h1>
+  <div className="w-24 h-1 bg-orange-500"></div>
+  <p className="text-gray-700 text-lg">
+    VillaMart is transforming the rural economy by connecting small farmers directly to urban consumers through tech-enabled, sustainable, and inclusive platforms.
+  </p>
+  <p className="text-gray-700 text-lg">
+    We enable FPOs, SHGs, and micro-entrepreneurs to thrive by providing access to markets, mobile supermarkets, and smart storage solutions — helping build a trusted farm-to-fork ecosystem.
+  </p>
+  <a href="/moreInfo" className="cursor-pointer mt-4 bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8 py-3 font-semibold transition duration-300">
+    Learn More About VillaMart
+  </a>
+</div>
+
 
         {/* Video / Illustration */}
         <div className="md:w-1/2 relative  overflow-hidden ">

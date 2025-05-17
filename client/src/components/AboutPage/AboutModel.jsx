@@ -2,7 +2,8 @@ import { useState } from 'react';
 
 export default function VillaMartDisplay() {
   const [activeSegment, setActiveSegment] = useState('middle');
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const segments = {
     premium: {
       title: "Premium Customers",
@@ -24,53 +25,76 @@ export default function VillaMartDisplay() {
     }
   };
 
+  // Modified color logic to use predefined classes instead of dynamic generation
+  const getSegmentStyles = (segment) => {
+    if (segment === 'premium') {
+      return {
+        buttonActive: 'bg-orange-600 text-white shadow-md',
+        buttonInactive: 'bg-gray-100 text-gray-700 hover:bg-gray-200',
+        borderColor: 'border-l-4 border-orange-600',
+        bgGradient: 'bg-gradient-to-r from-orange-100 to-orange-200',
+        dotColor: 'bg-orange-500'
+      };
+    } else if (segment === 'middle') {
+      return {
+        buttonActive: 'bg-green-600 text-white shadow-md',
+        buttonInactive: 'bg-gray-100 text-gray-700 hover:bg-gray-200',
+        borderColor: 'border-l-4 border-green-600',
+        bgGradient: 'bg-gradient-to-r from-green-100 to-green-200',
+        dotColor: 'bg-green-500'
+      };
+    } else { // lower
+      return {
+        buttonActive: 'bg-orange-600 text-white shadow-md',
+        buttonInactive: 'bg-gray-100 text-gray-700 hover:bg-gray-200',
+        borderColor: 'border-l-4 border-orange-600',
+        bgGradient: 'bg-gradient-to-r from-orange-100 to-orange-200',
+        dotColor: 'bg-orange-500'
+      };
+    }
+  };
+
+  const styles = getSegmentStyles(activeSegment);
+
   return (
     <div className="flex flex-col items-center w-full bg-gradient-to-br from-green-50 to-orange-50 p-6 rounded-xl shadow-lg">
       <h1 className="text-3xl font-bold text-green-800 mb-6 text-center">VillaMart's Customer Segmentation Strategy</h1>
-      
-      {/* Main Content - Side-by-side layout */}
+
       <div className="w-full max-w-6xl flex flex-col md:flex-row gap-6 mb-8">
         {/* Left Side - Image */}
         <div className="md:w-2/5 w-full">
-          <div className="sticky top-4 rounded-lg overflow-hidden shadow-xl bg-white p-2">
+          <div className="sticky top-20 rounded-lg overflow-hidden shadow-xl bg-white p-2 cursor-pointer " onClick={() => setIsModalOpen(true)}>
             <div className="w-full h-64 bg-gray-200 flex items-center justify-center">
-              <img src="/images/MobileModel.png" alt="" />
+              <img src="/images/MobileModel.png" alt="VillaMart Model" className="object-contain max-h-full" />
             </div>
           </div>
         </div>
-        
+
         {/* Right Side - Content */}
         <div className="md:w-3/5 w-full">
           {/* Segment Selector */}
           <div className="flex justify-center gap-4 mb-6 w-full">
-            {Object.keys(segments).map((segment) => (
-              <button
-                key={segment}
-                onClick={() => setActiveSegment(segment)}
-                className={`flex-1 py-3 px-4 rounded-full text-lg font-medium transition-all cursor-pointer ${
-                  activeSegment === segment
-                    ? segment === 'premium' 
-                      ? 'bg-green-600 text-white shadow-md' 
-                      : segment === 'middle'
-                      ? 'bg-blue-500 text-white shadow-md'
-                      : 'bg-orange-500 text-white shadow-md'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {segment.charAt(0).toUpperCase() + segment.slice(1)}
-              </button>
-            ))}
+            {Object.keys(segments).map((segment) => {
+              const segmentStyles = getSegmentStyles(segment);
+              return (
+                <button
+                  key={segment}
+                  onClick={() => setActiveSegment(segment)}
+                  className={`flex-1 py-3 px-4 rounded-full text-lg font-medium transition-all cursor-pointer ${
+                    activeSegment === segment
+                      ? segmentStyles.buttonActive
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  {segment.charAt(0).toUpperCase() + segment.slice(1)}
+                </button>
+              );
+            })}
           </div>
-          
+
           {/* Active Segment Details */}
           <div className="w-full">
-            <div className={`p-6 rounded-xl shadow-md transition-all ${
-              activeSegment === 'premium' 
-                ? 'bg-gradient-to-r from-green-100 to-green-200 border-l-4 border-green-600' 
-                : activeSegment === 'middle'
-                ? 'bg-gradient-to-r from-blue-100 to-blue-200 border-l-4 border-blue-500'
-                : 'bg-gradient-to-r from-orange-100 to-orange-200 border-l-4 border-orange-500'
-            }`}>
+            <div className={`p-6 rounded-xl shadow-md transition-all ${styles.bgGradient} ${styles.borderColor}`}>
               <h2 className="text-2xl font-bold mb-2">
                 {segments[activeSegment].title}
               </h2>
@@ -85,10 +109,7 @@ export default function VillaMartDisplay() {
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   {segments[activeSegment].features.map((feature, index) => (
                     <li key={index} className="flex items-center">
-                      <span className={`inline-block w-3 h-3 rounded-full mr-2 ${
-                        activeSegment === 'premium' ? 'bg-green-500' : 
-                        activeSegment === 'middle' ? 'bg-blue-500' : 'bg-orange-500'
-                      }`}></span>
+                      <span className={`inline-block w-3 h-3 rounded-full mr-2 ${styles.dotColor}`}></span>
                       {feature}
                     </li>
                   ))}
@@ -96,7 +117,7 @@ export default function VillaMartDisplay() {
               </div>
             </div>
           </div>
-          
+
           {/* Marketing Strategy Section */}
           <div className="w-full mt-6">
             <h2 className="text-2xl font-bold text-green-800 mb-4">VillaMart's Omnichannel Approach</h2>
@@ -119,6 +140,21 @@ export default function VillaMartDisplay() {
           </div>
         </div>
       </div>
+
+      {/* Image Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 bg-white/60 flex items-center justify-center" onClick={() => setIsModalOpen(false)}>
+          <div className="relative max-w-4xl w-full p-4 bg-white rounded-xl shadow-lg" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="absolute top-2 right-2 bg-gray-100 text-black px-3 py-1 rounded-full shadow hover:bg-gray-200 cursor-pointer"
+              onClick={() => setIsModalOpen(false)}
+            >
+              ✕
+            </button>
+            <img src="/images/MobileModel.png" alt="Expanded VillaMart Model" className="w-full h-auto rounded-lg" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

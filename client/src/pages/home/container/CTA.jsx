@@ -49,9 +49,9 @@ const CTA = () => {
               <div className="w-1/2 h-1/2 bg-amber-200 rounded-lg opacity-[.3] absolute -bottom-[10%] -left-[8%]" />
               <div className="w-full rounded-xl bg-white p-3 z-[1] relative shadow-lg">
                 <img
-                  src={images.CtaImage}
+                  src="/images/footer-media.png"
                   alt="Seasonal farming calendar"
-                  className="w-full object-cover object-center h-auto md:h-52 lg:h-48 xl:h-60 rounded-t-lg"
+                  className="w-full object-fit object-center h-auto md:h-52 lg:h-48 xl:h-60 rounded-t-lg"
                 />
                 <div className="p-5 bg-amber-50 rounded-b-lg">
                   <h2 className="font-roboto font-bold text-xl text-green-800 md:text-2xl lg:text-[28px]">
