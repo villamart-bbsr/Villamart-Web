@@ -13,6 +13,7 @@ import Partners from "../components/HomePage/Partners";
 // import VideoPage from "../components/HomePage/VideoPage";
 import VillaMartCards from "../components/HomePage/VillamartCards";
 import FarmerBlog from "../components/HomePage/farmerBlog";
+import Network from "../components/HomePage/Network";
 
 function Home() {
   return (
@@ -56,6 +57,7 @@ function Home() {
 
       <About />
       <SupportedBy />
+      <Network/>
       <Awards />
       <Partners />
       {/* <VideoPage/> */}
