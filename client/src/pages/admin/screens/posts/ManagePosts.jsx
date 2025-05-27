@@ -40,7 +40,7 @@ const ManagePosts = () => {
       searchKeywordOnSubmitHandler={submitSearchKeywordHandler}
       searchKeywordOnChangeHandler={searchKeywordHandler}
       searchKeyword={searchKeyword}
-      tableHeaderTitleList={["Title", "Category", "Created At", "Tags", ""]}
+      tableHeaderTitleList={["Title", "Category", "Created At", "Tags", "Actions"]}
       isLoading={isLoading}
       isFetching={isFetching}
       data={postsData?.data}
@@ -54,7 +54,7 @@ const ManagePosts = () => {
           <td className="px-5 py-5 text-sm bg-white border-b border-green-200">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <a href="/" className="relative block">
+                <Link to={`/blog/${post.slug}`} className="relative block">
                   <img
                     src={
                       post?.photo
@@ -64,10 +64,15 @@ const ManagePosts = () => {
                     alt={post.title}
                     className="mx-auto object-cover rounded-lg w-10 aspect-square border-2 border-green-300"
                   />
-                </a>
+                </Link>
               </div>
               <div className="ml-3">
-                <p className="text-green-800 font-medium whitespace-no-wrap">{post.title}</p>
+                <Link 
+                  to={`/blog/${post.slug}`}
+                  className="text-green-800 font-medium whitespace-no-wrap hover:text-green-600 transition-colors"
+                >
+                  {post.title}
+                </Link>
               </div>
             </div>
           </td>
@@ -108,26 +113,28 @@ const ManagePosts = () => {
                 : "No tags"}
             </div>
           </td>
-          <td className="px-5 py-5 text-sm bg-white border-b border-green-200 space-x-5">
-            <button
-              disabled={isLoadingDeleteData}
-              type="button"
-              className="text-red-600 hover:text-red-800 disabled:opacity-70 disabled:cursor-not-allowed font-medium"
-              onClick={() => {
-                deleteDataHandler({
-                  slug: post?.slug,
-                  token: userState.userInfo.token,
-                });
-              }}
-            >
-              Delete
-            </button>
-            <Link
-              to={`/admin/posts/manage/edit/${post?.slug}`}
-              className="text-green-600 hover:text-green-800 font-medium"
-            >
-              Edit
-            </Link>
+          <td className="px-5 py-5 text-sm bg-white border-b border-green-200">
+            <div className="flex gap-x-2">
+              <button
+                disabled={isLoadingDeleteData}
+                type="button"
+                className="text-red-600 hover:text-red-800 disabled:opacity-70 disabled:cursor-not-allowed font-medium"
+                onClick={() => {
+                  deleteDataHandler({
+                    slug: post?.slug,
+                    token: userState.userInfo.token,
+                  });
+                }}
+              >
+                Delete
+              </button>
+              <Link
+                to={`/admin/posts/manage/edit/${post?.slug}`}
+                className="text-green-600 hover:text-green-800 font-medium"
+              >
+                Edit
+              </Link>
+            </div>
           </td>
         </tr>
       ))}

@@ -57,9 +57,11 @@ function Home() {
 
       <About />
       <SupportedBy />
-      <Network/>
-      <Awards />
       <Partners />
+      <Awards />
+      <div className="hidden md:block">
+        <Network/>
+      </div>
       {/* <VideoPage/> */}
       <VillaMartCards />
       <Achievements />

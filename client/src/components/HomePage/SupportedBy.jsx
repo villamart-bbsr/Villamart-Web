@@ -80,7 +80,7 @@ const SupportedBy = () => {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <span className="border-b-4 border-orange-500 pb-2">Supported by</span>
+          <span className="border-b-4 border-orange-500 pb-2">Supported <span className="text-orange-500">By</span></span>
         </motion.h1>
         
         <motion.div 

@@ -18,6 +18,7 @@ import OverallModel from '../components/AboutPage/OverallModel.jsx';
 import OurApproach from '../components/AboutPage/OurApproach.jsx';
 import InnovativeApproach from '../components/AboutPage/InnovativeApproach.jsx';
 import SocietalImpact from '../components/AboutPage/SocietalImpact.jsx';
+import VillaMartBusinessModel from '../components/AboutPage/VillaMartBusinessModel.jsx';
 
 const About = () => {
   const headerRef = useRef(null);
@@ -141,7 +142,8 @@ const About = () => {
         <OurApproach />
         <OverallModel />
         <Business />
-        <AboutModel />
+        <VillaMartBusinessModel/>
+        {/* <AboutModel /> */}
         <InnovativeApproach />
         <AboutGrid />
       </div>

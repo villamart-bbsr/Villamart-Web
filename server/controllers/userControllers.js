@@ -29,6 +29,7 @@ const registerUser = async (req, res, next) => {
       email: user.email,
       verified: user.verified,
       admin: user.admin,
+      isEmployee: user.isEmployee,
       token: await user.generateJWT(),
     });
   } catch (error) {
@@ -54,6 +55,7 @@ const loginUser = async (req, res, next) => {
         email: user.email,
         verified: user.verified,
         admin: user.admin,
+        isEmployee: user.isEmployee,
         token: await user.generateJWT(),
       });
     } else {
@@ -76,6 +78,7 @@ const userProfile = async (req, res, next) => {
         email: user.email,
         verified: user.verified,
         admin: user.admin,
+        isEmployee: user.isEmployee,
       });
     } else {
       let error = new Error("User not found");
@@ -109,6 +112,10 @@ const updateProfile = async (req, res, next) => {
       user.admin = req.body.admin;
     }
 
+    if (typeof req.body.isEmployee !== "undefined" && req.user.admin) {
+      user.isEmployee = req.body.isEmployee;
+    }
+
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
     if (req.body.password && req.body.password.length < 6) {
@@ -126,6 +133,7 @@ const updateProfile = async (req, res, next) => {
       email: updatedUserProfile.email,
       verified: updatedUserProfile.verified,
       admin: updatedUserProfile.admin,
+      isEmployee: updatedUserProfile.isEmployee,
       token: await updatedUserProfile.generateJWT(),
     });
   } catch (error) {
@@ -161,6 +169,7 @@ const updateProfilePicture = async (req, res, next) => {
             email: updatedUser.email,
             verified: updatedUser.verified,
             admin: updatedUser.admin,
+            isEmployee: updatedUser.isEmployee,
             token: await updatedUser.generateJWT(),
           });
         } else {
@@ -177,6 +186,7 @@ const updateProfilePicture = async (req, res, next) => {
             email: updatedUser.email,
             verified: updatedUser.verified,
             admin: updatedUser.admin,
+            isEmployee: updatedUser.isEmployee,
             token: await updatedUser.generateJWT(),
           });
         }

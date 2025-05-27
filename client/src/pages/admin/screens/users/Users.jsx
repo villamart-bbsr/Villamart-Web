@@ -39,10 +39,10 @@ const Users = () => {
 
   const { mutate: mutateUpdateUser, isLoading: isLoadingUpdateUser } =
     useMutation({
-      mutationFn: ({ isAdmin, userId }) => {
+      mutationFn: ({ isAdmin, isEmployee, userId }) => {
         return updateProfile({
           token: userState.userInfo.token,
-          userData: { admin: isAdmin },
+          userData: { admin: isAdmin, isEmployee: isEmployee },
           userId,
         });
       },
@@ -62,7 +62,27 @@ const Users = () => {
     if (
       window.confirm("Do you want to change the admin status of this user?")
     ) {
-      mutateUpdateUser({ isAdmin: event.target.checked, userId });
+      mutateUpdateUser({ 
+        isAdmin: event.target.checked, 
+        isEmployee: usersData?.data.find(user => user._id === userId)?.isEmployee,
+        userId 
+      });
+    } else {
+      event.target.checked = initialCheckValue;
+    }
+  };
+
+  const handleEmployeeCheck = (event, userId) => {
+    const initialCheckValue = !event.target.checked;
+
+    if (
+      window.confirm("Do you want to change the employee status of this user?")
+    ) {
+      mutateUpdateUser({ 
+        isAdmin: usersData?.data.find(user => user._id === userId)?.admin,
+        isEmployee: event.target.checked,
+        userId 
+      });
     } else {
       event.target.checked = initialCheckValue;
     }
@@ -82,6 +102,7 @@ const Users = () => {
         "Created At",
         "is Verified",
         "is Admin",
+        "is Employee",
         "",
       ]}
       isLoading={isLoading}
@@ -144,6 +165,15 @@ const Users = () => {
               className="d-checkbox disabled:bg-orange-400 disabled:opacity-100 checked:bg-green-600 border-2 border-green-400 h-5 w-5 rounded"
               defaultChecked={user.admin}
               onChange={(event) => handleAdminCheck(event, user._id)}
+              disabled={isLoadingUpdateUser}
+            />
+          </td>
+          <td className="px-5 py-5 text-sm bg-white border-b border-green-200">
+            <input
+              type="checkbox"
+              className="d-checkbox disabled:bg-orange-400 disabled:opacity-100 checked:bg-green-600 border-2 border-green-400 h-5 w-5 rounded"
+              defaultChecked={user.isEmployee}
+              onChange={(event) => handleEmployeeCheck(event, user._id)}
               disabled={isLoadingUpdateUser}
             />
           </td>

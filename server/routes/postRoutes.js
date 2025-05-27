@@ -7,12 +7,12 @@ import {
   getPost,
   updatePost,
 } from "../controllers/postControllers.js";
-import { authGuard, adminGuard } from "../middleware/authMiddleware.js";
+import { authGuard, adminGuard, adminOrEmployeeGuard } from "../middleware/authMiddleware.js";
 
-router.route("/").post(authGuard, adminGuard, createPost).get(getAllPosts);
+router.route("/").post(authGuard, adminOrEmployeeGuard, createPost).get(getAllPosts);
 router
   .route("/:slug")
-  .put(authGuard, adminGuard, updatePost)
+  .put(authGuard, adminOrEmployeeGuard, updatePost)
   .delete(authGuard, adminGuard, deletePost)
   .get(getPost);
 

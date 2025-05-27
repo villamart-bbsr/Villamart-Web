@@ -34,3 +34,13 @@ export const adminGuard = (req, res, next) => {
     next(error);
   }
 };
+
+export const adminOrEmployeeGuard = (req, res, next) => {
+  if (req.user && (req.user.admin || req.user.isEmployee)) {
+    next();
+  } else {
+    let error = new Error("Not authorized as an admin or employee");
+    error.statusCode = 401;
+    next(error);
+  }
+};

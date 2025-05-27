@@ -13,6 +13,7 @@ const UserSchema = new Schema(
     verified: { type: Boolean, default: false },
     verificationCode: { type: String, required: false },
     admin: { type: Boolean, default: false },
+    isEmployee: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

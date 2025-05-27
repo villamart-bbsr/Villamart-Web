@@ -70,7 +70,7 @@ const Categories = () => {
   };
 
   return (
-    <div className="grid grid-cols-12 gap-6">
+    <div className="grid grid-cols-12 gap-6 text-black">
       <div className="col-span-12 lg:col-span-4 p-6 bg-white rounded-lg shadow-md border border-green-100">
         <h4 className="text-xl font-semibold text-green-800 border-l-4 border-orange-500 pl-3">
           Add New Category
