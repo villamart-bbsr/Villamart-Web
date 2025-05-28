@@ -17,11 +17,48 @@ const Partners = () => {
       name: "Reliance Fresh",
       logo: "/images/reliance-fresh.png",
       description: "A trusted name in retail, bringing you the best produce"
+    },
+    {
+      name: "BigBasket",
+      logo: "/images/bigbasket.png",
+      description: "India's largest online supermarket for fresh groceries"
+    },
+    {
+      name: "Grofers",
+      logo: "/images/grofers.png",
+      description: "Quick delivery of fresh produce and daily essentials"
+    },
+    {
+      name: "Amazon Fresh",
+      logo: "/images/amazon-fresh.png",
+      description: "Premium quality fresh groceries delivered fast"
+    },
+    {
+      name: "Flipkart Grocery",
+      logo: "/images/flipkart-grocery.png",
+      description: "Trusted online grocery shopping experience"
+    },
+    {
+      name: "Nature's Basket",
+      logo: "/images/natures-basket.png",
+      description: "Gourmet and organic food delivery specialists"
+    },
+    {
+      name: "Spencer's Retail",
+      logo: "/images/spencers.png",
+      description: "Quality retail chain for fresh food and groceries"
     }
   ];
 
   const [hoverIndex, setHoverIndex] = useState(null);
   const controls = useAnimation();
+  const sliderControls = useAnimation();
+
+  const cardsPerView = 3;
+  const cardWidth = 320; // Fixed width in pixels
+  const cardHeight = 280; // Fixed height in pixels
+  const gap = 24; // 24px gap (gap-6)
+  const totalCardWidth = cardWidth + gap;
 
   useEffect(() => {
     controls.start({
@@ -34,6 +71,20 @@ const Partners = () => {
       }
     });
   }, [controls]);
+
+  // Continuous sliding animation with slower speed
+  useEffect(() => {
+    const totalDistance = partners.length * totalCardWidth;
+    
+    sliderControls.start({
+      x: [0, -totalDistance],
+      transition: {
+        duration: 40, // Increased from 20 to make it slower
+        repeat: Infinity,
+        ease: "linear"
+      }
+    });
+  }, [sliderControls, totalCardWidth]);
 
   const hexSize = 30;
   const hexPoints = [
@@ -143,133 +194,290 @@ const Partners = () => {
           </motion.p>
         </div>
 
-        {/* Partners Grid */}
-        <div className="grid md:grid-cols-3 gap-10">
-          {partners.map((partner, index) => (
+        {/* Slider Container */}
+        <div className="relative">
+          {/* Slider Track */}
+          <div 
+            className="overflow-hidden"
+          >
             <motion.div
-              key={index}
-              className="relative"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.7 }}
+              className="flex gap-6"
+              animate={sliderControls}
             >
-              <div className="absolute h-12 w-full bottom-0 bg-amber-700/10 rounded-b-lg overflow-hidden">
-                {[...Array(20)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="absolute bg-amber-800/20 rounded-full"
-                    style={{
-                      width: `${8 + Math.random() * 15}px`,
-                      height: `${4 + Math.random() * 8}px`,
-                      left: `${i * 5}%`,
-                      bottom: `${Math.random() * 8}px`
-                    }}
-                  />
-                ))}
-              </div>
-
-              <motion.div
-                className="bg-white rounded-lg shadow-xl h-full overflow-hidden cursor-pointer relative"
-                onMouseEnter={() => setHoverIndex(index)}
-                onMouseLeave={() => setHoverIndex(null)}
-              >
-                <motion.div
-                  className="absolute right-0 top-0 bottom-0 w-8 overflow-hidden"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: hoverIndex === index ? 1 : 0 }}
-                >
-                  {[...Array(8)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute w-6 h-6"
-                      style={{
-                        top: `${i * 12}%`,
-                        right: `${i % 2 ? 0 : 4}px`
-                      }}
-                      initial={{ scale: 0 }}
-                      animate={{ scale: hoverIndex === index ? 1 : 0 }}
-                      transition={{ delay: i * 0.1, duration: 0.4 }}
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        className="fill-green-600 w-full h-full"
-                      >
-                        <path d="M12,3.1L6.1,8.6C7.3,9.7,8,11.2,8,13c0,0.7-0.1,1.3-0.3,1.9L12,19.5l4.3-4.6C16.1,14.3,16,13.7,16,13c0-1.8,0.7-3.3,1.9-4.4L12,3.1z" />
-                        <path
-                          className="fill-green-800"
-                          d="M12,12c-0.6,0-1-0.4-1-1s0.4-1,1-1s1,0.4,1,1S12.6,12,12,12z"
-                        />
-                      </svg>
-                    </motion.div>
-                  ))}
-                </motion.div>
-
-                <div className="h-36 flex items-center justify-center p-4 border-b border-green-100 relative">
+              {/* First set of partners */}
+              {partners.map((partner, index) => {
+                const emojis = ["🌱", "🌿", "🍃", "🌾", "🥬", "🥕", "🍅", "🌽", "🥒"];
+                
+                return (
                   <motion.div
-                    className="absolute inset-0 rounded-t-lg"
-                    style={{
-                      background:
-                        "radial-gradient(circle, rgba(74, 222, 128, 0.2) 0%, rgba(255,255,255,0) 70%)"
-                    }}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{
-                      opacity: hoverIndex === index ? 1 : 0,
-                      scale: hoverIndex === index ? 1.2 : 0.8
-                    }}
-                    transition={{ duration: 0.8 }}
-                  />
-                  <motion.img
-                    src={partner.logo}
-                    alt={partner.name}
-                    className="max-h-28 w-auto object-contain"
-                    style={{ minWidth: "160px" }}
-                    initial={{ filter: "grayscale(0%)" }}
-                    animate={{
-                      scale: hoverIndex === index ? 1.05 : 1
-                    }}
-                    transition={{ duration: 0.5 }}
-                  />
-                  <motion.div
-                    className="absolute -bottom-2 left-4 text-xl"
-                    initial={{ y: 10, opacity: 0 }}
-                    animate={{
-                      y: hoverIndex === index ? 0 : 10,
-                      opacity: hoverIndex === index ? 1 : 0
-                    }}
-                    transition={{ duration: 0.5 }}
+                    key={`first-${index}`}
+                    className="relative flex-none"
+                    style={{ width: `${cardWidth}px`, height: `${cardHeight}px` }}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: (index % cardsPerView) * 0.2, duration: 0.7 }}
                   >
-                    {index === 0 ? "🌱" : index === 1 ? "🌿" : "🍃"}
+                    <div className="w-full h-full">
+                      <div className="absolute h-12 w-full bottom-0 bg-amber-700/10 rounded-b-lg overflow-hidden">
+                        {[...Array(20)].map((_, i) => (
+                          <div
+                            key={i}
+                            className="absolute bg-amber-800/20 rounded-full"
+                            style={{
+                              width: `${8 + Math.random() * 15}px`,
+                              height: `${4 + Math.random() * 8}px`,
+                              left: `${i * 5}%`,
+                              bottom: `${Math.random() * 8}px`
+                            }}
+                          />
+                        ))}
+                      </div>
+
+                      <motion.div
+                        className="bg-white rounded-lg shadow-xl h-full overflow-hidden cursor-pointer relative"
+                        onMouseEnter={() => setHoverIndex(`first-${index}`)}
+                        onMouseLeave={() => setHoverIndex(null)}
+                        whileHover={{ y: -5 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <motion.div
+                          className="absolute right-0 top-0 bottom-0 w-8 overflow-hidden"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: hoverIndex === `first-${index}` ? 1 : 0 }}
+                        >
+                          {[...Array(8)].map((_, i) => (
+                            <motion.div
+                              key={i}
+                              className="absolute w-6 h-6"
+                              style={{
+                                top: `${i * 12}%`,
+                                right: `${i % 2 ? 0 : 4}px`
+                              }}
+                              initial={{ scale: 0 }}
+                              animate={{ scale: hoverIndex === `first-${index}` ? 1 : 0 }}
+                              transition={{ delay: i * 0.1, duration: 0.4 }}
+                            >
+                              <svg
+                                viewBox="0 0 24 24"
+                                className="fill-green-600 w-full h-full"
+                              >
+                                <path d="M12,3.1L6.1,8.6C7.3,9.7,8,11.2,8,13c0,0.7-0.1,1.3-0.3,1.9L12,19.5l4.3-4.6C16.1,14.3,16,13.7,16,13c0-1.8,0.7-3.3,1.9-4.4L12,3.1z" />
+                                <path
+                                  className="fill-green-800"
+                                  d="M12,12c-0.6,0-1-0.4-1-1s0.4-1,1-1s1,0.4,1,1S12.6,12,12,12z"
+                                />
+                              </svg>
+                            </motion.div>
+                          ))}
+                        </motion.div>
+
+                        <div className="h-48 flex items-center justify-center p-4 border-b border-green-100 relative">
+                          <motion.div
+                            className="absolute inset-0 rounded-t-lg"
+                            style={{
+                              background:
+                                "radial-gradient(circle, rgba(74, 222, 128, 0.2) 0%, rgba(255,255,255,0) 70%)"
+                            }}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{
+                              opacity: hoverIndex === `first-${index}` ? 1 : 0,
+                              scale: hoverIndex === `first-${index}` ? 1.2 : 0.8
+                            }}
+                            transition={{ duration: 0.8 }}
+                          />
+                          <motion.img
+                            src={partner.logo}
+                            alt={partner.name}
+                            className="max-h-32 w-auto object-contain"
+                            style={{ minWidth: "120px", maxWidth: "200px" }}
+                            initial={{ filter: "grayscale(0%)" }}
+                            animate={{
+                              scale: hoverIndex === `first-${index}` ? 1.05 : 1
+                            }}
+                            transition={{ duration: 0.5 }}
+                          />
+                          <motion.div
+                            className="absolute -bottom-2 left-4 text-xl"
+                            initial={{ y: 10, opacity: 0 }}
+                            animate={{
+                              y: hoverIndex === `first-${index}` ? 0 : 10,
+                              opacity: hoverIndex === `first-${index}` ? 1 : 0
+                            }}
+                            transition={{ duration: 0.5 }}
+                          >
+                            {emojis[index % emojis.length]}
+                          </motion.div>
+                        </div>
+
+                        <div className="p-3 bg-white h-[calc(100%-192px)]">
+                          <h3 className="text-lg font-semibold text-green-800 mb-1">
+                            {partner.name}
+                          </h3>
+                          <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">
+                            {partner.description}
+                          </p>
+                        </div>
+                      </motion.div>
+
+                      <motion.div
+                        className="absolute -bottom-10 w-full"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ delay: 0.5 + (index % cardsPerView) * 0.2 }}
+                      >
+                        <svg viewBox="0 0 100 20" width="100%" height="20">
+                          <motion.path
+                            d="M50,0 L50,5 M50,5 C50,5 40,5 30,15 M50,5 C50,5 60,5 70,15 M40,5 C40,5 30,5 20,10 M60,5 C60,5 70,5 80,10"
+                            stroke="#4F7942"
+                            strokeWidth="1"
+                            fill="none"
+                            initial={{ pathLength: 0, opacity: 0.2 }}
+                            whileInView={{ pathLength: 1, opacity: 0.7 }}
+                            transition={{ duration: 1.5, delay: 0.5 }}
+                          />
+                        </svg>
+                      </motion.div>
+                    </div>
                   </motion.div>
-                </div>
+                );
+              })}
+              
+              {/* Duplicate set for seamless loop */}
+              {partners.map((partner, index) => {
+                const emojis = ["🌱", "🌿", "🍃", "🌾", "🥬", "🥕", "🍅", "🌽", "🥒"];
+                
+                return (
+                  <motion.div
+                    key={`second-${index}`}
+                    className="relative flex-none"
+                    style={{ width: `${cardWidth}px`, height: `${cardHeight}px` }}
+                  >
+                    <div className="w-full h-full">
+                      <div className="absolute h-12 w-full bottom-0 bg-amber-700/10 rounded-b-lg overflow-hidden">
+                        {[...Array(20)].map((_, i) => (
+                          <div
+                            key={i}
+                            className="absolute bg-amber-800/20 rounded-full"
+                            style={{
+                              width: `${8 + Math.random() * 15}px`,
+                              height: `${4 + Math.random() * 8}px`,
+                              left: `${i * 5}%`,
+                              bottom: `${Math.random() * 8}px`
+                            }}
+                          />
+                        ))}
+                      </div>
 
-                <div className="p-6 bg-gradient-to-b from-white to-green-50">
-                  <h3 className="text-lg font-semibold text-green-800 mb-2">
-                    {partner.name}
-                  </h3>
-                  <p className="text-gray-600 text-sm">{partner.description}</p>
-                </div>
-              </motion.div>
+                      <motion.div
+                        className="bg-white rounded-lg shadow-xl h-full overflow-hidden cursor-pointer relative"
+                        onMouseEnter={() => setHoverIndex(`second-${index}`)}
+                        onMouseLeave={() => setHoverIndex(null)}
+                        whileHover={{ y: -5 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <motion.div
+                          className="absolute right-0 top-0 bottom-0 w-8 overflow-hidden"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: hoverIndex === `second-${index}` ? 1 : 0 }}
+                        >
+                          {[...Array(8)].map((_, i) => (
+                            <motion.div
+                              key={i}
+                              className="absolute w-6 h-6"
+                              style={{
+                                top: `${i * 12}%`,
+                                right: `${i % 2 ? 0 : 4}px`
+                              }}
+                              initial={{ scale: 0 }}
+                              animate={{ scale: hoverIndex === `second-${index}` ? 1 : 0 }}
+                              transition={{ delay: i * 0.1, duration: 0.4 }}
+                            >
+                              <svg
+                                viewBox="0 0 24 24"
+                                className="fill-green-600 w-full h-full"
+                              >
+                                <path d="M12,3.1L6.1,8.6C7.3,9.7,8,11.2,8,13c0,0.7-0.1,1.3-0.3,1.9L12,19.5l4.3-4.6C16.1,14.3,16,13.7,16,13c0-1.8,0.7-3.3,1.9-4.4L12,3.1z" />
+                                <path
+                                  className="fill-green-800"
+                                  d="M12,12c-0.6,0-1-0.4-1-1s0.4-1,1-1s1,0.4,1,1S12.6,12,12,12z"
+                                />
+                              </svg>
+                            </motion.div>
+                          ))}
+                        </motion.div>
 
-              <motion.div
-                className="absolute -bottom-10 w-full"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.5 + index * 0.2 }}
-              >
-                <svg viewBox="0 0 100 20" width="100%" height="20">
-                  <motion.path
-                    d="M50,0 L50,5 M50,5 C50,5 40,5 30,15 M50,5 C50,5 60,5 70,15 M40,5 C40,5 30,5 20,10 M60,5 C60,5 70,5 80,10"
-                    stroke="#4F7942"
-                    strokeWidth="1"
-                    fill="none"
-                    initial={{ pathLength: 0, opacity: 0.2 }}
-                    whileInView={{ pathLength: 1, opacity: 0.7 }}
-                    transition={{ duration: 1.5, delay: 0.5 }}
-                  />
-                </svg>
-              </motion.div>
+                        <div className="h-48 flex items-center justify-center p-4 border-b border-green-100 relative">
+                          <motion.div
+                            className="absolute inset-0 rounded-t-lg"
+                            style={{
+                              background:
+                                "radial-gradient(circle, rgba(74, 222, 128, 0.2) 0%, rgba(255,255,255,0) 70%)"
+                            }}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{
+                              opacity: hoverIndex === `second-${index}` ? 1 : 0,
+                              scale: hoverIndex === `second-${index}` ? 1.2 : 0.8
+                            }}
+                            transition={{ duration: 0.8 }}
+                          />
+                          <motion.img
+                            src={partner.logo}
+                            alt={partner.name}
+                            className="max-h-32 w-auto object-contain"
+                            style={{ minWidth: "120px", maxWidth: "200px" }}
+                            initial={{ filter: "grayscale(0%)" }}
+                            animate={{
+                              scale: hoverIndex === `second-${index}` ? 1.05 : 1
+                            }}
+                            transition={{ duration: 0.5 }}
+                          />
+                          <motion.div
+                            className="absolute -bottom-2 left-4 text-xl"
+                            initial={{ y: 10, opacity: 0 }}
+                            animate={{
+                              y: hoverIndex === `second-${index}` ? 0 : 10,
+                              opacity: hoverIndex === `second-${index}` ? 1 : 0
+                            }}
+                            transition={{ duration: 0.5 }}
+                          >
+                            {emojis[index % emojis.length]}
+                          </motion.div>
+                        </div>
+
+                        <div className="p-3 bg-white h-[calc(100%-192px)]">
+                          <h3 className="text-lg font-semibold text-green-800 mb-1">
+                            {partner.name}
+                          </h3>
+                          <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">
+                            {partner.description}
+                          </p>
+                        </div>
+                      </motion.div>
+
+                      <motion.div
+                        className="absolute -bottom-10 w-full"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ delay: 0.5 + (index % cardsPerView) * 0.2 }}
+                      >
+                        <svg viewBox="0 0 100 20" width="100%" height="20">
+                          <motion.path
+                            d="M50,0 L50,5 M50,5 C50,5 40,5 30,15 M50,5 C50,5 60,5 70,15 M40,5 C40,5 30,5 20,10 M60,5 C60,5 70,5 80,10"
+                            stroke="#4F7942"
+                            strokeWidth="1"
+                            fill="none"
+                            initial={{ pathLength: 0, opacity: 0.2 }}
+                            whileInView={{ pathLength: 1, opacity: 0.7 }}
+                            transition={{ duration: 1.5, delay: 0.5 }}
+                          />
+                        </svg>
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </motion.div>
-          ))}
+          </div>
         </div>
 
         {/* Call to Action */}
@@ -285,7 +493,7 @@ const Partners = () => {
               whileHover={{ rotate: 2 }}
               transition={{ duration: 0.4 }}
             />
-            <a href="/contact" className="relative px-8 py-3 font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors z-10 cursor-pointer">
+            <a href="/contact" className="relative px-8 py-3 font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors z-10 cursor-pointer block">
               Become Our Partner
             </a>
           </div>

@@ -111,11 +111,18 @@ export default function FarmerBlog() {
     }
     
     .hero-button {
-      transition: background-color 0.6s ease, color 0.6s ease, box-shadow 0.6s ease;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       height: 100%;
       width: 100%;
       z-index: 1;
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .hero-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     }
     
     .button-content {
@@ -125,19 +132,21 @@ export default function FarmerBlog() {
       position: relative;
       z-index: 2;
       width: 100%;
+      transition: transform 0.3s ease;
     }
     
-    /* Ensure no layout shift when arrow appears */
-    .arrow-placeholder {
-      width: 24px;
-      visibility: hidden;
-      margin-left: 8px;
-      display: inline-block;
+    .hero-button:hover .button-content {
+      transform: translateX(4px);
     }
     
     .arrow-animate {
       position: absolute;
       right: 16px;
+      transition: transform 0.3s ease;
+    }
+    
+    .hero-button:hover .arrow-animate {
+      transform: translateX(4px);
     }
   `;
   
@@ -183,7 +192,7 @@ export default function FarmerBlog() {
   ];
 
   return (
-    <div className="w-full min-h-screen bg-white font-sans relative overflow-hidden">
+    <div className="w-full bg-white font-sans relative overflow-hidden">
       {/* Add custom animations */}
       <style>{animationStyles}</style>
       {/* Animated Background */}
@@ -219,16 +228,7 @@ export default function FarmerBlog() {
       </div>
 
       {/* Season Banner */}
-      <div className="relative z-10 bg-gradient-to-r from-green-50 to-emerald-50 py-4 mb-8">
-        <div className="max-w-6xl mx-auto px-4 flex items-center justify-center space-x-2 overflow-x-auto">
-          <span className="text-green-800 font-semibold">Season's Bounty:</span>
-          {seasonalProduce.map((item, i) => (
-            <span key={i} className={`${item.color} text-white px-3 py-1 rounded-full text-sm font-medium transform transition-all hover:scale-110 hover:shadow-md cursor-pointer`}>
-              {item.name}
-            </span>
-          ))}
-        </div>
-      </div>
+      
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 relative z-10">
@@ -303,57 +303,11 @@ export default function FarmerBlog() {
         </div>
 
         {/* Sample Blogs */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold text-green-800 flex items-center mb-6">
-            <Leaf size={24} className="mr-2 text-green-600" />
-            Sample Blog Posts
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {samplePosts.map((post, i) => (
-              <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden border border-green-100 hover:shadow-lg transition-all duration-300 hover-grow card-hover hover-card">
-                <div className={`h-40 relative overflow-hidden ${post.color}`}>
-                  <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
-                  <div className="absolute top-2 right-2 bg-white/80 backdrop-blur-sm rounded-full px-2 py-1 text-xs font-medium text-green-800">
-                    {post.category.charAt(0).toUpperCase() + post.category.slice(1)}
-                  </div>
-                  <div className="card-overlay text-center">
-                    <span className="text-xs font-medium">Read {post.readTime} read</span>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-bold text-green-800 hover:text-green-600 transition-colors group">
-                    {post.title}
-                    <ArrowRight size={16} className="inline ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </h3>
-                  <p className="text-green-600 mt-2 text-sm line-clamp-2">{post.excerpt}</p>
-                  <div className="flex justify-between items-center mt-4 pt-2 border-t border-green-100 text-xs text-gray-500">
-                    <div className="flex items-center hover:text-green-700 transition-colors cursor-pointer">
-                      <User size={14} className="mr-1" />
-                      {post.author}
-                    </div>
-                    <div className="flex items-center">
-                      <Calendar size={14} className="mr-1" />
-                      {post.date}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        
       </div>
 
       {/* Newsletter */}
-      <div className="w-full bg-gradient-to-r from-green-700 via-green-600 to-green-700 py-8 text-white relative z-10">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <h3 className="text-xl font-bold mb-2">Join Our Growing Community</h3>
-          <p className="mb-4">Get seasonal growing tips, recipes, and more delivered to your inbox.</p>
-          <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-            <input type="email" placeholder="Enter your email" className="px-4 py-2 rounded-lg text-black flex-grow focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all border-white border-2" />
-            <button className="bg-yellow-500 cursor-pointer hover:bg-yellow-400 text-green-900 px-6 py-2 rounded-lg transition-all duration-700 hover:shadow-lg">Subscribe</button>
-          </div>
-        </div>
-      </div>
+      
     </div>
   );
 }

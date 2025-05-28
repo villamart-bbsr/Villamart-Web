@@ -1,11 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { Suspense, lazy } from "react";
+import { AnimatePresence } from "framer-motion";
 
 import "./App.css";
 import Navbar from "./components/common/Navbar.jsx";
 import Footer from "./components/HomePage/Footer.jsx";
 import LoadingSpinner from "./components/common/LoadingSpinner.jsx";
+import ScrollToTop from "./components/ScrollToTop.jsx";
+import PageTransition from "./components/PageTransition.jsx";
 
 // Lazy load all components
 const ArticleDetailPage = lazy(() => import("./pages/articleDetail/ArticleDetailPage"));
@@ -37,43 +40,43 @@ const CreateEmployeePost = lazy(() => import("./pages/employee/screens/posts/Cre
 function App() {
   return (
     <div className="App font-opensans bg-amber-50">
+      <ScrollToTop />
       <Navbar />
       <Suspense fallback={<LoadingSpinner />}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/moreInfo" element={<MoreInfo />} />
-          <Route path="/journey" element={<Journey />} />
-          <Route path="/franchise" element={<FranchisePage />} />
-          <Route path="/contact" element={<ContactUs />} />
-          <Route path="/media" element={<MediaPage />} />
-          <Route path="/gallery" element={<GalleryPage />} />
-          <Route index path="/blogPage" element={<HomePage />} />
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/blog/:slug" element={<ArticleDetailPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+        <AnimatePresence mode="wait">
+          <Routes>
+            <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+            <Route path="/moreInfo" element={<PageTransition><MoreInfo /></PageTransition>} />
+            <Route path="/journey" element={<PageTransition><Journey /></PageTransition>} />
+            <Route path="/franchise" element={<PageTransition><FranchisePage /></PageTransition>} />
+            <Route path="/contact" element={<PageTransition><ContactUs /></PageTransition>} />
+            <Route path="/media" element={<PageTransition><MediaPage /></PageTransition>} />
+            <Route path="/gallery" element={<PageTransition><GalleryPage /></PageTransition>} />
+            <Route index path="/blogPage" element={<PageTransition><HomePage /></PageTransition>} />
+            <Route path="/blog" element={<PageTransition><BlogPage /></PageTransition>} />
+            <Route path="/blog/:slug" element={<PageTransition><ArticleDetailPage /></PageTransition>} />
+            <Route path="/register" element={<PageTransition><RegisterPage /></PageTransition>} />
+            <Route path="/login" element={<PageTransition><LoginPage /></PageTransition>} />
+            <Route path="/profile" element={<PageTransition><ProfilePage /></PageTransition>} />
 
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<Admin />} />
-            <Route path="comments" element={<Comments />} />
-            <Route path="posts/manage" element={<ManagePosts />} />
-            <Route path="posts/manage/edit/:slug" element={<EditPost />} />
-            <Route path="categories/manage" element={<Categories />} />
-            <Route
-              path="categories/manage/edit/:slug"
-              element={<EditCategories />}
-            />
-            <Route path="users/manage" element={<Users />} />
-          </Route>
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<PageTransition><Admin /></PageTransition>} />
+              <Route path="comments" element={<PageTransition><Comments /></PageTransition>} />
+              <Route path="posts/manage" element={<PageTransition><ManagePosts /></PageTransition>} />
+              <Route path="posts/manage/edit/:slug" element={<PageTransition><EditPost /></PageTransition>} />
+              <Route path="categories/manage" element={<PageTransition><Categories /></PageTransition>} />
+              <Route path="categories/manage/edit/:slug" element={<PageTransition><EditCategories /></PageTransition>} />
+              <Route path="users/manage" element={<PageTransition><Users /></PageTransition>} />
+            </Route>
 
-          <Route path="/employee" element={<EmployeeLayout />}>
-            <Route index element={<EmployeePosts />} />
-            <Route path="posts/manage" element={<EmployeePosts />} />
-            <Route path="posts/manage/edit/:slug" element={<EditEmployeePost />} />
-            <Route path="posts/manage/create" element={<CreateEmployeePost />} />
-          </Route>
-        </Routes>
+            <Route path="/employee" element={<EmployeeLayout />}>
+              <Route index element={<PageTransition><EmployeePosts /></PageTransition>} />
+              <Route path="posts/manage" element={<PageTransition><EmployeePosts /></PageTransition>} />
+              <Route path="posts/manage/edit/:slug" element={<PageTransition><EditEmployeePost /></PageTransition>} />
+              <Route path="posts/manage/create" element={<PageTransition><CreateEmployeePost /></PageTransition>} />
+            </Route>
+          </Routes>
+        </AnimatePresence>
       </Suspense>
       <Footer />
 

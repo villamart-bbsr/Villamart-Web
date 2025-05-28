@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
@@ -13,6 +13,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const { mutate, isLoading } = useMutation({
     mutationFn: ({ email, password }) => {
@@ -51,21 +52,120 @@ const LoginPage = () => {
     mutate({ email, password });
   };
 
+  const handleRegisterClick = (e) => {
+    e.preventDefault();
+    setIsTransitioning(true);
+    
+    setTimeout(() => {
+      navigate("/register");
+    }, 300);
+  };
+
   return (
     <MainLayout>
-      <section className="w-screen h-screen bg-[#F0F4F8] flex">
+      <style jsx>{`
+        .page-transition {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .page-transition.transitioning {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        
+        .smooth-link {
+          position: relative;
+          overflow: hidden;
+          transition: all 0.3s ease;
+        }
+        
+        .smooth-link::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 111, 0, 0.2), transparent);
+          transition: left 0.5s ease;
+        }
+        
+        .smooth-link:hover::before {
+          left: 100%;
+        }
+        
+        .register-button {
+          position: relative;
+          overflow: hidden;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .register-button::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 0;
+          height: 0;
+          background: rgba(255, 111, 0, 0.1);
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+          transition: width 0.3s ease, height 0.3s ease;
+        }
+        
+        .register-button:hover::after {
+          width: 300px;
+          height: 300px;
+        }
+        
+        .register-button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 20px rgba(255, 111, 0, 0.3);
+        }
+        
+        @keyframes slideInFromRight {
+          from {
+            opacity: 0;
+            transform: translateX(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        @keyframes slideInFromLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        .animate-slide-in-left {
+          animation: slideInFromLeft 0.6s ease-out;
+        }
+        
+        .animate-slide-in-right {
+          animation: slideInFromRight 0.6s ease-out;
+        }
+      `}</style>
+      
+      <section className={`w-full h-screen bg-[#F0F4F8] flex page-transition ${isTransitioning ? 'transitioning' : ''}`}>
         {/* Login Form Section */}
-        <div className="w-1/2 bg-white flex items-center justify-center p-12 relative z-10 shadow-2xl">
+        <div className="w-1/2 bg-white flex items-center justify-center p-12 relative z-10 shadow-2xl animate-slide-in-left">
           <div className="w-full max-w-md">
             <h1 className="font-roboto text-4xl font-bold text-center text-[#FF6F00] mb-12 animate-bounce">
               Login
             </h1>
+            
             <form onSubmit={handleSubmit(submitHandler)} className="space-y-8">
+              {/* Email Input */}
               <div className="flex flex-col w-full">
-                <label
-                  htmlFor="email"
-                  className="text-[#4CAF50] font-semibold block mb-2"
-                >
+                <label htmlFor="email" className="text-[#4CAF50] font-semibold block mb-2">
                   Email
                 </label>
                 <input
@@ -73,8 +173,7 @@ const LoginPage = () => {
                   id="email"
                   {...register("email", {
                     pattern: {
-                      value:
-                        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                      value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                       message: "Enter a valid email",
                     },
                     required: {
@@ -93,11 +192,10 @@ const LoginPage = () => {
                   </p>
                 )}
               </div>
+
+              {/* Password Input */}
               <div className="flex flex-col w-full">
-                <label
-                  htmlFor="password"
-                  className="text-[#4CAF50] font-semibold block mb-2"
-                >
+                <label htmlFor="password" className="text-[#4CAF50] font-semibold block mb-2">
                   Password
                 </label>
                 <input
@@ -124,12 +222,16 @@ const LoginPage = () => {
                   </p>
                 )}
               </div>
+
+              {/* Forgot Password Link */}
               <Link
                 to="/forget-password"
-                className="text-sm font-semibold text-[#FF6F00] hover:underline block text-right transition-all duration-300 hover:text-[#F57C00]"
+                className="text-sm font-semibold text-[#FF6F00] hover:underline block text-right transition-all duration-300 hover:text-[#F57C00] smooth-link"
               >
                 Forgot password?
               </Link>
+
+              {/* Submit Button */}
               <button
                 type="submit"
                 disabled={!isValid || isLoading}
@@ -137,21 +239,24 @@ const LoginPage = () => {
               >
                 {isLoading ? 'Signing In...' : 'Sign In'}
               </button>
-              <p className="text-sm font-semibold text-[#2E7D32] text-center">
+
+              {/* Register Link */}
+              <p className="text-sm font-semibold text-[#2E7D32] text-center ">
                 Do not have an account?{" "}
-                <Link 
-                  to="/register" 
-                  className="text-[#FF6F00] hover:underline transition-all duration-300 hover:text-[#F57C00]"
+                <a 
+                  href="/register"
+                  onClick={handleRegisterClick}
+                  className="translate-y-2 text-[#FF6F00] hover:underline transition-all duration-300 hover:text-[#F57C00] register-button inline-block px-2 py-1 rounded relative z-10"
                 >
                   Register now
-                </Link>
+                </a>
               </p>
             </form>
           </div>
         </div>
 
         {/* Image Section */}
-        <div className="w-1/2 relative overflow-hidden">
+        <div className="w-1/2 relative overflow-hidden animate-slide-in-right">
           <div 
             className="absolute inset-0 bg-cover bg-center transform scale-110 blur-sm"
             style={{
@@ -168,7 +273,7 @@ const LoginPage = () => {
               <p className="text-[#4CAF50] text-lg italic mb-6">
                 Cultivating Connections, Harvesting Success
               </p>
-              <div className="w-full h-1 bg-[#FF6F00] mb-6"></div>
+              <div className="w-full h-1 bg-[#FF6F00] mb-6 transform origin-left transition-transform duration-1000 hover:scale-x-110"></div>
               <p className="text-[#2E7D32] font-semibold">
                 Connecting farmers, empowering agriculture, growing together.
               </p>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 
 export default function PFCComponent() {
   const [activeStep, setActiveStep] = useState(0);
@@ -63,12 +64,12 @@ export default function PFCComponent() {
   ];
 
   const getCurrentVideoInfo = () => {
-    const step = steps.find(step => step.id === currentVideoStep);
+    const step = steps.find((step) => step.id === currentVideoStep);
     return {
       title: step ? step.title : "",
       icon: step ? step.icon : "",
       videoSrc: step ? step.videoSrc : "",
-      description: step && step.id === 2 
+      description: step && step.id === 2
         ? "Our advanced sorting and grading system uses computer vision to assess produce quality, ensuring consistent standards and premium pricing for farmers."
         : "Our ozone cleaning system removes residual chemicals and pesticides from produce using ozone-enriched water. This eco-friendly process ensures higher hygiene standards and extends shelf life by up to 40%."
     };
@@ -92,11 +93,11 @@ export default function PFCComponent() {
               transform: scale(1);
             }
           }
-          
+
           .mega-glow-play {
             animation: superNeonGlow 1.5s infinite;
           }
-          
+
           @keyframes gradientTitle {
             0% {
               background-position: 0% 50%;
@@ -108,7 +109,7 @@ export default function PFCComponent() {
               background-position: 0% 50%;
             }
           }
-          
+
           .animated-gradient-title {
             background: linear-gradient(90deg, #1e8e3e, #fbbc04, #ff6f00, #1e8e3e);
             background-size: 300% 100%;
@@ -117,7 +118,7 @@ export default function PFCComponent() {
             -webkit-text-fill-color: transparent;
             text-fill-color: transparent;
           }
-          
+
           .heading-container {
             position: relative;
             padding: 1rem;
@@ -125,7 +126,7 @@ export default function PFCComponent() {
             overflow: hidden;
             margin-bottom: 2rem;
           }
-          
+
           .heading-container::before {
             content: '';
             position: absolute;
@@ -136,6 +137,24 @@ export default function PFCComponent() {
             background: linear-gradient(135deg, rgba(52, 211, 153, 0.2), rgba(59, 130, 246, 0.2));
             z-index: -1;
             border-radius: 1rem;
+          }
+
+          /* Scroll Animation */
+          @keyframes slideIn {
+            0% {
+              opacity: 0;
+              transform: translateX(100px);
+            }
+            100% {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+
+          .animate-slide-in {
+            opacity: 0;
+            transform: translateX(100px);
+            animation: slideIn 0.6s ease-out forwards;
           }
         `}
       </style>
@@ -161,22 +180,13 @@ export default function PFCComponent() {
       <div className="bg-gradient-to-b from-green-50 to-blue-50 rounded-xl shadow-lg overflow-hidden border border-green-200 w-full">
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Left Section */}
-          <div className="bg-green-100 p-4 flex items-center justify-center">
-            <div className="text-center p-8">
-              <div className="mb-4 text-6xl">🌱</div>
-              <h2 className="text-2xl font-bold text-green-800 mb-2">
-                PROCUREMENT CUM FULFILLMENT CENTER
-              </h2>
-              <p className="text-green-700">
-                Transforming agricultural supply chains with technology
-              </p>
-              <div className="mt-8 bg-white/70 p-6 rounded-lg shadow-md">
-                <p className="text-sm text-gray-700">
-                  Our PFC serves as a critical hub in the agricultural ecosystem,
-                  connecting farmers directly to markets through a technology-enabled
-                  infrastructure that ensures quality, reduces waste, and maximizes value.
-                </p>
-              </div>
+          <div className="bg-green-100 p-4 flex items-center justify-center h-full">
+            <div className="w-full h-full flex items-center justify-center">
+              <img
+                src="/images/flowchart-1.png"
+                alt="Procurement Flowchart"
+                className="max-h-[600px] w-auto object-contain rounded-lg shadow-lg"
+              />
             </div>
           </div>
 
@@ -185,13 +195,20 @@ export default function PFCComponent() {
             <div className="space-y-4">
               {steps.map((step, index) => {
                 const isActive = index <= activeStep;
+                const { ref, inView } = useInView({
+                  triggerOnce: true, // Animation triggers only once
+                  threshold: 0.3, // Trigger when 30% of the element is visible
+                });
 
                 return (
                   <div
                     key={step.id}
+                    ref={ref}
                     className={`flex items-center bg-white/90 p-4 rounded-lg shadow-md border-l-4 
                       ${isActive ? "border-green-600 opacity-100" : "border-gray-300 opacity-70"}
-                      transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1 cursor-pointer`}
+                      transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1 cursor-pointer
+                      ${inView ? "animate-slide-in" : ""}`}
+                    style={{ animationDelay: `${index * 0.2}s` }} // Staggered animation
                   >
                     <div className="relative mr-4">
                       <div
@@ -248,14 +265,14 @@ export default function PFCComponent() {
             >
               ✕
             </button>
-            
+
             {/* Responsive Layout - Stacked on mobile, side by side on larger screens */}
             <div className="flex flex-col md:flex-row gap-6">
               {/* Left: Video - Now optimized for vertical video */}
               <div className="md:w-2/5">
                 <div className="aspect-[9/16] bg-black rounded-lg overflow-hidden">
                   <video
-                    className="w-full h-full object-contain "
+                    className="w-full h-full object-contain"
                     muted
                     loop
                     src={getCurrentVideoInfo().videoSrc}
@@ -264,7 +281,7 @@ export default function PFCComponent() {
                   />
                 </div>
               </div>
-              
+
               {/* Right: Text Content */}
               <div className="md:w-3/5 flex flex-col justify-center">
                 <div className="mb-4 flex items-center">
@@ -275,7 +292,7 @@ export default function PFCComponent() {
                     {getCurrentVideoInfo().title}
                   </h3>
                 </div>
-                
+
                 <p className="text-base text-gray-700 leading-relaxed">
                   {getCurrentVideoInfo().description}
                 </p>
