@@ -34,7 +34,7 @@ const Partners = () => {
       description: "Odisha Rural Development and Marketing Society"
     },
     {
-      name: "OFSC",
+      name: "OFSDS",
       logo: "/images/forest.png",
       description: "Odisha Forestry Sector Development Society"
     },
