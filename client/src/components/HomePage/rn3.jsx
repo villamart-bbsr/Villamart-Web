@@ -12,15 +12,10 @@ export default function GrowingSlider() {
 
   useEffect(() => {
     const imageUrls = [
-      '/images/blinkit.png',
-      '/images/Instamartlogo.webp',
-      '/images/reliance-fresh.png',
-      '/images/blinkit.png',
-      '/images/blinkit.png',
-      '/images/blinkit.png',
-      '/images/blinkit.png',
-      '/images/blinkit.png'
-    ];
+      '/images/haat/haat-1.jpg',
+      '/images/haat/haat-2.jpg',
+      '/images/haat/haat-3.jpg',
+    ]
 
     const initialItems = Array.from({ length: totalImages }, (_, i) => ({
       id: i,

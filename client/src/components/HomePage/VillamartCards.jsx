@@ -115,12 +115,7 @@ export default function VillaMartCards() {
                 </p>
               </div>
               
-              <div className="flex flex-wrap gap-2 mt-4">
-                <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">Medium+2</span>
-                <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">Give+3</span>
-                <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">LinkedIn+3</span>
-                <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">villamart.in</span>
-              </div>
+              
             </div>
             
             <div className="flex justify-evenly mt-6">
@@ -202,11 +197,7 @@ export default function VillaMartCards() {
               </div>
             </div>
             
-            <div className="mt-6 p-3 bg-green-50 rounded-lg border border-green-100">
-              <p className="text-sm text-center text-green-700">
-                If you'd like more information on VillaMart's initiatives or how to get involved, feel free to ask!
-              </p>
-            </div>
+            
           </div>
         </div>
       </div>

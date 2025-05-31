@@ -19,7 +19,7 @@ const fadeInUp = {
 
 const Network = () => {
   return (
-    <div className="w-full relative  overflow-hidden">
+    <div className="w-full relative overflow-hidden bg-white">
       {/* Static Background Pattern */}
       <div className="absolute inset-0 w-full h-full">
         <svg
@@ -31,14 +31,14 @@ const Network = () => {
           <defs>
             {/* Gradient definitions */}
             <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#C4E17F" stopOpacity="0.15" />
-              <stop offset="50%" stopColor="#C4E17F" stopOpacity="0.1" />
-              <stop offset="100%" stopColor="#C4E17F" stopOpacity="0.15" />
+              <stop offset="0%" stopColor="#90EE90" stopOpacity="0.2" />
+              <stop offset="50%" stopColor="#98FB98" stopOpacity="0.15" />
+              <stop offset="100%" stopColor="#90EE90" stopOpacity="0.2" />
             </linearGradient>
             
             <radialGradient id="grad2" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#C4E17F" stopOpacity="0.05" />
-              <stop offset="100%" stopColor="#C4E17F" stopOpacity="0.02" />
+              <stop offset="0%" stopColor="#90EE90" stopOpacity="0.08" />
+              <stop offset="100%" stopColor="#98FB98" stopOpacity="0.04" />
             </radialGradient>
             
             {/* Pattern definitions */}
@@ -129,7 +129,10 @@ const Network = () => {
       </div>
 
       {/* Content overlay with semi-transparent background */}
-      <div className="relative z-10 bg-white/10 backdrop-blur-sm">
+      <div className="relative z-10 bg-white/10 backdrop-blur-sm" style={{
+        borderRadius: '0 0 50% 50%',
+        paddingBottom: '2rem'
+      }}>
         {/* Header Section */}
         <motion.div
           className="text-black py-8 px-6 text-center"
@@ -193,6 +196,8 @@ const Network = () => {
           </div>
         </motion.div>
       </div>
+
+
     </div>
   );
 };

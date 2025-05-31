@@ -12,7 +12,7 @@ const Achievements = () => {
   ];
 
   return (
-    <section className="relative py-20 px-4 overflow-hidden">
+    <section className="relative py-20 px-4 overflow-hidden bg-white">
       {/* Light earth-toned background with farm pattern overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-lime-50 to-green-100 opacity-95"></div>
       <div className="absolute inset-0 farm-pattern opacity-30"></div>
