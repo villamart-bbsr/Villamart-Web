@@ -19,35 +19,26 @@ const Partners = () => {
       description: "A trusted name in retail, bringing you the best produce"
     },
     {
-      name: "BigBasket",
-      logo: "/images/bigbasket.png",
-      description: "India's largest online supermarket for fresh groceries"
+      name: "JioMart",
+      logo: "/images/jio_mart.png",
+      description: "Your one-stop shop for groceries and essentials"
     },
     {
-      name: "Grofers",
-      logo: "/images/grofers.png",
+      name: "Livelihood Alternatives",
+      logo: "/images/image.png",
       description: "Quick delivery of fresh produce and daily essentials"
     },
     {
-      name: "Amazon Fresh",
-      logo: "/images/amazon-fresh.png",
-      description: "Premium quality fresh groceries delivered fast"
+      name: "ORMAS",
+      logo: "/images/ormas.png",
+      description: "Odisha Rural Development and Marketing Society"
     },
     {
-      name: "Flipkart Grocery",
-      logo: "/images/flipkart-grocery.png",
-      description: "Trusted online grocery shopping experience"
+      name: "OFSC",
+      logo: "/images/forest.png",
+      description: "Odisha Forestry Sector Development Society"
     },
-    {
-      name: "Nature's Basket",
-      logo: "/images/natures-basket.png",
-      description: "Gourmet and organic food delivery specialists"
-    },
-    {
-      name: "Spencer's Retail",
-      logo: "/images/spencers.png",
-      description: "Quality retail chain for fresh food and groceries"
-    }
+    
   ];
 
   const [hoverIndex, setHoverIndex] = useState(null);
@@ -169,15 +160,15 @@ const Partners = () => {
               🌿
             </motion.div>
             <motion.h2
-              className="text-4xl font-bold text-green-800 relative"
+              className="text-4xl font-bold text-green-700 relative"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
             >
-              Our Trusted Partners
+              Our Trusted <span className="text-orange-500">Partners</span>
             </motion.h2>
             <motion.div
-              className="h-1 bg-green-500 mt-3 mx-auto"
+              className="h-1 bg-orange-500 mt-3 mx-auto"
               initial={{ width: 0 }}
               whileInView={{ width: "100px" }}
               transition={{ duration: 1, delay: 0.5 }}
@@ -493,7 +484,7 @@ const Partners = () => {
               whileHover={{ rotate: 2 }}
               transition={{ duration: 0.4 }}
             />
-            <a href="/contact" className="relative px-8 py-3 font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors z-10 cursor-pointer block">
+            <a href="/contact" className="relative px-8 py-3 font-medium text-white bg-green-700 rounded-lg hover:bg-green-800 transition-colors z-10 cursor-pointer block transition-all duration-300 ease-in-out ">
               Become Our Partner
             </a>
           </div>

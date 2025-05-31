@@ -11,14 +11,10 @@ export default function CircularSlider() {
 
   useEffect(() => {
     const imageUrls = [
-      '/images/blinkit.png',
-      '/images/Instamartlogo.webp',
-      '/images/reliance-fresh.png',
-      '/images/blinkit.png',
-      '/images/blinkit.png',
-      '/images/blinkit.png',
-      '/images/blinkit.png',
-      '/images/blinkit.png'
+      "/images/veges/veges-1.png",
+      "/images/veges/veges-2.png",
+      "/images/veges/veges-4.webp",
+      "/images/veges/veges-3.webp",
     ];
 
     const initialItems = Array.from({ length: totalImages }, (_, i) => ({
@@ -102,7 +98,7 @@ export default function CircularSlider() {
             <img
               src={item.imageUrl}
               alt={`Item ${item.id + 1}`}
-              className="w-20 h-20 object-contain"
+              className="w-20 h-20 object-contain rounded-full bg-white p-1"
               draggable={false}
               style={{
                 pointerEvents: 'none',

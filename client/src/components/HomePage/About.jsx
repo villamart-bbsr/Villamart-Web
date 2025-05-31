@@ -66,7 +66,7 @@ export default function AgriPlatformHero() {
         {/* Text Content */}
         <div className="md:w-1/2 space-y-6">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
-            <span className="md:whitespace-nowrap z-10 relative">Empowering India's Agri Future</span><br />
+            <span className="md:whitespace-nowrap z-10 relative text-green-700">Empowering India's Agri Future</span><br />
             <span className="text-orange-500">One Village at a Time</span>
           </h1>
           <div className="w-24 h-1 bg-orange-500"></div>

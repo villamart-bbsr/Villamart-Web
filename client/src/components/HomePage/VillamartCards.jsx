@@ -54,7 +54,7 @@ export default function VillaMartCards() {
       <div className={`mb-12 text-center transform ${animate ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'} transition-all duration-1000`}>
         <div className="flex items-center justify-center mb-4">
           <Sprout className="text-green-600 mr-2" size={32} />
-          <h1 className="text-4xl font-bold text-green-800">VillaMart</h1>
+          <h1 className="text-4xl font-bold text-green-700">Villa<span className="text-orange-500">Mart</span></h1>
         </div>
         <p className="text-lg text-green-700 max-w-2xl">
           An agritech startup based in Bhubaneswar, Odisha, dedicated to transforming the agricultural landscape through innovative, technology-driven solutions.

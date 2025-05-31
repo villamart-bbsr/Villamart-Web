@@ -2,6 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Ln1 from './ln1';
 import Rn1 from './rn1';
+import Ln2 from './ln2';
+import Ln3 from './ln3';
+import Rn2 from './rn2';
+import Rn3 from './rn3';
 
 // Animation variants for reusability
 const fadeInUp = {
@@ -27,14 +31,14 @@ const Network = () => {
           <defs>
             {/* Gradient definitions */}
             <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#dcfce7" stopOpacity="0.3" />
-              <stop offset="50%" stopColor="#fed7aa" stopOpacity="0.2" />
-              <stop offset="100%" stopColor="#bbf7d0" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="#C4E17F" stopOpacity="0.15" />
+              <stop offset="50%" stopColor="#C4E17F" stopOpacity="0.1" />
+              <stop offset="100%" stopColor="#C4E17F" stopOpacity="0.15" />
             </linearGradient>
             
             <radialGradient id="grad2" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#10b981" stopOpacity="0.1" />
-              <stop offset="100%" stopColor="#f97316" stopOpacity="0.05" />
+              <stop offset="0%" stopColor="#C4E17F" stopOpacity="0.05" />
+              <stop offset="100%" stopColor="#C4E17F" stopOpacity="0.02" />
             </radialGradient>
             
             {/* Pattern definitions */}
@@ -134,8 +138,8 @@ const Network = () => {
           viewport={{ amount: 0.3 }}
           variants={fadeInUp}
         >
-          <h1 className="relative inline-block text-4xl font-bold mb-2 animate-slide-in-down text-green-600 after:block after:w-full after:h-1 after:bg-gradient-to-r after:from-green-600 after:via-orange-400 after:to-orange-400 after:mt-1 after:rounded-full">
-            Network <span className="text-orange-400">Dashboard</span>
+          <h1 className="relative inline-block text-4xl font-bold mb-2 animate-slide-in-down text-green-700 after:block after:w-full after:h-1 after:bg-gradient-to-r after:from-green-700 after:via-orange-500 after:to-orange-500 after:mt-1 after:rounded-full">
+            Network <span className="text-orange-500">Dashboard</span>
           </h1>
           <h2 className="text-xl font-light opacity-90 animate-fade-in">
             Real-time Network Monitoring System
@@ -155,10 +159,10 @@ const Network = () => {
               <Ln1 />
             </div>
             <div className="flex-1 flex items-center justify-center text-green-900 text-lg font-semibold">
-              <Ln1 />
+              <Ln2 />
             </div>
             <div className="flex-1 flex items-center justify-center text-green-900 text-lg font-semibold">
-              <Ln1 />
+              <Ln3 />
             </div>
           </div>
           
@@ -181,10 +185,10 @@ const Network = () => {
               <Rn1 />
             </div>
             <div className="flex-1 flex items-center justify-center text-green-900 text-lg font-semibold">
-              <Rn1 />
+              <Rn2 />
             </div>
             <div className="flex-1 flex items-center justify-center text-green-900 text-lg font-semibold">
-              <Rn1 />
+              <Rn3 />
             </div>
           </div>
         </motion.div>

@@ -53,8 +53,8 @@ const Achievements = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h1 className="text-5xl font-bold mb-6 text-green-900">Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-600 to-green-700">Harvest</span></h1>
-            <div className="h-1 w-32 bg-gradient-to-r from-lime-600 to-green-700 mx-auto rounded-full"></div>
+            <h1 className="text-5xl font-bold mb-6 text-green-700">Our <span className="text-transparent bg-clip-text bg-orange-500">Harvest</span></h1>
+            <div className="h-1 w-32 bg-gradient-to-r from-orange-500 to-orange-700 mx-auto rounded-full"></div>
           </motion.div>
           
           <motion.p 

@@ -15,11 +15,8 @@ export default function GrowingSlider() {
       '/images/blinkit.png',
       '/images/Instamartlogo.webp',
       '/images/reliance-fresh.png',
-      '/images/blinkit.png',
-      '/images/blinkit.png',
-      '/images/blinkit.png',
-      '/images/blinkit.png',
-      '/images/blinkit.png'
+      '/images/jio_mart.png',
+      
     ];
 
     const initialItems = Array.from({ length: totalImages }, (_, i) => ({
@@ -56,30 +53,32 @@ export default function GrowingSlider() {
             };
           }
 
-          // If not grown, compute new scale & opacity
+          // Growth phase - only grow until reaching full size, then maintain it
           if (!item.hasGrown) {
-            const growthEnd = viewportWidth * 0.6;
+            const growthEnd = viewportWidth * 0.4; // Reduced growth zone
             const ratio = Math.min(1, newPosition / growthEnd);
             const eased = ratio * ratio * (3 - 2 * ratio);
 
-            const scale = 0.25 + eased * 0.75;
-            const opacity = 0.5 + eased * 0.9;
+            const scale = 0.25 + eased * 0.75; // Grows from 0.25 to 1.0
+            const opacity = 0.5 + eased * 0.9; // Grows from 0.5 to 1.4
 
             const hasGrown = ratio >= 1;
 
             return {
               ...item,
               position: newPosition,
-              scale,
-              opacity,
+              scale: hasGrown ? 1.0 : scale, // Lock at full size once grown
+              opacity: hasGrown ? 1.0 : opacity, // Lock at full opacity once grown
               hasGrown
             };
           }
 
-          // After growing, only update position
+          // After growing, maintain full size and opacity
           return {
             ...item,
-            position: newPosition
+            position: newPosition,
+            scale: 1.0, // Keep full size
+            opacity: 1.0 // Keep full opacity
           };
         });
       });
@@ -114,7 +113,7 @@ export default function GrowingSlider() {
             <img
               src={item.imageUrl}
               alt={`Item ${item.id + 1}`}
-              className="w-20 h-20 object-contain"
+              className="w-20 h-20 object-contain rounded-full bg-white p-1"
               draggable={false}
               style={{
                 pointerEvents: 'none',

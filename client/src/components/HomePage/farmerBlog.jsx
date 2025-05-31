@@ -220,7 +220,7 @@ export default function FarmerBlog() {
       <div className="pt-12 pb-6 text-center relative z-10">
         <div className="inline-block mb-4 relative animate-float">
           <Tractor size={48} className="inline-block text-green-600 mr-3" />
-          <h1 className="text-5xl font-bold text-green-800 inline-block">Harvest Insights</h1>
+          <h1 className="text-5xl font-bold text-green-700 inline-block">Harvest <span className="text-orange-500">Insights</span></h1>
         </div>
         <p className="text-xl text-green-700 max-w-2xl mx-auto mt-2">
           Where farming wisdom grows and agricultural knowledge flourishes

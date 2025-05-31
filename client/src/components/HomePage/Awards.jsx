@@ -113,15 +113,15 @@ const Awards = () => {
           className="mb-12"
         >
           <motion.h1
-            className="text-5xl font-bold mb-4 text-green-900"
+            className="text-5xl font-bold mb-4 text-green-700"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-lime-600 to-green-700">Recognition</span>
+            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-500">Recognition</span>
           </motion.h1>
           <motion.div
-            className="w-24 h-1 bg-gradient-to-r from-lime-600 to-green-700 mx-auto mb-6"
+            className="w-24 h-1 bg-gradient-to-r from-orange-500 to-orange-600 mx-auto mb-6"
             initial={{ width: 0 }}
             whileInView={{ width: 96 }}
             transition={{ duration: 0.8, delay: 0.4 }}
