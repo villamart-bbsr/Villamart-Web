@@ -132,8 +132,8 @@ export default function EnhancedApproach() {
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <h2 className="text-4xl md:text-5xl font-bold text-green-600 inline-block">
-          Our Innovative Approach
+        <h2 className="text-4xl md:text-5xl font-bold text-green-700 inline-block">
+          Our Innovative <span className='text-orange-500'>Approach</span>
         </h2>
         <motion.div 
           className="h-1 w-24 md:w-32 mx-auto mt-4 rounded-full bg-orange-500"
@@ -181,14 +181,14 @@ export default function EnhancedApproach() {
             <div className="relative z-10 p-6 h-full flex flex-col transition-all duration-300 group-hover:translate-y-2">
               {/* Icon with circular background */}
               <div className="p-3 rounded-full w-14 h-14 flex items-center justify-center bg-green-100 mb-4 transition-all duration-300 group-hover:bg-green-500 group-hover:rotate-12 group-hover:scale-110">
-                <span className="text-green-600 transition-colors duration-300 group-hover:text-white">
+                <span className="text-green-700 transition-colors duration-300 group-hover:text-white">
                   {approach.icon}
                 </span>
               </div>
               
               {/* Title with sliding underline effect */}
               <div className="relative overflow-hidden mb-2">
-                <h3 className="text-xl font-bold text-gray-800 transition-colors duration-300 group-hover:text-green-600">
+                <h3 className="text-xl font-bold text-gray-800 transition-colors duration-300 group-hover:text-green-700">
                   {approach.title}
                 </h3>
                 <div className="absolute w-full h-0.5 bg-orange-500 -bottom-1 left-0 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></div>

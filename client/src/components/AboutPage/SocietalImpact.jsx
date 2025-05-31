@@ -113,7 +113,7 @@ const EnhancedImpact = () => {
       >
         <div className="flex items-center">
           <motion.div
-            className="h-1 w-10 bg-orange-500 mr-4 rounded-full"
+            className="h-1 w-10 bg-green-700 mr-4 rounded-full"
             initial={{ width: 0 }}
             animate={isImpactInView ? { width: '40px' } : { width: 0 }}
             transition={{ duration: 0.4, delay: 0.2 }}
@@ -122,8 +122,14 @@ const EnhancedImpact = () => {
             className="text-3xl md:text-4xl font-bold text-green-700"
             variants={fadeInUp}
           >
-            Societal Impact
+            Societal <span className='text-orange-500'>Impact</span>
           </motion.h2>
+          <motion.div
+            className="h-1 w-10 bg-orange-500 ml-4 rounded-full"
+            initial={{ width: 0 }}
+            animate={isImpactInView ? { width: '40px' } : { width: 0 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+          />
         </div>
       </motion.div>
 

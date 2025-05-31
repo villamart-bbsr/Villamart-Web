@@ -76,7 +76,7 @@ export default function PFCComponent() {
   };
 
   return (
-    <div className="font-sans">
+    <div className="font-sans mb-10">
       <style>
         {`
           @keyframes superNeonGlow {

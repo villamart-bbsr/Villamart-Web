@@ -41,7 +41,7 @@ const VillaMartBusinessModel = () => {
   const [row3Ref, row3InView] = useInView({ triggerOnce: true, threshold: 0.2 });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-900 via-green-800 to-teal-900 flex flex-col select-none">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-900 via-green-800 to-teal-900 flex flex-col select-none rounded-2xl m-4">
       {/* Header */}
       <motion.div
         ref={headerRef}

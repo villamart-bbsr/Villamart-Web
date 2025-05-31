@@ -74,11 +74,11 @@ export default function FarmerDistributionNetwork() {
   };
 
   return (
-    <div className="bg-green-50 min-h-screen p-6 overflow-hidden">
-      <div className="max-w-6xl mx-auto">
+    <div className="bg-green-50 min-h-screen w-full overflow-hidden">
+      <div className="w-full px-6 py-6">
         {/* Header Section */}
         <motion.div 
-          className="bg-white rounded-xl shadow-xl overflow-hidden mb-8"
+          className="bg-white rounded-xl shadow-xl overflow-hidden mb-8 w-full"
           initial="hidden"
           animate="visible"
           variants={headerBounce}
@@ -88,11 +88,11 @@ export default function FarmerDistributionNetwork() {
             <p className="text-green-100">From farm to consumers through efficient distribution channels</p>
           </div>
           
-          <div className="flex flex-col md:flex-row">
+          <div className="flex flex-col lg:flex-row">
             {/* Image Section - Slide from Left, No Hover Effect */}
             <motion.div 
               ref={imageRef}
-              className="w-full md:w-2/3 p-4" 
+              className="w-full lg:w-2/3 p-4" 
               initial="hidden"
               animate={isImageInView ? "visible" : "hidden"}
               variants={slideInLeft}
@@ -109,7 +109,7 @@ export default function FarmerDistributionNetwork() {
             {/* Content Section - Slide from Right */}
             <motion.div 
               ref={channelsRef}
-              className="w-full md:w-1/3 p-4 bg-orange-100 border-l-4 border-orange-500"
+              className="w-full lg:w-1/3 p-4 bg-orange-100 border-l-4 border-orange-500"
               initial="hidden"
               animate={isChannelsInView ? "visible" : "hidden"}
               variants={slideInRight}
@@ -170,7 +170,7 @@ export default function FarmerDistributionNetwork() {
         {/* Benefits Section - Pop-up Effect */}
         <motion.div 
           ref={benefitsRef}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 w-full"
           initial="hidden"
           animate={isBenefitsInView ? "visible" : "hidden"}
           variants={popUp}

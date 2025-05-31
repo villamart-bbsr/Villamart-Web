@@ -18,7 +18,7 @@ const EmpoweringEveryLink = () => {
       
       {/* Left Text Content */}
       <div className="lg:w-1/2 w-full text-center lg:text-left">
-        <h2 className="text-4xl md:text-5xl font-bold text-green-800 mb-3">
+        <h2 className="text-4xl md:text-5xl font-bold text-green-700 mb-3">
           Empowering every link
         </h2>
         <div className="w-20 h-1 bg-orange-500 mb-6 rounded-full mx-auto lg:mx-0"></div>
