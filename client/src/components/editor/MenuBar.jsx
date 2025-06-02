@@ -12,7 +12,7 @@ import {
 } from "react-icons/ai";
 import { BiParagraph } from "react-icons/bi";
 import { FiCode } from "react-icons/fi";
-import { MdOutlineLayersClear } from "react-icons/md";
+import { MdOutlineLayersClear, MdColorize } from "react-icons/md";
 import {
   PiCodeBlockBold,
   PiQuotesBold,
@@ -28,26 +28,39 @@ const MenuBar = ({ editor }) => {
     }
   }, [editor]);
 
+  const addColor = useCallback(() => {
+    const color = window.prompt("Enter color (hex, rgb, or color name)", "#000000");
+    if (color) {
+      editor.chain().focus().setColor(color).run();
+    }
+  }, [editor]);
+
   if (!editor) return null;
 
   return (
     <div className="border border-slate-300 rounded-lg p-5 sticky top-3 bg-white z-10 flex gap-1 flex-wrap">
+      {/* Heading buttons */}
       {[1, 2, 3, 4, 5, 6].map((level) => (
         <button
           key={level}
           onClick={() =>
             editor.chain().focus().toggleHeading({ level }).run()
           }
-          className={`editor-btn ${editor.isActive("heading", { level }) && "active-editor-btn"}`}
+          className={`editor-btn ${
+            editor.isActive("heading", { level }) ? "active-editor-btn" : ""
+          }`}
         >
           H{level}
         </button>
       ))}
 
+      {/* Text formatting buttons */}
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
-        className={`editor-btn ${editor.isActive("bold") && "active-editor-btn"}`}
+        className={`editor-btn ${
+          editor.isActive("bold") ? "active-editor-btn" : ""
+        }`}
       >
         <AiOutlineBold />
       </button>
@@ -55,7 +68,9 @@ const MenuBar = ({ editor }) => {
       <button
         onClick={() => editor.chain().focus().toggleItalic().run()}
         disabled={!editor.can().chain().focus().toggleItalic().run()}
-        className={`editor-btn ${editor.isActive("italic") && "active-editor-btn"}`}
+        className={`editor-btn ${
+          editor.isActive("italic") ? "active-editor-btn" : ""
+        }`}
       >
         <AiOutlineItalic />
       </button>
@@ -63,7 +78,9 @@ const MenuBar = ({ editor }) => {
       <button
         onClick={() => editor.chain().focus().toggleStrike().run()}
         disabled={!editor.can().chain().focus().toggleStrike().run()}
-        className={`editor-btn ${editor.isActive("strike") && "active-editor-btn"}`}
+        className={`editor-btn ${
+          editor.isActive("strike") ? "active-editor-btn" : ""
+        }`}
       >
         <AiOutlineStrikethrough />
       </button>
@@ -71,71 +88,117 @@ const MenuBar = ({ editor }) => {
       <button
         onClick={() => editor.chain().focus().toggleCode().run()}
         disabled={!editor.can().chain().focus().toggleCode().run()}
-        className={`editor-btn ${editor.isActive("code") && "active-editor-btn"}`}
+        className={`editor-btn ${
+          editor.isActive("code") ? "active-editor-btn" : ""
+        }`}
       >
         <FiCode />
       </button>
 
-      <button onClick={() => editor.chain().focus().unsetAllMarks().run()} className="editor-btn">
+      {/* Clear formatting buttons */}
+      <button 
+        onClick={() => editor.chain().focus().unsetAllMarks().run()} 
+        className="editor-btn"
+      >
         <MdOutlineLayersClear />
       </button>
 
-      <button onClick={() => editor.chain().focus().clearNodes().run()} className="editor-btn">
+      <button 
+        onClick={() => editor.chain().focus().clearNodes().run()} 
+        className="editor-btn"
+      >
         <AiOutlineClose />
       </button>
 
+      {/* Paragraph button */}
       <button
         onClick={() => editor.chain().focus().setParagraph().run()}
-        className={`editor-btn ${editor.isActive("paragraph") && "active-editor-btn"}`}
+        className={`editor-btn ${
+          editor.isActive("paragraph") ? "active-editor-btn" : ""
+        }`}
       >
         <BiParagraph />
       </button>
 
+      {/* Color button */}
+      <button onClick={addColor} className="editor-btn">
+        <MdColorize />
+      </button>
+
+      {/* Image button */}
       <button onClick={addImage} className="editor-btn">
         <PiImageSquareBold />
       </button>
 
+      {/* List buttons */}
       <button
         onClick={() => editor.chain().focus().toggleBulletList().run()}
-        className={`editor-btn ${editor.isActive("bulletList") && "active-editor-btn"}`}
+        className={`editor-btn ${
+          editor.isActive("bulletList") ? "active-editor-btn" : ""
+        }`}
       >
         <AiOutlineUnorderedList />
       </button>
 
       <button
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
-        className={`editor-btn ${editor.isActive("orderedList") && "active-editor-btn"}`}
+        className={`editor-btn ${
+          editor.isActive("orderedList") ? "active-editor-btn" : ""
+        }`}
       >
         <AiOutlineOrderedList />
       </button>
 
+      {/* Code block button */}
       <button
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-        className={`editor-btn ${editor.isActive("codeBlock") && "active-editor-btn"}`}
+        className={`editor-btn ${
+          editor.isActive("codeBlock") ? "active-editor-btn" : ""
+        }`}
       >
         <PiCodeBlockBold />
       </button>
 
+      {/* Blockquote button */}
       <button
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
-        className={`editor-btn ${editor.isActive("blockquote") && "active-editor-btn"}`}
+        className={`editor-btn ${
+          editor.isActive("blockquote") ? "active-editor-btn" : ""
+        }`}
       >
         <PiQuotesBold />
       </button>
 
-      <button onClick={() => editor.chain().focus().setHorizontalRule().run()} className="editor-btn">
+      {/* Horizontal rule button */}
+      <button 
+        onClick={() => editor.chain().focus().setHorizontalRule().run()} 
+        className="editor-btn"
+      >
         <TbSpacingVertical />
       </button>
 
-      <button onClick={() => editor.chain().focus().setHardBreak().run()} className="editor-btn">
+      {/* Hard break button */}
+      <button 
+        onClick={() => editor.chain().focus().setHardBreak().run()} 
+        className="editor-btn"
+      >
         <AiOutlineEnter />
       </button>
 
-      <button onClick={() => editor.chain().focus().undo().run()} className="editor-btn">
+      {/* Undo/Redo buttons */}
+      <button 
+        onClick={() => editor.chain().focus().undo().run()}
+        disabled={!editor.can().chain().focus().undo().run()}
+        className="editor-btn"
+      >
         <AiOutlineUndo />
       </button>
 
-      <button onClick={() => editor.chain().focus().redo().run()} className="editor-btn">
+      <button 
+        onClick={() => editor.chain().focus().redo().run()}
+        disabled={!editor.can().chain().focus().redo().run()}
+        className="editor-btn"
+      >
         <AiOutlineRedo />
       </button>
     </div>
