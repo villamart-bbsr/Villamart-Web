@@ -2,73 +2,73 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Clean, professional counter with subtle animation
-const Counter = ({ end, icon, label }) => {
-  const [count, setCount] = useState(0);
+// const Counter = ({ end, icon, label }) => {
+//   const [count, setCount] = useState(0);
   
-  useEffect(() => {
-    const duration = 2000;
-    const interval = 20;
-    const steps = duration / interval;
-    let current = 0;
-    let timeout;
+//   useEffect(() => {
+//     const duration = 2000;
+//     const interval = 20;
+//     const steps = duration / interval;
+//     let current = 0;
+//     let timeout;
     
-    const updateCounter = () => {
-      // Cubic easing for natural counting
-      const progress = Math.min(1, current / steps);
-      const easedProgress = progress < 0.5
-        ? 4 * progress * progress * progress
-        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+//     const updateCounter = () => {
+//       // Cubic easing for natural counting
+//       const progress = Math.min(1, current / steps);
+//       const easedProgress = progress < 0.5
+//         ? 4 * progress * progress * progress
+//         : 1 - Math.pow(-2 * progress + 2, 3) / 2;
         
-      const value = Math.floor(end * easedProgress);
-      setCount(value);
+//       const value = Math.floor(end * easedProgress);
+//       setCount(value);
       
-      if (current < steps) {
-        current++;
-        timeout = setTimeout(updateCounter, interval);
-      } else {
-        setCount(end);
-      }
-    };
+//       if (current < steps) {
+//         current++;
+//         timeout = setTimeout(updateCounter, interval);
+//       } else {
+//         setCount(end);
+//       }
+//     };
     
-    updateCounter();
-    return () => clearTimeout(timeout);
-  }, [end]);
+//     updateCounter();
+//     return () => clearTimeout(timeout);
+//   }, [end]);
   
-  return (
-    <motion.div 
-      className="bg-white rounded-lg p-6 shadow-md border border-green-100 h-full"
-      whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
-      transition={{ duration: 0.3 }}
-    >
-      <motion.div 
-        className="mb-3 text-3xl"
-        initial={{ scale: 0 }}
-        whileInView={{ scale: 1 }}
-        transition={{ type: "spring", stiffness: 260, damping: 20 }}
-      >
-        {icon}
-      </motion.div>
+//   return (
+//     <motion.div 
+//       className="bg-white rounded-lg p-6 shadow-md border border-green-100 h-full"
+//       whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
+//       transition={{ duration: 0.3 }}
+//     >
+//       <motion.div 
+//         className="mb-3 text-3xl"
+//         initial={{ scale: 0 }}
+//         whileInView={{ scale: 1 }}
+//         transition={{ type: "spring", stiffness: 260, damping: 20 }}
+//       >
+//         {icon}
+//       </motion.div>
       
-      <motion.div 
-        className="text-3xl font-bold text-green-700 mb-2"
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-      >
-        {count}<span className="text-green-500">+</span>
-      </motion.div>
+//       <motion.div 
+//         className="text-3xl font-bold text-green-700 mb-2"
+//         initial={{ opacity: 0, y: 10 }}
+//         whileInView={{ opacity: 1, y: 0 }}
+//         transition={{ delay: 0.2, duration: 0.5 }}
+//       >
+//         {count}<span className="text-green-500">+</span>
+//       </motion.div>
       
-      <motion.div
-        className="text-green-600 font-medium"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.4, duration: 0.5 }}
-      >
-        {label}
-      </motion.div>
-    </motion.div>
-  );
-};
+//       <motion.div
+//         className="text-green-600 font-medium"
+//         initial={{ opacity: 0 }}
+//         whileInView={{ opacity: 1 }}
+//         transition={{ delay: 0.4, duration: 0.5 }}
+//       >
+//         {label}
+//       </motion.div>
+//     </motion.div>
+//   );
+// };
 
 const TestimonialCard = ({ testimonial, isActive }) => {
   return (
@@ -310,7 +310,7 @@ const Testimonials = () => {
             </motion.h2>
             
             <motion.p 
-              className="text-green-600 mt-2"
+              className="text-green-700 mt-2"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}

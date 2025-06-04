@@ -1,31 +1,52 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ArrowLeft, ArrowRight, X, Camera, Leaf, ChevronRight, Sun, Cloud, Wind } from 'lucide-react';
-import { useRef } from 'react';
 
 // Sample farm images data
 const farmImages = [
-  { id: 1, title: "Sorting/Grading machine", description: "Our golden wheat fields ready for harvest.", tags: ["crops", "harvest"], imageSrc: "/images/gallery/factory1.jpg" },
-  { id: 2, title: "Sorting/Grading machine", description: "Fresh organic vegetables from our gardens.", tags: ["crops", "organic"], imageSrc: "/images/gallery/factory2.jpg" },
-  { id: 3, title: "Factory Outlet", description: "Our modern farming equipment in action.", tags: ["equipment", "technology"], imageSrc: "/images/gallery/factory3.jpg" },
-  { id: 4, title: "Factory Outlet", description: "Healthy livestock grazing in open pastures.", tags: ["animals", "organic"], imageSrc: "/images/gallery/factory4.jpg" },
-  { id: 5, title: "Ozone cleaning Machine", description: "Our greenhouse operations for year-round growing.", tags: ["technology", "organic"], imageSrc: "/images/gallery/factory5.jpg" },
-  { id: 6, title: "AI Powered", description: "Vibrant fruit orchards in full bloom.", tags: ["crops", "organic"], imageSrc: "/images/gallery/factory6.jpg" },
-  { id: 7, title: "Irrigation Systems", description: "Advanced irrigation systems for optimal water usage.", tags: ["technology", "equipment"], imageSrc: "/images/gallery/farming1.jpg" },
-  { id: 8, title: "Harvest Season", description: "The team during our busy harvest season.", tags: ["harvest", "crops"], imageSrc: "/images/gallery/farming2.jpg" },
-  { id: 9, title: "Farm Tours", description: "Educational tours of our sustainable farming practices.", tags: ["animals", "organic"], imageSrc: "/images/gallery/farming3.jpg" },
-  { id: 10, title: "Beekeeping", description: "Sustainable beekeeping for pollination and honey.", tags: ["organic", "animals"], imageSrc: "/images/gallery/items1.jpg" },
-  { id: 11, title: "Composting Area", description: "Organic waste composting for natural fertilizer.", tags: ["organic", "technology"], imageSrc: "/images/gallery/items2.jpg" },
-  { id: 12, title: "Tractor Work", description: "Tractors preparing fields for planting.", tags: ["equipment", "technology"], imageSrc: "/images/gallery/items3.jpg" },
-  { id: 13, title: "Farm Market", description: "Local produce sold at our farm market.", tags: ["organic", "crops"], imageSrc: "/images/gallery/items4.jpg" },
-  { id: 14, title: "Solar Panels", description: "Solar panels powering our sustainable operations.", tags: ["technology", "sustainability"], imageSrc: "/images/gallery/items5.jpg" },
-  { id: 15, title: "Farmhouse", description: "The historic farmhouse at the heart of the farm.", tags: ["architecture", "history"], imageSrc: "/images/gallery/items6.jpg" },
-  { id: 16, title: "Farm Dogs", description: "Our loyal farm dogs helping out.", tags: ["animals", "companions"], imageSrc: "/images/gallery/items7.jpg" },
-  { id: 17, title: "Cornfields", description: "Acres of tall corn swaying in the breeze.", tags: ["crops", "harvest"], imageSrc: "/images/gallery/mobile1.jpg" },
-  { id: 18, title: "Sunset Over Fields", description: "A peaceful sunset over our fields.", tags: ["scenery", "relaxation"], imageSrc: "/images/gallery/mobile2.jpg" },
-  { id: 19, title: "Silos", description: "Grain silos storing the season's yield.", tags: ["equipment", "storage"], imageSrc: "/images/gallery/mobile3.jpg" },
-  { id: 20, title: "Plant Nursery", description: "Young plants growing in the nursery.", tags: ["crops", "organic"], imageSrc: "/images/gallery/mobile4.png" },
-  { id: 21, title: "Rainwater Collection", description: "Eco-friendly rainwater collection system.", tags: ["technology", "sustainability"], imageSrc: "/images/gallery/static1.jpg" },
-  { id: 22, title: "Dairy Barn", description: "Milking cows in a clean, spacious barn.", tags: ["animals", "equipment"], imageSrc: "/images/gallery/static2.jpg" }
+  { id: 1,
+     title: "Sorting/Grading Machine", description: "Advanced sorting and grading machine for quality control.", tags: ["factory"], imageSrc: "/images/gallery/factory1.jpg" },
+  { id: 2,
+     title: "Automated Processing Line", description: "State-of-the-art automated processing line for efficient production.", tags: ["factory"], imageSrc: "/images/gallery/factory2.jpg" },
+  { id: 3,
+     title: "Factory Outlet Store", description: "Our main factory outlet store showcasing our products.", tags: ["factory"], imageSrc: "/images/gallery/factory3.jpg" },
+  { id: 4,
+     title: "Retail Showroom", description: "Modern retail showroom displaying our premium products.", tags: ["factory"], imageSrc: "/images/gallery/factory4.jpg" },
+  { id: 5,
+     title: "Ozone Cleaning Machine", description: "Advanced ozone cleaning technology for product sterilization.", tags: ["factory"], imageSrc: "/images/gallery/factory5.jpg" },
+  { id: 6,
+     title: "AI-Powered Processing", description: "Cutting-edge AI technology in our processing facility.", tags: ["factory"], imageSrc: "/images/gallery/factory6.jpg" },
+  { id: 7,
+     title: "Irrigation Systems", description: "Advanced irrigation systems for optimal water usage.", tags: ["farming"], imageSrc: "/images/gallery/farming1.jpg" },
+  { id: 8,
+     title: "Harvest Season", description: "The team during our busy harvest season.", tags: ["farming"], imageSrc: "/images/gallery/farming2.jpg" },
+  { id: 9,
+     title: "Farm Tours", description: "Educational tours of our sustainable farming practices.", tags: ["farming"], imageSrc: "/images/gallery/farming3.jpg" },
+  { id: 10,
+     title: "Premium Products", description: "Our high-quality products ready for distribution.", tags: ["items"], imageSrc: "/images/gallery/items1.jpg" },
+  { id: 11,
+     title: "Product Collection", description: "Diverse range of products from our facility.", tags: ["items"], imageSrc: "/images/gallery/items2.jpg" },
+  { id: 12,
+     title: "Farm Equipment", description: "Modern farming equipment in action.", tags: ["items"], imageSrc: "/images/gallery/items3.jpg" },
+  { id: 13,
+     title: "Retail Outlet", description: "Local products sold at our retail outlet.", tags: ["items"], imageSrc: "/images/gallery/items4.jpg" },
+  { id: 14,
+     title: "Solar Panels", description: "Solar panels powering our sustainable operations.", tags: ["items"], imageSrc: "/images/gallery/items5.jpg" },
+  { id: 15,
+     title: "Factory Facility", description: "Our main factory facility at the heart of operations.", tags: ["items"], imageSrc: "/images/gallery/items6.jpg" },
+  { id: 16,
+     title: "Quality Control", description: "Rigorous quality control processes in place.", tags: ["items"], imageSrc: "/images/gallery/items7.jpg" },
+  { id: 17,
+     title: "Farm Fields", description: "Expansive farm fields under cultivation.", tags: ["outlets"], imageSrc: "/images/gallery/mobile1.jpg" },
+  { id: 18,
+     title: "Farm Landscape", description: "Beautiful landscape of our farming operations.", tags: ["outlets"], imageSrc: "/images/gallery/mobile2.jpg" },
+  { id: 19,
+     title: "Storage Facility", description: "Modern storage facility for our products.", tags: ["outlets"], imageSrc: "/images/gallery/mobile3.jpg" },
+  { id: 20,
+     title: "Product Display", description: "Showcasing our premium product range.", tags: ["outlets"], imageSrc: "/images/gallery/mobile4.png" },
+  { id: 21,
+     title: "Processing Unit", description: "Advanced processing unit for product refinement.", tags: ["outlets"], imageSrc: "/images/gallery/static1.jpg" },
+  { id: 22,
+     title: "Distribution Center", description: "Efficient distribution center for product delivery.", tags: ["outlets"], imageSrc: "/images/gallery/static2.jpg" }
 ];
 
 
@@ -64,13 +85,13 @@ const FarmBackground = () => {
 const FilterBar = ({ activeFilter, setActiveFilter, filters }) => {
   return (
     <div className="relative z-10 mb-12">
-      <div className="flex flex-wrap gap-3 p-1 rounded-xl bg-gradient-to-r from-green-900/10 to-orange-900/10 backdrop-blur-sm shadow-lg">
+      <div className="flex flex-wrap gap-3 p-1 rounded-xl bg-green-700/10 backdrop-blur-sm shadow-lg">
         <button 
           onClick={() => setActiveFilter("all")}
           className={`px-5 py-3 rounded-lg text-sm font-medium transition-all duration-500 ease-in-out cursor-pointer ${
             activeFilter === "all" 
-              ? "bg-gradient-to-r from-green-600 to-orange-500 text-white shadow-lg scale-105 ring-2 ring-white/30" 
-              : "bg-white/80 text-green-800 hover:bg-white hover:scale-105"
+              ? "bg-green-700 text-white shadow-lg scale-105 ring-2 ring-white/30" 
+              : "bg-white/80 text-green-700 hover:bg-white hover:scale-105"
           } animate-[slide-in_0.5s_ease-out]`}
         >
           All
@@ -81,18 +102,16 @@ const FilterBar = ({ activeFilter, setActiveFilter, filters }) => {
             onClick={() => setActiveFilter(filter)}
             className={`px-5 py-3 rounded-lg text-sm font-medium transition-all duration-500 ease-in-out cursor-pointer ${
               activeFilter === filter 
-                ? "bg-gradient-to-r from-green-600 to-orange-500 text-white shadow-lg scale-105 ring-2 ring-white/30" 
-                : "bg-white/80 text-green-800 hover:bg-white hover:scale-105"
+                ? "bg-orange-500 text-white shadow-lg scale-105 ring-2 ring-white/30" 
+                : "bg-white/80 text-orange-500 hover:bg-white hover:scale-105"
             } animate-[slide-in_0.5s_ease-out]`}
             style={{ animationDelay: `${(index + 1) * 0.1}s` }}
           >
             <div className="flex items-center gap-2">
-              {filter === "crops" && <Leaf size={16} />}
-              {filter === "technology" && <Sun size={16} />}
-              {filter === "equipment" && <Wind size={16} />}
-              {filter === "organic" && <Leaf size={16} />}
-              {filter === "animals" && <Camera size={16} />}
-              {filter === "harvest" && <Sun size={16} />}
+              {filter === "factory" && <Camera size={16} />}
+              {filter === "farming" && <Leaf size={16} />}
+              {filter === "items" && <Sun size={16} />}
+              {filter === "outlets" && <Wind size={16} />}
               {filter.charAt(0).toUpperCase() + filter.slice(1)}
             </div>
           </button>
@@ -100,7 +119,7 @@ const FilterBar = ({ activeFilter, setActiveFilter, filters }) => {
       </div>
       <div className="mt-4 h-1 w-full bg-green-100 rounded-full overflow-hidden">
         <div 
-          className="h-full bg-gradient-to-r from-green-500 to-orange-500 transition-all duration-700 ease-in-out"
+          className="h-full bg-green-700 transition-all duration-700 ease-in-out"
           style={{ 
             width: activeFilter === "all" ? "100%" : `${(filters.indexOf(activeFilter) + 1) / (filters.length + 1) * 100}%` 
           }}
@@ -118,7 +137,7 @@ const ImageCard = ({ image, onClick, index }) => {
       className="relative overflow-hidden rounded-2xl shadow-lg cursor-pointer group transition-all duration-500 hover:shadow-2xl hover:scale-105 animate-[fade-slide_0.6s_ease-out_forwards]"
       style={{ animationDelay: `${index * 0.1}s` }}
     >
-      <div className="bg-gradient-to-br from-green-100 to-orange-50 aspect-square flex items-center justify-center overflow-hidden min-h-[200px]">
+      <div className="bg-green-50 aspect-square flex items-center justify-center overflow-hidden min-h-[200px]">
         {image.imageSrc ? (
           <img 
             src={image.imageSrc} 
@@ -132,18 +151,18 @@ const ImageCard = ({ image, onClick, index }) => {
         ) : (
           <Camera 
             size={48} 
-            className="text-green-600 opacity-30 group-hover:opacity-20 transition-opacity duration-300" 
+            className="text-green-700 opacity-30 group-hover:opacity-20 transition-opacity duration-300" 
           />
         )}
       </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
+      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
         <h3 className="text-white font-bold translate-y-4 group-hover:translate-y-0 transition-transform duration-500">{image.title}</h3>
-        <p className="text-white/80 text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">{image.description}</p>
+        <p className="text-white/90 text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-100">{image.description}</p>
         <div className="flex gap-2 mt-3 translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-200">
           {image.tags.map(tag => (
             <span 
               key={tag} 
-              className="bg-white/20 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full animate-[slide-up_0.3s_ease-out_forwards]"
+              className="bg-white/30 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full animate-[slide-up_0.3s_ease-out_forwards]"
             >
               #{tag}
             </span>
@@ -151,12 +170,12 @@ const ImageCard = ({ image, onClick, index }) => {
         </div>
       </div>
       <div className="absolute top-3 right-3 transform rotate-3 group-hover:rotate-0 transition-transform duration-300">
-        <span className="inline-flex items-center bg-gradient-to-r from-green-600 to-green-700 text-white text-xs px-3 py-1 rounded-full shadow-lg">
+        <span className="inline-flex items-center bg-green-700 text-white text-xs px-3 py-1 rounded-full shadow-lg">
           <Leaf size={12} className="mr-1 animate-pulse" />
           VillaMart
         </span>
       </div>
-      <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-green-500/0 group-hover:border-green-500/80 transition-all duration-500 rounded-tl-lg"></div>
+      <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-green-700/0 group-hover:border-green-700/80 transition-all duration-500 rounded-tl-lg"></div>
       <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-orange-500/0 group-hover:border-orange-500/80 transition-all duration-500 rounded-br-lg"></div>
     </div>
   );
@@ -251,7 +270,7 @@ const ImageModal = ({ image, onClose, allImages, activeFilter }) => {
   return (
     <div 
       className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-500 ease-in-out ${
-        isExiting ? 'bg-black/0 backdrop-blur-none' : 'bg-black/80 backdrop-blur-sm'
+        isExiting ? 'bg-black/0 backdrop-blur-none' : 'bg-black/60 backdrop-blur-sm'
       } animate-[fade-in_0.5s_ease-out]`}
       onClick={handleClickOutside}
     >
@@ -261,7 +280,7 @@ const ImageModal = ({ image, onClose, allImages, activeFilter }) => {
           isExiting ? 'scale-95 opacity-0' : 'scale-100 opacity-100'
         }`}
       >
-        <div className="bg-gradient-to-r from-green-600 to-green-700 p-5 flex justify-between items-center">
+        <div className="bg-green-700 p-5 flex justify-between items-center">
           <h2 className="text-white font-bold text-xl flex items-center">
             <span className="mr-2 text-white/80 flex items-center">
               <Camera size={20} className="mr-2" />
@@ -274,17 +293,16 @@ const ImageModal = ({ image, onClose, allImages, activeFilter }) => {
           </h2>
           <button 
             onClick={handleClose}
-            className="text-white hover:text-orange-200 transition-colors p-2 hover:bg-white/10 rounded-full cursor-pointer"
+            className="text-white hover:text-orange-500 transition-colors p-2 hover:bg-white/10 rounded-full cursor-pointer"
           >
             <X size={24} />
           </button>
         </div>
-        {/* Image container with better sizing constraints */}
-        <div className="flex-grow relative flex items-center justify-center bg-gradient-to-br from-black/5 to-black/10">
+        <div className="flex-grow relative flex items-center justify-center bg-green-50">
           <button 
             onClick={goToPrevious}
             disabled={isTransitioning}
-            className={`absolute left-4 z-100 bg-gradient-to-r from-green-600/90 to-green-700/90 hover:from-green-500 cursor-pointer hover:to-green-600 text-white rounded-full p-3 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-110 ${
+            className={`absolute left-4 z-100 bg-green-700 hover:bg-green-600 text-white rounded-full p-3 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-110 ${
               isTransitioning ? 'opacity-50 cursor-not-allowed' : 'opacity-90'
             }`}
             aria-label="Previous image"
@@ -292,7 +310,7 @@ const ImageModal = ({ image, onClose, allImages, activeFilter }) => {
             <ArrowLeft size={24} />
           </button>
           <div className="w-full h-full flex items-center justify-center p-8 relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-green-50/20 to-orange-50/20 animate-[gradient-shift_10s_ease-in-out_infinite] opacity-40"></div>
+            <div className="absolute inset-0 bg-green-50/20 opacity-40"></div>
             <div className={`relative z-10 transition-all duration-500 ${getAnimationClass()} shadow-2xl max-h-full flex items-center justify-center`}>
               {currentImage.imageSrc ? (
                 <img 
@@ -305,44 +323,37 @@ const ImageModal = ({ image, onClose, allImages, activeFilter }) => {
                   }}
                 />
               ) : (
-                <div className="bg-gradient-to-br from-green-100 to-orange-50 w-full h-full flex items-center justify-center rounded-lg">
-                  <Camera size={96} className="text-green-600/20" />
+                <div className="bg-green-50 w-full h-full flex items-center justify-center rounded-lg">
+                  <Camera size={96} className="text-green-700/20" />
                 </div>
               )}
-              <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-green-500 rounded-tl-lg"></div>
+              <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-green-700 rounded-tl-lg"></div>
               <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-orange-500 rounded-br-lg"></div>
             </div>
           </div>
           <button 
             onClick={goToNext}
             disabled={isTransitioning}
-            className={`absolute cursor-pointer right-4 z-10 bg-gradient-to-r from-green-600/90 to-green-700/90 hover:from-green-500 hover:to-green-600 text-white rounded-full p-3 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-110 ${
+            className={`absolute cursor-pointer right-4 z-10 bg-green-700 hover:bg-green-600 text-white rounded-full p-3 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-110 ${
               isTransitioning ? 'opacity-50 cursor-not-allowed' : 'opacity-90'
             }`}
             aria-label="Next image"
           >
             <ArrowRight size={24} />
           </button>
-          
         </div>
-        <div className="p-8 bg-gradient-to-br from-white to-green-50">
+        <div className="p-8 bg-white">
           <p className="text-gray-700 mb-5">{currentImage.description}</p>
           <div className="flex flex-wrap gap-2">
             {currentImage.tags.map(tag => (
               <span 
                 key={tag} 
-                className="bg-gradient-to-r from-orange-100 to-orange-200 text-orange-800 px-4 py-2 rounded-full text-sm flex items-center gap-1 shadow-sm hover:scale-105 transition-transform"
+                className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm flex items-center gap-1 shadow-sm hover:scale-105 transition-transform"
               >
-                <Leaf size={14} className="text-orange-700" />
+                <Leaf size={14} className="text-white" />
                 #{tag}
               </span>
             ))}
-          </div>
-          <div className="mt-6 text-sm text-gray-500 flex justify-between items-center">
-            
-            <div className="flex gap-3">
-              
-            </div>
           </div>
         </div>
       </div>
@@ -358,7 +369,7 @@ export default function FarmGallery() {
   const [isLoading, setIsLoading] = useState(true);
   const [animateFilters, setAnimateFilters] = useState(false);
 
-  const allTags = ["crops", "animals", "equipment", "technology", "organic", "harvest"];
+  const allTags = ["factory", "farming", "items", "outlets"];
 
   useEffect(() => {
     setTimeout(() => {
@@ -379,7 +390,7 @@ export default function FarmGallery() {
   }, [activeFilter]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-orange-50 p-6 md:p-8 lg:p-12 relative overflow-hidden">
+    <div className="min-h-screen bg-green-50 p-6 md:p-8 lg:p-12 relative overflow-hidden">
       <style>
         {`
           @keyframes fade-slide {
@@ -429,17 +440,12 @@ export default function FarmGallery() {
       <header className="mb-16 relative z-10">
         <div className="overflow-hidden">
           <h1 
-            className="text-5xl md:text-6xl font-bold mb-2 relative inline-block animate-[fade-slide_1s_ease-out]"
-            style={{ 
-              background: "linear-gradient(to right, #16a34a, #f97316)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent"
-            }}
+            className="text-5xl md:text-6xl font-bold mb-2 relative inline-block animate-[fade-slide_1s_ease-out] text-green-700"
           >
             VillaMart <span className="text-orange-500">Gallery</span> 
           </h1>
         </div>
-        <div className="w-32 h-1 bg-gradient-to-r from-green-500 to-orange-500 rounded-full mb-6 animate-[fade-slide_1s_ease-out]"></div>
+        <div className="w-32 h-1 bg-green-700 rounded-full mb-6 animate-[fade-slide_1s_ease-out]"></div>
         <p 
           className="text-green-700 max-w-2xl text-lg animate-[fade-in_1s_ease-out]"
           style={{ animationDelay: "0.5s" }}

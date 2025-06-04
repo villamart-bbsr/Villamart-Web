@@ -26,12 +26,12 @@ const sectionVariants = {
 
 const VillaMartBusinessModel = () => {
   // Scroll to top on mount with smooth behavior
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo({
+  //     top: 0,
+  //     behavior: 'smooth'
+  //   });
+  // }, []);
 
   // Hook for in-view detection
   const [headerRef, headerInView] = useInView({ triggerOnce: true, threshold: 0.2 });
@@ -148,16 +148,16 @@ const VillaMartBusinessModel = () => {
             whileHover={{ scale: 1.02 }}
             className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-4 shadow-xl border border-blue-200"
           >
-            <h3 className="text-lg font-bold text-center mb-2 text-gray-800">QUICK COMMERCE</h3>
+            <h3 className="text-base sm:text-lg font-bold text-center mb-2 text-gray-800">QUICK COMMERCE</h3>
             <div className="text-center mb-2">
               <motion.span
                 whileHover={{ scale: 1.05 }}
-                className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-2 py-1 rounded-full text-xs font-semibold"
+                className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-2 py-1 rounded-full text-xs font-semibold whitespace-nowrap"
               >
-                Strategic Partnerships
+                Strategic Partners
               </motion.span>
             </div>
-            <div className="flex justify-between items-center gap-2">
+            <div className="flex flex-col sm:grid sm:grid-cols-4 gap-2">
               {[
                 { logo: "/images/Instamartlogo.webp", name: "Swiggy", color: "from-orange-400 to-red-500" },
                 { logo: "/images/blinkit.png", name: "Blinkit", color: "from-yellow-400 to-orange-500" },
@@ -167,13 +167,13 @@ const VillaMartBusinessModel = () => {
                 <motion.div
                   key={index}
                   whileHover={{ scale: 1.1 }}
-                  className="p-2 rounded-xl flex-1"
+                  className="p-2 rounded-xl"
                 >
                   <div className="p-2 text-center">
                     <img 
                       src={partner.logo} 
                       alt={partner.name}
-                      className="h-19 w-auto mx-auto object-contain"
+                      className="h-12 sm:h-19 w-auto mx-auto object-contain"
                     />
                   </div>
                 </motion.div>
@@ -247,12 +247,12 @@ const VillaMartBusinessModel = () => {
             <div className="text-center mb-2">
               <motion.span
                 whileHover={{ scale: 1.05 }}
-                className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-2 py-1 rounded-full text-xs font-semibold"
+                className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-2 py-1 rounded-full text-xs font-semibold whitespace-nowrap"
               >
                 Direct Distribution
               </motion.span>
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="flex flex-col sm:grid sm:grid-cols-2 gap-2">
               <motion.div
                 whileHover={{ scale: 1.1 }}
                 className="text-center"
@@ -262,10 +262,10 @@ const VillaMartBusinessModel = () => {
                     <img 
                       src="/images/mobile_franchise.png" 
                       alt="Mobile Van"
-                      className="h-50 w-auto object-contain relative"
+                      className="sm:h-50 w-auto object-contain relative mx-auto translate-y-15 sm:translate-y-0 "
                     />
                   </div>
-                  <div className="text-black -translate-y-35 -translate-x-10 text-sm font-semibold mt-1 relative">Mobile</div>
+                  <div className="text-green-800 sm:-translate-y-35 sm:-translate-x-10 text-sm font-semibold mt-1 relative -translate-y-14 bg-white/70 backdrop-blur-sm p-2 rounded-lg shadow-sm">Mobile</div>
                 </div>
               </motion.div>
               <motion.div
@@ -273,12 +273,12 @@ const VillaMartBusinessModel = () => {
                 className="text-center"
               >
                 <div className="p-2 rounded-xl">
-                  <div className="text-black -translate-y-19 text-sm font-semibold mt-1 relative">Static</div>
+                  <div className="text-black sm:-translate-y-19 text-sm font-semibold mt-1 relative translate-y-8 text-green-800 bg-white/70 backdrop-blur-sm p-2 rounded-lg shadow-sm">Static</div>
                   <div className="p-2 flex items-center justify-center h-16">
                     <img 
                       src="/images/image6.jpg" 
                       alt="Store Outlet"
-                      className="h-40 w-auto object-contain relative translate-x-7 -translate-y-7"
+                      className="h-40 w-auto object-contain relative  sm:translate-x-7 sm:-translate-y-7 translate-y-16 mx-auto"
                     />
                   </div>
                 </div>

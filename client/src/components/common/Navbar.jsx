@@ -25,6 +25,7 @@ export default function Navbar() {
   const companyTimeoutRef = useRef(null);
   const blogsTimeoutRef = useRef(null);
   const profileTimeoutRef = useRef(null);
+  const mobileMenuRef = useRef(null);
   
   // Scroll effect for navbar
   useEffect(() => {
@@ -47,6 +48,11 @@ export default function Navbar() {
   // Handle clicks outside dropdowns (desktop only)
   useEffect(() => {
     function handleClickOutside(event) {
+      // Handle mobile menu click outside
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target) && !event.target.closest('button[aria-label="Toggle mobile menu"]')) {
+        setMobileMenuOpen(false);
+      }
+
       if (!mobileMenuOpen) { // Only run when mobile menu is closed
         if (companyMenuRef.current && !companyMenuRef.current.contains(event.target)) {
           setCompanyDropdownOpen(false);
@@ -159,12 +165,16 @@ export default function Navbar() {
             <div className="md:hidden flex items-center">
               <button
                 onClick={toggleMobileMenu}
-                className={`p-2 rounded-md focus:outline-none ${hoverColor} transition-all duration-300 cursor-pointer`}
+                className={`p-2 rounded-md focus:outline-none ${hoverColor} transition-all duration-300 cursor-pointer relative overflow-hidden group`}
+                aria-label="Toggle mobile menu"
               >
-                {mobileMenuOpen ? 
-                  <X size={24} className="transform rotate-90 transition-transform duration-300" /> : 
-                  <Menu size={24} className="transform transition-transform duration-300" />
-                }
+                <div className="relative z-10">
+                  {mobileMenuOpen ? 
+                    <X size={24} className="transform rotate-90 transition-all duration-500 ease-in-out" /> : 
+                    <Menu size={24} className="transform transition-all duration-500 ease-in-out" />
+                  }
+                </div>
+                <div className="absolute inset-0 bg-green-500/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </button>
             </div>
             
@@ -183,7 +193,7 @@ export default function Navbar() {
                   <ChevronDown size={16} className={`ml-1 transition-transform duration-300 ${companyDropdownOpen ? "rotate-180" : ""}`} />
                 </button>
                 {companyDropdownOpen && (
-                  <div className={`absolute mt-1 w-48 rounded-md shadow-lg ${dropdownBgColor} ring-1 ring-black ring-opacity-5 transform transition-all duration-300 origin-top z-50`}>
+                  <div className={`absolute mt-1 w-48 rounded-md shadow-md ${dropdownBgColor} transform transition-all duration-300 origin-top z-50`}>
                     <div className="py-1" role="menu" aria-orientation="vertical">
                       <a href="/moreInfo" className={`block px-4 py-3 text-base font-medium ${hoverColor} transition-all duration-200 hover:translate-x-1 hover:text-green-600 cursor-pointer`}>About</a>
                       <a href="/journey" className={`block px-4 py-3 text-base font-medium ${hoverColor} transition-all duration-200 hover:translate-x-1 hover:text-green-600 cursor-pointer`}>Journey</a>
@@ -207,7 +217,7 @@ export default function Navbar() {
                   <ChevronDown size={16} className={`ml-1 transition-transform duration-300 ${blogsDropdownOpen ? "rotate-180" : ""}`} />
                 </button>
                 {blogsDropdownOpen && (
-                  <div className={`absolute mt-1 w-48 rounded-md shadow-lg ${dropdownBgColor} ring-1 ring-black ring-opacity-5 transform transition-all duration-300 origin-top z-50`}>
+                  <div className={`absolute mt-1 w-48 rounded-md shadow-md ${dropdownBgColor} transform transition-all duration-300 origin-top z-50`}>
                     <div className="py-1" role="menu" aria-orientation="vertical">
                       <a href="/blogPage" className={`block px-4 py-3 text-base font-medium ${hoverColor} transition-all duration-200 hover:translate-x-1 hover:text-green-600 cursor-pointer`}>Blog Page</a>
                       <a href="/blog" className={`block px-4 py-3 text-base font-medium ${hoverColor} transition-all duration-200 hover:translate-x-1 hover:text-green-600 cursor-pointer`}>Read Blogs</a>
@@ -243,7 +253,7 @@ export default function Navbar() {
                     <ChevronDown size={16} className={`ml-2 text-white transition-transform duration-300 ${profileDropdownOpen ? "rotate-180" : ""}`} />
                   </button>
                   {profileDropdownOpen && (
-                    <div className={`absolute right-0 mt-1 w-48 rounded-md shadow-lg ${dropdownBgColor} ring-1 ring-black ring-opacity-5 transform transition-all duration-300 origin-top z-50`}>
+                    <div className={`absolute right-0 mt-1 w-48 rounded-md shadow-md ${dropdownBgColor} transform transition-all duration-300 origin-top z-50`}>
                       <div className="py-1" role="menu" aria-orientation="vertical">
                         {userState?.userInfo?.admin && (
                           <button onClick={() => navigate("/admin")} className={`w-full text-left block px-4 py-3 text-base font-medium ${hoverColor} transition-all duration-200 hover:translate-x-1 hover:text-green-600 cursor-pointer`}>Admin Dashboard</button>
@@ -271,7 +281,10 @@ export default function Navbar() {
         </div>
         
         {/* Mobile menu */}
-        <div className={`md:hidden ${navBgColor} border-t ${borderColor} overflow-hidden transition-all duration-500 ease-in-out transform ${mobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}>
+        <div 
+          ref={mobileMenuRef}
+          className={`md:hidden ${navBgColor} border-t ${borderColor} overflow-hidden transition-all duration-500 ease-in-out transform ${mobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}
+        >
           <div className="px-2 pt-2 pb-3 space-y-1">
             <a href="/" className={`block px-3 py-2 rounded-md ${hoverColor} flex items-center transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`}>
               <Home size={16} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
@@ -319,6 +332,78 @@ export default function Navbar() {
               <Phone size={16} className="mr-2" />
               Contact Us
             </a>
+
+            {/* Mobile Auth Section */}
+            {userState?.userInfo ? (
+              <div className="mt-2">
+                <button 
+                  onClick={toggleMobileProfileDropdown}
+                  className={`w-full px-3 py-2 rounded-md flex items-center justify-between ${hoverColor} transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer relative overflow-hidden group`}
+                >
+                  <div className="flex items-center relative z-10">
+                    <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-green-500 transition-transform duration-300 group-hover:scale-110">
+                      {userState.userInfo.avatar ? (
+                        <img
+                          src={stables.UPLOAD_FOLDER_BASE_URL + userState.userInfo.avatar}
+                          alt="profile"
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-green-100 flex items-center justify-center">
+                          <MessageSquare size={16} className="text-green-600 transition-transform duration-300 group-hover:scale-110" />
+                        </div>
+                      )}
+                    </div>
+                    <span className="ml-2 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-500 after:transition-all after:duration-300 group-hover:after:w-full">Profile</span>
+                  </div>
+                  <ChevronDown size={16} className={`transition-all duration-500 ease-in-out ${profileDropdownOpen ? "rotate-180" : ""}`} />
+                  <div className="absolute inset-0 bg-green-500/5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                </button>
+                <div className={`pl-6 mt-1 space-y-1 overflow-hidden transition-all duration-300 ease-in-out ${profileDropdownOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
+                  {userState?.userInfo?.admin && (
+                    <button 
+                      onClick={() => { navigate("/admin"); setMobileMenuOpen(false); }} 
+                      className={`block w-full text-left px-3 py-2 rounded-md ${hoverColor} transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer relative overflow-hidden group`}
+                    >
+                      <span className="relative z-10">Admin Dashboard</span>
+                      <div className="absolute inset-0 bg-green-500/5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                    </button>
+                  )}
+                  {userState?.userInfo?.isEmployee && (
+                    <button 
+                      onClick={() => { navigate("/employee/posts/manage"); setMobileMenuOpen(false); }} 
+                      className={`block w-full text-left px-3 py-2 rounded-md ${hoverColor} transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer relative overflow-hidden group`}
+                    >
+                      <span className="relative z-10">Create Blog</span>
+                      <div className="absolute inset-0 bg-green-500/5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                    </button>
+                  )}
+                  <button 
+                    onClick={() => { navigate("/profile"); setMobileMenuOpen(false); }} 
+                    className={`block w-full text-left px-3 py-2 rounded-md ${hoverColor} transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer relative overflow-hidden group`}
+                  >
+                    <span className="relative z-10">Profile Page</span>
+                    <div className="absolute inset-0 bg-green-500/5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                  </button>
+                  <button 
+                    onClick={() => { logoutHandler(); setMobileMenuOpen(false); }} 
+                    className={`block w-full text-left px-3 py-2 rounded-md ${hoverColor} transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer relative overflow-hidden group`}
+                  >
+                    <span className="relative z-10">Logout</span>
+                    <div className="absolute inset-0 bg-green-500/5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <button 
+                onClick={() => navigate("/login")} 
+                className={`w-full mt-2 px-3 py-2 rounded-md flex items-center justify-center bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 text-white transition-all duration-300 hover:translate-x-2 cursor-pointer relative overflow-hidden group`}
+              >
+                <MessageSquare size={16} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
+                <span className="relative z-10">Sign In</span>
+                <div className="absolute inset-0 bg-white/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              </button>
+            )}
           </div>
         </div>
       </nav>

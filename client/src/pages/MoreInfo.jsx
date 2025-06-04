@@ -10,7 +10,6 @@ import {
   FaBriefcase,
 } from 'react-icons/fa';
 import Business from "../components/AboutPage/business-model.jsx";
-import VideoText from "../components/AboutPage/videoText.jsx";
 import AnimatedOverlay from '../components/AboutPage/AnimatedOverlay.jsx';
 import AboutGrid from '../components/AboutPage/AboutGrid.jsx';
 import AboutModel from '../components/AboutPage/AboutModel.jsx';
@@ -19,7 +18,7 @@ import OurApproach from '../components/AboutPage/OurApproach.jsx';
 import InnovativeApproach from '../components/AboutPage/InnovativeApproach.jsx';
 import SocietalImpact from '../components/AboutPage/SocietalImpact.jsx';
 import VillaMartBusinessModel from '../components/AboutPage/VillaMartBusinessModel.jsx';
-
+import StickyCards from '../components/AboutPage/sticky.jsx';
 const About = () => {
   const headerRef = useRef(null);
   const introRef = useRef(null);
@@ -145,6 +144,7 @@ const About = () => {
         <VillaMartBusinessModel/>
         {/* <AboutModel /> */}
         <InnovativeApproach />
+        {/* <StickyCards /> */}
         <AboutGrid />
       </div>
 

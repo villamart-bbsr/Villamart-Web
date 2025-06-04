@@ -26,7 +26,7 @@ const Partners = () => {
     {
       name: "Livelihood Alternatives",
       logo: "/images/image.png",
-      description: "Quick delivery of fresh produce and daily essentials"
+      description: ""
     },
     {
       name: "ORMAS",
@@ -68,11 +68,12 @@ const Partners = () => {
     const totalDistance = partners.length * totalCardWidth;
     
     sliderControls.start({
-      x: [0, -totalDistance],
+      x: [-totalDistance, 0],
       transition: {
-        duration: 40, // Increased from 20 to make it slower
+        duration: 40,
         repeat: Infinity,
-        ease: "linear"
+        ease: "linear",
+        repeatType: "loop"
       }
     });
   }, [sliderControls, totalCardWidth]);
@@ -194,6 +195,10 @@ const Partners = () => {
             <motion.div
               className="flex gap-6"
               animate={sliderControls}
+              style={{
+                width: "fit-content",
+                willChange: "transform"
+              }}
             >
               {/* First set of partners */}
               {partners.map((partner, index) => {

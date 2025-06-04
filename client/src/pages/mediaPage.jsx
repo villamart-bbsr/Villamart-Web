@@ -1,17 +1,46 @@
 import { useState, useEffect } from 'react';
-import { Play, Newspaper, ChevronRight, ChevronLeft, Link as LinkIcon } from 'lucide-react';
+import { Play, Newspaper, ChevronRight, ChevronLeft, ExternalLink, X, Loader2 } from 'lucide-react';
 
 export default function FarmMediaPage() {
   const [activeTab, setActiveTab] = useState('videos');
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [isModalOpening, setIsModalOpening] = useState(false);
+  const [isModalClosing, setIsModalClosing] = useState(false);
+  const [isTabChanging, setIsTabChanging] = useState(false);
+  const [isVideoLoading, setIsVideoLoading] = useState(true);
   
   // Sample media data
   const mediaItems = {
     videos: [
-      { id: 1, title: "Planting Season Timelapse", duration: "3:45" },
-      { id: 2, title: "Meet the Farmers", duration: "5:20" },
-      { id: 3, title: "Harvesting Techniques", duration: "4:12" },
-      { id: 4, title: "Farm Tour", duration: "7:30" },
+      { 
+        id: 1, 
+        title: "Discussion with Founder & CEO, VillaMart on Onion price control and storage @KanakNewsOdisha", 
+        duration: "3:45", 
+        link: "https://www.youtube.com/watch?v=gOydT3umRCs&t=232s",
+            image: "/images/media1.png"
+      },
+      { 
+        id: 2, 
+        title: "Villamart_MBC TV_Scientists Return From Abroad", 
+        duration: "5:20", 
+        link: "https://www.youtube.com/watch?v=uL4WgoPCpWw",
+        image: "/images/media2.png"
+      },
+      { 
+        id: 3, 
+        title: "Villamart_Agri startup_News 18 Odia", 
+        duration: "4:12", 
+        link: "https://www.youtube.com/watch?v=SZZnA7oN0_8&t=22s",
+        image: "/images/media3.png"
+      },
+      { 
+        id: 4, 
+        title: "Villamart_Agri startup_Village development_ Zee Odisha", 
+        duration: "7:30", 
+        link: "https://www.youtube.com/watch?v=RyTbPCD5Upo&t=1s",
+        image: "/images/media4.png"
+      },
     ],
     news: [
       { 
@@ -19,64 +48,23 @@ export default function FarmMediaPage() {
         title: "Farm Wins Sustainability Award", 
         date: "April 15, 2025", 
         excerpt: "Our commitment to sustainable farming practices has been recognized...",
-        link: "https://example.com/sustainability-award"
+        link: "https://thebetterindia.com/311837/engineer-quit-us-job-to-launch-villa-mart-mobile-mandi-farmer-suicides-fair-income/"
       },
       { 
         id: 2, 
         title: "New Community Program Launched", 
         date: "March 22, 2025", 
         excerpt: "We're excited to announce our new program connecting local schools with farming education...",
-        link: "https://example.com/community-program"
+        link: "https://economictimes.indiatimes.com/small-biz/sme-sector/how-bhubaneswars-agritech-ecosystem-is-fast-gaining-momentum/articleshow/106688288.cms?from=mdr"
       },
       { 
         id: 3, 
         title: "Seasonal Produce Update", 
         date: "February 10, 2025", 
         excerpt: "This season we're featuring our award-winning organic vegetables and fruits...",
-        link: "https://example.com/seasonal-update"
+        link: "https://yourstory.com/socialstory/2020/02/agri-startup-villa-mart-iit-alumnus-farmers-produce-mobile-market"
       },
-      { 
-        id: 4, 
-        title: "Farm-to-Table Partnership with Local Restaurants", 
-        date: "January 25, 2025", 
-        excerpt: "We've partnered with five local restaurants to provide fresh, organic produce directly from our farm...",
-        link: "https://example.com/farm-to-table"
-      },
-      { 
-        id: 5, 
-        title: "New Organic Certification Achieved", 
-        date: "December 18, 2024", 
-        excerpt: "Our farm has received the highest level of organic certification after rigorous evaluation...",
-        link: "https://example.com/organic-certification"
-      },
-      { 
-        id: 6, 
-        title: "Winter Workshop Series Announced", 
-        date: "November 30, 2024", 
-        excerpt: "Join us for our winter workshop series covering topics from home gardening to sustainable farming practices...",
-        link: "https://example.com/winter-workshops"
-      },
-      { 
-        id: 7, 
-        title: "Expanded CSA Program for Next Season", 
-        date: "October 15, 2024", 
-        excerpt: "Due to popular demand, we're expanding our Community Supported Agriculture program for the upcoming season...",
-        link: "https://example.com/csa-expansion"
-      },
-      { 
-        id: 8, 
-        title: "Innovative Irrigation System Reduces Water Usage by 40%", 
-        date: "September 5, 2024", 
-        excerpt: "Our newly implemented smart irrigation system has significantly reduced our water consumption while maintaining crop yields...",
-        link: "https://example.com/irrigation-innovation"
-      },
-      { 
-        id: 9, 
-        title: "Annual Farm Festival Dates Announced", 
-        date: "August 20, 2024", 
-        excerpt: "Mark your calendars for our biggest event of the year! The Annual Farm Festival will take place on...",
-        link: "https://example.com/farm-festival"
-      }
+      
     ]
   };
 
@@ -122,8 +110,183 @@ export default function FarmMediaPage() {
   // Animation classes for items
   const itemAnimationClass = "transform transition duration-500 hover:scale-105";
 
+  // Function to get YouTube video ID from URL
+  const getYouTubeVideoId = (url) => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+  };
+
+  // Function to get YouTube thumbnail URL
+  const getYouTubeThumbnail = (url) => {
+    const videoId = getYouTubeVideoId(url);
+    if (videoId) {
+      return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+    }
+    return `/api/placeholder/500/300?text=Video+Thumbnail`;
+  };
+
+  // Function to open video modal with animation
+  const openVideoModal = (video) => {
+    setSelectedVideo(video);
+    setIsModalOpening(true);
+    setIsVideoLoading(true);
+    setTimeout(() => setIsModalOpening(false), 300);
+  };
+
+  // Function to close video modal with animation
+  const closeVideoModal = () => {
+    setIsModalClosing(true);
+    setTimeout(() => {
+      setSelectedVideo(null);
+      setIsModalClosing(false);
+      setIsVideoLoading(true);
+    }, 300);
+  };
+
+  // Function to handle tab change with animation
+  const handleTabChange = (tab) => {
+    if (tab === activeTab) return;
+    setIsTabChanging(true);
+    setTimeout(() => {
+      setActiveTab(tab);
+      setTimeout(() => setIsTabChanging(false), 300);
+    }, 300);
+  };
+
   return (
     <div className="bg-gray-50 min-h-screen">
+      <style jsx>{`
+        @keyframes modalFadeIn {
+          from {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        
+        @keyframes modalFadeOut {
+          from {
+            opacity: 1;
+            transform: scale(1);
+          }
+          to {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+        }
+        
+        @keyframes tabFadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes tabFadeOut {
+          from {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          to {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+        }
+        
+        .modal-enter {
+          animation: modalFadeIn 0.3s ease-out forwards;
+        }
+        
+        .modal-exit {
+          animation: modalFadeOut 0.3s ease-out forwards;
+        }
+
+        .tab-enter {
+          animation: tabFadeIn 0.3s ease-out forwards;
+        }
+        
+        .tab-exit {
+          animation: tabFadeOut 0.3s ease-out forwards;
+        }
+
+        .tab-button {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .tab-button::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background-color: #f97316;
+          transform: scaleX(0);
+          transition: transform 0.2s ease-out;
+          transform-origin: center;
+        }
+
+        .tab-button.active::after {
+          transform: scaleX(1);
+        }
+      `}</style>
+
+      {/* Enhanced Video Modal with Smooth Transitions */}
+      {selectedVideo && (
+        <div 
+          className={`fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4 transition-all duration-300 ${
+            isModalClosing ? 'modal-exit' : 'modal-enter'
+          }`}
+          onClick={closeVideoModal}
+        >
+          <div 
+            className={`bg-white rounded-2xl w-full max-w-7xl h-full max-h-[90vh] relative shadow-2xl transition-all duration-300 transform ${
+              isModalOpening ? 'scale-95 opacity-90' : 'scale-100 opacity-100'
+            } ${isModalClosing ? 'scale-95 opacity-90' : ''}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              onClick={closeVideoModal}
+              className="cursor-pointer absolute -top-4 z-50 -right-4 bg-red-500 text-white rounded-full p-3 hover:bg-red-600 transition-all duration-300 z-10 shadow-lg hover:scale-110 transform hover:rotate-90"
+            >
+              <X size={28} />
+            </button>
+            <div className="w-full h-5/6 rounded-t-2xl overflow-hidden relative">
+              {isVideoLoading && (
+                <div className="absolute inset-0 bg-gray-900 flex items-center justify-center z-10">
+                  <div className="text-center">
+                    <Loader2 className="w-12 h-12 text-orange-500 animate-spin mx-auto mb-4" />
+                    <p className="text-white text-lg font-medium">Loading video...</p>
+                  </div>
+                </div>
+              )}
+              <iframe
+                src={`https://www.youtube.com/embed/${getYouTubeVideoId(selectedVideo.link)}?autoplay=1`}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full transition-all duration-500"
+                style={{ minHeight: '500px' }}
+                onLoad={() => setIsVideoLoading(false)}
+              ></iframe>
+            </div>
+            <div className="p-8 h-1/6 flex items-center">
+              <h3 className="text-3xl font-bold text-gray-800 transition-all duration-300">{selectedVideo.title}</h3>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Hero Section with Featured Slider */}
       <div className="relative overflow-hidden h-96 bg-green-900">
         {featuredItems.map((item, index) => (
@@ -185,123 +348,119 @@ export default function FarmMediaPage() {
           </p>
         </div>
         
-        {/* Media Navigation Tabs */}
+        {/* Enhanced Media Navigation Tabs with Smooth Transitions */}
         <div className="flex flex-wrap justify-center mb-8 border-b border-gray-200">
           <button 
-            onClick={() => setActiveTab('videos')}
-            className={`cursor-pointer flex items-center px-6 py-3 font-medium text-lg transition-all duration-200 ${activeTab === 'videos' ? 'text-orange-500 border-b-2 border-orange-500' : 'text-gray-600 hover:text-green-700'}`}
+            onClick={() => handleTabChange('videos')}
+            className={`tab-button cursor-pointer flex items-center px-6 py-3 font-medium text-lg transition-all duration-300 transform hover:scale-105 ${
+              activeTab === 'videos' 
+                ? 'text-orange-500 active bg-orange-50 rounded-t-lg' 
+                : 'text-gray-600 hover:text-green-700 hover:bg-green-50 rounded-lg'
+            }`}
           >
-            <Play className="mr-2" size={20} />
+            <Play className={`mr-2 transition-transform duration-300 ${activeTab === 'videos' ? 'rotate-0' : '-rotate-45'}`} size={20} />
             Videos
           </button>
           <button 
-            onClick={() => setActiveTab('news')}
-            className={`cursor-pointer flex items-center px-6 py-3 font-medium text-lg transition-all duration-200 ${activeTab === 'news' ? 'text-orange-500 border-b-2 border-orange-500' : 'text-gray-600 hover:text-green-700'}`}
+            onClick={() => handleTabChange('news')}
+            className={`tab-button cursor-pointer flex items-center px-6 py-3 font-medium text-lg transition-all duration-300 transform hover:scale-105 ${
+              activeTab === 'news' 
+                ? 'text-orange-500 active bg-orange-50 rounded-t-lg' 
+                : 'text-gray-600 hover:text-green-700 hover:bg-green-50 rounded-lg'
+            }`}
           >
-            <Newspaper className="mr-2" size={20} />
+            <Newspaper className={`mr-2 transition-transform duration-300 ${activeTab === 'news' ? 'rotate-0' : '-rotate-45'}`} size={20} />
             News
           </button>
         </div>
         
-        {/* Videos Grid */}
-        {activeTab === 'videos' && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-            {mediaItems.videos.map((video) => (
-              <div 
-                key={video.id} 
-                className={`${itemAnimationClass} bg-white rounded-lg overflow-hidden shadow-md`}
-              >
-                <div className="relative h-64 bg-gray-200">
-                  <img 
-                    src={`/api/placeholder/500/300`} 
-                    alt={video.title} 
-                    className="w-full h-full object-cover" 
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-                    <div className="bg-orange-500 rounded-full p-4 text-white shadow-lg transform transition-all duration-300 hover:scale-110">
-                      <Play size={24} />
+        {/* Tab Content with Smooth Transitions */}
+        <div className={`transition-all duration-300 ${isTabChanging ? 'opacity-0' : 'opacity-100'}`}>
+          {/* Videos Grid */}
+          {activeTab === 'videos' && (
+            <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 ${isTabChanging ? 'tab-exit' : 'tab-enter'}`}>
+              {mediaItems.videos.map((video) => (
+                <div 
+                  key={video.id} 
+                  className={`${itemAnimationClass} bg-white rounded-lg overflow-hidden shadow-md`}
+                >
+                  <div className="relative h-64 bg-gray-200">
+                    <img 
+                      src={video.image || getYouTubeThumbnail(video.link)} 
+                      alt={video.title} 
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.src = `/api/placeholder/500/300?text=${encodeURIComponent(video.title)}`;
+                      }}
+                    />
+                    <div 
+                      className="absolute inset-0 flex items-center justify-center cursor-pointer hover:bg-opacity-40 transition-all duration-300"
+                      onClick={() => openVideoModal(video)}
+                    >
+                      <div className="bg-orange-500 rounded-full p-4 text-white shadow-lg transform transition-all duration-300 hover:scale-110 hover:bg-orange-600">
+                        <Play size={24} />
+                      </div>
                     </div>
                   </div>
-                  <div className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-2 py-1 text-sm rounded">
-                    {video.duration}
+                  <div className="p-4">
+                    <h3 className="font-bold text-lg text-green-800 mb-2">{video.title}</h3>
+                    <div className="flex justify-between items-center">
+                      <button 
+                        onClick={() => openVideoModal(video)}
+                        className="cursor-pointer text-orange-500 hover:text-orange-600 font-medium flex items-center"
+                      >
+                        Watch Video <ChevronRight size={16} className="ml-1" />
+                      </button>
+                      {video.link && (
+                        <a 
+                          href={video.link} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="flex items-center text-green-600 hover:text-green-800 font-medium"
+                        >
+                          <ExternalLink size={16} className="mr-1" />
+                          View Source
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
-                <div className="p-4">
-                  <h3 className="font-bold text-lg text-green-800 mb-2">{video.title}</h3>
-                  <button className="cursor-pointer text-orange-500 hover:text-orange-600 font-medium flex items-center">
-                    Watch Video <ChevronRight size={16} className="ml-1" />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-        
-        {/* News List with Links */}
-        {activeTab === 'news' && (
-          <div className="space-y-6">
-            {mediaItems.news.map((article) => (
-              <div 
-                key={article.id} 
-                className={`${itemAnimationClass} bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row`}
-              >
-                <div className="md:w-1/4 bg-green-100 flex items-center justify-center p-6">
-                  <Newspaper size={48} className="text-green-700" />
-                </div>
-                <div className="p-6 md:w-3/4">
-                  <div className="text-sm text-orange-500 font-medium mb-2">{article.date}</div>
-                  <h3 className="font-bold text-xl text-green-800 mb-2">{article.title}</h3>
-                  <p className="text-gray-600 mb-4">{article.excerpt}</p>
-                  <div className="flex justify-between items-center">
-                    <button className="cursor-pointer text-orange-500 hover:text-orange-600 font-medium flex items-center">
-                      Read Full Article <ChevronRight size={16} className="ml-1" />
-                    </button>
-                    {article.link && (
+              ))}
+            </div>
+          )}
+          
+          {/* News List */}
+          {activeTab === 'news' && (
+            <div className={`space-y-6 ${isTabChanging ? 'tab-exit' : 'tab-enter'}`}>
+              {mediaItems.news.map((article) => (
+                <div 
+                  key={article.id} 
+                  className={`${itemAnimationClass} bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row`}
+                >
+                  <div className="md:w-1/4 bg-green-100 flex items-center justify-center p-6">
+                    <Newspaper size={48} className="text-green-700" />
+                  </div>
+                  <div className="p-6 md:w-3/4">
+                    <div className="text-sm text-orange-500 font-medium mb-2">{article.date}</div>
+                    <h3 className="font-bold text-xl text-green-800 mb-2">{article.title}</h3>
+                    <p className="text-gray-600 mb-4">{article.excerpt}</p>
+                    <div className="flex justify-between items-center">
                       <a 
                         href={article.link} 
                         target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="flex items-center text-green-600 hover:text-green-800 font-medium"
+                        rel="noopener noreferrer"
+                        className="cursor-pointer text-orange-500 hover:text-orange-600 font-medium flex items-center"
                       >
-                        <LinkIcon size={16} className="mr-1" />
-                        View Source
+                        Read Full Article <ChevronRight size={16} className="ml-1" />
                       </a>
-                    )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
-        
-        {/* Pagination Controls */}
-        
-        
-        {/* Subscribe Section */}
-        {/* <div className="mt-16 bg-green-50 rounded-xl p-8 shadow-inner">
-          <div className="text-center mb-6">
-            <h3 className="text-2xl font-bold text-green-800 mb-2">Stay Updated</h3>
-            <p className="text-gray-600">Subscribe to our newsletter for the latest farm updates and seasonal offerings.</p>
-          </div>
-          <form className="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
-            <input 
-              type="email" 
-              placeholder="Your email address" 
-              className="flex-grow px-4 py-3 rounded-lg focus:ring-2 focus:ring-green-500 border border-gray-300 focus:outline-none" 
-              required 
-            />
-            <button 
-              type="submit" 
-              className="cursor-pointer bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition duration-300"
-            >
-              Subscribe
-            </button>
-          </form>
-        </div> */}
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-      
-      {/* Footer */}
-      
     </div>
   );
 }

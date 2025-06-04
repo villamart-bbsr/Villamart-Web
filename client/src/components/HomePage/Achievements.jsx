@@ -3,12 +3,13 @@ import { motion } from "framer-motion";
 
 const Achievements = () => {
   const achievements = [
-    { count: 3000, label: "FARMERS", icon: "🌾" },
-    { count: 20, label: "PG/SHGs", icon: "🧑‍🌾" },
+    { count: 15000, label: "FARMERS", icon: "🌾" },
+    { count: 50, label: "PG/SHGs", icon: "🧑‍🌾" },
     { count: 60, label: "SHGs", icon: "👨‍👩‍👧‍👦" },
-    { count: 150, label: "B2B Units", icon: "🏪" },
-    { count: 6000, label: "Consumers", icon: "🥕" },
+    { count: 150, label: "SKU Units", icon: "🏪" },
+    
     { count: 30, label: "Employment", icon: "🌽" },
+    { count: 3, label: "Locations", icon: "🏙️" },
   ];
 
   return (
@@ -18,27 +19,7 @@ const Achievements = () => {
       <div className="absolute inset-0 farm-pattern opacity-30"></div>
       
       {/* Floating vegetable elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute"
-            style={{
-              width: `${Math.random() * 40 + 20}px`,
-              height: `${Math.random() * 40 + 20}px`,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              fontSize: `${Math.random() * 20 + 20}px`,
-              opacity: 0.15,
-              transform: `rotate(${Math.random() * 360}deg)`,
-              animation: `float ${Math.random() * 10 + 15}s infinite ease-in-out`,
-              animationDelay: `${Math.random() * 5}s`,
-            }}
-          >
-            {['🥦', '🥬', '🍅', '🍆', '🥕', '🌽', '🥔', '🧄', '🧅'][Math.floor(Math.random() * 9)]}
-          </div>
-        ))}
-      </div>
+      
 
       <div className="relative max-w-6xl mx-auto text-center z-10">
         <motion.div 
