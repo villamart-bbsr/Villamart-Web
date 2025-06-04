@@ -8,8 +8,6 @@ import {
   Star,
   Zap
 } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 
 // Animation variants for fade-in effect
 const sectionVariants = {
@@ -25,366 +23,254 @@ const sectionVariants = {
 };
 
 const VillaMartBusinessModel = () => {
-  // Scroll to top on mount with smooth behavior
-  // useEffect(() => {
-  //   window.scrollTo({
-  //     top: 0,
-  //     behavior: 'smooth'
-  //   });
-  // }, []);
-
-  // Hook for in-view detection
-  const [headerRef, headerInView] = useInView({ triggerOnce: true, threshold: 0.2 });
-  const [columnRef, columnInView] = useInView({ triggerOnce: true, threshold: 0.2 });
-  const [row1Ref, row1InView] = useInView({ triggerOnce: true, threshold: 0.2 });
-  const [row2Ref, row2InView] = useInView({ triggerOnce: true, threshold: 0.2 });
-  const [row3Ref, row3InView] = useInView({ triggerOnce: true, threshold: 0.2 });
+  // Mock motion component for basic animations
+  const Motion = ({ children, className, whileHover, ...props }) => (
+    <div className={className} {...props}>{children}</div>
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-900 via-green-800 to-teal-900 flex flex-col select-none rounded-2xl m-4">
       {/* Header */}
-      <motion.div
-        ref={headerRef}
-        initial="hidden"
-        animate={headerInView ? 'visible' : 'hidden'}
-        variants={sectionVariants}
-        className="relative bg-gradient-to-r from-emerald-900 to-green-900 shadow-xl"
-      >
+      <div className="relative bg-gradient-to-r from-emerald-900 to-green-900 shadow-xl">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="relative p-4 flex justify-between items-center">
           <div className="flex items-center space-x-3">
-            <motion.div
-              whileHover={{ rotate: 6, scale: 1.05 }}
-              transition={{ duration: 0.2 }}
-              className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-xl flex items-center justify-center shadow-lg"
-            >
+            <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-xl flex items-center justify-center shadow-lg">
               <Store className="w-6 h-6 text-white" />
-            </motion.div>
+            </div>
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-yellow-300 to-amber-300 bg-clip-text text-transparent">
+              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-yellow-300 to-amber-300 bg-clip-text text-transparent">
                 BUSINESS MODEL
               </h1>
-              <p className="text-emerald-200 text-sm">VillaMart Revenue Strategy</p>
+              <p className="text-emerald-200 text-xs sm:text-sm">VillaMart Revenue Strategy</p>
             </div>
           </div>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.2 }}
-            className="bg-white/10 backdrop-blur-sm rounded-xl p-2 border border-white/20"
-          >
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-2 border border-white/20">
             <img 
               src="/images/villamart-logo.png" 
               alt="VillaMart"
-              className="h-12 w-auto object-contain mx-auto"
+              className="h-8 sm:h-12 w-auto object-contain mx-auto"
             />
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Column Headers */}
-      <motion.div
-        ref={columnRef}
-        initial="hidden"
-        animate={columnInView ? 'visible' : 'hidden'}
-        variants={sectionVariants}
-        className="grid grid-cols-3 gap-3 px-4 py-2 bg-gradient-to-r from-emerald-800/50 to-green-800/50"
-      >
+      <div className="grid grid-cols-3 gap-2 sm:gap-3 px-2 sm:px-4 py-2 bg-gradient-to-r from-emerald-800/50 to-green-800/50">
         {[
           { icon: Users, title: 'CUSTOMER SEGMENTS' },
           { icon: Zap, title: 'REVENUE VERTICALS' },
           { icon: ShoppingCart, title: 'PRODUCT PORTFOLIO' }
         ].map((item, index) => (
-          <motion.div
+          <div
             key={index}
-            whileHover={{ scale: 1.02 }}
-            className="bg-white/10 backdrop-blur-md rounded-xl p-3 text-center border border-white/20"
+            className="bg-white/10 backdrop-blur-md rounded-xl p-2 sm:p-3 text-center border border-white/20"
           >
             <div className="flex items-center justify-center mb-1">
-              <item.icon className="w-5 h-5 text-yellow-300 mr-2" />
-              <h2 className="text-lg font-bold text-white">{item.title}</h2>
+              <item.icon className="w-4 sm:w-5 h-4 sm:h-5 text-yellow-300 mr-1 sm:mr-2" />
+              <h2 className="text-sm sm:text-lg font-bold text-white">{item.title}</h2>
             </div>
-            <div className="w-12 h-0.5 bg-gradient-to-r from-yellow-400 to-amber-500 mx-auto rounded-full"></div>
-          </motion.div>
+            <div className="w-8 sm:w-12 h-0.5 bg-gradient-to-r from-yellow-400 to-amber-500 mx-auto rounded-full"></div>
+          </div>
         ))}
-      </motion.div>
+      </div>
 
       {/* Main Content - 3 Rows */}
-      <div className="flex-1 px-4 py-2 grid grid-rows-3 gap-2">
+      <div className="flex-1 px-2 sm:px-4 py-2 grid grid-rows-3 gap-2">
         {/* ROW 1: Premium Segment */}
-        <motion.div
-          ref={row1Ref}
-          initial="hidden"
-          animate={row1InView ? 'visible' : 'hidden'}
-          variants={sectionVariants}
-          className="grid grid-cols-3 gap-3"
-        >
+        <div className="grid grid-cols-3 gap-2 sm:gap-3">
           {/* Premium Customer Segment */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-4 shadow-xl border border-blue-200 flex items-center justify-center"
-          >
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl sm:rounded-2xl p-2 sm:p-4 shadow-xl border border-blue-200 flex items-center justify-center">
             <div className="text-center">
-              <div className="relative inline-block mb-3">
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="w-14 h-14 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center shadow-lg"
-                >
-                  <Star className="w-7 h-7 text-white" />
-                </motion.div>
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full flex items-center justify-center"
-                >
+              <div className="relative inline-block mb-2 sm:mb-3">
+                <div className="w-10 sm:w-14 h-10 sm:h-14 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center shadow-lg">
+                  <Star className="w-5 sm:w-7 h-5 sm:h-7 text-white" />
+                </div>
+                <div className="absolute -top-1 -right-1 w-3 sm:w-4 h-3 sm:h-4 bg-yellow-400 rounded-full flex items-center justify-center">
                   <span className="text-xs font-bold text-orange-800">P</span>
-                </motion.div>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-gray-800">Premium</h3>
+              <h3 className="text-base sm:text-xl font-bold text-gray-800">Premium</h3>
               <p className="text-gray-600 text-xs">High-value customers</p>
             </div>
-          </motion.div>
+          </div>
 
           {/* Quick Commerce */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-4 shadow-xl border border-blue-200"
-          >
-            <h3 className="text-base sm:text-lg font-bold text-center mb-2 text-gray-800">QUICK COMMERCE</h3>
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl sm:rounded-2xl p-2 sm:p-4 shadow-xl border border-blue-200">
+            <h3 className="text-sm sm:text-base lg:text-lg font-bold text-center mb-2 text-gray-800">QUICK COMMERCE</h3>
             <div className="text-center mb-2">
-              <motion.span
-                whileHover={{ scale: 1.05 }}
-                className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-2 py-1 rounded-full text-xs font-semibold whitespace-nowrap"
-              >
-                Strategic Partners
-              </motion.span>
+              <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold whitespace-normal sm:whitespace-nowrap">
+                Strategic <br className='sm:hidden' />
+                Partners
+              </div>
+              
             </div>
-            <div className="flex flex-col sm:grid sm:grid-cols-4 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1 sm:gap-2">
               {[
                 { logo: "/images/Instamartlogo.webp", name: "Swiggy", color: "from-orange-400 to-red-500" },
                 { logo: "/images/blinkit.png", name: "Blinkit", color: "from-yellow-400 to-orange-500" },
                 { logo: "/images/jio_mart.png", name: "JioMart", color: "from-blue-400 to-indigo-500" },
                 { logo: "/images/reliance-fresh.png", name: "Reliance", color: "from-green-400 to-emerald-500" }
               ].map((partner, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ scale: 1.1 }}
-                  className="p-2 rounded-xl"
-                >
-                  <div className="p-2 text-center">
+                <div key={index} className="p-1 sm:p-2 rounded-xl">
+                  <div className="p-1 sm:p-2 text-center">
                     <img 
                       src={partner.logo} 
                       alt={partner.name}
-                      className="h-12 sm:h-19 w-auto mx-auto object-contain"
+                      className="h-8 sm:h-12 lg:h-19 w-auto mx-auto object-contain"
                     />
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* Premium Products */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-4 shadow-xl border border-blue-200"
-          >
-            <h3 className="text-lg font-bold text-center mb-2 text-gray-800">Premium Products</h3>
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl sm:rounded-2xl p-2 sm:p-4 shadow-xl border border-blue-200">
+            <h3 className="text-sm sm:text-lg font-bold text-center mb-2 text-gray-800">Premium Products</h3>
             <div className="space-y-1">
               {[
                 { icon: Leaf, text: 'Indian Vegetables, Exotic Vegetables', color: 'text-green-600' },
                 { icon: Apple, text: 'Premium Fruits, Cut Veg/Fruits', color: 'text-red-500' }
               ].map((item, index) => (
-                <motion.div
+                <div
                   key={index}
-                  whileHover={{ scale: 1.02, backgroundColor: 'rgba(255, 255, 255, 0.9)' }}
-                  className="bg-white/70 backdrop-blur-sm p-2 rounded-lg shadow-sm text-sm"
+                  className="bg-white/70 backdrop-blur-sm p-2 rounded-lg shadow-sm text-xs sm:text-sm"
                 >
-                  <item.icon className={`w-4 h-4 ${item.color} inline mr-2`} />
+                  <item.icon className={`w-3 sm:w-4 h-3 sm:h-4 ${item.color} inline mr-2`} />
                   {item.text}
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* ROW 2: Middle Segment */}
-        <motion.div
-          ref={row2Ref}
-          initial="hidden"
-          animate={row2InView ? 'visible' : 'hidden'}
-          variants={sectionVariants}
-          className="grid grid-cols-3 gap-3"
-        >
+        <div className="grid grid-cols-3 gap-2 sm:gap-3">
           {/* Middle Customer Segment */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="bg-gradient-to-br from-green-50 to-emerald-100 rounded-2xl p-4 shadow-xl border border-green-200 flex items-center justify-center"
-          >
+          <div className="bg-gradient-to-br from-green-50 to-emerald-100 rounded-xl sm:rounded-2xl p-2 sm:p-4 shadow-xl border border-green-200 flex items-center justify-center">
             <div className="text-center">
-              <div className="relative inline-block mb-3">
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="w-14 h-14 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center shadow-lg"
-                >
-                  <Users className="w-7 h-7 text-white" />
-                </motion.div>
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full flex items-center justify-center"
-                >
+              <div className="relative inline-block mb-2 sm:mb-3">
+                <div className="w-10 sm:w-14 h-10 sm:h-14 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
+                  <Users className="w-5 sm:w-7 h-5 sm:h-7 text-white" />
+                </div>
+                <div className="absolute -top-1 -right-1 w-3 sm:w-4 h-3 sm:h-4 bg-yellow-400 rounded-full flex items-center justify-center">
                   <span className="text-xs font-bold text-green-800">M</span>
-                </motion.div>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-gray-800">Middle</h3>
+              <h3 className="text-base sm:text-xl font-bold text-gray-800">Middle</h3>
               <p className="text-gray-600 text-xs">Value-conscious</p>
             </div>
-          </motion.div>
+          </div>
 
           {/* Franchise Network */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="bg-gradient-to-br from-green-50 to-emerald-100 rounded-2xl p-4 shadow-xl border border-green-200"
-          >
-            <h3 className="text-lg font-bold text-center mb-2 text-gray-800">FRANCHISE</h3>
+          <div className="bg-gradient-to-br from-green-50 to-emerald-100 rounded-xl sm:rounded-2xl p-2 sm:p-4 shadow-xl border border-green-200">
+            <h3 className="text-sm sm:text-lg font-bold text-center mb-2 text-gray-800">FRANCHISE</h3>
             <div className="text-center mb-2">
-              <motion.span
-                whileHover={{ scale: 1.05 }}
-                className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-2 py-1 rounded-full text-xs font-semibold whitespace-nowrap"
-              >
-                Direct Distribution
-              </motion.span>
+              <div className="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold whitespace-normal sm:whitespace-nowrap">
+                Direct<br className="sm:hidden" /> Distribution
+              </div>
             </div>
-            <div className="flex flex-col sm:grid sm:grid-cols-2 gap-2">
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                className="text-center"
-              >
-                <div className="p-2 rounded-xl">
-                  <div className="p-2 flex items-center justify-center h-16">
-                    <img 
-                      src="/images/mobile_franchise.png" 
-                      alt="Mobile Van"
-                      className="sm:h-50 w-auto object-contain relative mx-auto translate-y-15 sm:translate-y-0 "
-                    />
-                  </div>
-                  <div className="text-green-800 sm:-translate-y-35 sm:translate-x-10 text-sm font-semibold mt-1 relative -translate-y-14 sm:bg-white/70 sm:w-20 bg-white/70 backdrop-blur-sm p-2 rounded-lg shadow-sm">Mobile</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-2">
+              {/* Mobile Section */}
+              <div className="text-center sm:flex sm:items-center sm:justify-between sm:absolute">
+                <div className=" relative text-green-800  sm:-translate-y-17 text-xs sm:text-sm font-semibold bg-white/70 backdrop-blur-sm p-1 sm:p-2 rounded-lg shadow-sm sm:mb-0 mb-1">
+                  Mobile
                 </div>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="text-center"
-              >
-                <div className="p-2 rounded-xl">
-                  <div className="text-black sm:-translate-y-19 text-sm font-semibold mt-1 relative translate-y-8 sm:bg-white/70 sm:w-20 sm:translate-x-20 text-green-800 bg-white/70 backdrop-blur-sm p-2 rounded-lg shadow-sm">Static</div>
-                  <div className="p-2 flex items-center justify-center h-16">
-                    <img 
-                      src="/images/image6.jpg" 
-                      alt="Store Outlet"
-                      className="h-40 w-auto object-contain relative  sm:translate-x-7 sm:-translate-y-7 translate-y-16 mx-auto"
-                    />
-                  </div>
+                <div className="p-1 sm:p-2 flex items-center justify-center relative">
+                  <img 
+                    src="/images/mobile_franchise.png" 
+                    alt="Mobile Van"
+                    className="h-16 sm:h-35 w-auto object-contain mx-auto relative sm:-translate-x-2 sm:-translate-y-2"
+                  />
                 </div>
-              </motion.div>
+              </div>
+              {/* Static Section */}
+              <div className="text-center sm:flex sm:items-center sm:justify-between sm:absolute">
+                <div className="relative sm:translate-x-60 sm:-translate-y-14  text-green-800 text-xs sm:text-sm font-semibold bg-white/70 backdrop-blur-sm p-1 sm:p-2 rounded-lg shadow-sm sm:mb-0 mb-1">
+                  Static
+                </div>
+                <div className="p-1 sm:p-2 flex items-center justify-center relative">
+                  <img 
+                    src="/images/image6.jpg" 
+                    alt="Store Outlet"
+                    className="h-16 sm:h-30 w-auto object-contain mx-auto relative sm:translate-x-60 sm:-translate-y-2"
+                  />
+                </div>
+              </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Middle Products */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="bg-gradient-to-br from-green-50 to-emerald-100 rounded-2xl p-4 shadow-xl border border-green-200"
-          >
-            <h3 className="text-lg font-bold text-center mb-2 text-gray-800">Diverse Portfolio</h3>
+          <div className="bg-gradient-to-br from-green-50 to-emerald-100 rounded-xl sm:rounded-2xl p-2 sm:p-4 shadow-xl border border-green-200">
+            <h3 className="text-sm sm:text-lg font-bold text-center mb-2 text-gray-800">Diverse Portfolio</h3>
             <div className="space-y-1">
               {[
                 { icon: Leaf, text: 'Indian Vegetables, Exotic Vegetables', color: 'text-green-600' },
                 { icon: Apple, text: 'Fresh Fruits, Village Products', color: 'text-red-600' },
                 { icon: ShoppingCart, text: 'Pulses, Millet Products, Desi Rice', color: 'text-amber-600' }
               ].map((item, index) => (
-                <motion.div
+                <div
                   key={index}
-                  whileHover={{ scale: 1.02, backgroundColor: 'rgba(255, 255, 255, 0.9)' }}
-                  className="bg-white/70 backdrop-blur-sm p-2 rounded-lg shadow-sm text-sm"
+                  className="bg-white/70 backdrop-blur-sm p-2 rounded-lg shadow-sm text-xs sm:text-sm"
                 >
-                  <item.icon className={`w-4 h-4 ${item.color} inline mr-2`} />
+                  <item.icon className={`w-3 sm:w-4 h-3 sm:h-4 ${item.color} inline mr-2`} />
                   {item.text}
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* ROW 3: Economy Segment */}
-        <motion.div
-          ref={row3Ref}
-          initial="hidden"
-          animate={row3InView ? 'visible' : 'hidden'}
-          variants={sectionVariants}
-          className="grid grid-cols-3 gap-3"
-        >
+        <div className="grid grid-cols-3 gap-2 sm:gap-3">
           {/* Economy Customer Segment */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="bg-gradient-to-br from-orange-50 to-amber-100 rounded-2xl p-4 shadow-xl border border-orange-200 flex items-center justify-center"
-          >
+          <div className="bg-gradient-to-br from-orange-50 to-amber-100 rounded-xl sm:rounded-2xl p-2 sm:p-4 shadow-xl border border-orange-200 flex items-center justify-center">
             <div className="text-center">
-              <div className="relative inline-block mb-3">
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="w-14 h-14 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center shadow-lg"
-                >
-                  <ShoppingCart className="w-7 h-7 text-white" />
-                </motion.div>
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full flex items-center justify-center"
-                >
+              <div className="relative inline-block mb-2 sm:mb-3">
+                <div className="w-10 sm:w-14 h-10 sm:h-14 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
+                  <ShoppingCart className="w-5 sm:w-7 h-5 sm:h-7 text-white" />
+                </div>
+                <div className="absolute -top-1 -right-1 w-3 sm:w-4 h-3 sm:h-4 bg-yellow-400 rounded-full flex items-center justify-center">
                   <span className="text-xs font-bold text-orange-800">E</span>
-                </motion.div>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-gray-800">Economy</h3>
+              <h3 className="text-base sm:text-xl font-bold text-gray-800">Economy</h3>
               <p className="text-gray-600 text-xs">Affordable solutions</p>
             </div>
-          </motion.div>
+          </div>
 
           {/* Haat Model */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="bg-gradient-to-br from-orange-50 to-amber-100 rounded-2xl p-4 shadow-xl border border-orange-200 flex flex-col justify-center"
-          >
+          <div className="bg-gradient-to-br from-orange-50 to-amber-100 rounded-xl sm:rounded-2xl p-2 sm:p-4 shadow-xl border border-orange-200 flex flex-col justify-center">
             <div className="text-center">
-              <h3 className="text-lg font-bold mb-2 text-gray-800">HAAT MODEL</h3>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-xl shadow-lg"
-              >
-                <div className="text-2xl font-bold">सबसे सस्ता</div>
-                <div className="text-sm font-semibold opacity-90">SABSE SASTA</div>
-              </motion.div>
+              <h3 className="text-sm sm:text-lg font-bold mb-2 text-gray-800">HAAT MODEL</h3>
+              <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-2 sm:px-4 py-1 sm:py-2 rounded-xl shadow-lg">
+                <div className="text-lg sm:text-2xl font-bold">सबसे सस्ता</div>
+                <div className="text-xs sm:text-sm font-semibold opacity-90">SABSE SASTA</div>
+              </div>
               <p className="text-gray-600 mt-1 text-xs">Traditional market</p>
             </div>
-          </motion.div>
+          </div>
 
           {/* Economy Products */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="bg-gradient-to-br from-orange-50 to-amber-100 rounded-2xl p-4 shadow-xl border border-orange-200"
-          >
-            <h3 className="text-lg font-bold text-center mb-2 text-gray-800">Essential Products</h3>
+          <div className="bg-gradient-to-br from-orange-50 to-amber-100 rounded-xl sm:rounded-2xl p-2 sm:p-4 shadow-xl border border-orange-200">
+            <h3 className="text-sm sm:text-lg font-bold text-center mb-2 text-gray-800">Essential Products</h3>
             <div className="space-y-2">
               {[
                 { icon: Leaf, text: 'Basic Vegetables', color: 'text-green-600' },
                 { icon: Apple, text: 'Seasonal Fruits', color: 'text-red-500' }
               ].map((item, index) => (
-                <motion.div
+                <div
                   key={index}
-                  whileHover={{ scale: 1.02, backgroundColor: 'rgba(255, 255, 255, 0.9)' }}
-                  className="bg-white/70 backdrop-blur-sm p-2 rounded-lg shadow-sm text-sm"
+                  className="bg-white/70 backdrop-blur-sm p-2 rounded-lg shadow-sm text-xs sm:text-sm"
                 >
-                  <item.icon className={`w-4 h-4 ${item.color} inline mr-2`} />
+                  <item.icon className={`w-3 sm:w-4 h-3 sm:h-4 ${item.color} inline mr-2`} />
                   {item.text}
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </div>
   );

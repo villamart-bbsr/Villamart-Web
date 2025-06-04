@@ -5,6 +5,7 @@ export default function PFCComponent() {
   const [activeStep, setActiveStep] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentVideoStep, setCurrentVideoStep] = useState(null);
+  const [isModalClosing, setIsModalClosing] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -15,9 +16,46 @@ export default function PFCComponent() {
     return () => clearTimeout(timer);
   }, [activeStep]);
 
+  // Handle modal open/close and prevent body scroll
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isModalOpen]);
+
+  // Handle Escape key press to close modal
+  useEffect(() => {
+    const handleEscKey = (e) => {
+      if (e.key === "Escape" && isModalOpen) {
+        closeModal();
+      }
+    };
+    
+    window.addEventListener("keydown", handleEscKey);
+    return () => window.removeEventListener("keydown", handleEscKey);
+  }, [isModalOpen]);
+
   const openVideoModal = (stepId) => {
     setCurrentVideoStep(stepId);
     setIsModalOpen(true);
+    setIsModalClosing(false);
+  };
+
+  const closeModal = () => {
+    setIsModalClosing(true);
+    
+    // Wait for animation to complete before actually closing
+    setTimeout(() => {
+      setIsModalOpen(false);
+      setCurrentVideoStep(null);
+      setIsModalClosing(false);
+    }, 250); // Match the exit animation duration
   };
 
   const steps = [
@@ -156,6 +194,103 @@ export default function PFCComponent() {
             transform: translateX(100px);
             animation: slideIn 0.6s ease-out forwards;
           }
+
+          /* Modal Animations */
+          @keyframes modalBackdropFadeIn {
+            0% {
+              opacity: 0;
+              backdrop-filter: blur(0);
+            }
+            100% {
+              opacity: 1;
+              backdrop-filter: blur(8px);
+            }
+          }
+
+          @keyframes modalBackdropFadeOut {
+            0% {
+              opacity: 1;
+              backdrop-filter: blur(8px);
+            }
+            100% {
+              opacity: 0;
+              backdrop-filter: blur(0);
+            }
+          }
+
+          @keyframes modalSlideIn {
+            0% {
+              opacity: 0;
+              transform: scale(0.8) translateY(50px);
+            }
+            60% {
+              opacity: 1;
+              transform: scale(1.05) translateY(-10px);
+            }
+            100% {
+              opacity: 1;
+              transform: scale(1) translateY(0);
+            }
+          }
+
+          @keyframes modalSlideOut {
+            0% {
+              opacity: 1;
+              transform: scale(1) translateY(0);
+            }
+            100% {
+              opacity: 0;
+              transform: scale(0.8) translateY(50px);
+            }
+          }
+
+          .modal-backdrop-enter {
+            animation: modalBackdropFadeIn 0.3s ease-out forwards;
+          }
+
+          .modal-backdrop-exit {
+            animation: modalBackdropFadeOut 0.25s ease-in forwards;
+          }
+
+          .modal-content-enter {
+            animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+          }
+
+          .modal-content-exit {
+            animation: modalSlideOut 0.25s ease-in forwards;
+          }
+
+          /* Add subtle bounce effect for video section */
+          @keyframes videoReveal {
+            0% {
+              opacity: 0;
+              transform: scale(0.9);
+            }
+            100% {
+              opacity: 1;
+              transform: scale(1);
+            }
+          }
+
+          .video-reveal {
+            animation: videoReveal 0.5s ease-out 0.2s both;
+          }
+
+          /* Text content fade in */
+          @keyframes textFadeIn {
+            0% {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            100% {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          .text-fade-in {
+            animation: textFadeIn 0.6s ease-out 0.3s both;
+          }
         `}
       </style>
 
@@ -256,46 +391,148 @@ export default function PFCComponent() {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 px-4">
-          <div className="bg-white rounded-xl shadow-2xl w-full max-w-4xl p-6 relative">
-            {/* Close Button */}
-            <button
-              onClick={() => setIsModalOpen(false)}
-              className="cursor-pointer absolute top-4 right-4 text-gray-500 hover:text-gray-700 bg-gray-100 rounded-full w-8 h-8 flex items-center justify-center"
-            >
-              ✕
-            </button>
+        <div 
+          className={`fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-2 sm:p-4 ${
+            isModalClosing ? 'modal-backdrop-exit' : 'modal-backdrop-enter'
+          }`}
+          style={{ backdropFilter: 'blur(8px)' }}
+          onClick={closeModal}
+        >
+          <div 
+            className={`bg-white rounded-xl shadow-2xl w-full max-w-6xl max-h-[95vh] flex flex-col overflow-hidden ${
+              isModalClosing ? 'modal-content-exit' : 'modal-content-enter'
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header with close button - always visible */}
+            <div className="flex justify-between items-center p-4 border-b border-gray-200 bg-white sticky top-0 z-10">
+              <div className="flex items-center">
+                <div className="bg-green-100 p-2 rounded-full mr-3">
+                  <span className="text-green-700 text-xl">{getCurrentVideoInfo().icon}</span>
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-green-700 pr-4">
+                  {getCurrentVideoInfo().title}
+                </h3>
+              </div>
+              <button
+                onClick={closeModal}
+                className="flex-shrink-0 p-2 hover:bg-gray-100 rounded-full transition-all duration-200 hover:scale-110 hover:rotate-90"
+                aria-label="Close video"
+              >
+                <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
 
-            {/* Responsive Layout - Stacked on mobile, side by side on larger screens */}
-            <div className="flex flex-col md:flex-row gap-6">
-              {/* Left: Video - Now optimized for vertical video */}
-              <div className="md:w-2/5">
-                <div className="aspect-[9/16] bg-black rounded-lg overflow-hidden">
-                  <video
-                    className="w-full h-full object-contain"
-                    muted
-                    loop
-                    src={getCurrentVideoInfo().videoSrc}
-                    autoPlay
-                    controls
-                  />
+            {/* Scrollable content */}
+            <div className="flex-1 overflow-y-auto">
+              <div className="p-4 sm:p-6">
+                {/* Responsive Layout - Stacked on mobile, side by side on large screens */}
+                <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
+                  {/* Video Section - Vertical layout for large screens */}
+                  <div className="lg:w-1/2 xl:w-2/5">
+                    <div className="aspect-[9/16] lg:aspect-[9/16] bg-black rounded-lg overflow-hidden video-reveal max-w-md mx-auto lg:max-w-none lg:h-[70vh]">
+                      <video
+                        className="w-full h-full object-contain"
+                        muted
+                        loop
+                        src={getCurrentVideoInfo().videoSrc}
+                        autoPlay
+                        controls
+                        controlsList="nodownload"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Text Content */}
+                  <div className="lg:w-1/2 xl:w-3/5 flex flex-col justify-center text-fade-in">
+                    <div className="lg:hidden mb-4">
+                      <div className="flex items-center">
+                        <div className="bg-green-100 p-2 rounded-full mr-3">
+                          <span className="text-green-700 text-xl">{getCurrentVideoInfo().icon}</span>
+                        </div>
+                        <h3 className="text-xl font-bold text-green-700">
+                          {getCurrentVideoInfo().title}
+                        </h3>
+                      </div>
+                    </div>
+
+                    <div className="space-y-6">
+                      <p className="text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed">
+                        {getCurrentVideoInfo().description}
+                      </p>
+                      
+                      {/* Additional details based on step */}
+                      <div className="bg-green-50 p-4 lg:p-6 rounded-lg border-l-4 border-green-400 transform hover:scale-105 transition-transform duration-200">
+                        <h4 className="font-semibold text-green-800 mb-3 text-lg">Key Benefits:</h4>
+                        <ul className="text-sm lg:text-base text-green-700 space-y-2">
+                          {currentVideoStep === 2 ? (
+                            <>
+                              <li>• Automated quality assessment using AI</li>
+                              <li>• Consistent grading standards</li>
+                              <li>• Increased farmer revenue through premium pricing</li>
+                              <li>• Reduced manual labor and human error</li>
+                            </>
+                          ) : (
+                            <>
+                              <li>• 99.9% removal of chemical residues</li>
+                              <li>• 40% increase in shelf life</li>
+                              <li>• Eco-friendly cleaning process</li>
+                              <li>• Preserves nutritional value</li>
+                            </>
+                          )}
+                        </ul>
+                      </div>
+
+                      {/* Additional info section for large screens */}
+                      <div className="hidden lg:block bg-blue-50 p-4 lg:p-6 rounded-lg border-l-4 border-blue-400">
+                        <h4 className="font-semibold text-blue-800 mb-3 text-lg">Technical Specifications:</h4>
+                        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 text-sm lg:text-base text-blue-700">
+                          {currentVideoStep === 2 ? (
+                            <>
+                              <div>• Processing Speed: 500kg/hour</div>
+                              <div>• Accuracy Rate: 99.5%</div>
+                              <div>• Size Categories: 12 different grades</div>
+                              <div>• Quality Parameters: 8 assessment points</div>
+                            </>
+                          ) : (
+                            <>
+                              <div>• Ozone Concentration: 2.5 ppm</div>
+                              <div>• Treatment Time: 3-5 minutes</div>
+                              <div>• Water Temperature: 15-20°C</div>
+                              <div>• Efficiency Rate: 99.9%</div>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
+            </div>
 
-              {/* Right: Text Content */}
-              <div className="md:w-3/5 flex flex-col justify-center">
-                <div className="mb-4 flex items-center">
-                  <div className="bg-green-100 p-3 rounded-full mr-4">
-                    <span className="text-green-700 text-2xl">{getCurrentVideoInfo().icon}</span>
-                  </div>
-                  <h3 className="text-2xl font-bold text-green-700">
-                    {getCurrentVideoInfo().title}
-                  </h3>
-                </div>
+            {/* Footer with close button for mobile */}
+            <div className="lg:hidden p-4 border-t border-gray-200 bg-gray-50">
+              <button
+                onClick={closeModal}
+                className="w-full px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 transform"
+                aria-label="Close video"
+              >
+                Close
+              </button>
+            </div>
 
-                <p className="text-base text-gray-700 leading-relaxed">
-                  {getCurrentVideoInfo().description}
-                </p>
+            {/* Desktop footer */}
+            <div className="hidden lg:block p-4 border-t border-gray-200 bg-gray-50">
+              <div className="flex justify-end">
+                <button
+                  onClick={closeModal}
+                  className="px-8 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 transform"
+                  aria-label="Close video"
+                >
+                  Close
+                </button>
               </div>
             </div>
           </div>

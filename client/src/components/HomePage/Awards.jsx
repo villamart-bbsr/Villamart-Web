@@ -17,11 +17,20 @@ const Awards = () => {
     return () => window.removeEventListener("keydown", handleEscKey);
   }, [selectedAward]);
 
-  // Trap focus inside modal when open
+  // Trap focus inside modal when open and prevent body scroll
   useEffect(() => {
-    if (selectedAward && modalRef.current) {
-      modalRef.current.focus();
+    if (selectedAward) {
+      document.body.style.overflow = 'hidden';
+      if (modalRef.current) {
+        modalRef.current.focus();
+      }
+    } else {
+      document.body.style.overflow = 'unset';
     }
+    
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
   }, [selectedAward]);
   
   const awards = [
@@ -137,7 +146,7 @@ const Awards = () => {
           </motion.p>
         </motion.div>
 
-        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {awards.map((award, index) => (
             <AwardCard 
               key={index} 
@@ -153,7 +162,7 @@ const Awards = () => {
       <AnimatePresence>
         {selectedAward && (
           <motion.div
-            className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-2 sm:p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -164,7 +173,7 @@ const Awards = () => {
           >
             <motion.div
               ref={modalRef}
-              className="bg-white rounded-xl overflow-hidden max-w-4xl w-full shadow-2xl"
+              className="bg-white rounded-xl overflow-hidden w-full max-w-4xl max-h-[95vh] shadow-2xl flex flex-col"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
@@ -172,34 +181,77 @@ const Awards = () => {
               onClick={(e) => e.stopPropagation()}
               tabIndex={-1}
             >
-              <div className="flex flex-col md:flex-row">
-                <div className="md:w-2/5 bg-white">
-                  <div className="h-full relative p-4">
-                    <div 
-                      className="absolute inset-0" 
-                      style={{
-                        backgroundImage: `
-                          linear-gradient(rgba(22, 101, 52, 0.1) 1px, transparent 1px),
-                          linear-gradient(90deg, rgba(22, 101, 52, 0.1) 1px, transparent 1px),
-                          radial-gradient(rgba(22, 101, 52, 0.08) 2px, transparent 2px)`,
-                        backgroundSize: '40px 40px, 40px 40px, 80px 80px',
-                        backgroundPosition: '0 0, 0 0, 20px 20px',
-                        opacity: 0.05
-                      }}
-                    ></div>
-                    <img
-                      src={selectedAward.img}
-                      alt={selectedAward.title}
-                      className="w-full h-full object-contain p-6 relative z-10"
-                    />
+              {/* Header with close button - always visible */}
+              <div className="flex justify-between items-center p-4 border-b border-gray-200 bg-white sticky top-0 z-10">
+                <h2 id="award-modal-title" className="text-xl sm:text-2xl font-bold text-green-900 pr-4">
+                  {selectedAward.title}
+                </h2>
+                <button
+                  onClick={closeModal}
+                  className="flex-shrink-0 p-2 hover:bg-gray-100 rounded-full transition-colors duration-200 cursor-pointer"
+                  aria-label="Close award details"
+                >
+                  <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Scrollable content */}
+              <div className="flex-1 overflow-y-auto">
+                <div className="flex flex-col lg:flex-row">
+                  {/* Image section */}
+                  <div className="lg:w-2/5 bg-white p-4 sm:p-6">
+                    <div className="h-48 sm:h-64 lg:h-full min-h-[200px] relative">
+                      <div 
+                        className="absolute inset-0" 
+                        style={{
+                          backgroundImage: `
+                            linear-gradient(rgba(22, 101, 52, 0.1) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(22, 101, 52, 0.1) 1px, transparent 1px),
+                            radial-gradient(rgba(22, 101, 52, 0.08) 2px, transparent 2px)`,
+                          backgroundSize: '40px 40px, 40px 40px, 80px 80px',
+                          backgroundPosition: '0 0, 0 0, 20px 20px',
+                          opacity: 0.05
+                        }}
+                      ></div>
+                      <img
+                        src={selectedAward.img}
+                        alt={selectedAward.title}
+                        className="w-full h-full object-contain relative z-10"
+                      />
+                    </div>
+                  </div>
+                  
+                  {/* Content section */}
+                  <div className="lg:w-3/5 p-4 sm:p-6 lg:p-8">
+                    <div className="lg:hidden mb-4">
+                      <h3 className="text-xl font-bold text-green-900">{selectedAward.title}</h3>
+                    </div>
+                    <p className="text-green-800 mb-6 leading-relaxed text-sm sm:text-base">
+                      {selectedAward.fullDesc}
+                    </p>
+                    
+                    {/* Mobile close button */}
+                    <div className="lg:hidden">
+                      <button
+                        onClick={closeModal}
+                        className="w-full px-6 py-3 bg-gradient-to-r from-lime-600 to-green-700 text-white rounded-lg font-medium hover:shadow-lg transition duration-300 cursor-pointer"
+                        aria-label="Close award details"
+                      >
+                        Close
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <div className="md:w-3/5 p-8 text-left">
-                  <h2 id="award-modal-title" className="text-3xl font-bold mb-4 text-green-900">{selectedAward.title}</h2>
-                  <p className="text-green-800 mb-6 leading-relaxed">{selectedAward.fullDesc}</p>
+              </div>
+
+              {/* Desktop footer with close button */}
+              <div className="hidden lg:block p-6 border-t border-gray-200 bg-gray-50">
+                <div className="flex justify-end">
                   <button
                     onClick={closeModal}
-                    className="px-6 py-2 bg-gradient-to-r from-lime-600 to-green-700 text-white rounded-lg font-medium hover:shadow-lg transition duration-300"
+                    className="px-6 py-2 bg-gradient-to-r from-lime-600 to-green-700 text-white rounded-lg font-medium hover:shadow-lg transition duration-300 cursor-pointer"
                     aria-label="Close award details"
                   >
                     Close
@@ -231,7 +283,7 @@ const Awards = () => {
         }
         @keyframes float-4 {
           0%, 100% { transform: translateY(0) rotate(0deg); }
-          50% { transform: translateY(-15px) rotate(10deg); }
+          50% { transform: translateY(-18px) rotate(10deg); }
         }
         @keyframes float-5 {
           0%, 100% { transform: translateY(0) rotate(0deg); }
