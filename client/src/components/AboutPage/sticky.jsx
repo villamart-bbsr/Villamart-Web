@@ -1,192 +1,230 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useInView, useAnimation } from 'framer-motion';
 
-const StickyCards = () => {
-  const cards = [
+const StackCards = ({ children, className = '' }) => {
+  const containerRef = useRef(null);
+  const itemsRef = useRef([]);
+  const [isIntersecting, setIsIntersecting] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const scrollingRef = useRef(false);
+  const observerRef = useRef(null);
+
+  // Animation controls for large screen grid
+  const controls = useAnimation();
+  const isInView = useInView(containerRef, { once: true, margin: '0px 0px -100px 0px' });
+
+  // Impact items data
+  const impactItems = [
     {
-      id: 1,
-      title: "Design Systems",
-      description: "Building consistent and scalable design systems for modern applications with reusable components and clear guidelines.",
-      color: "bg-gradient-to-br from-purple-500 to-pink-600",
-      icon: "🎨"
+      title: 'Empowering Farmers',
+      description: 'Direct access to consumers allows farmers to sell their produce without middlemen, improving income and reducing exploitation. Tech-enabled procurement offers fair pricing and transparency.',
+      emoji: '👨‍🌾',
+      color: 'green',
     },
     {
-      id: 2,
-      title: "Frontend Development",
-      description: "Creating responsive and interactive user interfaces using modern frameworks and cutting-edge technologies.",
-      color: "bg-gradient-to-br from-blue-500 to-cyan-600",
-      icon: "💻"
+      title: 'Reducing Food Waste',
+      description: 'Technologies like solar dryers, AI procurement, and smart storage reduce waste, optimize inventory, and ensure faster distribution to reduce spoilage.',
+      emoji: '♻️',
+      color: 'orange',
     },
     {
-      id: 3,
-      title: "User Experience",
-      description: "Crafting intuitive and delightful user experiences through research, prototyping, and iterative design processes.",
-      color: "bg-gradient-to-br from-green-500 to-emerald-600",
-      icon: "✨"
+      title: 'Enhancing Food Safety',
+      description: 'Cool storage, Ozone cleaning, and freeze drying reduce chemicals and preserve freshness, promoting better health through safer produce.',
+      emoji: '🛡️',
+      color: 'green',
     },
     {
-      id: 4,
-      title: "Mobile Apps",
-      description: "Developing cross-platform mobile applications that provide seamless experiences across iOS and Android devices.",
-      color: "bg-gradient-to-br from-orange-500 to-red-600",
-      icon: "📱"
+      title: 'Supporting Local Economies',
+      description: 'VillaMart empowers local SHGs, PGs, and FPOs with tech, while its franchise model drives local employment and economic growth.',
+      emoji: '🏪',
+      color: 'orange',
     },
     {
-      id: 5,
-      title: "Data Analytics",
-      description: "Transforming raw data into actionable insights through advanced analytics and beautiful data visualizations.",
-      color: "bg-gradient-to-br from-indigo-500 to-purple-600",
-      icon: "📊"
+      title: 'Environmental Impact',
+      description: 'Battery-powered mobile markets, reduced food waste, and short supply chains help lower emissions and support sustainable agriculture.',
+      emoji: '🌍',
+      color: 'green',
     },
     {
-      id: 6,
-      title: "Cloud Solutions",
-      description: "Architecting scalable cloud infrastructure and implementing DevOps practices for modern applications.",
-      color: "bg-gradient-to-br from-teal-500 to-blue-600",
-      icon: "☁️"
-    }
+      title: 'Creation of Self-Employment',
+      description: 'Franchising and tech operations create diverse self-employment opportunities, fostering inclusive economic development.',
+      emoji: '💼',
+      color: 'orange',
+    },
   ];
 
-  return (
-    <div className="min-h-screen bg-gray-900">
-      {/* Header */}
-      <div className="sticky top-0 z-50 bg-gray-900/80 backdrop-blur-lg border-b border-gray-800">
-        <div className="max-w-4xl mx-auto px-6 py-8">
-          <h1 className="text-4xl font-bold text-white mb-2">Sticky Cards</h1>
-          <p className="text-gray-400">Scroll to see the stacking effect in action</p>
-        </div>
+  const cards = children || impactItems.map((item, index) => (
+    <div
+      key={index}
+      className="rounded-xl shadow-lg overflow-hidden border-b-4 p-6 flex flex-col justify-between text-center transition-transform duration-300 hover:scale-[1.02] min-h-[300px]"
+      style={{
+        borderColor: item.color === 'green' ? '#22c55e' : '#f97316',
+        background: item.color === 'green'
+          ? 'linear-gradient(to bottom right, #f0fdf4, #ffffff)'
+          : 'linear-gradient(to bottom right, #fff7ed, #ffffff)',
+      }}
+    >
+      <div className={`text-6xl mb-3 ${item.color === 'green' ? 'text-green-500' : 'text-orange-500'}`}>
+        {item.emoji}
       </div>
+      <h3 className={`text-xl font-bold mb-2 ${item.color === 'green' ? 'text-green-700' : 'text-orange-700'}`}>
+        {item.title}
+      </h3>
+      <p className="text-sm text-gray-600">{item.description}</p>
+    </div>
+  ));
 
-      {/* Cards Container */}
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Mobile: Sticky Cards */}
-        <div className="lg:hidden">
-          {cards.map((card, index) => (
-            <div
-              key={card.id}
-              className="sticky"
-              style={{ 
-                top: `${80 + (cards.length - 1 - index) * 20}px`,
-                zIndex: index + 1
-              }}
-            >
-              <div className="h-screen flex items-center justify-center py-20">
-                <div className={`
-                  w-full max-w-2xl mx-auto p-6 rounded-3xl shadow-2xl transform transition-all duration-500 hover:scale-105
-                  ${card.color} text-white relative overflow-hidden
-                `}>
-                  {/* Background Pattern */}
-                  <div className="absolute inset-0 opacity-10">
-                    <div className="absolute -top-4 -right-4 w-32 h-32 rounded-full bg-white"></div>
-                    <div className="absolute -bottom-4 -left-4 w-24 h-24 rounded-full bg-white"></div>
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="relative z-10">
-                    <div className="flex items-center mb-4">
-                      <span className="text-3xl mr-3">{card.icon}</span>
-                      <div className="flex items-center space-x-2">
-                        <span className="px-2 py-1 bg-white/20 rounded-full text-xs font-medium">
-                          Card {card.id}
-                        </span>
-                      </div>
-                    </div>
-                    
-                    <h2 className="text-2xl font-bold mb-3">{card.title}</h2>
-                    <p className="text-base leading-relaxed opacity-90 mb-6">
-                      {card.description}
-                    </p>
-                    
-                    <div className="flex items-center justify-between">
-                      <button className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-xl font-semibold transition-all duration-300 backdrop-blur-sm text-sm">
-                        Learn More
-                      </button>
-                      <div className="flex space-x-2">
-                        <div className="w-2 h-2 bg-white/50 rounded-full"></div>
-                        <div className="w-2 h-2 bg-white/30 rounded-full"></div>
-                        <div className="w-2 h-2 bg-white/30 rounded-full"></div>
-                      </div>
-                    </div>
-                  </div>
+  const animateStackCards = () => {
+    if (!containerRef.current) return;
 
-                  {/* Floating Elements */}
-                  <div className="absolute top-4 right-4 w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-                    <span className="text-lg">→</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const containerTop = containerRect.top;
+    const cardHeight = 200; // Approximate card height
+    const marginY = 16; // Gap between cards (translate-y-4 = 16px)
+
+    itemsRef.current.forEach((item, index) => {
+      if (!item) return;
+
+      const scrolling = -containerTop - index * (cardHeight + marginY);
+
+      if (scrolling > 0) {
+        const scale = Math.max(0.8, (cardHeight - scrolling * 0.05) / cardHeight);
+        const translateY = marginY * index;
+
+        item.style.transform = `translateY(${translateY}px) scale(${scale})`;
+      } else {
+        item.style.transform = `translateY(${marginY * index}px) scale(1)`;
+      }
+    });
+
+    scrollingRef.current = false;
+  };
+
+  const handleScroll = () => {
+    if (scrollingRef.current || !isIntersecting || !isSmallScreen) return;
+    scrollingRef.current = true;
+    requestAnimationFrame(animateStackCards);
+  };
+
+  // Check screen size
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth < 1024); // lg breakpoint
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+
+    return () => {
+      window.removeEventListener('resize', checkScreenSize);
+    };
+  }, []);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    // Set up Intersection Observer for small screen stack effect
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        setIsIntersecting(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    observerRef.current.observe(container);
+
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isIntersecting && isSmallScreen) {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    } else {
+      window.removeEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isIntersecting, isSmallScreen]);
+
+  // Framer Motion animation for large screens
+  useEffect(() => {
+    if (isInView && !isSmallScreen) {
+      controls.start((i) => ({
+        opacity: 1,
+        y: 0,
+        transition: {
+          delay: i * 0.1, // Staggered animation
+          duration: 0.5,
+          ease: 'easeOut',
+        },
+      }));
+    }
+  }, [isInView, isSmallScreen, controls]);
+
+  return (
+    <div className="min-h-screen py-12">
+      <div className="max-w-7xl mx-auto px-4">
+        {/* Background gradient decorative element */}
+        <div className="absolute -left-40 top-40 w-80 h-80 rounded-full bg-gradient-to-br from-orange-200/30 to-green-100/30 blur-3xl -z-10" />
+
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center mb-6">
+            <div className="h-1 w-10 bg-green-700 mr-4 rounded-full" />
+            <h1 className="text-4xl font-bold text-green-700">
+              Societal <span className="text-orange-500">Impact</span>
+            </h1>
+            <div className="h-1 w-10 bg-orange-500 ml-4 rounded-full" />
+          </div>
         </div>
 
-        {/* Desktop: 4x2 Grid */}
-        <div className="hidden lg:block py-20">
-          <div className="grid grid-cols-4 gap-6">
-            {cards.map((card, index) => (
-              <div
-                key={card.id}
-                className={`
-                  ${index >= 4 ? 'mt-6' : ''} 
-                  group cursor-pointer
-                `}
+        {/* Cards Container - Grid on large screens, Stack on small screens */}
+        {isSmallScreen ? (
+          // Stack Cards Effect for Small Screens (Unchanged)
+          <ul ref={containerRef} className={`space-y-4 ${className}`}>
+            {React.Children.map(cards, (child, index) => (
+              <li
+                key={index}
+                ref={(el) => { itemsRef.current[index] = el; }}
+                className="sticky top-24 transform-gpu transition-transform duration-75 ease-out"
+                style={{ transformOrigin: 'center top' }}
               >
-                <div className={`
-                  h-80 p-6 rounded-2xl shadow-xl transform transition-all duration-500 hover:scale-105 hover:-translate-y-2
-                  ${card.color} text-white relative overflow-hidden
-                `}>
-                  {/* Background Pattern */}
-                  <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-500">
-                    <div className="absolute -top-2 -right-2 w-20 h-20 rounded-full bg-white"></div>
-                    <div className="absolute -bottom-2 -left-2 w-16 h-16 rounded-full bg-white"></div>
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="relative z-10 h-full flex flex-col">
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-2xl">{card.icon}</span>
-                      <span className="px-2 py-1 bg-white/20 rounded-full text-xs font-medium">
-                        {card.id}
-                      </span>
-                    </div>
-                    
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-yellow-200 transition-colors">
-                      {card.title}
-                    </h3>
-                    
-                    <p className="text-sm leading-relaxed opacity-90 flex-grow">
-                      {card.description}
-                    </p>
-                    
-                    <div className="mt-4 flex items-center justify-between">
-                      <button className="px-3 py-2 bg-white/20 hover:bg-white/30 rounded-lg font-medium transition-all duration-300 backdrop-blur-sm text-xs group-hover:bg-white/40">
-                        Explore
-                      </button>
-                      <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm group-hover:bg-white/20 transition-colors">
-                        <span className="text-sm">→</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                {child}
+              </li>
             ))}
-          </div>
-        </div>
-        
-        {/* Footer */}
-        <div className="py-20 text-center">
-          <div className="bg-gray-800 rounded-2xl p-8 max-w-md mx-auto">
-            <h3 className="text-2xl font-bold text-white mb-4">
-              <span className="lg:hidden">Sticky Effect!</span>
-              <span className="hidden lg:block">Grid Layout!</span>
-            </h3>
-            <p className="text-gray-400">
-              <span className="lg:hidden">You've seen all the cards stack as you scrolled.</span>
-              <span className="hidden lg:block">Clean 4x2 grid layout for larger screens.</span>
-            </p>
-          </div>
-        </div>
+          </ul>
+        ) : (
+          // 3x2 Grid with Motion for Large Screens
+          <motion.div
+            ref={containerRef}
+            className="grid grid-cols-3 gap-8 lg:gap-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            {React.Children.map(cards, (child, index) => (
+              <motion.div
+                key={index}
+                custom={index}
+                initial={{ opacity: 0, y: 50 }}
+                animate={controls}
+                className="transform transition-transform duration-300 hover:scale-105 w-full"
+              >
+                {child}
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
       </div>
     </div>
   );
 };
 
-export default StickyCards;
+export default StackCards;

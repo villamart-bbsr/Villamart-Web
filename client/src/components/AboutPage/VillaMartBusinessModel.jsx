@@ -265,7 +265,7 @@ const VillaMartBusinessModel = () => {
                       className="sm:h-50 w-auto object-contain relative mx-auto translate-y-15 sm:translate-y-0 "
                     />
                   </div>
-                  <div className="text-green-800 sm:-translate-y-35 sm:-translate-x-10 text-sm font-semibold mt-1 relative -translate-y-14 bg-white/70 backdrop-blur-sm p-2 rounded-lg shadow-sm">Mobile</div>
+                  <div className="text-green-800 sm:-translate-y-35 sm:translate-x-10 text-sm font-semibold mt-1 relative -translate-y-14 sm:bg-white/70 sm:w-20 bg-white/70 backdrop-blur-sm p-2 rounded-lg shadow-sm">Mobile</div>
                 </div>
               </motion.div>
               <motion.div
@@ -273,7 +273,7 @@ const VillaMartBusinessModel = () => {
                 className="text-center"
               >
                 <div className="p-2 rounded-xl">
-                  <div className="text-black sm:-translate-y-19 text-sm font-semibold mt-1 relative translate-y-8 text-green-800 bg-white/70 backdrop-blur-sm p-2 rounded-lg shadow-sm">Static</div>
+                  <div className="text-black sm:-translate-y-19 text-sm font-semibold mt-1 relative translate-y-8 sm:bg-white/70 sm:w-20 sm:translate-x-20 text-green-800 bg-white/70 backdrop-blur-sm p-2 rounded-lg shadow-sm">Static</div>
                   <div className="p-2 flex items-center justify-center h-16">
                     <img 
                       src="/images/image6.jpg" 
