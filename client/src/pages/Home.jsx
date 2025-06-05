@@ -31,7 +31,7 @@ function Home() {
         <motion.img
           src="/images/left-img.png"
           alt=""
-          className="absolute left-0 top-10 h-50"
+          className="hidden md:block absolute left-0 top-10 h-50"
           animate={{ y: [0, -20, 0] }}
           transition={{ duration: 4, repeat: Infinity }}
         />
@@ -40,7 +40,7 @@ function Home() {
         <motion.img
           src="/images/center-img.png"
           alt=""
-          className="absolute left-3/4 transform -translate-x-1/2 top-10 h-45"
+          className="hidden md:block absolute left-3/4 transform -translate-x-1/2 top-10 h-45"
           animate={{ y: [0, -30, 0] }}
           transition={{ duration: 5, repeat: Infinity }}
         />
@@ -49,7 +49,7 @@ function Home() {
         <motion.img
           src="/images/right-img.png"
           alt=""
-          className="absolute right-0 top-50 h-55"
+          className="hidden md:block absolute right-0 top-50 h-55"
           animate={{ y: [0, -20, 0] }}
           transition={{ duration: 4.5, repeat: Infinity }}
         />
