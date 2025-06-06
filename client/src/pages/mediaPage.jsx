@@ -45,23 +45,23 @@ export default function FarmMediaPage() {
     news: [
       { 
         id: 1, 
-        title: "Farm Wins Sustainability Award", 
-        date: "April 15, 2025", 
-        excerpt: "Our commitment to sustainable farming practices has been recognized...",
+        title: "Engineer Left US to Help Farmers Earn with Mobile Mandis", 
+        date: "March 01, 2023", 
+        excerpt: "Appalled by the news of farmer suicides in India, engineer Ramesh Biswal left life in the US to return to his hometown....",
         link: "https://thebetterindia.com/311837/engineer-quit-us-job-to-launch-villa-mart-mobile-mandi-farmer-suicides-fair-income/"
       },
       { 
         id: 2, 
-        title: "New Community Program Launched", 
-        date: "March 22, 2025", 
-        excerpt: "We're excited to announce our new program connecting local schools with farming education...",
+        title: "How Bhubaneswars agritech ecosystem is fast gaining momentum", 
+        date: "January 10, 2024", 
+        excerpt: "Bhubaneswar is fast becoming a hub for agritech startups, with the city now home to over 100 agritech companies.",
         link: "https://economictimes.indiatimes.com/small-biz/sme-sector/how-bhubaneswars-agritech-ecosystem-is-fast-gaining-momentum/articleshow/106688288.cms?from=mdr"
       },
       { 
         id: 3, 
-        title: "Seasonal Produce Update", 
-        date: "February 10, 2025", 
-        excerpt: "This season we're featuring our award-winning organic vegetables and fruits...",
+        title: "This agri startup is helping farmers sell their produce at fair prices", 
+        date: "February 25, 2020", 
+        excerpt: "Odisha-based agritech startup Villa Mart is helping farmers sell their produce at fair prices through its mobile marketplace platform.",
         link: "https://yourstory.com/socialstory/2020/02/agri-startup-villa-mart-iit-alumnus-farmers-produce-mobile-market"
       },
       
@@ -302,9 +302,9 @@ export default function FarmMediaPage() {
             <div className="relative z-10 container mx-auto px-6 text-white">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">{item.title}</h1>
               <p className="text-xl mb-8 max-w-2xl">{item.description}</p>
-              <button className="cursor-pointer bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition duration-300 transform hover:scale-105">
+              {/* <button className="cursor-pointer bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition duration-300 transform hover:scale-105">
                 Learn More
-              </button>
+              </button> */}
             </div>
           </div>
         ))}
@@ -342,9 +342,9 @@ export default function FarmMediaPage() {
       {/* Main Content */}
       <div className="container mx-auto px-6 py-12">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-green-800 mb-4">Farm Media Center</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-green-800 mb-4">Villamart Media Center</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Explore videos and news from our farm. See our daily operations, meet our team, and stay updated with our latest news and events.
+            Explore videos and news. See our daily operations, meet our team, and stay updated with our latest news and events.
           </p>
         </div>
         

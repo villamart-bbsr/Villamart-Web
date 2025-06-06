@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState({ type: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const quickLinks = [
     { name: "About Us", path: "/about" },
     { name: "Career", path: "/career" },
@@ -46,6 +50,64 @@ const Footer = () => {
       url: "https://in.linkedin.com/company/villamartindia",
     },
   ];
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setStatus({ type: "", message: "" });
+
+    try {
+      const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/api/newsletter/subscribe`;
+      console.log('Environment variables:', {
+        VITE_API_BASE_URL: import.meta.env.VITE_API_BASE_URL,
+        NODE_ENV: import.meta.env.MODE
+      });
+      console.log('Making API call to:', apiUrl);
+      console.log('With email:', email);
+      
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      console.log('Response status:', response.status);
+      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+      
+      // Check if the response is ok before trying to parse JSON
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      // Try to parse the JSON response
+      let data;
+      try {
+        data = await response.json();
+      } catch (parseError) {
+        console.error('Error parsing JSON:', parseError);
+        throw new Error('Invalid response from server');
+      }
+
+      console.log('Response data:', data);
+
+      if (data.success) {
+        setStatus({ type: "success", message: data.message || "Successfully subscribed to newsletter!" });
+        setEmail("");
+      } else {
+        setStatus({ type: "error", message: data.message || "Failed to subscribe" });
+      }
+    } catch (error) {
+      console.error('Subscription error:', error);
+      setStatus({ 
+        type: "error", 
+        message: error.message || "Failed to subscribe. Please try again later." 
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <footer className="bg-gray-900 border-t border-gray-800">
@@ -115,18 +177,43 @@ const Footer = () => {
             
             {/* Newsletter */}
             <div className="mb-6">
-              <div className="flex">
-                <input
-                  type="email"
-                  placeholder="Enter email"
-                  className="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-l-md text-white text-sm focus:outline-none focus:border-green-400 transition-colors"
-                />
-                <button className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-r-md transition-colors duration-200">
-                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                  </svg>
-                </button>
-              </div>
+              <form onSubmit={handleSubscribe} className="space-y-2">
+                <div className="flex">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter email"
+                    className="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-l-md text-white text-sm focus:outline-none focus:border-green-400 transition-colors"
+                    required
+                  />
+                  <button 
+                    type="submit"
+                    disabled={isSubmitting}
+                    className={`px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-r-md transition-colors duration-200 ${
+                      isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+                  >
+                    {isSubmitting ? (
+                      <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      </svg>
+                    ) : (
+                      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                      </svg>
+                    )}
+                  </button>
+                </div>
+                {status.message && (
+                  <p className={`text-sm ${
+                    status.type === "success" ? "text-green-400" : "text-red-400"
+                  }`}>
+                    {status.message}
+                  </p>
+                )}
+              </form>
             </div>
 
             {/* Social Icons */}

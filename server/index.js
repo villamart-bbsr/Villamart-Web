@@ -15,6 +15,7 @@ import postRoutes from "./routes/postRoutes.js";
 import commentRoutes from "./routes/commentRoutes.js";
 import postCategoriesRoutes from "./routes/postCategoriesRoutes.js";
 import contactRouter from "./routes/contact.js";
+import newsletterRouter from "./routes/newsletter.js";
 
 // Fix for __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
@@ -43,6 +44,7 @@ app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/post-categories", postCategoriesRoutes);
 app.use("/api/contact", contactRouter);
+app.use("/api/newsletter", newsletterRouter);
 
 // Static uploads folder
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));

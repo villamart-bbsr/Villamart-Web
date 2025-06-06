@@ -142,10 +142,10 @@ const Network = () => {
           variants={fadeInUp}
         >
           <h1 className="relative inline-block text-4xl font-bold mb-2 animate-slide-in-down text-green-700 after:block after:w-full after:h-1 after:bg-gradient-to-r after:from-green-700 after:via-orange-500 after:to-orange-500 after:mt-1 after:rounded-full">
-            Network <span className="text-orange-500">Dashboard</span>
+            Distribution <span className="text-orange-500">Network</span>
           </h1>
           <h2 className="text-xl font-light opacity-90 animate-fade-in">
-            Real-time Network Monitoring System
+          Seamlessly Linking Rural Produce to Urban Platforms
           </h2>
         </motion.div>
         

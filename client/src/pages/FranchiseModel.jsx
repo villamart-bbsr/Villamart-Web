@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Leaf, Truck, Store, Star, CheckCircle, Mail, Phone, User } from 'lucide-react';
 import axios from 'axios';
 
 const FranchisePage = () => {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 500);
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -166,28 +168,88 @@ const FranchisePage = () => {
         </motion.div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Header Section */}
+      {/* Hero Section */}
+      <motion.div 
+        className="relative w-full h-[500px] flex items-center justify-center mb-10 overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        {/* Background Image with Overlay */}
         <motion.div 
-          className="text-center py-16"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          className="absolute inset-0"
+          style={{ y }}
         >
+          <img 
+            src="/images/gallery-sub-header.png" 
+            alt="Franchise Background" 
+            className="w-full h-[120%] object-fit bg-fixed"
+          />
+          <div className="absolute inset-0 bg-green-900/70"></div>
+        </motion.div>
+
+        {/* Content */}
+        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
           <motion.div
             className="inline-flex items-center gap-3 mb-6"
             whileHover={{ scale: 1.05 }}
           >
             <Leaf className="text-orange-400" size={40} />
-            <h1 className="text-5xl font-bold text-gray-800">Franchise Benefits</h1>
+            <h1 className="text-5xl font-bold text-white">Franchise Benefits</h1>
             <Leaf className="text-orange-400" size={40} />
           </motion.div>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Join our growing network of successful partners and cultivate prosperity in your community
+          <p className="text-green-100 text-lg max-w-3xl mx-auto leading-relaxed mb-8">
+            Join our growing network of successful partners and cultivate prosperity in your community. 
+            Experience the power of our proven business model and make a difference in your local market.
           </p>
-        </motion.div>
-        
+          
+          {/* CTA Button */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <button 
+              onClick={() => {
+                document.getElementById('contact-form').scrollIntoView({ 
+                  behavior: 'smooth',
+                  block: 'start'
+                });
+              }}
+              className="cursor-pointer bg-orange-500 hover:bg-orange-400 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-orange-400 hover:border-orange-300"
+            >
+              Start Your Franchise Journey
+            </button>
+          </motion.div>
+        </div>
+
+        {/* Wave SVG */}
+        <div className="absolute bottom-0 left-0 w-full">
+          <svg 
+            className="w-full h-16 text-white" 
+            viewBox="0 0 1440 100" 
+            preserveAspectRatio="none"
+          >
+            <path 
+              fill="currentColor" 
+              d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,58.7C672,53,768,43,864,42.7C960,43,1056,53,1152,53.3C1248,53,1344,43,1392,37.3L1440,32L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"
+            ></path>
+          </svg>
+        </div>
+      </motion.div>
+
+      <div className="container mx-auto px-4 relative z-10">
         {/* Mobile Outlet Section */}
+        <div className="text-center mb-12">
+          <motion.div
+            className="inline-flex items-center gap-3 bg-green-700/10 py-4 px-8 rounded-full"
+            whileHover={{ scale: 1.05 }}
+          >
+            <Truck className="text-green-700" size={40} />
+            <h2 className="text-4xl font-bold text-green-700">Mobile Outlet</h2>
+            <Truck className="text-green-700" size={40} />
+          </motion.div>
+        </div>
+
         <motion.div 
           className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20"
           initial="hidden"
@@ -195,26 +257,25 @@ const FranchisePage = () => {
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div 
-            className="relative group"
+            className="relative"
             variants={cardVariants}
           >
             <motion.div 
-              className="rounded-2xl overflow-hidden shadow-2xl bg-white border-2 border-orange-400 hover:border-orange-300 transition-all duration-300"
+              className="relative overflow-hidden rounded-2xl"
               variants={imageVariants}
-              whileHover={{ 
-                y: -5,
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
+              animate={{
+                y: [0, -15, 0],
+                transition: {
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }
               }}
             >
-              <div className="bg-green-700 p-4 flex items-center gap-3">
-                <Truck className="text-white" size={28} />
-                <h3 className="text-white font-bold text-xl">Mobile Outlet</h3>
-                <Star className="text-white ml-auto" size={24} />
-              </div>
               <img 
                 src="/images/mobile_franchise.png" 
                 alt="Mobile Outlet" 
-                className="w-full h-64 object-cover"
+                className="w-full h-[400px] object-fit"
               />
             </motion.div>
           </motion.div>
@@ -227,10 +288,6 @@ const FranchisePage = () => {
               borderColor: "rgb(251 146 60)"
             }}
           >
-            <div className="flex items-center gap-3 mb-6">
-              <Truck className="text-green-700" size={32} />
-              <h2 className="text-3xl font-bold text-green-700">Mobile Outlet Benefits</h2>
-            </div>
             <motion.div className="space-y-4">
               {mobileOutletBenefits.map((item, index) => (
                 <motion.div
@@ -254,6 +311,17 @@ const FranchisePage = () => {
         </motion.div>
 
         {/* Static Outlet Section */}
+        <div className="text-center mb-12">
+          <motion.div
+            className="inline-flex items-center gap-3 bg-orange-400/10 py-4 px-8 rounded-full"
+            whileHover={{ scale: 1.05 }}
+          >
+            <Store className="text-orange-400" size={40} />
+            <h2 className="text-4xl font-bold text-orange-400">Static Outlet</h2>
+            <Store className="text-orange-400" size={40} />
+          </motion.div>
+        </div>
+
         <motion.div 
           className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-16"
           initial="hidden"
@@ -268,10 +336,6 @@ const FranchisePage = () => {
               borderColor: "rgb(251 146 60)"
             }}
           >
-            <div className="flex items-center gap-3 mb-6">
-              <Store className="text-orange-400" size={32} />
-              <h2 className="text-3xl font-bold text-orange-400">Static Outlet Benefits</h2>
-            </div>
             <motion.div className="space-y-4">
               {staticOutletBenefits.map((item, index) => (
                 <motion.div
@@ -294,54 +358,33 @@ const FranchisePage = () => {
           </motion.div>
 
           <motion.div 
-            className="relative group"
+            className="relative"
             variants={cardVariants}
           >
             <motion.div 
-              className="rounded-2xl overflow-hidden shadow-2xl bg-white border-2 border-orange-400 hover:border-orange-300 transition-all duration-300"
+              className="relative overflow-hidden rounded-2xl"
               variants={imageVariants}
-              whileHover={{ 
-                y: -5,
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
+              animate={{
+                y: [0, -15, 0],
+                transition: {
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }
               }}
             >
-              <div className="bg-orange-400 p-4 flex items-center gap-3">
-                <Store className="text-white" size={28} />
-                <h3 className="text-white font-bold text-xl">Static Outlet</h3>
-                <Star className="text-white ml-auto" size={24} />
-              </div>
               <img 
                 src="/images/image6.jpg" 
                 alt="Static Outlet" 
-                className="w-full h-64 object-cover"
+                className="w-full h-[400px] object-fit"
               />
             </motion.div>
           </motion.div>
         </motion.div>
 
-        {/* Call to Action Section */}
-        <motion.div 
-          className="text-center py-16 border-t-2 border-gray-200"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-        >
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <button className="bg-orange-500 hover:bg-orange-400 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-orange-400 hover:border-orange-300">
-              Start Your Franchise Journey
-            </button>
-          </motion.div>
-          <p className="text-gray-600 mt-4 text-lg">
-            Grow with us and make a difference in your community
-          </p>
-        </motion.div>
-
         {/* Contact Form Section */}
         <motion.div 
+          id="contact-form"
           className="max-w-4xl mx-auto py-16 px-4"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

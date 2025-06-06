@@ -26,7 +26,7 @@ const Partners = () => {
     {
       name: "Livelihood Alternatives",
       logo: "/images/image.png",
-      description: ""
+      description: "Empowering rural Odisha through sustainable, scalable, and collective livelihoods."
     },
     {
       name: "ORMAS",
