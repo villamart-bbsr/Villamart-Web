@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Smartphone, Mail, Send } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+
+// Initialize EmailJS with your public key
+emailjs.init("NF6I53ZEKl-U7MvBN"); // Replace with your actual public key
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -36,13 +40,40 @@ const ContactPage = () => {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
       setIsSubmitting(true);
-      // Simulate form submission
-      setTimeout(() => {
-        setIsSubmitting(false);
+      try {
+        // Send email to admin
+        await emailjs.send(
+          "service_zw8vb7i",
+          "template_dmr8f9h",
+          {
+            from_name: formData.fullname,
+            from_email: formData.email,
+            to_email: "info@villamart.in",
+            subject: formData.subject,
+            message: formData.message,
+            address: formData.address,
+            mobile: formData.mobile,
+            reply_to: formData.email
+          }
+        );
+
+        // Send confirmation email to user
+        await emailjs.send(
+          "service_zw8vb7i",
+          "template_tejdaax",
+          {
+            from_name: formData.fullname,
+            to_email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+            reply_to: "info@villamart.in"
+          }
+        );
+
         setIsSubmitted(true);
         setFormData({
           fullname: '',
@@ -53,7 +84,12 @@ const ContactPage = () => {
           message: ''
         });
         setTimeout(() => setIsSubmitted(false), 3000);
-      }, 1500);
+      } catch (error) {
+        setError('Failed to send message. Please try again later.');
+        console.error('EmailJS Error:', error);
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 

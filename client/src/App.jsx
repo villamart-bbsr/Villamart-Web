@@ -36,6 +36,9 @@ const EmployeeLayout = lazy(() => import("./pages/employee/EmployeeLayout"));
 const EmployeePosts = lazy(() => import("./pages/employee/screens/posts/EmployeePosts"));
 const EditEmployeePost = lazy(() => import("./pages/employee/screens/posts/EditEmployeePost"));
 const CreateEmployeePost = lazy(() => import("./pages/employee/screens/posts/CreateEmployeePost"));
+const OTPVerificationPage = lazy(() => import("./pages/register/OTPVerificationPage"));
+const ForgotPasswordPage = lazy(() => import("./pages/forgotPassword/ForgotPasswordPage"));
+const ResetPasswordPage = lazy(() => import("./pages/forgotPassword/ResetPasswordPage"));
 
 function App() {
   return (
@@ -56,8 +59,11 @@ function App() {
             <Route path="/blog" element={<PageTransition><BlogPage /></PageTransition>} />
             <Route path="/blog/:slug" element={<PageTransition><ArticleDetailPage /></PageTransition>} />
             <Route path="/register" element={<PageTransition><RegisterPage /></PageTransition>} />
+            <Route path="/verify-otp" element={<PageTransition><OTPVerificationPage /></PageTransition>} />
             <Route path="/login" element={<PageTransition><LoginPage /></PageTransition>} />
             <Route path="/profile" element={<PageTransition><ProfilePage /></PageTransition>} />
+            <Route path="/forgot-password" element={<PageTransition><ForgotPasswordPage /></PageTransition>} />
+            <Route path="/reset-password/:token" element={<PageTransition><ResetPasswordPage /></PageTransition>} />
 
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<PageTransition><Admin /></PageTransition>} />

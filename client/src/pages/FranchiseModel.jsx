@@ -1,148 +1,19 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Leaf, Truck, Store, Star, CheckCircle, Mail, Phone, User } from 'lucide-react';
+import axios from 'axios';
 
 const FranchisePage = () => {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 500);
-  const [showEnquiryForm, setShowEnquiryForm] = useState(false);
-
-
-  
-    // Form state and handlers
-    const [formData, setFormData] = useState({
-      fullname: '',
-      address: '',
-      email: '',
-      mobile: '',
-      subject: '',
-      message: ''
-    });
-  
-    const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      setFormData(prevState => ({
-        ...prevState,
-        [name]: value
-      }));
-    };
-  
-    const [submitting, setSubmitting] = useState(false);
-    const [submitSuccess, setSubmitSuccess] = useState(false);
-    const [submitError, setSubmitError] = useState(null);
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      setSubmitting(true);
-      setSubmitError(null);
-      
-      try {
-        // Example using a service like EmailJS
-        // You'll need to replace with your actual service details
-        await emailSubmission(formData);
-        
-        // Show success message
-        setSubmitSuccess(true);
-        
-        // Reset form after submission
-        setFormData({
-          fullname: '',
-          address: '',
-          email: '',
-          mobile: '',
-          subject: '',
-          message: ''
-        });
-        
-        // Hide success message after 5 seconds
-        setTimeout(() => {
-          setSubmitSuccess(false);
-        }, 5000);
-      } catch (error) {
-        console.error('Form submission error:', error);
-        setSubmitError('Failed to send your message. Please try again later.');
-      } finally {
-        setSubmitting(false);
-      }
-    };
-    
-    // Function to handle the email submission
-    const emailSubmission = async (data) => {
-      // OPTION 1: Using EmailJS
-      // Uncomment and configure this code to use EmailJS
-      /*
-      return emailjs.send(
-        'YOUR_SERVICE_ID',  // Create account at emailjs.com and get service ID
-        'YOUR_TEMPLATE_ID', // Create an email template and get template ID
-        {
-          from_name: data.fullname,
-          reply_to: data.email,
-          address: data.address,
-          mobile: data.mobile,
-          subject: data.subject,
-          message: data.message
-        },
-        'YOUR_PUBLIC_KEY'   // Your EmailJS public key
-      );
-      */
-      
-      // OPTION 2: Using your own backend API
-      // Uncomment and configure this code to use your own API endpoint
-      /*
-      const response = await fetch('YOUR_API_ENDPOINT', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      
-      return await response.json();
-      */
-      
-      // For demonstration, we're using a timeout to simulate API call
-      // REMOVE THIS IN PRODUCTION and uncomment one of the above options
-      return new Promise((resolve) => {
-        setTimeout(resolve, 1000);
-      });
-    };
-  
-    // Animation variants
-    const formVariants = {
-      hidden: { opacity: 0 },
-      visible: { 
-        opacity: 1,
-        transition: { 
-          staggerChildren: 0.1 
-        }
-      }
-    };
-  
-    const buttonVariants = {
-      hover: { scale: 1.05 },
-      tap: { scale: 0.95 }
-    };
-  
-    const inputVariants = {
-      hidden: { x: -20, opacity: 0 },
-      visible: { 
-        x: 0, 
-        opacity: 1,
-        transition: { duration: 0.3 }
-      }
-    };
-
-
-  // const [formData, setFormData] = useState({
-  //   fullname: '',
-  //   address: '',
-  //   email: '',
-  //   mobile: '',
-  //   subject: '',
-  //   message: ''
-  // });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+    outletType: 'mobile' // default value
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -153,62 +24,34 @@ const FranchisePage = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({ ...formData, [name]: value });
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log('Form submitted:', formData);
-  //   // Form submission logic would go here
-  //   alert('Form submitted successfully!');
-  //   setFormData({
-  //     fullname: '',
-  //     address: '',
-  //     email: '',
-  //     mobile: '',
-  //     subject: '',
-  //     message: ''
-  //   });
-  // };
-
-  const tableVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const rowVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100
-      }
-    }
-  };
-
   const benefitVariants = {
-    hidden: { opacity: 0, x: -20 },
+    hidden: { opacity: 0, x: -30 },
     visible: { 
       opacity: 1, 
       x: 0,
       transition: {
         type: "spring",
-        stiffness: 50
+        stiffness: 60,
+        damping: 12
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 50,
+        damping: 15
       }
     }
   };
 
   const imageVariants = {
-    hidden: { scale: 0.8, opacity: 0 },
+    hidden: { scale: 0.9, opacity: 0 },
     visible: { 
       scale: 1, 
       opacity: 1,
@@ -217,553 +60,414 @@ const FranchisePage = () => {
         stiffness: 80,
         duration: 0.8
       }
-    },
-    hover: {
-      scale: 1.05,
-      boxShadow: "0px 0px 8px rgba(0,0,0,0.3)",
+    }
+  };
+
+  const leafVariants = {
+    animate: {
+      rotate: [0, 5, -5, 0],
       transition: {
-        type: "spring",
-        stiffness: 300
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut"
       }
     }
   };
 
-  // const buttonVariants = {
-  //   hover: {
-  //     scale: 1.05,
-  //     backgroundColor: "#f97316",
-  //     transition: {
-  //       type: "spring",
-  //       stiffness: 300
-  //     }
-  //   },
-  //   tap: {
-  //     scale: 0.95
-  //   }
-  // };
+  const mobileOutletBenefits = [
+    "Supermarket at doorstep",
+    "Effortless procurement GPS",
+    "Based billing & sales analysis",
+    "Digitally Local order",
+    "No fuel & less expenses",
+    "Apartment Entry Permission",
+    "Brand connect",
+    "Round the year sales boost",
+    "Low energy cooling system",
+    "Feel & tough buying experience",
+    "Fixed time & weekly off as needed"
+  ];
 
-  // const formVariants = {
-  //   hidden: { opacity: 0, y: 50 },
-  //   visible: { 
-  //     opacity: 1, 
-  //     y: 0,
-  //     transition: {
-  //       type: "spring",
-  //       stiffness: 50
-  //     }
-  //   }
-  // };
+  const staticOutletBenefits = [
+    "Digitally Local order",
+    "Effortless Procurement",
+    "Technology-backed Freshness",
+    "Profit Boost through Brand connect",
+    "Customer acquisition & retention",
+    "Real time billing & analysis",
+    "Reduced Perishability Risk",
+    "Feel & tough buying experience",
+    "Optimised price guidance",
+    "Profit analysis",
+    "Availability of healthy products"
+  ];
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/contact', formData);
+      setSubmitStatus({ type: 'success', message: 'Message sent successfully! We will contact you soon.' });
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        message: '',
+        outletType: 'mobile'
+      });
+    } catch (error) {
+      console.error('Contact form error:', error);
+      const errorMessage = error.response?.data?.error || error.response?.data?.message || error.message;
+      setSubmitStatus({ 
+        type: 'error', 
+        message: `Failed to send message: ${errorMessage}` 
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
-    <div className="bg-gray-50 min-h-screen text-black">
-      {/* Hero Section */}
-      <section className="relative bg-green-900 text-white py-16">
-        <div className="absolute inset-0 overflow-hidden">
+    <div className="bg-white min-h-screen text-gray-800 relative overflow-hidden">
+      {/* Floating Leaf Decorations */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          className="absolute top-20 left-10 text-green-600 opacity-20"
+          variants={leafVariants}
+          animate="animate"
+        >
+          <Leaf size={40} />
+        </motion.div>
+        <motion.div
+          className="absolute top-40 right-20 text-green-600 opacity-20"
+          variants={leafVariants}
+          animate="animate"
+          style={{ animationDelay: '1s' }}
+        >
+          <Leaf size={30} />
+        </motion.div>
+        <motion.div
+          className="absolute bottom-32 left-1/4 text-green-600 opacity-20"
+          variants={leafVariants}
+          animate="animate"
+          style={{ animationDelay: '2s' }}
+        >
+          <Leaf size={35} />
+        </motion.div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Header Section */}
+        <motion.div 
+          className="text-center py-16"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <motion.div
+            className="inline-flex items-center gap-3 mb-6"
+            whileHover={{ scale: 1.05 }}
+          >
+            <Leaf className="text-orange-400" size={40} />
+            <h1 className="text-5xl font-bold text-gray-800">Franchise Benefits</h1>
+            <Leaf className="text-orange-400" size={40} />
+          </motion.div>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            Join our growing network of successful partners and cultivate prosperity in your community
+          </p>
+        </motion.div>
+        
+        {/* Mobile Outlet Section */}
+        <motion.div 
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
           <motion.div 
-            className="w-full h-full"
-            initial={{ opacity: 0.2 }}
-            animate={{ opacity: 0.4 }}
-            transition={{ 
-              duration: 8,
-              repeat: Infinity,
-              repeatType: "reverse"
+            className="relative group"
+            variants={cardVariants}
+          >
+            <motion.div 
+              className="rounded-2xl overflow-hidden shadow-2xl bg-white border-2 border-orange-400 hover:border-orange-300 transition-all duration-300"
+              variants={imageVariants}
+              whileHover={{ 
+                y: -5,
+                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
+              }}
+            >
+              <div className="bg-green-700 p-4 flex items-center gap-3">
+                <Truck className="text-white" size={28} />
+                <h3 className="text-white font-bold text-xl">Mobile Outlet</h3>
+                <Star className="text-white ml-auto" size={24} />
+              </div>
+              <img 
+                src="/images/mobile_franchise.png" 
+                alt="Mobile Outlet" 
+                className="w-full h-64 object-cover"
+              />
+            </motion.div>
+          </motion.div>
+
+          <motion.div 
+            className="bg-white border-2 border-orange-400 p-8 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300"
+            variants={cardVariants}
+            whileHover={{ 
+              y: -5,
+              borderColor: "rgb(251 146 60)"
             }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-green-800 to-green-950"></div>
-            <div className="absolute inset-0 bg-[url('/images/background.png')] bg-cover opacity-30"></div>
-          </motion.div>
-        </div>
-        <div className="container mx-auto relative z-10 px-4">
-          <motion.h1 
-            className="text-4xl md:text-5xl font-bold text-center"
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            Franchise
-          </motion.h1>
-          <motion.p 
-            className="text-lg md:text-xl text-center mt-4 max-w-2xl mx-auto"
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            Join the VillaMart family and be part of our mission to connect farmers and consumers
-          </motion.p>
-        </div>
-      </section>
-
-      {/* Franchise Table Section */}
-      <section className="py-12 px-4">
-        <div className="container mx-auto">
-          <motion.h2 
-            className="text-3xl font-bold text-center text-green-800 mb-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            Franchise Opportunities
-          </motion.h2>
-          
-          {/* Desktop Table */}
-          {isDesktop && (
-            <motion.div 
-              className="overflow-x-auto rounded-lg shadow-lg"
-              variants={tableVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.1 }}
-            >
-              <table className="w-full border-collapse">
-                <thead>
-                  <motion.tr variants={rowVariants} className="bg-white">
-                    <th className="p-4 md:p-6 text-lg font-bold bg-green-100 text-orange-500 border-4 border-green-800">Partnership / Franchise</th>
-                    <th className="p-4 md:p-6 text-lg font-bold text-orange-500 border-4 border-green-800">Mobile Outlet</th>
-                    <th className="p-4 md:p-6 text-lg font-bold bg-green-50 text-orange-500 border-4 border-green-800">Static Outlet</th>
-                  </motion.tr>
-                </thead>
-                <tbody>
-                  <motion.tr variants={rowVariants} className="bg-white">
-                    <td className="p-4 md:p-6 font-bold bg-green-100 border-4 border-green-800">Investment</td>
-                    <td className="p-4 md:p-6 border-4 border-green-800">3-4 Lakh</td>
-                    <td className="p-4 md:p-6 bg-green-50 border-4 border-green-800">4-5 Lakh</td>
-                  </motion.tr>
-                  <motion.tr variants={rowVariants} className="bg-white">
-                    <td className="p-4 md:p-6 font-bold bg-green-100 border-4 border-green-800">ROI</td>
-                    <td className="p-4 md:p-6 border-4 border-green-800">8-12 Months</td>
-                    <td className="p-4 md:p-6 bg-green-50 border-4 border-green-800">8-12 Months</td>
-                  </motion.tr>
-                  <motion.tr variants={rowVariants} className="bg-white">
-                    <td className="p-4 md:p-6 font-bold bg-green-100 border-4 border-green-800">Monthly Income</td>
-                    <td className="p-4 md:p-6 border-4 border-green-800">Rs. 40,000</td>
-                    <td className="p-4 md:p-6 bg-green-50 border-4 border-green-800"> Rs. 40,000</td>
-                  </motion.tr>
-                  <motion.tr variants={rowVariants} className="bg-white">
-                    <td className="p-4 md:p-6 font-bold bg-green-100 border-4 border-green-800">Benefits</td>
-                    <td className="p-4 md:p-6 border-4 border-green-800">
-                      <motion.ul className="list-disc pl-5 space-y-1">
-                        {[
-                          "Supermarket at doorstep",
-                          "Effortless procurement GPS",
-                          "Based billing & sales analysis",
-                          "Digitally Local order",
-                          "No fuel & less expenses",
-                          "Apartment Entry Permission",
-                          "Brand connect",
-                          "Round the year sales boost",
-                          "Low energy cooling system",
-                          "Feel & tough buying experience",
-                          "Fixed time & weekly off as needed"
-                        ].map((item, index) => (
-                          <motion.li 
-                            key={`mobile-${index}`}
-                            variants={benefitVariants}
-                            className="text-sm md:text-base"
-                          >
-                            {item}
-                          </motion.li>
-                        ))}
-                      </motion.ul>
-                    </td>
-                    <td className="p-4 md:p-6 bg-green-50 border-4 border-green-800">
-                      <motion.ul className="list-disc pl-5 space-y-1">
-                        {[
-                          "Digitally Local order",
-                          "Effortless Procurement",
-                          "Technology-backed Freshness",
-                          "Profit Boost through Brand connect",
-                          "Customer acquisition & retention",
-                          "Real time billing & analysis",
-                          "Reduced Perishability Risk",
-                          "Feel & tough buying experience",
-                          "Optimised price guidance",
-                          "Profit analysis",
-                          "Availability of healthy products"
-                        ].map((item, index) => (
-                          <motion.li 
-                            key={`static-${index}`}
-                            variants={benefitVariants}
-                            className="text-sm md:text-base"
-                          >
-                            {item}
-                          </motion.li>
-                        ))}
-                      </motion.ul>
-                    </td>
-                  </motion.tr>
-                  <motion.tr variants={rowVariants} className="bg-white">
-                    <td className="p-4 md:p-6 font-bold bg-green-100 border-4 border-green-800">Franchise Cost</td>
-                    <td className="p-4 md:p-6 border-4 border-green-800">
-                      <ul className="list-disc pl-5 space-y-1">
-                        <li className="text-sm md:text-base">Franchise cost 30,000 (Non refundable)</li>
-                        <li className="text-sm md:text-base">Security deposit 20,000 (Refundable)</li>
-                      </ul>
-                    </td>
-                    <td className="p-4 md:p-6 bg-green-50 border-4 border-green-800">
-                      <ul className="list-disc pl-5 space-y-1">
-                        <li className="text-sm md:text-base">Franchise cost 30,000 (Non refundable)</li>
-                        <li className="text-sm md:text-base">Security deposit 20,000 (Refundable)</li>
-                      </ul>
-                    </td>
-                  </motion.tr>
-                  <motion.tr variants={rowVariants} className="bg-white">
-                    <td className="p-4 md:p-6 font-bold bg-green-100 border-4 border-green-800">VillaMart Share</td>
-                    <td className="p-4 md:p-6 border-4 border-green-800">3% revenue share</td>
-                    <td className="p-4 md:p-6 bg-green-50 border-4 border-green-800">3% revenue share</td>
-                  </motion.tr>
-                </tbody>
-              </table>
-            </motion.div>
-          )}
-          
-          {/* Mobile Table */}
-          {!isDesktop && (
-            <div className="space-y-8">
-              <motion.div 
-                className="bg-white rounded-lg shadow-lg overflow-hidden"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-              >
-                <div className="bg-orange-500 text-white p-4 text-center font-bold">
-                  Mobile Outlet
-                </div>
-                <div className="p-4 space-y-3">
-                  <div className="flex justify-between border-b pb-2">
-                    <span className="font-bold text-green-800">Investment:</span>
-                    <span>3-4 Lakh</span>
-                  </div>
-                  <div className="flex justify-between border-b pb-2">
-                    <span className="font-bold text-green-800">ROI:</span>
-                    <span>8-12 Months</span>
-                  </div>
-                  <div className="flex justify-between border-b pb-2">
-                    <span className="font-bold text-green-800">Monthly Income:</span>
-                    <span> Rs. 40,000</span>
-                  </div>
-                  <div className="border-b pb-2">
-                    <span className="font-bold text-green-800 block mb-2">Benefits:</span>
-                    <motion.ul 
-                      className="list-disc pl-5 space-y-1 text-sm"
-                      variants={tableVariants}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true }}
-                    >
-                      {[
-                        "Supermarket at doorstep",
-                        "Effortless procurement GPS",
-                        "Based billing & sales analysis",
-                        "No fuel & less expenses",
-                        "Brand connect"
-                      ].map((item, index) => (
-                        <motion.li key={index} variants={benefitVariants}>{item}</motion.li>
-                      ))}
-                    </motion.ul>
-                  </div>
-                  <div className="flex justify-between border-b pb-2">
-                    <span className="font-bold text-green-800">Franchise Cost:</span>
-                    <span>Rs. 30,000 + 20,000 deposit</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="font-bold text-green-800">VillaMart Share:</span>
-                    <span>3% revenue</span>
-                  </div>
-                </div>
-              </motion.div>
-              
-              <motion.div 
-                className="bg-white rounded-lg shadow-lg overflow-hidden"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                <div className="bg-green-700 text-white p-4 text-center font-bold">
-                  Static Outlet
-                </div>
-                <div className="p-4 space-y-3">
-                  <div className="flex justify-between border-b pb-2">
-                    <span className="font-bold text-green-800">Investment:</span>
-                    <span>4-5 Lakh</span>
-                  </div>
-                  <div className="flex justify-between border-b pb-2">
-                    <span className="font-bold text-green-800">ROI:</span>
-                    <span>8-12 Months</span>
-                  </div>
-                  <div className="flex justify-between border-b pb-2">
-                    <span className="font-bold text-green-800">Monthly Income:</span>
-                    <span> Rs. 40,000</span>
-                  </div>
-                  <div className="border-b pb-2">
-                    <span className="font-bold text-green-800 block mb-2">Benefits:</span>
-                    <motion.ul 
-                      className="list-disc pl-5 space-y-1 text-sm"
-                      variants={tableVariants}
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: true }}
-                    >
-                      {[
-                        "Digitally Local order",
-                        "Technology-backed Freshness",
-                        "Real time billing & analysis",
-                        "Optimised price guidance",
-                        "Profit analysis"
-                      ].map((item, index) => (
-                        <motion.li key={index} variants={benefitVariants}>{item}</motion.li>
-                      ))}
-                    </motion.ul>
-                  </div>
-                  <div className="flex justify-between border-b pb-2">
-                    <span className="font-bold text-green-800">Franchise Cost:</span>
-                    <span>Rs. 30,000 + 20,000 deposit</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="font-bold text-green-800">VillaMart Share:</span>
-                    <span>3% revenue</span>
-                  </div>
-                </div>
-              </motion.div>
+            <div className="flex items-center gap-3 mb-6">
+              <Truck className="text-green-700" size={32} />
+              <h2 className="text-3xl font-bold text-green-700">Mobile Outlet Benefits</h2>
             </div>
-          )}
-        </div>
-      </section>
-
-      {/* Franchise Visuals Section */}
-      <section className="py-12 bg-green-50 px-4">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <motion.div 
-              className="relative group"
-              initial="hidden"
-              whileInView="visible"
-              whileHover="hover"
-              viewport={{ once: true }}
-            >
-              <motion.div 
-                className="rounded-lg overflow-hidden shadow-lg bg-white"
-                variants={imageVariants}
-              >
-                <div className="relative h-64 md:h-80 overflow-hidden">
-                  <img 
-                    src="/api/placeholder/400/320" 
-                    alt="Static Outlet" 
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                    <div className="p-4 text-white">
-                      <h3 className="text-lg font-bold">Static Outlet</h3>
-                      <p className="text-sm">Our strategically located stores bring fresh produce to your neighborhood.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="p-4 text-center">
-                  <h3 className="text-xl font-bold text-green-800">Static Outlet</h3>
-                  <motion.div 
-                    className="mt-2"
-                    initial={{ opacity: 0, height: 0 }}
-                    whileInView={{ opacity: 1, height: 'auto' }}
-                    transition={{ delay: 0.3 }}
-                    viewport={{ once: true }}
+            <motion.div className="space-y-4">
+              {mobileOutletBenefits.map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="flex items-center text-gray-700 hover:text-gray-900 transition-colors duration-200 group"
+                  variants={benefitVariants}
+                  custom={index}
+                  whileHover={{ x: 10 }}
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.2, rotate: 180 }}
+                    transition={{ type: "spring", stiffness: 300 }}
                   >
-                    <p className="text-gray-600">Establish a permanent presence in prime locations</p>
+                    <CheckCircle className="text-green-700 mr-4 group-hover:text-green-600" size={20} />
                   </motion.div>
-                </div>
-              </motion.div>
+                  <span className="font-medium">{item}</span>
+                </motion.div>
+              ))}
             </motion.div>
-            
-            <motion.div 
-              className="relative group"
-              initial="hidden"
-              whileInView="visible"
-              whileHover="hover"
-              viewport={{ once: true }}
-            >
-              <motion.div 
-                className="rounded-lg overflow-hidden shadow-lg bg-white"
-                variants={imageVariants}
-              >
-                <div className="relative h-64 md:h-80 overflow-hidden">
-                  <img 
-                    src="/api/placeholder/400/320" 
-                    alt="Mobile Outlet" 
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                    <div className="p-4 text-white">
-                      <h3 className="text-lg font-bold">Mobile Outlet</h3>
-                      <p className="text-sm">Bringing fresh produce directly to residential areas and communities.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="p-4 text-center">
-                  <h3 className="text-xl font-bold text-green-800">Mobile Outlet</h3>
-                  <motion.div 
-                    className="mt-2"
-                    initial={{ opacity: 0, height: 0 }}
-                    whileInView={{ opacity: 1, height: 'auto' }}
-                    transition={{ delay: 0.3 }}
-                    viewport={{ once: true }}
-                  >
-                    <p className="text-gray-600">Reach customers directly with our mobile store solution</p>
-                  </motion.div>
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+          </motion.div>
+        </motion.div>
 
-      {/* Enquiry Form Section */}
-      <section className="py-12 px-4 bg-gray-50">
-      <div className="container mx-auto max-w-6xl">
-        <div className="flex flex-col md:flex-row items-center gap-8">
-          {/* Left side - Floating Image */}
-          <div className="w-full md:w-1/2">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="relative"
+        {/* Static Outlet Section */}
+        <motion.div 
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          <motion.div 
+            className="bg-white border-2 border-orange-400 p-8 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300"
+            variants={cardVariants}
+            whileHover={{ 
+              y: -5,
+              borderColor: "rgb(251 146 60)"
+            }}
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <Store className="text-orange-400" size={32} />
+              <h2 className="text-3xl font-bold text-orange-400">Static Outlet Benefits</h2>
+            </div>
+            <motion.div className="space-y-4">
+              {staticOutletBenefits.map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="flex items-center text-gray-700 hover:text-gray-900 transition-colors duration-200 group"
+                  variants={benefitVariants}
+                  custom={index}
+                  whileHover={{ x: 10 }}
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.2, rotate: 180 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <CheckCircle className="text-orange-400 mr-4 group-hover:text-orange-300" size={20} />
+                  </motion.div>
+                  <span className="font-medium">{item}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          <motion.div 
+            className="relative group"
+            variants={cardVariants}
+          >
+            <motion.div 
+              className="rounded-2xl overflow-hidden shadow-2xl bg-white border-2 border-orange-400 hover:border-orange-300 transition-all duration-300"
+              variants={imageVariants}
+              whileHover={{ 
+                y: -5,
+                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)"
+              }}
             >
-              <img 
-                src="/api/placeholder/500/600" 
-                alt="Contact us" 
-                className="rounded-lg shadow-lg w-full object-cover"
-              />
-              <div className="absolute -bottom-4 -right-4 bg-green-600 text-white p-4 rounded-lg shadow-md">
-                <p className="text-lg font-bold">Get in Touch</p>
-                <p className="text-sm">We'd love to hear from you!</p>
+              <div className="bg-orange-400 p-4 flex items-center gap-3">
+                <Store className="text-white" size={28} />
+                <h3 className="text-white font-bold text-xl">Static Outlet</h3>
+                <Star className="text-white ml-auto" size={24} />
               </div>
+              <img 
+                src="/images/image6.jpg" 
+                alt="Static Outlet" 
+                className="w-full h-64 object-cover"
+              />
             </motion.div>
-          </div>
-          
-          {/* Right side - Enquiry Form */}
-          <div className="w-full md:w-1/2">
-            <motion.div 
-              className="bg-white rounded-lg shadow-lg p-6 md:p-8"
-              variants={formVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+          </motion.div>
+        </motion.div>
+
+        {/* Call to Action Section */}
+        <motion.div 
+          className="text-center py-16 border-t-2 border-gray-200"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <button className="bg-orange-500 hover:bg-orange-400 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-orange-400 hover:border-orange-300">
+              Start Your Franchise Journey
+            </button>
+          </motion.div>
+          <p className="text-gray-600 mt-4 text-lg">
+            Grow with us and make a difference in your community
+          </p>
+        </motion.div>
+
+        {/* Contact Form Section */}
+        <motion.div 
+          className="max-w-4xl mx-auto py-16 px-4"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          <div className="text-center mb-12">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="inline-flex items-center gap-3 mb-6"
             >
-              <h3 className="text-2xl font-bold text-center text-green-800 mb-6">Enquiry</h3>
-              {submitSuccess && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4"
-                >
-                  <p>Thank you! Your message has been successfully sent.</p>
-                </motion.div>
-              )}
-              
-              {submitError && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"
-                >
-                  <p>{submitError}</p>
-                </motion.div>
-              )}
-              
-              <div className="space-y-4" role="form" aria-label="Contact form">
-                <motion.div variants={inputVariants}>
+              <Mail className="text-orange-400" size={40} />
+              <h2 className="text-4xl font-bold text-gray-800">Contact Us</h2>
+              <Mail className="text-orange-400" size={40} />
+            </motion.div>
+            <p className="text-gray-600 text-lg">
+              Interested in our franchise opportunities? Get in touch with us!
+            </p>
+          </div>
+
+          <motion.form 
+            onSubmit={handleSubmit}
+            className="bg-white rounded-2xl shadow-xl p-8 border-2 border-orange-400"
+            initial={{ y: 50, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div className="space-y-2">
+                <label className="block text-gray-700 font-medium">Name</label>
+                <div className="relative">
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                   <input
                     type="text"
-                    name="fullname"
-                    value={formData.fullname}
+                    name="name"
+                    value={formData.name}
                     onChange={handleInputChange}
-                    placeholder="Enter Your Name"
-                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+                    required
+                    className="w-full pl-10 pr-4 py-2 border-2 border-gray-200 rounded-lg focus:border-orange-400 focus:ring-2 focus:ring-orange-200 transition-all duration-200"
+                    placeholder="Your name"
                   />
-                </motion.div>
+                </div>
+              </div>
 
-                <motion.div variants={inputVariants}>
-                  <input
-                    type="text"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleInputChange}
-                    placeholder="Enter Your Address"
-                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                  />
-                </motion.div>
-
-                <motion.div variants={inputVariants}>
+              <div className="space-y-2">
+                <label className="block text-gray-700 font-medium">Email</label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    placeholder="Enter Your Email Address"
-                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+                    required
+                    className="w-full pl-10 pr-4 py-2 border-2 border-gray-200 rounded-lg focus:border-orange-400 focus:ring-2 focus:ring-orange-200 transition-all duration-200"
+                    placeholder="Your email"
                   />
-                </motion.div>
-
-                <motion.div variants={inputVariants}>
-                  <input
-                    type="number"
-                    name="mobile"
-                    value={formData.mobile}
-                    onChange={handleInputChange}
-                    placeholder="Enter Your Contact Number"
-                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                  />
-                </motion.div>
-
-                <motion.div variants={inputVariants}>
-                  <select
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                  >
-                    <option value="">Select a subject</option>
-                    <option value="job">Job</option>
-                    <option value="franchise">Franchise</option>
-                    <option value="internship">Internship</option>
-                    <option value="collaboration">Collaboration</option>
-                    <option value="fpo">FPO</option>
-                    <option value="shg">SHG</option>
-                    <option value="other">Other</option>
-                  </select>
-                </motion.div>
-
-                <motion.div variants={inputVariants}>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    placeholder="Your Message"
-                    rows="5"
-                    className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                  ></textarea>
-                </motion.div>
-
-                <motion.button
-                  variants={buttonVariants}
-                  whileHover="hover"
-                  whileTap="tap"
-                  onClick={handleSubmit}
-                  disabled={submitting}
-                  className={`w-full py-3 text-white font-bold rounded transition-colors ${
-                    submitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-orange-500 hover:bg-orange-600'
-                  }`}
-                >
-                  {submitting ? 'Sending...' : 'Send Message'}
-                </motion.button>
+                </div>
               </div>
-            </motion.div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-      
+              <div className="space-y-2">
+                <label className="block text-gray-700 font-medium">Phone</label>
+                <div className="relative">
+                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full pl-10 pr-4 py-2 border-2 border-gray-200 rounded-lg focus:border-orange-400 focus:ring-2 focus:ring-orange-200 transition-all duration-200"
+                    placeholder="Your phone number"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="block text-gray-700 font-medium">Outlet Type</label>
+                <select
+                  name="outletType"
+                  value={formData.outletType}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-orange-400 focus:ring-2 focus:ring-orange-200 transition-all duration-200"
+                >
+                  <option value="mobile">Mobile Outlet</option>
+                  <option value="static">Static Outlet</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="space-y-2 mb-6">
+              <label className="block text-gray-700 font-medium">Message</label>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleInputChange}
+                required
+                rows="4"
+                className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-orange-400 focus:ring-2 focus:ring-orange-200 transition-all duration-200"
+                placeholder="Tell us about your interest in our franchise..."
+              ></textarea>
+            </div>
+
+            {submitStatus && (
+              <div className={`mb-6 p-4 rounded-lg ${
+                submitStatus.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+              }`}>
+                {submitStatus.message}
+              </div>
+            )}
+
+            <motion.button
+              type="submit"
+              disabled={isSubmitting}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className={`w-full bg-orange-500 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-orange-400 transition-all duration-300 ${
+                isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
+              }`}
+            >
+              {isSubmitting ? 'Sending...' : 'Send Message'}
+            </motion.button>
+          </motion.form>
+        </motion.div>
+      </div>
     </div>
   );
 }

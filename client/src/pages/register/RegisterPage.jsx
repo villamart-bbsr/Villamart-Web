@@ -20,8 +20,8 @@ const RegisterPage = () => {
       return signup({ name, email, password });
     },
     onSuccess: (data) => {
-      dispatch(userActions.setUserInfo(data));
-      localStorage.setItem("account", JSON.stringify(data));
+      // Navigate to OTP verification page with email
+      navigate("/verify-otp", { state: { email: data.email } });
     },
     onError: (error) => {
       toast.error(error.message);

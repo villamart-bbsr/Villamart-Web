@@ -130,3 +130,50 @@ export const deleteUser = async ({ slug, token }) => {
     throw new Error(error.message);
   }
 };
+
+export const verifyOTP = async ({ email, otp }) => {
+  try {
+    const { data } = await axios.post("/api/users/verify-otp", {
+      email,
+      otp,
+    });
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data.message)
+      throw new Error(error.response.data.message);
+    throw new Error(error.message);
+  }
+};
+
+export const requestPasswordReset = async (email) => {
+  try {
+    const { data } = await axios.post("/api/users/request-password-reset", { email });
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data.message)
+      throw new Error(error.response.data.message);
+    throw new Error(error.message);
+  }
+};
+
+export const verifyResetOTP = async ({ email, otp }) => {
+  try {
+    const { data } = await axios.post("/api/users/verify-reset-otp", { email, otp });
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data.message)
+      throw new Error(error.response.data.message);
+    throw new Error(error.message);
+  }
+};
+
+export const resetPassword = async ({ token, newPassword }) => {
+  try {
+    const { data } = await axios.post("/api/users/reset-password", { token, newPassword });
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data.message)
+      throw new Error(error.response.data.message);
+    throw new Error(error.message);
+  }
+};

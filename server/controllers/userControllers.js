@@ -3,26 +3,91 @@ import Comment from "../models/Comment.js";
 import Post from "../models/Post.js";
 import User from "../models/User.js";
 import { fileRemover } from "../utils/fileRemover.js";
+import OTP from "../models/OTP.js";
+import { v4 as uuidv4 } from 'uuid';
+import bcrypt from 'bcrypt';
+import { mailSender } from "../utils/mailSender.js";
+import { passwordUpdateTemplate } from "../templates/passwordUpdateTemplate.js";
+import crypto from 'crypto';
+import { passwordResetTemplate } from "../templates/passwordResetTemplate.js";
 
 const registerUser = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
 
-    // check whether the user exists or not
-    let user = await User.findOne({ email });
-
-    if (user) {
-      throw new Error("User have already registered");
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      throw new Error("User has already registered");
     }
 
-    // creating a new user
-    user = await User.create({
-      name,
+    // Check if there's a pending registration
+    const pendingOTP = await OTP.findOne({ email });
+    if (pendingOTP) {
+      // Delete existing OTP if it exists
+      await OTP.deleteOne({ email });
+    }
+
+    // Generate OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    
+    // Create OTP document with registration data
+    await OTP.create({
       email,
-      password,
+      otp,
+      type: 'verification',
+      registrationData: {
+        name,
+        email,
+        password
+      }
     });
 
     return res.status(201).json({
+      message: "OTP sent successfully. Please verify your email.",
+      email: email
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const verifyOTP = async (req, res, next) => {
+  try {
+    const { email, otp } = req.body;
+
+    // Find the OTP document
+    const otpRecord = await OTP.findOne({ email, otp });
+
+    if (!otpRecord) {
+      throw new Error("Invalid OTP");
+    }
+
+    // Check if OTP is expired (5 minutes)
+    const otpAge = Date.now() - otpRecord.createdAt;
+    if (otpAge > 5 * 60 * 1000) {
+      await OTP.deleteOne({ email, otp });
+      throw new Error("OTP has expired. Please request a new one.");
+    }
+
+    // Get registration data
+    const { registrationData } = otpRecord;
+    if (!registrationData) {
+      throw new Error("Registration data not found. Please try registering again.");
+    }
+
+    // Create the user
+    const user = await User.create({
+      name: registrationData.name,
+      email: registrationData.email,
+      password: registrationData.password,
+      verified: true
+    });
+
+    // Delete the OTP record
+    await OTP.deleteOne({ email, otp });
+
+    return res.status(200).json({
       _id: user._id,
       avatar: user.avatar,
       name: user.name,
@@ -45,6 +110,10 @@ const loginUser = async (req, res, next) => {
 
     if (!user) {
       throw new Error("Email not found");
+    }
+
+    if (!user.verified) {
+      throw new Error("Please verify your email before logging in");
     }
 
     if (await user.comparePassword(password)) {
@@ -266,6 +335,120 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
+// Request password reset
+const requestPasswordReset = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    // Check if user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    // Generate reset token
+    const resetToken = crypto.randomBytes(32).toString("hex");
+    const hashedToken = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
+
+    // Save hashed token to user
+    user.resetPasswordToken = hashedToken;
+    user.resetPasswordExpires = Date.now() + 15 * 60 * 1000; // 15 minutes
+    await user.save();
+
+    // Create reset URL with fallback
+    const baseUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+    const resetUrl = `${baseUrl}/reset-password/${resetToken}`;
+
+    // Send email
+    try {
+      await mailSender(
+        email,
+        "Password Reset Request",
+        passwordResetTemplate(resetUrl)
+      );
+
+      res.status(200).json({
+        success: true,
+        message: "Password reset link sent to your email",
+      });
+    } catch (error) {
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpires = undefined;
+      await user.save();
+
+      return res.status(500).json({
+        success: false,
+        message: "Error sending email",
+      });
+    }
+  } catch (error) {
+    console.error("Error in requestPasswordReset:", error);
+    res.status(500).json({
+      success: false,
+      message: "Error requesting password reset",
+    });
+  }
+};
+
+const resetPassword = async (req, res) => {
+  try {
+    const { token, newPassword } = req.body;
+
+    // Hash the token
+    const hashedToken = crypto
+      .createHash("sha256")
+      .update(token)
+      .digest("hex");
+
+    // Find user with valid token
+    const user = await User.findOne({
+      resetPasswordToken: hashedToken,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or expired reset token",
+      });
+    }
+
+    // Update password (the pre-save hook will hash it)
+    user.password = newPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+
+    // Send confirmation email
+    try {
+      await mailSender(
+        user.email,
+        "Password Reset Successful",
+        passwordUpdateTemplate()
+      );
+    } catch (error) {
+      console.error("Error sending confirmation email:", error);
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Password reset successful",
+    });
+  } catch (error) {
+    console.error("Error in resetPassword:", error);
+    res.status(500).json({
+      success: false,
+      message: "Error resetting password",
+    });
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -274,4 +457,7 @@ export {
   updateProfilePicture,
   getAllUsers,
   deleteUser,
+  verifyOTP,
+  requestPasswordReset,
+  resetPassword,
 };

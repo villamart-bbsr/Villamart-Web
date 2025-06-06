@@ -8,15 +8,23 @@ import {
   updateProfilePicture,
   getAllUsers,
   deleteUser,
+  verifyOTP,
+  requestPasswordReset,
+  resetPassword,
 } from "../controllers/userControllers.js";
 import { adminGuard, authGuard } from "../middleware/authMiddleware.js";
 
 router.post("/register", registerUser);
+router.post("/verify-otp", verifyOTP);
 router.post("/login", loginUser);
 router.get("/profile", authGuard, userProfile);
 router.put("/updateProfile/:userId", authGuard, updateProfile);
 router.put("/updateProfilePicture", authGuard, updateProfilePicture);
 router.get("/", authGuard, adminGuard, getAllUsers);
 router.delete("/:userId", authGuard, adminGuard, deleteUser);
+
+// Password reset routes
+router.post("/request-password-reset", requestPasswordReset);
+router.post("/reset-password", resetPassword);
 
 export default router;
