@@ -111,7 +111,7 @@ export default function VillaMartCards() {
               
               <div className="pl-4 border-l-4 border-green-500">
                 <p className="text-green-600">
-                  They aim to establish a tech-enabled, direct-to-consumer (D2C) omnichannel marketplace that connects farmers directly with consumers, eliminating middlemen and ensuring fair prices for producers while providing fresh, chemical-free produce to consumers.
+                  We aim to establish a tech-enabled, direct-to-consumer (D2C) omnichannel marketplace that connects farmers directly with consumers, eliminating middlemen and ensuring fair prices for producers while providing fresh, chemical-free produce to consumers.
                 </p>
               </div>
               
@@ -184,12 +184,12 @@ export default function VillaMartCards() {
               
               <div className="pl-4 border-l-4 border-green-500">
                 <p className="text-green-600">
-                  By leveraging their Phygital Platform As A Service (PPAAS) model, they strive to empower local farmers, rural women self-help groups (SHGs), producer groups (PGs), and Farmer Producer Organizations (FPOs) with user-friendly technology, fostering sustainable livelihoods and boosting local economies.
+                  By leveraging our Phygital Platform As A Service (PPAAS) model, we strive to empower local farmers, rural women self-help groups (SHGs), producer groups (PGs), and Farmer Producer Organizations (FPOs) with user-friendly technology, fostering sustainable livelihoods and boosting local economies.
                 </p>
               </div>
               
               <p className="text-green-700">
-                Through their innovative approach, VillaMart is committed to reducing food waste, enhancing food safety, and promoting healthy eating, thereby contributing to better overall public health and supporting local communities.
+                Through our innovative approach, VillaMart is committed to reducing food waste, enhancing food safety, and promoting healthy eating, thereby contributing to better overall public health and supporting local communities.
               </p>
               
           
