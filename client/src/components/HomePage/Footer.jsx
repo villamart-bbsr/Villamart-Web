@@ -6,10 +6,15 @@ const Footer = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const quickLinks = [
-    { name: "About Us", path: "/about" },
-    { name: "Career", path: "/career" },
-    { name: "Contact", path: "/contact" },
-    { name: "Privacy Policy", path: "/privacy" }
+    { name: "Home", path: "/" },
+    { name: "About", path: "/moreInfo" },
+    { name: "Journey", path: "/journey" },
+    { name: "Media", path: "/media" },
+    { name: "Gallery", path: "/gallery" },
+    { name: "Franchise Model", path: "/franchise" },
+    { name: "Blog Page", path: "/blogPage" },
+    { name: "Read Blogs", path: "/blog" },
+    { name: "Contact Us", path: "/contact" }
   ];
 
   const socialIcons = [
@@ -124,7 +129,7 @@ const Footer = () => {
                 </svg>
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white">Villamart</h3>
+                <h3 className="text-xl font-bold text-white">VillaMart</h3>
                 <p className="text-green-400 text-sm">Happy Farmer Happy Consumer</p>
               </div>
             </div>
@@ -138,7 +143,7 @@ const Footer = () => {
                 <svg className="h-4 w-4 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                support@villamart.in
+                info@villamart.in
               </div>
               <div className="flex items-center text-gray-400 text-sm">
                 <svg className="h-4 w-4 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -155,12 +160,12 @@ const Footer = () => {
               <span className="h-1 w-8 bg-green-400 rounded mr-3"></span>
               Quick Links
             </h4>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {quickLinks.map((link, index) => (
                 <a
                   key={index}
                   href={link.path}
-                  className="text-gray-400 hover:text-green-400 text-sm py-1 transition-colors duration-200 hover:translate-x-1 transform"
+                  className="text-gray-400 hover:text-green-400 text-sm py-1 transition-colors duration-500 hover:translate-x-1 transform duration-300"
                 >
                   {link.name}
                 </a>

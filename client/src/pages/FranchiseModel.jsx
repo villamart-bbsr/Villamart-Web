@@ -245,7 +245,7 @@ const FranchisePage = () => {
             whileHover={{ scale: 1.05 }}
           >
             <Truck className="text-green-700" size={40} />
-            <h2 className="text-4xl font-bold text-green-700">Mobile Outlet</h2>
+            <h2 className="text-4xl font-bold text-green-700 select-none">Mobile Outlet</h2>
             <Truck className="text-green-700" size={40} />
           </motion.div>
         </div>
@@ -281,11 +281,11 @@ const FranchisePage = () => {
           </motion.div>
 
           <motion.div 
-            className="bg-white border-2 border-orange-400 p-8 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300"
+            className="bg-white border-2 border-green-700 p-8 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300"
             variants={cardVariants}
             whileHover={{ 
               y: -5,
-              borderColor: "rgb(251 146 60)"
+              // borderColor: "rgb(251 146 60)"
             }}
           >
             <motion.div className="space-y-4">
@@ -317,7 +317,7 @@ const FranchisePage = () => {
             whileHover={{ scale: 1.05 }}
           >
             <Store className="text-orange-400" size={40} />
-            <h2 className="text-4xl font-bold text-orange-400">Static Outlet</h2>
+            <h2 className="text-4xl font-bold text-orange-400 select-none">Static Outlet</h2>
             <Store className="text-orange-400" size={40} />
           </motion.div>
         </div>

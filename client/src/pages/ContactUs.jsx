@@ -96,10 +96,10 @@ const ContactPage = () => {
   return (
     <div className="bg-gradient-to-b from-white to-gray-100 min-h-screen font-sans text-black">
       {/* Header Banner */}
-      <div className="relative h-64 bg-gradient-to-r from-green-800 to-green-600 overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-10">
-          <div className="absolute inset-0 bg-black bg-opacity-30" />
-          <div className="w-full h-full bg-[url('/api/placeholder/1600/400')] bg-cover bg-center" />
+      <div className="relative h-96 bg-gradient-to-r from-green-800 to-green-600 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-green-800/70" />
+          <div className="w-full h-full bg-[url('/images/contactus-subheader.png')] bg-cover bg-center" />
         </div>
         
         <div className="relative z-10 flex items-center justify-center h-full">
