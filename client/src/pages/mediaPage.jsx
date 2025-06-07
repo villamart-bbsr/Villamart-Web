@@ -81,19 +81,19 @@ export default function FarmMediaPage() {
     {
       title: "Our Award-Winning Produce",
       description: "Discover the fresh, organic vegetables and fruits grown with care on our farm.",
-      bgColor: "bg-orange-500",
-      image: "/api/placeholder/1200/700?text=Produce"
+      bgColor: "bg-green-700",
+      image: "/images/awards.jpeg"
     },
     {
       title: "Sustainable Farming Practices",
       description: "Learn about our commitment to environmentally friendly farming methods.",
-      bgColor: "bg-green-700",
+      bgColor: "bg-orange-500",
       image: "/api/placeholder/1200/700?text=Sustainable"
     },
     {
       title: "Farm Tours Now Available",
       description: "Book a tour to experience our beautiful farm firsthand.",
-      bgColor: "bg-green-600",
+      bgColor: "bg-green-700",
       image: "/api/placeholder/1200/700?text=Tours"
     }
   ];

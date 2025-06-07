@@ -77,31 +77,31 @@ const FranchisePage = () => {
   };
 
   const mobileOutletBenefits = [
-    "Supermarket at doorstep",
-    "Effortless procurement GPS",
-    "Based billing & sales analysis",
-    "Digitally Local order",
-    "No fuel & less expenses",
-    "Apartment Entry Permission",
-    "Brand connect",
-    "Round the year sales boost",
-    "Low energy cooling system",
-    "Feel & tough buying experience",
-    "Fixed time & weekly off as needed"
+    <><b>Supermarket at Your Doorstep</b> – Convenient, hyperlocal access to daily essentials</>,
+    <><b>Effortless Procurement</b> – Streamlined stocking and inventory processes</>,
+    <><b>GPS-Based Billing & Sales Insights</b> – Real-time location-driven analytics</>,
+    <><b>Digitally-Integrated Local Orders</b> – Smart ordering via mobile and web</>,
+    <><b>No Fuel Costs, Lower Operational Expenses</b> – Eco-friendly & cost-efficient</>,
+    <><b>Seamless Apartment Entry Access</b> – Approved resident entry for smooth deliveries</>,
+    <><b>Strong Brand Connect</b> – Direct engagement with trusted local and national brands</>,
+    <><b>Consistent Year-Round Sales</b> – Boosted revenue through continuous presence</>,
+    <><b>Low-Energy Cooling Systems</b> – Sustainable refrigeration solutions</>,
+    <><b>Touch-and-Feel Shopping Experience</b> – Physical product interaction retained</>,
+    <><b>Fixed Working Hours & Weekly Offs</b> – Designed for employee well-being</>
   ];
 
   const staticOutletBenefits = [
-    "Digitally Local order",
-    "Effortless Procurement",
-    "Technology-backed Freshness",
-    "Profit Boost through Brand connect",
-    "Customer acquisition & retention",
-    "Real time billing & analysis",
-    "Reduced Perishability Risk",
-    "Feel & tough buying experience",
-    "Optimised price guidance",
-    "Profit analysis",
-    "Availability of healthy products"
+    <><b>Digitally-Enabled Local Ordering</b> – Fast, convenient ordering tailored to neighborhood needs</>,
+    <><b>Streamlined Procurement Process</b> – Simplified sourcing for maximum efficiency</>,
+    <><b>Technology-Driven Freshness</b> – Ensured quality with real-time freshness monitoring</>,
+    <><b>Brand Partnerships for Profit Growth</b> – Boost margins through strategic collaborations</>,
+    <><b>Customer Acquisition & Retention</b> – Smart tools to attract and keep loyal buyers</>,
+    <><b>Live Billing & Sales Analytics</b> – Instant insights for better decision-making</>,
+    <><b>Minimized Perishability Loss</b> – Data-led inventory management to reduce waste</>,
+    <><b>Touch-and-Feel Purchase Experience</b> – Physical interaction for higher purchase confidence</>,
+    <><b>Smart Price Optimization</b> – Data-backed pricing for competitiveness and profitability</>,
+    <><b>In-Depth Profitability Analysis</b> – Clear visibility into performance metrics</>,
+    <><b>Curated Healthy Product Selection</b> – Meeting the rising demand for wellness-focused items</>
   ];
 
   const handleInputChange = (e) => {
@@ -120,6 +120,10 @@ const FranchisePage = () => {
     try {
       const response = await axios.post('http://localhost:5000/api/contact', formData);
       setSubmitStatus({ type: 'success', message: 'Message sent successfully! We will contact you soon.' });
+      // Clear success message after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus(null);
+      }, 5000);
       setFormData({
         name: '',
         email: '',
@@ -198,7 +202,7 @@ const FranchisePage = () => {
             <h1 className="text-5xl font-bold text-white">Franchise Benefits</h1>
             <Leaf className="text-orange-400" size={40} />
           </motion.div>
-          <p className="text-green-100 text-lg max-w-3xl mx-auto leading-relaxed mb-8">
+          <p className="text-green-100 text-lg max-w-3xl mx-auto leading-relaxed mb-8 select-none">
             Join our growing network of successful partners and cultivate prosperity in your community. 
             Experience the power of our proven business model and make a difference in your local market.
           </p>
@@ -275,24 +279,23 @@ const FranchisePage = () => {
               <img 
                 src="/images/mobile_franchise.png" 
                 alt="Mobile Outlet" 
-                className="w-full h-[400px] object-fit"
+                className="w-full lg:w-[80%] mx-auto h-[400px] lg:h-[500px] object-cover"
               />
             </motion.div>
           </motion.div>
 
           <motion.div 
-            className="bg-white border-2 border-green-700 p-8 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300"
+            className="bg-white border-2 border-green-700 p-8 rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-300"
             variants={cardVariants}
             whileHover={{ 
               y: -5,
-              // borderColor: "rgb(251 146 60)"
             }}
           >
             <motion.div className="space-y-4">
               {mobileOutletBenefits.map((item, index) => (
                 <motion.div
                   key={index}
-                  className="flex items-center text-gray-700 hover:text-gray-900 transition-colors duration-200 group"
+                  className="flex items-center text-gray-700 hover:text-gray-900 transition-colors duration-200 group select-none"
                   variants={benefitVariants}
                   custom={index}
                   whileHover={{ x: 10 }}
@@ -303,7 +306,7 @@ const FranchisePage = () => {
                   >
                     <CheckCircle className="text-green-700 mr-4 group-hover:text-green-600" size={20} />
                   </motion.div>
-                  <span className="font-medium">{item}</span>
+                  <span className="font-medium select-none">{item}</span>
                 </motion.div>
               ))}
             </motion.div>
@@ -329,7 +332,7 @@ const FranchisePage = () => {
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div 
-            className="bg-white border-2 border-orange-400 p-8 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300"
+            className="bg-white border-2 border-orange-400 p-8 rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-300"
             variants={cardVariants}
             whileHover={{ 
               y: -5,
@@ -340,7 +343,7 @@ const FranchisePage = () => {
               {staticOutletBenefits.map((item, index) => (
                 <motion.div
                   key={index}
-                  className="flex items-center text-gray-700 hover:text-gray-900 transition-colors duration-200 group"
+                  className="flex items-center text-gray-700 hover:text-gray-900 transition-colors duration-200 group select-none"
                   variants={benefitVariants}
                   custom={index}
                   whileHover={{ x: 10 }}
@@ -351,7 +354,7 @@ const FranchisePage = () => {
                   >
                     <CheckCircle className="text-orange-400 mr-4 group-hover:text-orange-300" size={20} />
                   </motion.div>
-                  <span className="font-medium">{item}</span>
+                  <span className="font-medium select-none">{item}</span>
                 </motion.div>
               ))}
             </motion.div>
@@ -374,9 +377,9 @@ const FranchisePage = () => {
               }}
             >
               <img 
-                src="/images/image6.jpg" 
+                src="/images/image8.jpeg" 
                 alt="Static Outlet" 
-                className="w-full h-[400px] object-fit"
+                className="w-full lg:w-[80%] mx-auto h-[400px] lg:h-[500px] object-contain"
               />
             </motion.div>
           </motion.div>
@@ -400,7 +403,7 @@ const FranchisePage = () => {
               <h2 className="text-4xl font-bold text-gray-800">Contact Us</h2>
               <Mail className="text-orange-400" size={40} />
             </motion.div>
-            <p className="text-gray-600 text-lg">
+            <p className="text-gray-600 text-lg select-none">
               Interested in our franchise opportunities? Get in touch with us!
             </p>
           </div>
@@ -415,7 +418,7 @@ const FranchisePage = () => {
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div className="space-y-2">
-                <label className="block text-gray-700 font-medium">Name</label>
+                <label className="block text-gray-700 font-medium select-none">Name</label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                   <input
@@ -431,7 +434,7 @@ const FranchisePage = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="block text-gray-700 font-medium">Email</label>
+                <label className="block text-gray-700 font-medium select-none">Email</label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                   <input
@@ -447,7 +450,7 @@ const FranchisePage = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="block text-gray-700 font-medium">Phone</label>
+                <label className="block text-gray-700 font-medium select-none">Phone</label>
                 <div className="relative">
                   <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                   <input
@@ -456,14 +459,21 @@ const FranchisePage = () => {
                     value={formData.phone}
                     onChange={handleInputChange}
                     required
+                    pattern="[0-9]*"
+                    maxLength="10"
                     className="w-full pl-10 pr-4 py-2 border-2 border-gray-200 rounded-lg focus:border-orange-400 focus:ring-2 focus:ring-orange-200 transition-all duration-200"
                     placeholder="Your phone number"
+                    onKeyPress={(e) => {
+                      if (!/[0-9]/.test(e.key)) {
+                        e.preventDefault();
+                      }
+                    }}
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="block text-gray-700 font-medium">Outlet Type</label>
+                <label className="block text-gray-700 font-medium select-none">Outlet Type</label>
                 <select
                   name="outletType"
                   value={formData.outletType}
@@ -477,7 +487,7 @@ const FranchisePage = () => {
             </div>
 
             <div className="space-y-2 mb-6">
-              <label className="block text-gray-700 font-medium">Message</label>
+              <label className="block text-gray-700 font-medium select-none">Message</label>
               <textarea
                 name="message"
                 value={formData.message}
@@ -502,7 +512,7 @@ const FranchisePage = () => {
               disabled={isSubmitting}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className={`w-full bg-orange-500 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-orange-400 transition-all duration-300 ${
+              className={`cursor-pointer w-full bg-orange-500 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-orange-400 transition-all duration-300 ${
                 isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
               }`}
             >
