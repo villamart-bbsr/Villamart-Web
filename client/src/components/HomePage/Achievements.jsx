@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 const Achievements = () => {
   const achievements = [
     { count: 15000, label: "FARMERS", icon: "🌾" },
-    { count: 50, label: "PG/SHGs", icon: "🧑‍🌾" },
+    { count: 50, label: "PG/FPOs", icon: "🧑‍🌾" },
     { count: 60, label: "SHGs", icon: "👨‍👩‍👧‍👦" },
-    { count: 150, label: "SKU Units", icon: "🏪" },
+    { count: 150, label: "SKU ", icon: "🏪" },
     
-    { count: 30, label: "Employment", icon: "🌽" },
+    { count: 60, label: "Employment", icon: "💼" },
     { count: 3, label: "Locations", icon: "🏙️" },
   ];
 

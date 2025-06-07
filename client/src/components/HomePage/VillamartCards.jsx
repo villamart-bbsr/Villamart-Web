@@ -192,9 +192,7 @@ export default function VillaMartCards() {
                 Through their innovative approach, VillaMart is committed to reducing food waste, enhancing food safety, and promoting healthy eating, thereby contributing to better overall public health and supporting local communities.
               </p>
               
-              <div className="flex justify-end">
-                <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">villamart.in</span>
-              </div>
+          
             </div>
             
             

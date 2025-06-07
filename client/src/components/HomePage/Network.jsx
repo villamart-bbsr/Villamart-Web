@@ -174,7 +174,7 @@ const Network = () => {
             <motion.img
               src="/images/network_1.png"
               alt="Network diagram or image"
-              className="h-96 py-10 relative w-4xl animate-pulse-slow"
+              className="h-96 py-10 relative w-7xl translate-x-2 animate-pulse-slow"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ amount: 0.5 }}
