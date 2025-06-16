@@ -151,13 +151,13 @@ export default function Navbar() {
   return (
     <>
       {/* Navbar */}
-      <nav className={`fixed top-0 left-0 right-0 z-40 ${navBgColor} ${textColor} shadow-lg transition-all duration-500 ${isScrolled ? "h-16" : "h-20"}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-40 ${navBgColor} ${textColor} shadow-lg transition-all duration-500 m-0 ${isScrolled ? "h-16" : "h-24"}`} >
         <div className="container mx-auto px-4 h-full">
           <div className="flex items-center justify-between h-full">
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
-              <a href="/" className="flex items-center text-2xl font-bold transition-all duration-300 transform hover:scale-105">
-                <img src="/images/villamart-logo.png" alt="" className={`transition-all duration-300 ${isScrolled ? 'h-12' : 'h-20'} mb-2 mt-2`}/>
+              <a href="/" className="flex items-center text-2xl font-bold transition-all duration-300 transform hover:scale-105 px-4 ">
+                <img src="/images/villamart-logo.png" alt="" className={` transition-all duration-300 ${isScrolled ? 'h-12' : 'h-20'} mb-5 mt-5`}/>
               </a>
             </div>
             
@@ -180,17 +180,17 @@ export default function Navbar() {
             
             {/* Desktop nav */}
             <div className="hidden md:flex md:items-center md:justify-center flex-1 space-x-1">
-              <a href="/" className={`px-3 py-2 rounded-md flex items-center ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
-                <Home size={16} className="mr-1 transition-transform duration-300 group-hover:rotate-12" />
+              <a href="/" className={`px-4 py-2 rounded-md flex items-center text-lg ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
+                <Home size={20} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
                 <span className="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-500 after:transition-all after:duration-300 group-hover:after:w-full">Home</span>
               </a>
               
               {/* Company Dropdown */}
               <div className="relative" ref={companyMenuRef} onMouseEnter={handleCompanyMouseEnter} onMouseLeave={handleCompanyMouseLeave}>
-                <button className={`px-3 py-2 rounded-md flex items-center ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
-                  <Building size={16} className="mr-1 transition-transform duration-300 group-hover:rotate-12" />
+                <button className={`px-4 py-2 rounded-md flex items-center text-lg ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
+                  <Building size={20} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
                   <span className="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-500 after:transition-all after:duration-300 group-hover:after:w-full">Company</span>
-                  <ChevronDown size={16} className={`ml-1 transition-transform duration-300 ${companyDropdownOpen ? "rotate-180" : ""}`} />
+                  <ChevronDown size={20} className={`ml-1 transition-transform duration-300 ${companyDropdownOpen ? "rotate-180" : ""}`} />
                 </button>
                 {companyDropdownOpen && (
                   <div className={`absolute mt-1 w-48 rounded-md shadow-md ${dropdownBgColor} transform transition-all duration-300 origin-top z-50`}>
@@ -204,17 +204,17 @@ export default function Navbar() {
                 )}
               </div>
               
-              <a href="/franchise" className={`px-3 py-2 rounded-md flex items-center ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
-                <Users size={16} className="mr-1 transition-transform duration-300 group-hover:rotate-12" />
+              <a href="/franchise" className={`px-4 py-2 rounded-md flex items-center text-lg ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
+                <Users size={20} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
                 <span className="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-500 after:transition-all after:duration-300 group-hover:after:w-full">Franchise Model</span>
               </a>
               
               {/* Blogs Dropdown */}
               <div className="relative" ref={blogsMenuRef} onMouseEnter={handleBlogsMouseEnter} onMouseLeave={handleBlogsMouseLeave}>
-                <button className={`px-3 py-2 rounded-md flex items-center ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
-                  <BookOpen size={16} className="mr-1 transition-transform duration-300 group-hover:rotate-12" />
+                <button className={`px-4 py-2 rounded-md flex items-center text-lg ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
+                  <BookOpen size={20} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
                   <span className="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-500 after:transition-all after:duration-300 group-hover:after:w-full">Blogs</span>
-                  <ChevronDown size={16} className={`ml-1 transition-transform duration-300 ${blogsDropdownOpen ? "rotate-180" : ""}`} />
+                  <ChevronDown size={20} className={`ml-1 transition-transform duration-300 ${blogsDropdownOpen ? "rotate-180" : ""}`} />
                 </button>
                 {blogsDropdownOpen && (
                   <div className={`absolute mt-1 w-48 rounded-md shadow-md ${dropdownBgColor} transform transition-all duration-300 origin-top z-50`}>
@@ -226,8 +226,8 @@ export default function Navbar() {
                 )}
               </div>
               
-              <a href="/contact" className={`px-3 py-2 rounded-md flex items-center ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
-                <Phone size={16} className="mr-1 transition-transform duration-300 group-hover:rotate-12" />
+              <a href="/contact" className={`px-4 py-2 rounded-md flex items-center text-lg ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
+                <Phone size={20} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
                 <span className="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-500 after:transition-all after:duration-300 group-hover:after:w-full">Contact Us</span>
               </a>
             </div>
@@ -268,10 +268,10 @@ export default function Navbar() {
                   )}
                 </div>
               ) : (
-                <button onClick={() => navigate("/login")} className="ml-4 px-6 py-2 flex items-center bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 text-white rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg cursor-pointer">
-                  <MessageSquare size={16} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
+                <button onClick={() => navigate("/login")} className="ml-4 px-6 py-2 flex items-center text-lg bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 text-white rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg cursor-pointer">
+                  <MessageSquare size={20} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
                   <span className="relative inline-block">
-                    Sign In
+                    Member Access
                     <span className="absolute inset-x-0 bottom-0 h-0.5 bg-white/40 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
                   </span>
                 </button>
@@ -400,7 +400,7 @@ export default function Navbar() {
                 className={`w-full mt-2 px-3 py-2 rounded-md flex items-center justify-center bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 text-white transition-all duration-300 hover:translate-x-2 cursor-pointer relative overflow-hidden group`}
               >
                 <MessageSquare size={16} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
-                <span className="relative z-10">Sign In</span>
+                <span className="relative z-10">Member Access</span>
                 <div className="absolute inset-0 bg-white/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </button>
             )}
@@ -409,7 +409,7 @@ export default function Navbar() {
       </nav>
       
       {/* Spacer */}
-      <div className={`transition-all duration-500 ${isScrolled ? "pt-16" : "pt-20"}`}></div>
+      <div className={`transition-all duration-500 ${isScrolled ? "pt-16" : "pt-24"}`}></div>
     </>
   );
 }

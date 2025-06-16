@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import VideoPopup from "../components/HomePage/VideoPopup";
 import About from "../components/HomePage/About";
@@ -16,15 +16,19 @@ import FarmerBlog from "../components/HomePage/farmerBlog";
 import Network from "../components/HomePage/Network";
 
 function Home() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="font-poppins">
       {/* hero */}
-      <div className="relative w-full h-[600px] overflow-hidden bg-fixed bg-cover bg-center">
+      <div className="relative w-full min-h-[400px] md:h-[600px] overflow-hidden">
         {/* Background image */}
         <img
           src="/images/back-hero.png"
           alt="Hero banner"
-          className="absolute w-full h-full object-cover bg-fixed bg-cover bg-center"
+          className="absolute w-full h-full object-fit"
         />
 
         {/* Left image */}

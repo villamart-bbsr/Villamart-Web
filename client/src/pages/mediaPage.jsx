@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Play, Newspaper, ChevronRight, ChevronLeft, ExternalLink, X, Loader2 } from 'lucide-react';
 
 export default function FarmMediaPage() {
-  const [activeTab, setActiveTab] = useState('videos');
+  const [activeTab, setActiveTab] = useState('news');
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isModalOpening, setIsModalOpening] = useState(false);
@@ -18,7 +18,7 @@ export default function FarmMediaPage() {
         title: "Discussion with Founder & CEO, VillaMart on Onion price control and storage @KanakNewsOdisha", 
         duration: "3:45", 
         link: "https://www.youtube.com/watch?v=gOydT3umRCs&t=232s",
-            image: "/images/media1.png"
+        image: "/images/media1.png"
       },
       { 
         id: 2, 
@@ -48,47 +48,43 @@ export default function FarmMediaPage() {
         title: "Engineer Left US to Help Farmers Earn with Mobile Mandis", 
         date: "March 01, 2023", 
         excerpt: "Appalled by the news of farmer suicides in India, engineer Ramesh Biswal left life in the US to return to his hometown....",
-        link: "https://thebetterindia.com/311837/engineer-quit-us-job-to-launch-villa-mart-mobile-mandi-farmer-suicides-fair-income/"
+        link: "https://thebetterindia.com/311837/engineer-quit-us-job-to-launch-villa-mart-mobile-mandi-farmer-suicides-fair-income/",
+        image: "/images/theBetterIndia.png"
       },
       { 
         id: 2, 
         title: "How Bhubaneswars agritech ecosystem is fast gaining momentum", 
         date: "January 10, 2024", 
         excerpt: "Bhubaneswar is fast becoming a hub for agritech startups, with the city now home to over 100 agritech companies.",
-        link: "https://economictimes.indiatimes.com/small-biz/sme-sector/how-bhubaneswars-agritech-ecosystem-is-fast-gaining-momentum/articleshow/106688288.cms?from=mdr"
+        link: "https://economictimes.indiatimes.com/small-biz/sme-sector/how-bhubaneswars-agritech-ecosystem-is-fast-gaining-momentum/articleshow/106688288.cms?from=mdr",
+        image: "/images/EconomicTimes.jpeg"
       },
       { 
         id: 3, 
         title: "This agri startup is helping farmers sell their produce at fair prices", 
         date: "February 25, 2020", 
         excerpt: "Odisha-based agritech startup Villa Mart is helping farmers sell their produce at fair prices through its mobile marketplace platform.",
-        link: "https://yourstory.com/socialstory/2020/02/agri-startup-villa-mart-iit-alumnus-farmers-produce-mobile-market"
+        link: "https://yourstory.com/socialstory/2020/02/agri-startup-villa-mart-iit-alumnus-farmers-produce-mobile-market",
+        image: "/images/your_story.png"
       },
-      
     ]
   };
-
-  // Feature slider automation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev === featuredItems.length - 1 ? 0 : prev + 1));
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
 
   // Featured items for the hero slider
   const featuredItems = [
     {
-      title: "Our Award-Winning Produce",
-      description: "Discover the fresh, organic vegetables and fruits grown with care on our farm.",
-      bgColor: "bg-green-700",
-      image: "/images/awards.jpeg"
+      title: "Award-Winning AgriTech Startup",
+description: "Proud recipient of accolades for revolutionizing sustainable farming through innovative technology and fresh organic produce.",
+bgColor: "bg-green-700",
+image: "/images/awards.jpeg"
+
     },
     {
-      title: "Sustainable Farming Practices",
-      description: "Learn about our commitment to environmentally friendly farming methods.",
-      bgColor: "bg-orange-500",
-      image: "/api/placeholder/1200/700?text=Sustainable"
+      title: "Our Innovision for Sustainable Farming",
+description: "Discover how our agri-tech Innovision is transforming farming with smart technologies, eco-friendly practices, and a vision for a greener future.",
+bgColor: "bg-orange-500",
+image: "/images/ourInnovision.jpeg"
+
     },
     {
       title: "Farm Tours Now Available",
@@ -97,6 +93,14 @@ export default function FarmMediaPage() {
       image: "/api/placeholder/1200/700?text=Tours"
     }
   ];
+
+  // Feature slider automation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev === featuredItems.length - 1 ? 0 : prev + 1));
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [featuredItems.length]);
 
   // Navigation for slider
   const nextSlide = () => {
@@ -243,7 +247,7 @@ export default function FarmMediaPage() {
       {/* Enhanced Video Modal with Smooth Transitions */}
       {selectedVideo && (
         <div 
-          className={`fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4 transition-all duration-300 ${
+          className={`fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 transition-all duration-300 ${
             isModalClosing ? 'modal-exit' : 'modal-enter'
           }`}
           onClick={closeVideoModal}
@@ -288,23 +292,25 @@ export default function FarmMediaPage() {
       )}
 
       {/* Hero Section with Featured Slider */}
-      <div className="relative overflow-hidden h-96 bg-green-900">
+      <div className="relative overflow-hidden h-[500px] bg-green-900">
         {featuredItems.map((item, index) => (
           <div 
             key={index}
             className={`absolute inset-0 transition-opacity duration-1000 flex items-center ${currentSlide === index ? 'opacity-100' : 'opacity-0'}`}
           >
             {/* Placeholder with background color */}
-            <div className={`absolute inset-0 ${item.bgColor} opacity-80`}>
-              <img src={item.image} alt={item.title} className="w-full h-full object-cover opacity-30" />
+            <div className={`absolute inset-0 ${item.bgColor} opacity-90`}>
+              <img 
+                src={item.image} 
+                alt={item.title} 
+                className="w-full h-full object-fit  opacity-30"
+                // style={{ maxHeight: '400px' }}
+              />
             </div>
             
             <div className="relative z-10 container mx-auto px-6 text-white">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">{item.title}</h1>
               <p className="text-xl mb-8 max-w-2xl">{item.description}</p>
-              {/* <button className="cursor-pointer bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition duration-300 transform hover:scale-105">
-                Learn More
-              </button> */}
             </div>
           </div>
         ))}
@@ -342,7 +348,7 @@ export default function FarmMediaPage() {
       {/* Main Content */}
       <div className="container mx-auto px-6 py-12">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-green-800 mb-4">Villamart Media Center</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-green-800 mb-4">VillaMart Media Center</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Explore videos and news. See our daily operations, meet our team, and stay updated with our latest news and events.
           </p>
@@ -429,7 +435,7 @@ export default function FarmMediaPage() {
             </div>
           )}
           
-          {/* News List */}
+          {/* News List - Image URLs preserved exactly as provided */}
           {activeTab === 'news' && (
             <div className={`space-y-6 ${isTabChanging ? 'tab-exit' : 'tab-enter'}`}>
               {mediaItems.news.map((article) => (
@@ -437,8 +443,13 @@ export default function FarmMediaPage() {
                   key={article.id} 
                   className={`${itemAnimationClass} bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row`}
                 >
-                  <div className="md:w-1/4 bg-green-100 flex items-center justify-center p-6">
-                    <Newspaper size={48} className="text-green-700" />
+                  <div className="md:w-1/4 relative bg-gray-100 flex items-center justify-center">
+                    <img 
+                      src={article.image} 
+                      alt={article.title}
+                      className="w-full h-full object-contain p-2"
+                      style={{ maxHeight: '150px' }}
+                    />
                   </div>
                   <div className="p-6 md:w-3/4">
                     <div className="text-sm text-orange-500 font-medium mb-2">{article.date}</div>
