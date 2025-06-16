@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Play, Newspaper, ChevronRight, ChevronLeft, ExternalLink, X, Loader2 } from 'lucide-react';
+import SEO from '../components/SEO';
 
 export default function FarmMediaPage() {
   const [activeTab, setActiveTab] = useState('news');
@@ -160,6 +161,7 @@ image: "/images/ourInnovision.jpeg"
 
   return (
     <div className="bg-gray-50 min-h-screen">
+      <SEO title="Media Center | VillaMart" description="Explore our media center for the latest videos and news about VillaMart's journey, innovations, and community impact." />
       <style jsx>{`
         @keyframes modalFadeIn {
           from {
@@ -260,7 +262,7 @@ image: "/images/ourInnovision.jpeg"
           >
             <button 
               onClick={closeVideoModal}
-              className="cursor-pointer absolute -top-4 z-50 -right-4 bg-red-500 text-white rounded-full p-3 hover:bg-red-600 transition-all duration-300 z-10 shadow-lg hover:scale-110 transform hover:rotate-90"
+              className="cursor-pointer absolute -top-4  -right-4 bg-red-500 text-white rounded-full p-3 hover:bg-red-600 transition-all duration-300 z-10 shadow-lg hover:scale-110 transform hover:rotate-90"
             >
               <X size={28} />
             </button>

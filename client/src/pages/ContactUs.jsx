@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Smartphone, Mail, Send } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import SEO from '../components/SEO';
 
 // Initialize EmailJS with your public key
 emailjs.init("NF6I53ZEKl-U7MvBN"); // Replace with your actual public key
@@ -95,6 +96,7 @@ const ContactPage = () => {
 
   return (
     <div className="bg-gradient-to-b from-white to-gray-100 min-h-screen font-sans text-black">
+      <SEO title="Contact Us | VillaMart" description="Get in touch with us for any queries or support. We are here to help you." />
       {/* Header Banner */}
       <div className="relative h-96 bg-gradient-to-r from-green-800 to-green-600 overflow-hidden">
         <div className="absolute inset-0 z-0">

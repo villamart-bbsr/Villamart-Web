@@ -19,6 +19,7 @@ import InnovativeApproach from '../components/AboutPage/InnovativeApproach.jsx';
 import SocietalImpact from '../components/AboutPage/SocietalImpact.jsx';
 import VillaMartBusinessModel from '../components/AboutPage/VillaMartBusinessModel.jsx';
 import StickyCards from '../components/AboutPage/sticky.jsx';
+import SEO from '../components/SEO.jsx';
 const About = () => {
   const headerRef = useRef(null);
   const introRef = useRef(null);
@@ -103,6 +104,8 @@ const About = () => {
 
   return (
     <div className='bg-white text-black'>
+
+      <SEO title="About Us | VillaMart" description="Learn about VillaMart's mission, values, and innovative approach to sustainable agriculture and community development." />
       
       {/* Tractor animation - hidden on small screens */}
       <div className="hidden md:block">

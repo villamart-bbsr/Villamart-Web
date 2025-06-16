@@ -12,6 +12,7 @@ import Search from "../../components/Search";
 import AsyncMultiSelectTagDropdown from "../../components/SelectAsyncPaginate";
 import { getAllCategories } from "../../services/index/postCategories";
 import { filterCategories } from "../../utils/multiSelectTagUtils";
+import SEO from "../../components/SEO";
 
 let isFirstRun = true;
 
@@ -73,6 +74,7 @@ const BlogPage = () => {
   return (
     <MainLayout>
       <div className="bg-gradient-to-b from-green-900 to-green-800 py-6">
+        <SEO title="Blog | VillaMart" description="Explore the latest articles, insights, and updates from VillaMart. Join our community of farmers and enthusiasts." />
         <h1 className="text-4xl font-bold text-white mb-2 text-center">VillaMart Blog</h1>
         <p className="text-center text-green-100 mb-0">Harvesting Knowledge, Growing Community</p>
       </div>

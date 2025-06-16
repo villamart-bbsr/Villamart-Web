@@ -9,6 +9,7 @@ import Footer from "./components/HomePage/Footer.jsx";
 import LoadingSpinner from "./components/common/LoadingSpinner.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
 import PageTransition from "./components/PageTransition.jsx";
+import {HelmetProvider} from "react-helmet-async";
 
 // Lazy load all components
 const ArticleDetailPage = lazy(() => import("./pages/articleDetail/ArticleDetailPage"));
@@ -43,6 +44,8 @@ const ResetPasswordPage = lazy(() => import("./pages/forgotPassword/ResetPasswor
 function App() {
   return (
     <div className="App font-opensans bg-amber-50">
+      <HelmetProvider>
+
       <ScrollToTop />
       <Navbar />
       <Suspense fallback={<LoadingSpinner />}>
@@ -87,6 +90,7 @@ function App() {
       <Footer />
 
       <Toaster />
+      </HelmetProvider>
     </div>
   );
 }

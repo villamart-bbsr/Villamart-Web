@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import SEO from "../components/SEO";
 
 export default function VillaMartJourney() {
   const [isVisible, setIsVisible] = useState({});
@@ -95,6 +96,7 @@ export default function VillaMartJourney() {
   return (
     <div className="min-h-screen bg-green-50 font-sans">
       {/* Enhanced Hero Section */}
+      <SEO title="VillaMart Journey" description="Explore the journey of VillaMart, from humble beginnings to revolutionizing rural retail. Discover our milestones and vision for the future." />
       <header
         className="bg-center bg-cover bg-no-repeat bg-fixed relative h-screen overflow-hidden "
         style={{ 

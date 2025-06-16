@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Leaf, Truck, Store, Star, CheckCircle, Mail, Phone, User } from 'lucide-react';
 import axios from 'axios';
+import SEO from '../components/SEO';
 
 const FranchisePage = () => {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 500);
@@ -145,6 +146,9 @@ const FranchisePage = () => {
 
   return (
     <div className="bg-white min-h-screen text-gray-800 relative overflow-hidden">
+      {/* SEO Meta Tags */}
+      <SEO title="Franchise Benefits | VillaMart"
+           description="Explore the benefits of becoming a franchise partner with VillaMart. Join our network and grow your business with our proven model." />
       {/* Floating Leaf Decorations */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div

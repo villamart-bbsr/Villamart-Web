@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { ArrowLeft, ArrowRight, X, Camera, Leaf, ChevronRight, Sun, Cloud, Wind } from 'lucide-react';
+import SEO from '../components/SEO';
 
 // Sample farm images data
 const farmImages = [
@@ -51,6 +52,7 @@ const farmImages = [
 const FarmBackground = () => {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden">
+      <SEO title="Farm Gallery | VillaMart" description="Explore our farm gallery showcasing sustainable practices, crops, and life on the farm." />
       <div className="absolute top-16 right-16 animate-pulse">
         <div className="w-16 h-16 bg-yellow-400 rounded-full shadow-lg opacity-20"></div>
       </div>
