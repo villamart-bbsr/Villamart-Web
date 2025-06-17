@@ -68,6 +68,16 @@ export default function FarmMediaPage() {
         link: "https://yourstory.com/socialstory/2020/02/agri-startup-villa-mart-iit-alumnus-farmers-produce-mobile-market",
         image: "/images/your_story.png"
       },
+      {
+        id:4,
+        title:"STRIVING TO TRANSFORM RURAL ODISHA",
+        date:"December 18, 2018",
+        excerpt: "Villamart is a revenue model for the development of rural India and intended to create a sustainable livelihood.",
+        link: "https://www.orissapost.com/striving-to-transform-rural-odisha/",
+        image: "/images/OrissaPOST.png"
+
+
+      }
     ]
   };
 

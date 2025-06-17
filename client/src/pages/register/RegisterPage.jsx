@@ -390,19 +390,20 @@ const RegisterPage = () => {
             }}
           />
           <div className="absolute inset-0 bg-[#86EFAC]/30 flex items-center justify-center">
-            <div className="text-center p-8 bg-white/80 rounded-xl shadow-2xl max-w-md mx-auto transform transition-all duration-500 hover:scale-105">
-              <h2 className="text-2xl font-bold text-[#15803D] mb-4">
-                Join Our Farming Community
-              </h2>
-              <p className="text-[#16A34A] text-base italic mb-4">
-                Growing Together, Cultivating Success
-              </p>
-              <div className="w-full h-1 bg-[#22C55E] mb-4 transform origin-left transition-transform duration-1000 hover:scale-x-110"></div>
-              <p className="text-[#15803D] font-semibold text-sm">
-                Create your account and be part of our agricultural network.
-              </p>
-            </div>
-          </div>
+  <div className="text-center p-8 bg-white/80 rounded-xl shadow-2xl max-w-md mx-auto transform transition-all duration-500 hover:scale-105">
+    <h2 className="text-2xl font-bold text-[#15803D] mb-4">
+      Members Only Area
+    </h2>
+    <p className="text-[#16A34A] text-base italic mb-4">
+      Exclusive Access for Verified Farmers
+    </p>
+    <div className="w-full h-1 bg-[#22C55E] mb-4 transform origin-left transition-transform duration-1000 hover:scale-x-110"></div>
+    <p className="text-[#15803D] font-semibold text-sm">
+      You must be logged in to view this content. Join us and grow with our trusted community.
+    </p>
+  </div>
+</div>
+
         </div>
       </section>
     </MainLayout>

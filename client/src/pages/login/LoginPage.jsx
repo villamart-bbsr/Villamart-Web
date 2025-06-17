@@ -321,20 +321,22 @@ const LoginPage = () => {
               backgroundPosition: 'center'
             }}
           />
-          <div className="absolute inset-0 bg-[#86EFAC]/30 flex items-center justify-center">
-            <div className="text-center p-10 bg-white/80 rounded-xl shadow-2xl max-w-md mx-auto transform transition-all duration-500 hover:scale-105">
-              <h2 className="text-3xl font-bold text-[#15803D] mb-6">
-                Welcome to Farmer's Portal
-              </h2>
-              <p className="text-[#16A34A] text-lg italic mb-6">
-                Cultivating Connections, Harvesting Success
-              </p>
-              <div className="w-full h-1 bg-[#22C55E] mb-6 transform origin-left transition-transform duration-1000 hover:scale-x-110"></div>
-              <p className="text-[#15803D] font-semibold">
-                Connecting farmers, empowering agriculture, growing together.
-              </p>
-            </div>
-          </div>
+         <div className="absolute inset-0 bg-[#86EFAC]/30 flex items-center justify-center">
+  <div className="text-center p-10 bg-white/80 rounded-xl shadow-2xl max-w-md mx-auto transform transition-all duration-500 hover:scale-105">
+    <h2 className="text-3xl font-bold text-[#15803D] mb-6">
+      Members Only Access
+    </h2>
+    <p className="text-[#16A34A] text-lg italic mb-6">
+      Trusted Farmers. Private Insights. Shared Growth.
+    </p>
+    <div className="w-full h-1 bg-[#22C55E] mb-6 transform origin-left transition-transform duration-1000 hover:scale-x-110"></div>
+    <p className="text-[#15803D] font-semibold">
+      This section is reserved for registered members of our farming network.
+      Please log in to continue.
+    </p>
+  </div>
+</div>
+
         </div>
       </section>
     </MainLayout>
