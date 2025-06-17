@@ -23,7 +23,8 @@ function Home() {
 
   return (
     <div className="font-poppins">
-      <SEO title="Home | VillaMart" description="Welcome to VillaMart, your one-stop destination for quality products and services. Explore our offerings and join our community." />
+      <SEO/>
+      {/* <SEO title="Home | VillaMart" description="Welcome to VillaMart, your one-stop destination for quality products and services. Explore our offerings and join our community." /> */}
       {/* hero */}
       <div className="relative w-full min-h-[400px] md:h-[600px] overflow-hidden">
         {/* Background image */}

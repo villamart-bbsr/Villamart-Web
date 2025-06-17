@@ -96,7 +96,8 @@ const ContactPage = () => {
 
   return (
     <div className="bg-gradient-to-b from-white to-gray-100 min-h-screen font-sans text-black">
-      <SEO title="Contact Us | VillaMart" description="Get in touch with us for any queries or support. We are here to help you." />
+      <SEO title="Contact Us | VillaMart" description="Get in touch with us for any queries or support. We are here to help you." 
+      keywords=""/>
       {/* Header Banner */}
       <div className="relative h-96 bg-gradient-to-r from-green-800 to-green-600 overflow-hidden">
         <div className="absolute inset-0 z-0">
