@@ -4,6 +4,7 @@ import { useRef } from "react";
 
 export default function FarmerDistributionNetwork() {
   const [isHovered] = useState(false); // Kept for compatibility, but not used
+  const [imgLoaded, setImgLoaded] = useState(false);
   
   // Refs for sections to detect when they enter the viewport
   const imageRef = useRef(null);
@@ -97,11 +98,28 @@ export default function FarmerDistributionNetwork() {
               animate={isImageInView ? "visible" : "hidden"}
               variants={slideInLeft}
             >
-              <div>
+              <div className="relative w-full">
+                {/* Blurred low-res placeholder */}
+                <img
+                  src="/images/flowchart-blur.png"
+                  alt="Farmer Distribution Network Diagram (blurred)"
+                  className={`w-full h-auto rounded-lg shadow-2xl absolute top-0 left-0 transition-opacity duration-700 ${imgLoaded ? 'opacity-0' : 'opacity-100'}`}
+                  aria-hidden="true"
+                  draggable="false"
+                />
+                {/* Loading Spinner Overlay */}
+                {!imgLoaded && (
+                  <div className="absolute inset-0 flex items-center justify-center z-10">
+                    <div className="w-12 h-12 border-4 border-green-500 border-t-transparent rounded-full animate-spin bg-white bg-opacity-60"></div>
+                  </div>
+                )}
+                {/* High-res image with lazy loading */}
                 <img 
                   src="/images/flowchart.png" 
                   alt="Farmer Distribution Network Diagram" 
-                  className="w-full h-auto rounded-lg shadow-2xl"
+                  className={`w-full h-auto rounded-lg shadow-2xl relative transition-opacity duration-700 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
+                  loading="lazy"
+                  onLoad={() => setImgLoaded(true)}
                 />
               </div>
             </motion.div>

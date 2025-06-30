@@ -97,12 +97,12 @@ bgColor: "bg-orange-500",
 image: "/images/ourInnovision.jpeg"
 
     },
-    {
-      title: "Farm Tours Now Available",
-      description: "Book a tour to experience our beautiful farm firsthand.",
-      bgColor: "bg-green-700",
-      image: "/api/placeholder/1200/700?text=Tours"
-    }
+    // {
+    //   title: "Farm Tours Now Available",
+    //   description: "Book a tour to experience our beautiful farm firsthand.",
+    //   bgColor: "bg-green-700",
+    //   image: "/api/placeholder/1200/700?text=Tours"
+    // }
   ];
 
   // Feature slider automation

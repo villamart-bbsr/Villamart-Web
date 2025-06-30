@@ -416,7 +416,7 @@ export default function PFCComponent() {
               </div>
               <button
                 onClick={closeModal}
-                className="flex-shrink-0 p-2 hover:bg-gray-100 rounded-full transition-all duration-200 hover:scale-110 hover:rotate-90"
+                className="cursor-pointer flex-shrink-0 p-2 hover:bg-gray-100 rounded-full transition-all duration-200 hover:scale-110 hover:rotate-90"
                 aria-label="Close video"
               >
                 <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -516,7 +516,7 @@ export default function PFCComponent() {
             <div className="lg:hidden p-4 border-t border-gray-200 bg-gray-50">
               <button
                 onClick={closeModal}
-                className="w-full px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 transform"
+                className="cursor-pointer w-full px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 transform"
                 aria-label="Close video"
               >
                 Close
@@ -528,7 +528,7 @@ export default function PFCComponent() {
               <div className="flex justify-end">
                 <button
                   onClick={closeModal}
-                  className="px-8 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 transform"
+                  className="cursor-pointer px-8 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-lg font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 transform"
                   aria-label="Close video"
                 >
                   Close
