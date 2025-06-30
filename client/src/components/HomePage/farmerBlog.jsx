@@ -246,7 +246,7 @@ export default function FarmerBlog() {
             {/* Fixed button container */}
             <div className="button-container">
               {/* Write Blog Button - Fixed with wrapper */}
-              <div className="button-wrapper">
+              {/* <div className="button-wrapper">
                 <a href="/blogPage" className="block w-full">
                   <button 
                     className={`hero-button flex items-center justify-center px-6 py-3 rounded-lg font-medium cursor-pointer ${
@@ -266,11 +266,11 @@ export default function FarmerBlog() {
                     </div>
                   </button>
                 </a>
-              </div>
+              </div> */}
 
               {/* Read Blog Button - Fixed with wrapper */}
               <div className="button-wrapper">
-                <a href='/blog' className="block w-full">
+                <a href='/blogs' className="block w-full">
                   <button 
                     className={`hero-button flex items-center justify-center cursor-pointer px-6 py-3 rounded-lg font-medium ${
                       hoveredButton === 'read'

@@ -12,8 +12,8 @@ const Footer = () => {
     { name: "Media", path: "/media" },
     { name: "Gallery", path: "/gallery" },
     { name: "Franchise Model", path: "/franchise" },
-    { name: "Blog Page", path: "/blogPage" },
-    { name: "Read Blogs", path: "/blog" },
+    // { name: "Blog Page", path: "/blogPage" },
+    { name: "Read Blogs", path: "/blogs" },
     { name: "Contact Us", path: "/contact" }
   ];
 
@@ -251,11 +251,11 @@ const Footer = () => {
               © {new Date().getFullYear()} Villamart. All rights reserved.
             </p>
             <div className="flex space-x-6">
-              <a href="/terms" className="text-gray-500 hover:text-green-400 transition-colors">
-                Terms
-              </a>
               <a href="/privacy" className="text-gray-500 hover:text-green-400 transition-colors">
-                Privacy
+                Privacy Policy
+              </a>
+              <a href="/terms" className="text-gray-500 hover:text-green-400 transition-colors">
+              Terms & Conditions
               </a>
             </div>
           </div>

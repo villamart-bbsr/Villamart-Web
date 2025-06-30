@@ -3,6 +3,9 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Leaf, Truck, Store, Star, CheckCircle, Mail, Phone, User } from 'lucide-react';
 import axios from 'axios';
 import SEO from '../components/SEO';
+import ReCAPTCHA from 'react-google-recaptcha';
+
+const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
 const FranchisePage = () => {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 500);
@@ -17,6 +20,7 @@ const FranchisePage = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [recaptchaToken, setRecaptchaToken] = useState('');
 
   useEffect(() => {
     const handleResize = () => {
@@ -115,11 +119,18 @@ const FranchisePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!recaptchaToken) {
+      setSubmitStatus({ type: 'error', message: 'Please complete the reCAPTCHA.' });
+      return;
+    }
     setIsSubmitting(true);
     setSubmitStatus(null);
 
     try {
-      const response = await axios.post('http://localhost:5000/api/contact', formData);
+      const response = await axios.post('http://localhost:5000/api/contact', {
+        ...formData,
+        recaptchaToken
+      });
       setSubmitStatus({ type: 'success', message: 'Message sent successfully! We will contact you soon.' });
       // Clear success message after 5 seconds
       setTimeout(() => {
@@ -132,6 +143,7 @@ const FranchisePage = () => {
         message: '',
         outletType: 'mobile'
       });
+      setRecaptchaToken('');
     } catch (error) {
       console.error('Contact form error:', error);
       const errorMessage = error.response?.data?.error || error.response?.data?.message || error.message;
@@ -501,6 +513,13 @@ const FranchisePage = () => {
                 className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-orange-400 focus:ring-2 focus:ring-orange-200 transition-all duration-200"
                 placeholder="Tell us about your interest in our franchise..."
               ></textarea>
+            </div>
+
+            <div className="mb-6">
+              <ReCAPTCHA
+                sitekey={RECAPTCHA_SITE_KEY}
+                onChange={token => setRecaptchaToken(token)}
+              />
             </div>
 
             {submitStatus && (

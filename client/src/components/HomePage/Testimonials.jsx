@@ -152,21 +152,21 @@ const Testimonials = () => {
       name: "Basanti Nayak",
       role: "Farmer",
       text: "VillaMart takes my vegetables without any bargain and I am happy being associated with it. The team is professional and reliable.",
-      img: "/images/profile.png",
+      img: "/images/profile1.png",
       icon: "🥕"
     },
     {
       name: "Sonali Rout",
       role: "Housewife",
       text: "I am a regular customer of VillaMart, they are so punctual in their service, the sales people are so well behaved and the products are always fresh.",
-      img: "/images/profile.png",
+      img: "/images/profile2.png",
       icon: "🍅"
     },
     {
       name: "Sukanti Behara",
       role: "Housewife",
       text: "I am happy to get all the fresh vegetables at my doorstep, and most importantly VillaMart brings Desi variety vegetables that are hard to find elsewhere.",
-      img: "/images/profile.png",
+      img: "/images/profile3.png",
       icon: "🥬"
     },
   ];

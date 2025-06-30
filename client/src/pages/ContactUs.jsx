@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Smartphone, Mail, Send } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 import SEO from '../components/SEO';
+import ReCAPTCHA from 'react-google-recaptcha';
 
-// Initialize EmailJS with your public key
-emailjs.init("NF6I53ZEKl-U7MvBN"); // Replace with your actual public key
+const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +17,7 @@ const ContactPage = () => {
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState('');
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,37 +43,31 @@ const ContactPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!recaptchaToken) {
+      setError('Please complete the reCAPTCHA.');
+      return;
+    }
     if (validateForm()) {
       setIsSubmitting(true);
+      setError('');
       try {
-        // Send email to admin
-        await emailjs.send(
-          "service_zw8vb7i",
-          "template_dmr8f9h",
-          {
-            from_name: formData.fullname,
-            from_email: formData.email,
-            to_email: "info@villamart.in",
-            subject: formData.subject,
-            message: formData.message,
+        const response = await fetch('http://localhost:5000/api/contact/contact-us', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: formData.fullname,
+            email: formData.email,
             address: formData.address,
             mobile: formData.mobile,
-            reply_to: formData.email
-          }
-        );
-
-        // Send confirmation email to user
-        await emailjs.send(
-          "service_zw8vb7i",
-          "template_tejdaax",
-          {
-            from_name: formData.fullname,
-            to_email: formData.email,
             subject: formData.subject,
             message: formData.message,
-            reply_to: "info@villamart.in"
-          }
-        );
+            recaptchaToken
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to send message');
+        }
 
         setIsSubmitted(true);
         setFormData({
@@ -84,10 +78,11 @@ const ContactPage = () => {
           subject: '',
           message: ''
         });
+        setRecaptchaToken('');
         setTimeout(() => setIsSubmitted(false), 3000);
       } catch (error) {
         setError('Failed to send message. Please try again later.');
-        console.error('EmailJS Error:', error);
+        console.error('Contact Form Error:', error);
       } finally {
         setIsSubmitting(false);
       }
@@ -189,110 +184,119 @@ const ContactPage = () => {
               </h3>
               
               <div>
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    name="fullname"
-                    value={formData.fullname}
-                    onChange={handleChange}
-                    placeholder="Enter Your Name"
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
-                  />
-                </div>
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-4">
+                    <input
+                      type="text"
+                      name="fullname"
+                      value={formData.fullname}
+                      onChange={handleChange}
+                      placeholder="Enter Your Name"
+                      className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
+                    />
+                  </div>
 
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleChange}
-                    placeholder="Enter Your Address"
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
-                  />
-                </div>
+                  <div className="mb-4">
+                    <input
+                      type="text"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleChange}
+                      placeholder="Enter Your Address"
+                      className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
+                    />
+                  </div>
 
-                <div className="mb-4">
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Enter Your Email Address"
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
-                  />
-                </div>
+                  <div className="mb-4">
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="Enter Your Email Address"
+                      className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
+                    />
+                  </div>
 
-                <div className="mb-4">
-                  <input
-                    type="tel"
-                    name="mobile"
-                    value={formData.mobile}
-                    onChange={handleChange}
-                    placeholder="Enter Your Contact No"
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
-                  />
-                </div>
+                  <div className="mb-4">
+                    <input
+                      type="tel"
+                      name="mobile"
+                      value={formData.mobile}
+                      onChange={handleChange}
+                      placeholder="Enter Your Contact No"
+                      className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
+                    />
+                  </div>
 
-                <div className="mb-4">
-                  <select
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
+                  <div className="mb-4">
+                    <select
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
+                    >
+                      <option value="">Select a subject</option>
+                      <option value="job">Job</option>
+                      <option value="internship">Internship</option>
+                      <option value="collaboration">Collaboration</option>
+                      <option value="fpo">FPO</option>
+                      <option value="shg">SHG</option>
+                      <option value="govt">Govt</option>
+                      <option value="ngo">NGO</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+
+                  <div className="mb-4">
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Your Message"
+                      rows="6"
+                      className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
+                    />
+                  </div>
+
+                  <div className="mb-4">
+                    <ReCAPTCHA
+                      sitekey={RECAPTCHA_SITE_KEY}
+                      onChange={token => setRecaptchaToken(token)}
+                    />
+                  </div>
+
+                  {error && (
+                    <p className="text-red-500 mb-4">
+                      {error}
+                    </p>
+                  )}
+
+                  <button
+                    type="submit"
+                    className="relative overflow-hidden bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-lg flex items-center transition-all duration-300 group hover:scale-105 active:scale-95"
+                    disabled={isSubmitting}
                   >
-                    <option value="">Select a subject</option>
-                    <option value="job">Job</option>
-                    <option value="internship">Internship</option>
-                    <option value="collaboration">Collaboration</option>
-                    <option value="fpo">FPO</option>
-                    <option value="shg">SHG</option>
-                    <option value="govt">Govt</option>
-                    <option value="ngo">NGO</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                <div className="mb-4">
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Your Message"
-                    rows="6"
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
-                  />
-                </div>
-
-                {error && (
-                  <p className="text-red-500 mb-4">
-                    {error}
-                  </p>
-                )}
-
-                <button
-                  onClick={handleSubmit}
-                  className="relative overflow-hidden bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-lg flex items-center transition-all duration-300 group hover:scale-105 active:scale-95"
-                  disabled={isSubmitting}
-                >
-                  <span className="absolute inset-0 w-0 bg-white transition-all duration-700 ease-out opacity-20 group-hover:w-full" />
-                  {isSubmitting ? (
-                    <div className="flex items-center">
-                      <div className="w-5 h-5 border-t-2 border-r-2 border-white rounded-full animate-spin mr-2" />
-                      <span>Sending...</span>
-                    </div>
-                  ) : (
-                    <div className="flex items-center">
-                      <span>Send Message</span>
-                      <Send className="ml-2 w-5 h-5" />
+                    <span className="absolute inset-0 w-0 bg-white transition-all duration-700 ease-out opacity-20 group-hover:w-full" />
+                    {isSubmitting ? (
+                      <div className="flex items-center">
+                        <div className="w-5 h-5 border-t-2 border-r-2 border-white rounded-full animate-spin mr-2" />
+                        <span>Sending...</span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center">
+                        <span>Send Message</span>
+                        <Send className="ml-2 w-5 h-5" />
+                      </div>
+                    )}
+                  </button>
+                  
+                  {isSubmitted && (
+                    <div className="mt-4 p-4 bg-green-100 text-green-700 rounded-lg">
+                      Thank you for your message! We'll get back to you soon.
                     </div>
                   )}
-                </button>
-                
-                {isSubmitted && (
-                  <div className="mt-4 p-4 bg-green-100 text-green-700 rounded-lg">
-                    Thank you for your message! We'll get back to you soon.
-                  </div>
-                )}
+                </form>
               </div>
             </div>
           </div>

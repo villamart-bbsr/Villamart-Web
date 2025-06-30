@@ -179,7 +179,7 @@ export default function Navbar() {
             </div>
             
             {/* Desktop nav */}
-            <div className="hidden md:flex md:items-center md:justify-center flex-1 space-x-1">
+            <div className="hidden md:flex md:items-center md:justify-center ">
               <a href="/" className={`px-4 py-2 rounded-md flex items-center text-lg ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
                 <Home size={20} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
                 <span className="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-500 after:transition-all after:duration-300 group-hover:after:w-full">Home</span>
@@ -210,7 +210,7 @@ export default function Navbar() {
               </a>
               
               {/* Blogs Dropdown */}
-              <div className="relative" ref={blogsMenuRef} onMouseEnter={handleBlogsMouseEnter} onMouseLeave={handleBlogsMouseLeave}>
+              {/* <div className="relative" ref={blogsMenuRef} onMouseEnter={handleBlogsMouseEnter} onMouseLeave={handleBlogsMouseLeave}>
                 <button className={`px-4 py-2 rounded-md flex items-center text-lg ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
                   <BookOpen size={20} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
                   <span className="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-500 after:transition-all after:duration-300 group-hover:after:w-full">Blogs</span>
@@ -224,7 +224,12 @@ export default function Navbar() {
                     </div>
                   </div>
                 )}
-              </div>
+              </div> */}
+
+              <a href="/blogs" className={`px-4 py-2 rounded-md flex items-center text-lg ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
+                <BookOpen size={20} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
+                <span className="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-500 after:transition-all after:duration-300 group-hover:after:w-full">Blogs</span>
+              </a>
               
               <a href="/contact" className={`px-4 py-2 rounded-md flex items-center text-lg ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
                 <Phone size={20} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
@@ -233,7 +238,7 @@ export default function Navbar() {
             </div>
             
             {/* Right side - Auth & Dark Mode */}
-            <div className="hidden md:flex md:items-center space-x-2">
+            {/* <div className="hidden md:flex md:items-center space-x-2">
               {userState?.userInfo ? (
                 <div className="relative" ref={profileMenuRef} onMouseEnter={handleProfileMouseEnter} onMouseLeave={handleProfileMouseLeave}>
                   <button onClick={() => setProfileDropdownOpen(!profileDropdownOpen)} className="ml-4 px-2.5 py-1.5 flex items-center bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 text-white rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-md cursor-pointer">
@@ -276,7 +281,7 @@ export default function Navbar() {
                   </span>
                 </button>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
         
@@ -314,7 +319,7 @@ export default function Navbar() {
             </a>
             
             {/* Mobile Blogs */}
-            <div>
+            {/* <div>
               <button onClick={toggleMobileBlogsDropdown} className={`w-full text-left px-3 py-2 rounded-md ${hoverColor} flex items-center justify-between transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`}>
                 <div className="flex items-center">
                   <BookOpen size={16} className="mr-2" />
@@ -326,7 +331,12 @@ export default function Navbar() {
                 <a href="/blogPage" className={`block px-3 py-2 rounded-md ${hoverColor} transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`}>Create Blog</a>
                 <a href="/blog" className={`block px-3 py-2 rounded-md ${hoverColor} transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`}>Read Blogs</a>
               </div>
-            </div>
+            </div> */}
+
+            <a href="/blogs" className={`block px-3 py-2 rounded-md ${hoverColor} flex items-center transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`}>
+              <BookOpen size={16} className="mr-2" />
+              Blogs
+            </a>
             
             <a href="/contact" className={`block px-3 py-2 rounded-md ${hoverColor} flex items-center transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`}>
               <Phone size={16} className="mr-2" />

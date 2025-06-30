@@ -58,9 +58,10 @@ function App() {
             <Route path="/contact" element={<PageTransition><ContactUs /></PageTransition>} />
             <Route path="/media" element={<PageTransition><MediaPage /></PageTransition>} />
             <Route path="/gallery" element={<PageTransition><GalleryPage /></PageTransition>} />
-            <Route index path="/blogPage" element={<PageTransition><HomePage /></PageTransition>} />
+            
+            {/* <Route index path="/blogPage" element={<PageTransition><HomePage /></PageTransition>} />
             <Route path="/blog" element={<PageTransition><BlogPage /></PageTransition>} />
-            <Route path="/blog/:slug" element={<PageTransition><ArticleDetailPage /></PageTransition>} />
+            <Route path="/blog/:slug" element={<PageTransition><ArticleDetailPage /></PageTransition>} /> */}
             <Route path="/register" element={<PageTransition><RegisterPage /></PageTransition>} />
             <Route path="/verify-otp" element={<PageTransition><OTPVerificationPage /></PageTransition>} />
             <Route path="/login" element={<PageTransition><LoginPage /></PageTransition>} />
