@@ -30,7 +30,7 @@ const AnimatedOverlay = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-96">
+    <div className="relative w-full h-full">
       {/* Background image will be added by you */}
       <div className="absolute inset-0 bg-cover bg-center z-0">
         {/* Your background image will go here */}

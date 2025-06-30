@@ -104,7 +104,7 @@ export default function VillaMartJourney() {
         }}
       >
         {/* Overlay with gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-green-900/80 via-green-800/70 to-green-700/80"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-green-900/40 via-green-800/50 to-green-700/60"></div>
         
         {/* Decorative elements - floating vegetables/produce */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -154,7 +154,7 @@ export default function VillaMartJourney() {
                 Explore Our Story
               </button>
               <a
-              href="/moreInfo" 
+              href="/about" 
               className="cursor-pointer bg-transparent hover:bg-white/10 text-white border-2 border-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
                 Learn More
               </a>

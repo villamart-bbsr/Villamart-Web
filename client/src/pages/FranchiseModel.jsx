@@ -205,7 +205,7 @@ const FranchisePage = () => {
             alt="Franchise Background" 
             className="w-full h-[120%] object-fit bg-fixed"
           />
-          <div className="absolute inset-0 bg-green-900/70"></div>
+          <div className="absolute inset-0 bg-green-900/40"></div>
         </motion.div>
 
         {/* Content */}

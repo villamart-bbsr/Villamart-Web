@@ -162,7 +162,7 @@ export default function Navbar() {
             </div>
             
             {/* Mobile menu button */}
-            <div className="md:hidden flex items-center">
+            <div className="lg:hidden flex items-center">
               <button
                 onClick={toggleMobileMenu}
                 className={`p-2 rounded-md focus:outline-none ${hoverColor} transition-all duration-300 cursor-pointer relative overflow-hidden group`}
@@ -179,7 +179,7 @@ export default function Navbar() {
             </div>
             
             {/* Desktop nav */}
-            <div className="hidden md:flex md:items-center md:justify-center ">
+            <div className="hidden lg:flex lg:items-center lg:justify-center ">
               <a href="/" className={`px-4 py-2 rounded-md flex items-center text-lg ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
                 <Home size={20} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
                 <span className="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-500 after:transition-all after:duration-300 group-hover:after:w-full">Home</span>
@@ -195,7 +195,7 @@ export default function Navbar() {
                 {companyDropdownOpen && (
                   <div className={`absolute mt-1 w-48 rounded-md shadow-md ${dropdownBgColor} transform transition-all duration-300 origin-top z-50`}>
                     <div className="py-1" role="menu" aria-orientation="vertical">
-                      <a href="/moreInfo" className={`block px-4 py-3 text-base font-medium ${hoverColor} transition-all duration-200 hover:translate-x-1 hover:text-green-600 cursor-pointer`}>About</a>
+                      <a href="/about" className={`block px-4 py-3 text-base font-medium ${hoverColor} transition-all duration-200 hover:translate-x-1 hover:text-green-600 cursor-pointer`}>About</a>
                       <a href="/journey" className={`block px-4 py-3 text-base font-medium ${hoverColor} transition-all duration-200 hover:translate-x-1 hover:text-green-600 cursor-pointer`}>Journey</a>
                       <a href="/media" className={`block px-4 py-3 text-base font-medium ${hoverColor} transition-all duration-200 hover:translate-x-1 hover:text-green-600 cursor-pointer`}>Media</a>
                       <a href="/gallery" className={`block px-4 py-3 text-base font-medium ${hoverColor} transition-all duration-200 hover:translate-x-1 hover:text-green-600 cursor-pointer`}>Gallery</a>
@@ -236,59 +236,49 @@ export default function Navbar() {
                 <span className="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-500 after:transition-all after:duration-300 group-hover:after:w-full">Contact Us</span>
               </a>
             </div>
-            
-            {/* Right side - Auth & Dark Mode */}
-            {/* <div className="hidden md:flex md:items-center space-x-2">
-              {userState?.userInfo ? (
-                <div className="relative" ref={profileMenuRef} onMouseEnter={handleProfileMouseEnter} onMouseLeave={handleProfileMouseLeave}>
-                  <button onClick={() => setProfileDropdownOpen(!profileDropdownOpen)} className="ml-4 px-2.5 py-1.5 flex items-center bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 text-white rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-md cursor-pointer">
-                    <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-white/80">
-                      {userState.userInfo.avatar ? (
-                        <img
-                          src={stables.UPLOAD_FOLDER_BASE_URL + userState.userInfo.avatar}
-                          alt="profile"
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-white/20 flex items-center justify-center">
-                          <MessageSquare size={16} className="text-white" />
-                        </div>
-                      )}
-                    </div>
-                    <ChevronDown size={16} className={`ml-2 text-white transition-transform duration-300 ${profileDropdownOpen ? "rotate-180" : ""}`} />
-                  </button>
-                  {profileDropdownOpen && (
-                    <div className={`absolute right-0 mt-1 w-48 rounded-md shadow-md ${dropdownBgColor} transform transition-all duration-300 origin-top z-50`}>
-                      <div className="py-1" role="menu" aria-orientation="vertical">
-                        {userState?.userInfo?.admin && (
-                          <button onClick={() => navigate("/admin")} className={`w-full text-left block px-4 py-3 text-base font-medium ${hoverColor} transition-all duration-200 hover:translate-x-1 hover:text-green-600 cursor-pointer`}>Admin Dashboard</button>
-                        )}
-                        {userState?.userInfo?.isEmployee && (
-                          <button onClick={() => navigate("/employee/posts/manage")} className={`w-full text-left block px-4 py-3 text-base font-medium ${hoverColor} transition-all duration-200 hover:translate-x-1 hover:text-green-600 cursor-pointer`}>Create Blog</button>
-                        )}
-                        <button onClick={() => navigate("/profile")} className={`w-full text-left block px-4 py-3 text-base font-medium ${hoverColor} transition-all duration-200 hover:translate-x-1 hover:text-green-600 cursor-pointer`}>Profile Page</button>
-                        <button onClick={logoutHandler} className={`w-full text-left block px-4 py-3 text-base font-medium ${hoverColor} transition-all duration-200 hover:translate-x-1 hover:text-green-600 cursor-pointer`}>Logout</button>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <button onClick={() => navigate("/login")} className="ml-4 px-6 py-2 flex items-center text-lg bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-600 text-white rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg cursor-pointer">
-                  <MessageSquare size={20} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
-                  <span className="relative inline-block">
-                    Member Access
-                    <span className="absolute inset-x-0 bottom-0 h-0.5 bg-white/40 transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-                  </span>
-                </button>
-              )}
-            </div> */}
+
+            {/* Tab view nav (visible on sm and up, hidden on md and up, hidden on mobile) */}
+            <div className="hidden sm:flex md:hidden items-center justify-between w-full px-2 overflow-x-auto scrollbar-hide">
+              <a href="/" className={`flex flex-col items-center px-2 py-1 mx-1 rounded-md text-xs ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
+                <Home size={20} />
+                <span>Home</span>
+              </a>
+              <a href="/about" className={`flex flex-col items-center px-2 py-1 mx-1 rounded-md text-xs ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
+                <Building size={20} />
+                <span>About</span>
+              </a>
+              <a href="/journey" className={`flex flex-col items-center px-2 py-1 mx-1 rounded-md text-xs ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
+                <Sprout size={20} />
+                <span>Journey</span>
+              </a>
+              <a href="/media" className={`flex flex-col items-center px-2 py-1 mx-1 rounded-md text-xs ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
+                <Leaf size={20} />
+                <span>Media</span>
+              </a>
+              <a href="/gallery" className={`flex flex-col items-center px-2 py-1 mx-1 rounded-md text-xs ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
+                <Users size={20} />
+                <span>Gallery</span>
+              </a>
+              <a href="/franchise" className={`flex flex-col items-center px-2 py-1 mx-1 rounded-md text-xs ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
+                <Users size={20} />
+                <span>Franchise</span>
+              </a>
+              <a href="/blogs" className={`flex flex-col items-center px-2 py-1 mx-1 rounded-md text-xs ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
+                <BookOpen size={20} />
+                <span>Blogs</span>
+              </a>
+              <a href="/contact" className={`flex flex-col items-center px-2 py-1 mx-1 rounded-md text-xs ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
+                <Phone size={20} />
+                <span>Contact</span>
+              </a>
+            </div>
           </div>
         </div>
         
         {/* Mobile menu */}
         <div 
           ref={mobileMenuRef}
-          className={`md:hidden ${navBgColor} border-t ${borderColor} overflow-hidden transition-all duration-500 ease-in-out transform ${mobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}
+          className={`lg:hidden ${navBgColor} border-t ${borderColor} overflow-hidden transition-all duration-500 ease-in-out transform ${mobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}
         >
           <div className="px-2 pt-2 pb-3 space-y-1">
             <a href="/" className={`block px-3 py-2 rounded-md ${hoverColor} flex items-center transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`}>
@@ -306,7 +296,7 @@ export default function Navbar() {
                 <ChevronDown size={16} className={`transition-transform duration-500 ${companyDropdownOpen ? "rotate-180" : ""}`} />
               </button>
               <div className={`pl-6 mt-1 space-y-1 overflow-hidden transition-all duration-300 ease-in-out ${companyDropdownOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
-                <a href="/moreInfo" className={`block px-3 py-2 rounded-md ${hoverColor} transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`} onClick={() => { setCompanyDropdownOpen(false); setMobileMenuOpen(false); }}>About</a>
+                <a href="/about" className={`block px-3 py-2 rounded-md ${hoverColor} transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`} onClick={() => { setCompanyDropdownOpen(false); setMobileMenuOpen(false); }}>About</a>
                 <a href="/journey" className={`block px-3 py-2 rounded-md ${hoverColor} transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`} onClick={() => { setCompanyDropdownOpen(false); setMobileMenuOpen(false); }}>Journey</a>
                 <a href="/media" className={`block px-3 py-2 rounded-md ${hoverColor} transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`} onClick={() => { setCompanyDropdownOpen(false); setMobileMenuOpen(false); }}>Media</a>
                 <a href="/gallery" className={`block px-3 py-2 rounded-md ${hoverColor} transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`} onClick={() => { setCompanyDropdownOpen(false); setMobileMenuOpen(false); }}>Gallery</a>
@@ -344,7 +334,7 @@ export default function Navbar() {
             </a>
 
             {/* Mobile Auth Section */}
-            {userState?.userInfo ? (
+            {/* {userState?.userInfo ? (
               <div className="mt-2">
                 <button 
                   onClick={toggleMobileProfileDropdown}
@@ -413,7 +403,7 @@ export default function Navbar() {
                 <span className="relative z-10">Member Access</span>
                 <div className="absolute inset-0 bg-white/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </button>
-            )}
+            )} */}
           </div>
         </div>
       </nav>

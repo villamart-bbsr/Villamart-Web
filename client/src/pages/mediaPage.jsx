@@ -86,14 +86,14 @@ export default function FarmMediaPage() {
     {
       title: "Award-Winning AgriTech Startup",
 description: "Proud recipient of accolades for revolutionizing sustainable farming through innovative technology and fresh organic produce.",
-bgColor: "bg-green-700",
+bgColor: "bg-green-700/40",
 image: "/images/awards.jpeg"
 
     },
     {
       title: "Our Innovision for Sustainable Farming",
 description: "Discover how our agri-tech Innovision is transforming farming with smart technologies, eco-friendly practices, and a vision for a greener future.",
-bgColor: "bg-orange-500",
+bgColor: "bg-orange-500/40",
 image: "/images/ourInnovision.jpeg"
 
     },
@@ -311,11 +311,11 @@ image: "/images/ourInnovision.jpeg"
             className={`absolute inset-0 transition-opacity duration-1000 flex items-center ${currentSlide === index ? 'opacity-100' : 'opacity-0'}`}
           >
             {/* Placeholder with background color */}
-            <div className={`absolute inset-0 ${item.bgColor} opacity-90`}>
+            <div className={`absolute inset-0 ${item.bgColor} opacity-100`}>
               <img 
                 src={item.image} 
                 alt={item.title} 
-                className="w-full h-full object-fit  opacity-30"
+                className="w-full h-full object-fit  opacity-50"
                 // style={{ maxHeight: '400px' }}
               />
             </div>
@@ -324,6 +324,7 @@ image: "/images/ourInnovision.jpeg"
               <h1 className="text-4xl md:text-5xl font-bold mb-4">{item.title}</h1>
               <p className="text-xl mb-8 max-w-2xl">{item.description}</p>
             </div>
+            
           </div>
         ))}
         

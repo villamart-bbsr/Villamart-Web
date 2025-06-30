@@ -5,6 +5,12 @@ import ReCAPTCHA from 'react-google-recaptcha';
 
 const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
+// Utility to detect mobile device
+const isMobile = () => {
+  if (typeof navigator === 'undefined') return false;
+  return /Mobi|Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+};
+
 const ContactPage = () => {
   const [formData, setFormData] = useState({
     fullname: '',
@@ -18,6 +24,7 @@ const ContactPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState('');
+  const [copied, setCopied] = useState({});
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -89,6 +96,15 @@ const ContactPage = () => {
     }
   };
 
+  const handlePhoneClick = (phoneNumber, key) => {
+    if (!isMobile()) {
+      navigator.clipboard.writeText(phoneNumber);
+      setCopied(prev => ({ ...prev, [key]: true }));
+      setTimeout(() => setCopied(prev => ({ ...prev, [key]: false })), 1500);
+    }
+    // else: do nothing, as <a href="tel:"> will handle mobile
+  };
+
   return (
     <div className="bg-gradient-to-b from-white to-gray-100 min-h-screen font-sans text-black">
       <SEO title="Contact Us | VillaMart" description="Get in touch with us for any queries or support. We are here to help you." 
@@ -96,7 +112,7 @@ const ContactPage = () => {
       {/* Header Banner */}
       <div className="relative h-96 bg-gradient-to-r from-green-800 to-green-600 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-green-800/70" />
+          <div className="absolute inset-0 bg-green-800/40" />
           <div className="w-full h-full bg-[url('/images/contactus-subheader.png')] bg-cover bg-center" />
         </div>
         
@@ -144,7 +160,29 @@ const ContactPage = () => {
                 </div>
               </div>
               <div>
-                <h5 className="text-xl font-medium text-gray-800 mb-1">+91 674 3529604</h5>
+                <h5 className="text-xl font-medium text-gray-800 mb-1">
+                  {isMobile() ? (
+                    <a
+                      href="tel:+916743529604"
+                      className="hover:text-green-500 focus:outline-none bg-transparent border-none cursor-pointer"
+                      style={{ padding: 0, textDecoration: 'none' }}
+                    >
+                      +91 674 3529604
+                    </a>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => handlePhoneClick('+91 674 3529604', 'landline')}
+                      className="hover:text-green-500 focus:outline-none bg-transparent border-none cursor-pointer"
+                      style={{ padding: 0, textDecoration: 'none' }}
+                    >
+                      +91 674 3529604
+                    </button>
+                  )}
+                  {copied['landline'] && (
+                    <span className="ml-2 text-green-500 text-xs">Copied!</span>
+                  )}
+                </h5>
                 <p className="text-gray-600">Monday to Saturday, 10AM to 6PM</p>
               </div>
             </div>
@@ -156,7 +194,29 @@ const ContactPage = () => {
                 </div>
               </div>
               <div>
-                <h5 className="text-xl font-medium text-gray-800 mb-1">+91 80931 234 11 / 12 / 13</h5>
+                <h5 className="text-xl font-medium text-gray-800 mb-1">
+                  {isMobile() ? (
+                    <a
+                      href="tel:+918093123411"
+                      className="hover:text-blue-500 focus:outline-none bg-transparent border-none cursor-pointer"
+                      style={{ padding: 0, textDecoration: 'none' }}
+                    >
+                      +91 80931 234 11 / 12 / 13
+                    </a>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => handlePhoneClick('+91 80931 234 11 / 12 / 13', 'mobile')}
+                      className="hover:text-blue-500 focus:outline-none bg-transparent border-none cursor-pointer"
+                      style={{ padding: 0, textDecoration: 'none' }}
+                    >
+                      +91 80931 234 11 / 12 / 13
+                    </button>
+                  )}
+                  {copied['mobile'] && (
+                    <span className="ml-2 text-blue-500 text-xs">Copied!</span>
+                  )}
+                </h5>
                 <p className="text-gray-600">Monday to Saturday, 10AM to 6PM</p>
               </div>
             </div>

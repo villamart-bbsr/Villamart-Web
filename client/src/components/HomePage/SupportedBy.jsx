@@ -139,18 +139,7 @@ const SupportedBy = () => {
           <div className="absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-green-50 to-transparent z-10"></div>
         </motion.div>
         
-        <motion.div 
-          className="mt-8"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-        >
-          <div className="flex justify-center space-x-1">
-            <div className="w-2 h-2 rounded-full bg-green-600"></div>
-            <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-            <div className="w-2 h-2 rounded-full bg-green-600"></div>
-          </div>
-        </motion.div>
+        
       </motion.section>
     </div>
   );

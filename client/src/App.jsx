@@ -52,7 +52,7 @@ function App() {
         <AnimatePresence mode="wait">
           <Routes>
             <Route path="/" element={<PageTransition><Home /></PageTransition>} />
-            <Route path="/moreInfo" element={<PageTransition><MoreInfo /></PageTransition>} />
+            <Route path="/about" element={<PageTransition><MoreInfo /></PageTransition>} />
             <Route path="/journey" element={<PageTransition><Journey /></PageTransition>} />
             <Route path="/franchise" element={<PageTransition><FranchisePage /></PageTransition>} />
             <Route path="/contact" element={<PageTransition><ContactUs /></PageTransition>} />

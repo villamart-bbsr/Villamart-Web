@@ -76,7 +76,7 @@ export default function AgriPlatformHero() {
           <p className="text-gray-700 text-lg">
             We enable FPOs, SHGs, and micro-entrepreneurs to thrive by providing access to markets, mobile supermarkets, and smart storage solutions — helping build a trusted farm-to-fork ecosystem.
           </p>
-          <a href="/moreInfo" className="cursor-pointer mt-4 bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8 py-3 font-semibold transition duration-300">
+          <a href="/about" className="cursor-pointer mt-4 bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8 py-3 font-semibold transition duration-300">
             Learn More About VillaMart
           </a>
         </div>

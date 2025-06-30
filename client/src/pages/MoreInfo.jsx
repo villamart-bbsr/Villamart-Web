@@ -131,9 +131,10 @@ const About = () => {
 
       {/* Header Section */}
       <header
-        className="bg-fixed bg-center bg-cover bg-no-repeat relative h-96 overflow-hidden"
+        className="bg-fixed bg-no-repeat bg-center relative h-76 overflow-hidden bg-cover md:bg-contain"
         style={{
-          backgroundImage: "url('/images/sub-header.png')"
+          backgroundImage: "url('/images/aboutus.png')",
+          backgroundPosition: "center 65px"
         }}
       >
         <AnimatedOverlay />
