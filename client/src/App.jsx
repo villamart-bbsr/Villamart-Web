@@ -33,6 +33,7 @@ const FranchisePage = lazy(() => import("./pages/FranchiseModel.jsx"));
 const ContactUs = lazy(() => import("./pages/ContactUs.jsx"));
 const MediaPage = lazy(() => import("./pages/mediaPage.jsx"));
 const GalleryPage = lazy(() => import("./pages/GalleryPage.jsx"));
+const OurTeam = lazy(() => import("./pages/OurTeam.jsx"));
 const EmployeeLayout = lazy(() => import("./pages/employee/EmployeeLayout"));
 const EmployeePosts = lazy(() => import("./pages/employee/screens/posts/EmployeePosts"));
 const EditEmployeePost = lazy(() => import("./pages/employee/screens/posts/EditEmployeePost"));
@@ -58,6 +59,7 @@ function App() {
             <Route path="/contact" element={<PageTransition><ContactUs /></PageTransition>} />
             <Route path="/media" element={<PageTransition><MediaPage /></PageTransition>} />
             <Route path="/gallery" element={<PageTransition><GalleryPage /></PageTransition>} />
+            <Route path="/team" element={<PageTransition><OurTeam /></PageTransition>} />
             
             {/* <Route index path="/blogPage" element={<PageTransition><HomePage /></PageTransition>} />
             <Route path="/blog" element={<PageTransition><BlogPage /></PageTransition>} />
