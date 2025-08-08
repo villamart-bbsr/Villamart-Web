@@ -32,46 +32,46 @@ const TeamPage = () => {
         description: "Priya drives brand strategy and market expansion, with a focus on connecting with health-conscious consumers across India"
       }
     ],
-    'BOARD': [
-      {
-        name: "David Wilson",
-        position: "Chairman",
-        image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=800&fit=crop&crop=face",
-        description: "David brings 25 years of board experience in food and agriculture sector, providing strategic guidance for sustainable growth"
-      },
-      {
-        name: "Dr. Anita Patel",
-        position: "Independent Director",
-        image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=600&h=800&fit=crop&crop=face",
-        description: "Dr. Patel is a renowned expert in sustainable agriculture with PhD in Agricultural Sciences from IIT Delhi"
-      },
-      {
-        name: "Rajesh Kumar",
-        position: "Board Member",
-        image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&h=800&fit=crop&crop=face",
-        description: "Rajesh has extensive experience in rural development and farmer welfare programs across India"
-      }
-    ],
-    'INVESTORS': [
-      {
-        name: "Green Valley Capital",
-        position: "Lead Investor",
-        image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=800&fit=crop&crop=face",
-        description: "Green Valley Capital is our primary investment partner, focusing on sustainable food and agriculture ventures"
-      },
-      {
-        name: "Impact Ventures",
-        position: "Strategic Investor",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face",
-        description: "Impact Ventures specializes in companies that create positive social and environmental impact"
-      },
-      {
-        name: "Agricultural Innovation Fund",
-        position: "Sector Specialist",
-        image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=800&fit=crop&crop=face",
-        description: "AIF focuses exclusively on agricultural technology and sustainable farming solutions"
-      }
-    ],
+    // 'BOARD': [
+    //   {
+    //     name: "David Wilson",
+    //     position: "Chairman",
+    //     image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=800&fit=crop&crop=face",
+    //     description: "David brings 25 years of board experience in food and agriculture sector, providing strategic guidance for sustainable growth"
+    //   },
+    //   {
+    //     name: "Dr. Anita Patel",
+    //     position: "Independent Director",
+    //     image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=600&h=800&fit=crop&crop=face",
+    //     description: "Dr. Patel is a renowned expert in sustainable agriculture with PhD in Agricultural Sciences from IIT Delhi"
+    //   },
+    //   {
+    //     name: "Rajesh Kumar",
+    //     position: "Board Member",
+    //     image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&h=800&fit=crop&crop=face",
+    //     description: "Rajesh has extensive experience in rural development and farmer welfare programs across India"
+    //   }
+    // ],
+    // 'INVESTORS': [
+    //   {
+    //     name: "Green Valley Capital",
+    //     position: "Lead Investor",
+    //     image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=800&fit=crop&crop=face",
+    //     description: "Green Valley Capital is our primary investment partner, focusing on sustainable food and agriculture ventures"
+    //   },
+    //   {
+    //     name: "Impact Ventures",
+    //     position: "Strategic Investor",
+    //     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face",
+    //     description: "Impact Ventures specializes in companies that create positive social and environmental impact"
+    //   },
+    //   {
+    //     name: "Agricultural Innovation Fund",
+    //     position: "Sector Specialist",
+    //     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&h=800&fit=crop&crop=face",
+    //     description: "AIF focuses exclusively on agricultural technology and sustainable farming solutions"
+    //   }
+    // ],
     'PARTNERS': [
       {
         name: "Rural Cooperative Network",
