@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 // You can import this object from a shared file if you want
 const teamDetails = {
-    Ramesh: {
+    "Dr Ramesh Chandra Biswal": {
         name: "Dr Ramesh Chandra Biswal",
         education: "PhD, IIT Khargpur",
         designation: "Founder & CEO",

@@ -4,14 +4,14 @@ import { useNavigate } from "react-router-dom"; // Add this import
 // Example: Add social links to each member (customize per member as needed)
 const teamMembers = [
 	{
-		name: "Ramesh",
+		name: "Dr Ramesh Chandra Biswal",
 		role: "Creative Director",
 		image: "/images/ceo-photo.jpeg", // Place your image in public/images/
 		quote:
 			"Together, we challenge ourselves for a better tomorrow by meaningful designs that help live our best life and maintain lasting relevance",
-		twitter: "https://twitter.com/ramesh",
-		facebook: "https://facebook.com/ramesh",
-		linkedin: "https://linkedin.com/in/ramesh",
+		twitter: "https://twitter.com/rchbiswal",
+		facebook: "https://www.facebook.com/rchbiswal/",
+		linkedin: "https://in.linkedin.com/in/dr-ramesh-chandra-biswal-7151b822",
 	},
 	{
 		name: "Jenny Wilson",
@@ -143,15 +143,15 @@ const LinkedInIcon = () => (
 
 // Add a details object for each team member (expand as needed)
 const teamDetails = {
-    Ramesh: {
+    "Dr Ramesh Chandra Biswal": {
         name: "Dr Ramesh Chandra Biswal",
         education: "PhD, IIT Khargpur",
         designation: "Founder & CEO",
-        image: "/images/ramesh.jpg",
+        image: "/images/ceo-photo.jpeg",
         linkedin: "https://in.linkedin.com/in/dr-ramesh-chandra-biswal-7151b822",
         facebook: "https://www.facebook.com/rchbiswal/",
         twitter: "https://x.com/rchbiswal",
-        about: `I’m a Materials Scientist turned Agripreneur with 8+ years of experience designing sustainable business models at the intersection of agriculture, technology, and social impact.
+        about: `I'm a Materials Scientist turned Agripreneur with 8+ years of experience designing sustainable business models at the intersection of agriculture, technology, and social impact.
 As Founder of VillaMart, I built a PhyGital (Physical + Digital) supply chain platform connecting farmers directly to consumers — delivering fair pricing, reducing post-harvest losses, and ensuring year-round access to healthy, locally sourced produce.
 
 Core strengths:
@@ -205,7 +205,7 @@ Her goal is to inspire and help customers create the look they want.`,
 
 const Card = ({ member, isHovered, setHovered, index }) => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const navigate = useNavigate(); // Add this line
+    const navigate = useNavigate();
 
     const handleMouseMove = (e) => {
         const rect = e.currentTarget.getBoundingClientRect();
@@ -225,24 +225,24 @@ const Card = ({ member, isHovered, setHovered, index }) => {
     return (
         <>
             <div
-                className={`flex-shrink-0 w-96 transition-all duration-700 ease-out relative ${
+                className={`flex-shrink-0 transition-all duration-700 ease-out relative ${
                     isHovered
                         ? "z-50 scale-105 -translate-y-6 rotate-1"
                         : "z-10 scale-100 hover:scale-102"
                 }`}
+                style={{
+                    width: "384px", // fixed width (w-96 = 384px)
+                    minWidth: "384px",
+                    maxWidth: "384px",
+                    height: "600px", // fixed height for all cards
+                    minHeight: "600px",
+                    maxHeight: "600px",
+                }}
                 onMouseEnter={() => setHovered(index)}
                 onMouseLeave={() => setHovered(null)}
                 onMouseMove={handleMouseMove}
-                style={{
-                    transform: isHovered
-                        ? `scale(1.08) translateY(-24px) rotateX(5deg) rotateY(${
-                                (mousePosition.x - 192) * 0.02
-                          }deg)`
-                        : "scale(1)",
-                    transformOrigin: "center center",
-                }}
             >
-                <div className="relative mx-4">
+                <div className="relative mx-4 h-full">
                     {/* Crazy hover effects */}
                     {isHovered && (
                         <>
@@ -304,7 +304,7 @@ const Card = ({ member, isHovered, setHovered, index }) => {
                         </>
                     )}
 
-                    <div className="bg-white/95 backdrop-blur-sm text-green-900 rounded-3xl overflow-hidden shadow-2xl relative group cursor-pointer z-50">
+                    <div className="bg-white/95 backdrop-blur-sm text-green-900 rounded-3xl overflow-hidden shadow-2xl relative group cursor-pointer z-50 h-full flex flex-col">
                         {/* Dynamic hover glow with mouse following */}
                         <div
                             className={`absolute inset-0 bg-gradient-radial from-green-400/30 via-green-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-3xl ${
@@ -325,15 +325,16 @@ const Card = ({ member, isHovered, setHovered, index }) => {
                         />
 
                         {/* Image */}
-                        <div className="relative overflow-hidden">
+                        <div className="relative overflow-hidden" style={{ height: "320px" }}>
                             <img
                                 src={member.image}
                                 alt={member.name}
-                                className={`w-full h-80 object-cover transition-all duration-700 ${
+                                className={`w-full h-full object-cover transition-all duration-700 ${
                                     isHovered
                                         ? "scale-125 brightness-110 contrast-110 saturate-125"
                                         : "group-hover:scale-110"
                                 }`}
+                                style={{ minHeight: "320px", maxHeight: "320px" }}
                             />
                             <div
                                 className={`absolute inset-0 bg-gradient-to-t from-black/30 to-transparent transition-opacity duration-500 ${
@@ -348,84 +349,87 @@ const Card = ({ member, isHovered, setHovered, index }) => {
                                 <div className="absolute inset-0 bg-gradient-to-br from-green-400/20 via-transparent to-green-600/20 animate-pulse" />
                             )}
                         </div>
-
                         {/* Info */}
-                        <div className="p-8 relative">
-                            <div className="mb-6">
-                                <h2
-                                    className={`text-2xl font-bold mb-2 transition-all duration-300 ${
-                                        isHovered
-                                            ? "text-green-600 text-2xl animate-pulse"
-                                            : "text-green-900 group-hover:text-green-700"
-                                    }`}
-                                >
-                                    {member.name}
-                                </h2>
+                        <div className="p-8 relative flex-1 flex flex-col justify-between">
+                            <div>
+                                <div className="mb-6">
+                                    <h2
+                                        className={`text-2xl font-bold mb-2 transition-all duration-300 ${
+                                            isHovered
+                                                ? "text-green-600 text-2xl animate-pulse"
+                                                : "text-green-900 group-hover:text-green-700"
+                                        }`}
+                                    >
+                                        {member.name}
+                                    </h2>
+                                    <p
+                                        className={`font-semibold text-sm uppercase tracking-wide transition-all duration-300 ${
+                                            isHovered
+                                                ? "text-green-500 text-sm tracking-wider animate-bounce"
+                                                : "text-green-600"
+                                        }`}
+                                    >
+                                        {member.role}
+                                    </p>
+                                </div>
                                 <p
-                                    className={`font-semibold text-sm uppercase tracking-wide transition-all duration-300 ${
+                                    className={`italic leading-relaxed transition-all duration-300 ${
                                         isHovered
-                                            ? "text-green-500 text-sm tracking-wider animate-bounce"
-                                            : "text-green-600"
+                                            ? "text-green-600 text-base transform scale-102"
+                                            : "text-green-800 group-hover:text-green-700"
                                     }`}
                                 >
-                                    {member.role}
+                                    "{member.quote}"
                                 </p>
                             </div>
-                            <p
-                                className={`italic leading-relaxed transition-all duration-300 ${
-                                    isHovered
-                                        ? "text-green-600 text-base transform scale-102"
-                                        : "text-green-800 group-hover:text-green-700"
-                                }`}
-                            >
-                                "{member.quote}"
-                            </p>
                             {/* Social icons */}
-                            <div className="flex gap-4 mt-6">
-                                {member.twitter && (
-                                    <a
-                                        href={member.twitter}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-green-500 hover:text-green-700 transition"
-                                        aria-label="Twitter"
+                            <div>
+                                <div className="flex gap-4 mt-6">
+                                    {member.twitter && (
+                                        <a
+                                            href={member.twitter}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-green-500 hover:text-green-700 transition"
+                                            aria-label="Twitter"
+                                        >
+                                            <TwitterIcon />
+                                        </a>
+                                    )}
+                                    {member.facebook && (
+                                        <a
+                                            href={member.facebook}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-green-500 hover:text-green-700 transition"
+                                            aria-label="Facebook"
+                                        >
+                                            <FacebookIcon />
+                                        </a>
+                                    )}
+                                    {member.linkedin && (
+                                        <a
+                                            href={member.linkedin}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-green-500 hover:text-green-700 transition"
+                                            aria-label="LinkedIn"
+                                        >
+                                            <LinkedInIcon />
+                                        </a>
+                                    )}
+                                </div>
+                                {/* More Info button for all team members */}
+                                {details && (
+                                    <button
+                                        className="mt-6 px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-700 transition font-semibold"
+                                        onClick={openDetailsPage}
+                                        type="button"
                                     >
-                                        <TwitterIcon />
-                                    </a>
-                                )}
-                                {member.facebook && (
-                                    <a
-                                        href={member.facebook}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-green-500 hover:text-green-700 transition"
-                                        aria-label="Facebook"
-                                    >
-                                        <FacebookIcon />
-                                    </a>
-                                )}
-                                {member.linkedin && (
-                                    <a
-                                        href={member.linkedin}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-green-500 hover:text-green-700 transition"
-                                        aria-label="LinkedIn"
-                                    >
-                                        <LinkedInIcon />
-                                    </a>
+                                        More Info
+                                    </button>
                                 )}
                             </div>
-                            {/* More Info button for all team members */}
-                            {details && (
-                                <button
-                                    className="mt-6 px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-700 transition font-semibold"
-                                    onClick={openDetailsPage}
-                                    type="button"
-                                >
-                                    More Info
-                                </button>
-                            )}
                         </div>
                     </div>
                 </div>
@@ -436,28 +440,48 @@ const Card = ({ member, isHovered, setHovered, index }) => {
 
 const partners = [
 	{
-		name: "Acme Corp",
-		logo: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
+		name: "Director of Horticulture",
+		logo: "/images/partners/partner1.png", // Replace with actual image path
 	},
 	{
-		name: "Globex",
-		logo: "https://upload.wikimedia.org/wikipedia/commons/4/47/React.svg",
+		name: "OFSDS",
+		logo: "/images/partners/partner2.png", // Replace with actual image path
 	},
 	{
-		name: "Initech",
-		logo: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg",
+		name: "ORMAS",
+		logo: "/images/partners/partner3.png", // Replace with actual image path
 	},
 	{
-		name: "Umbrella",
-		logo: "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png",
+		name: "IRRI",
+		logo: "/images/partners/partner4.png", // Replace with actual image path
 	},
 	{
-		name: "Wayne Enterprises",
-		logo: "https://upload.wikimedia.org/wikipedia/commons/9/96/Sass_Logo_Color.svg",
+		name: "Livelyhood Alternatives",
+		logo: "/images/partners/partner5.png", // Replace with actual image path
 	},
 	{
-		name: "Stark Industries",
-		logo: "https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg",
+		name: "Mahashakti Foundation",
+		logo: "/images/partners/partner6.png", // Replace with actual image path
+	},
+	{
+		name: "Swiggy Instamart",
+		logo: "/images/partners/partner7.png", // Replace with actual image path
+	},
+	{
+		name: "Blinkit",
+		logo: "/images/partners/partner8.png", // Replace with actual image path
+	},
+	{
+		name: "Reliance Fresh",
+		logo: "/images/partners/partner9.png", // Replace with actual image path
+	},
+	{
+		name: "Jio Mart",
+		logo: "/images/partners/partner10.png", // Replace with actual image path
+	},
+	{
+		name: "Big Basket",
+		logo: "/images/partners/partner11.png", // Replace with actual image path
 	},
 ];
 
