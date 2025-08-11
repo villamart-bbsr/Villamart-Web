@@ -41,6 +41,7 @@ const CreateEmployeePost = lazy(() => import("./pages/employee/screens/posts/Cre
 const OTPVerificationPage = lazy(() => import("./pages/register/OTPVerificationPage"));
 const ForgotPasswordPage = lazy(() => import("./pages/forgotPassword/ForgotPasswordPage"));
 const ResetPasswordPage = lazy(() => import("./pages/forgotPassword/ResetPasswordPage"));
+const TeamMemberDetails = lazy(() => import("./pages/TeamMemberDetails.jsx"));
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
             <Route path="/media" element={<PageTransition><MediaPage /></PageTransition>} />
             <Route path="/gallery" element={<PageTransition><GalleryPage /></PageTransition>} />
             <Route path="/team" element={<PageTransition><OurTeam /></PageTransition>} />
+            <Route path="/team/:name" element={<PageTransition><TeamMemberDetails /></PageTransition>} />
             
             {/* <Route index path="/blogPage" element={<PageTransition><HomePage /></PageTransition>} />
             <Route path="/blog" element={<PageTransition><BlogPage /></PageTransition>} />
