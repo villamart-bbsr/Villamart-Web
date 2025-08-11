@@ -384,47 +384,45 @@ const Card = ({ member, isHovered, setHovered, index }) => {
                                     "{member.quote}"
                                 </p>
                             </div>
-                            {/* Social icons */}
-                            <div>
-                                <div className="flex gap-4 mt-6">
-                                    {member.twitter && (
-                                        <a
-                                            href={member.twitter}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-green-500 hover:text-green-700 transition"
-                                            aria-label="Twitter"
-                                        >
-                                            <TwitterIcon />
-                                        </a>
-                                    )}
-                                    {member.facebook && (
-                                        <a
-                                            href={member.facebook}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-green-500 hover:text-green-700 transition"
-                                            aria-label="Facebook"
-                                        >
-                                            <FacebookIcon />
-                                        </a>
-                                    )}
-                                    {member.linkedin && (
-                                        <a
-                                            href={member.linkedin}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-green-500 hover:text-green-700 transition"
-                                            aria-label="LinkedIn"
-                                        >
-                                            <LinkedInIcon />
-                                        </a>
-                                    )}
-                                </div>
+                            {/* Social icons and More Info in a single line */}
+                            <div className="flex items-center gap-4 mt-6">
+                                {member.twitter && (
+                                    <a
+                                        href={member.twitter}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-green-500 hover:text-green-700 transition"
+                                        aria-label="Twitter"
+                                    >
+                                        <TwitterIcon />
+                                    </a>
+                                )}
+                                {member.facebook && (
+                                    <a
+                                        href={member.facebook}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-green-500 hover:text-green-700 transition"
+                                        aria-label="Facebook"
+                                    >
+                                        <FacebookIcon />
+                                    </a>
+                                )}
+                                {member.linkedin && (
+                                    <a
+                                        href={member.linkedin}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-green-500 hover:text-green-700 transition"
+                                        aria-label="LinkedIn"
+                                    >
+                                        <LinkedInIcon />
+                                    </a>
+                                )}
                                 {/* More Info button for all team members */}
                                 {details && (
                                     <button
-                                        className="mt-6 px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-700 transition font-semibold"
+                                        className="cursor-pointer ml-auto px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-700 transition font-semibold"
                                         onClick={openDetailsPage}
                                         type="button"
                                     >
@@ -547,7 +545,7 @@ function PartnersSection() {
 			</div>
 			<style jsx>{`
 				.slider-partners {
-					animation: scroll-partners 12s linear infinite;
+					animation: scroll-partners 30s linear infinite;
 				}
 				.slider-partners:hover {
 					animation-play-state: paused;
