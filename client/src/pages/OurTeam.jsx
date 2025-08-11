@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"; // Add this import
 const teamMembers = [
 	{
 		name: "Dr Ramesh Chandra Biswal",
-		role: "Creative Director",
+		role: "Founder & CEO",
 		image: "/images/ceo-photo.jpeg", // Place your image in public/images/
 		quote:
 			"Together, we challenge ourselves for a better tomorrow by meaningful designs that help live our best life and maintain lasting relevance",
@@ -33,6 +33,8 @@ const teamMembers = [
 		facebook: "https://facebook.com/bessiecooper",
 		linkedin: "https://linkedin.com/in/bessiecooper",
 	},
+	// Add more team members here as needed...
+
 	// {
 	//   name: "Devon Lane",
 	//   role: "UI/UX Designer",
