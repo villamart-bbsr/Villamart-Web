@@ -229,16 +229,17 @@ const FranchisePage = () => {
             whileTap={{ scale: 0.95 }}
           >
             <button 
-              onClick={() => {
-                document.getElementById('contact-form').scrollIntoView({ 
-                  behavior: 'smooth',
-                  block: 'start'
-                });
-              }}
-              className="cursor-pointer bg-orange-500 hover:bg-orange-400 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-orange-400 hover:border-orange-300"
-            >
-              Start Your Franchise Journey
-            </button>
+  onClick={() => {
+    window.open(
+      "https://docs.google.com/forms/d/1sJ9pXufWZUKWk_D0PGcSbVG9LB_XOh9mEY4UyYOx2-U/viewform?edit_requested=true",
+      "_blank"
+    );
+  }}
+  className="cursor-pointer bg-orange-500 hover:bg-orange-400 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-orange-400 hover:border-orange-300"
+>
+  Start Your Franchise Journey
+</button>
+
           </motion.div>
         </div>
 

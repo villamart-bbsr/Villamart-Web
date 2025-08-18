@@ -209,10 +209,10 @@ export default function Navbar() {
                 <span className="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-500 after:transition-all after:duration-300 group-hover:after:w-full">Franchise Model</span>
               </a>
               
-              <a href="/team" className={`px-4 py-2 rounded-md flex items-center text-lg ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
+              {/* <a href="/team" className={`px-4 py-2 rounded-md flex items-center text-lg ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
                 <Users size={20} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
                 <span className="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-500 after:transition-all after:duration-300 group-hover:after:w-full">Our Team</span>
-              </a>
+              </a> */}
               
               {/* Blogs Dropdown */}
               {/* <div className="relative" ref={blogsMenuRef} onMouseEnter={handleBlogsMouseEnter} onMouseLeave={handleBlogsMouseLeave}>
@@ -268,10 +268,10 @@ export default function Navbar() {
                 <Users size={20} />
                 <span>Franchise</span>
               </a>
-              <a href="/team" className={`flex flex-col items-center px-2 py-1 mx-1 rounded-md text-xs ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
+              {/* <a href="/team" className={`flex flex-col items-center px-2 py-1 mx-1 rounded-md text-xs ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
                 <Users size={20} />
                 <span>Our Team</span>
-              </a>
+              </a> */}
               <a href="/blogs" className={`flex flex-col items-center px-2 py-1 mx-1 rounded-md text-xs ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
                 <BookOpen size={20} />
                 <span>Blogs</span>
@@ -317,10 +317,10 @@ export default function Navbar() {
               Franchise Model
             </a>
             
-            <a href="/team" className={`block px-3 py-2 rounded-md ${hoverColor} flex items-center transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`}>
+            {/* <a href="/team" className={`block px-3 py-2 rounded-md ${hoverColor} flex items-center transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`}>
               <Users size={16} className="mr-2" />
               Our Team
-            </a>
+            </a> */}
             
             {/* Mobile Blogs */}
             {/* <div>
