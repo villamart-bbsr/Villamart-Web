@@ -6,20 +6,19 @@ import { ArrowLeft, Linkedin, Twitter, Facebook, Mail, MapPin, Calendar, Award }
 
 // Team details data
 const teamDetails = {
-  "Dr Ramesh Chandra Biswal": {
-    name: "Dr Ramesh Chandra Biswal",
-    education: "PhD, IIT Khargpur",
-    designation: "Founder & CEO",
-    image: "/images/ceo-photo.jpeg",
-    linkedin: "https://in.linkedin.com/in/dr-ramesh-chandra-biswal-7151b822",
-    facebook: "https://www.facebook.com/rchbiswal/",
-    twitter: "https://x.com/rchbiswal",
-    email: "ramesh@villamart.com",
-    location: "Bhubaneswar, India",
-    joinedDate: "2016",
-    achievements: ["Materials Scientist", "Agripreneur", "Innovation Leader"],
-    about: `I'm a Materials Scientist turned Agripreneur with 8+ years of experience designing sustainable business models at the intersection of agriculture, technology, and social impact.
-
+    "Dr Ramesh Chandra Biswal": {
+        name: "Dr Ramesh Chandra Biswal",
+        education: "PhD, IIT Khargpur",
+        designation: "Founder & CEO",
+        image: "/images/ceo-photo.jpeg",
+        linkedin: "https://in.linkedin.com/in/dr-ramesh-chandra-biswal-7151b822",
+        facebook: "https://www.facebook.com/rchbiswal/",
+        twitter: "https://x.com/rchbiswal",
+        email: "ramesh@villamart.com",
+        location: "Bhubaneswar, India",
+        joinedDate: "2016",
+        achievements: ["Materials Scientist", "Agripreneur", "Innovation Leader"],
+        about: `I'm a Materials Scientist turned Agripreneur with 8+ years of experience designing sustainable business models at the intersection of agriculture, technology, and social impact.
 As Founder of VillaMart, I built a PhyGital (Physical + Digital) supply chain platform connecting farmers directly to consumers — delivering fair pricing, reducing post-harvest losses, and ensuring year-round access to healthy, locally sourced produce.
 
 Core strengths:
@@ -31,57 +30,139 @@ Core strengths:
 • Deploying post-harvest technology & traceability tools
 
 My work is driven by a mission to boost farmer incomes, build transparent supply chains, and bring traceable, quality produce to urban markets — combining grassroots insight with purposeful innovation and scalable execution.`,
-  },
-  "Jenny Wilson": {
-    name: "Jenny Wilson",
-    education: "M.Des, NID Ahmedabad",
-    designation: "Design Lead",
-    image: "https://i.pravatar.cc/400?img=1",
-    linkedin: "https://linkedin.com/in/jennywilson",
-    facebook: "https://facebook.com/jennywilson",
-    twitter: "https://twitter.com/jennywilson",
-    email: "jenny@villamart.com",
-    location: "Mumbai, India",
-    joinedDate: "2018",
-    achievements: ["UI/UX Expert", "Brand Strategist", "Design Innovator"],
-    about: `Jenny is a passionate designer with a keen eye for contemporary aesthetics and usability. She leads the creative team at VillaMart, ensuring every product and experience is both beautiful and functional.
+    },
+    "Silarani Mohanty": {
+        name: "Silarani Mohanty",
+        education: "MBA, Operations Management",
+        designation: "Chief Operating Officer",
+        image: "/images/ourTeam/COO.jpg",
+        linkedin: "https://linkedin.com/in/silarani-mohanty",
+        facebook: "https://www.facebook.com/share/17FHaF1VW9",
+        email: "silarani@villamart.com",
+        location: "Bhubaneswar, India",
+        joinedDate: "2018",
+        achievements: ["Operations Excellence", "Process Optimization", "Team Leadership"],
+        about: `As Chief Operating Officer at VillaMart, I'm passionate about creating operational excellence that drives organizational success. My role involves streamlining processes, fostering collaboration, and ensuring we consistently deliver value to our farmers and customers.
 
-With over 6 years of experience in design, Jenny has worked with various startups and established companies, helping them create compelling user experiences that drive engagement and growth.
+I'm obsessed with staying organized and making everyone's life easier. It brings genuine joy to take the burden off my team's shoulders, and I always do anything I can to enhance operational efficiency. Trust and dependability are the foundations that can grow a company, and I pride myself on being dedicated to both.
 
-Strengths:
-• UI/UX design and research
-• Brand identity development
-• Product storytelling and marketing
-• Team leadership and mentorship
-• Design systems and guidelines
+When I'm not optimizing operations, I'm at home nurturing my plants. My plants are my absolute healers and they create a positive environment for me and my surroundings.
 
-Jenny believes everyone deserves access to well-made, thoughtfully designed products. Her design philosophy centers around creating inclusive, accessible, and sustainable design solutions.`,
-  },
-  "Bessie Cooper": {
-    name: "Bessie Cooper",
-    education: "MBA, IIM Bangalore",
-    designation: "Product Manager",
-    image: "https://i.pravatar.cc/400?img=2",
-    linkedin: "https://linkedin.com/in/bessiecooper",
-    facebook: "https://facebook.com/bessiecooper",
-    twitter: "https://twitter.com/bessiecooper",
-    email: "bessie@villamart.com",
-    location: "Bangalore, India",
-    joinedDate: "2019",
-    achievements: ["Product Strategy Expert", "Market Research Leader", "Customer Experience Advocate"],
-    about: `Bessie is a dynamic product manager with a knack for building relatable and accessible collections. She ensures VillaMart's offerings evolve with customer needs while staying true to the brand's mission.
+I believe in bending over backwards to help others' dreams come true, while understanding the importance of standing your ground and maintaining balance. I am committed to fostering a culture of continuous improvement and operational agility to stay ahead in our rapidly evolving agricultural landscape.`,
+    },
+    "Shewtaparna Panigrahy": {
+        name: "Shewtaparna Panigrahy",
+        education: "Semi-Qualified Chartered Accountant",
+        designation: "Chief Financial Officer",
+        image: "/images/ourTeam/CFO.jpg",
+        linkedin: "https://www.linkedin.com/in/swetaparna-panigrahi-a502a0219?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+        email: "shewtaparna@villamart.com",
+        location: "Bhubaneswar, India",
+        joinedDate: "2019",
+        achievements: ["Financial Strategy", "Budget Management", "Fundraising Expert"],
+        about: `As CFO at VillaMart, I bring financial stewardship and strategic planning expertise to support our mission of empowering farmers and building resilient supply chains. With my background as a Semi-Qualified Chartered Accountant and experience with organizations like EY, I've worked in progressively responsible positions before joining VillaMart.
 
-With a strong background in business strategy and product development, Bessie has successfully launched multiple product lines that have significantly contributed to VillaMart's growth.
+My work in the finance domain encompasses comprehensive financial management including planning, budgeting, forecasting, fundraising, and fund management. I ensure our resources are optimized to maximize impact for our farming communities while maintaining sustainable growth.
 
-Strengths:
-• Product strategy and roadmap planning
-• Market research and competitive analysis
-• Team collaboration and cross-functional leadership
-• Customer experience optimization
-• Data-driven decision making
+Beyond my love for numbers and financial analysis, I enjoy traveling, reading, and social work. I believe that strong financial foundations enable us to create lasting positive change in the agricultural sector.`,
+    },
+    "Rakesh Panda": {
+        name: "Rakesh Panda",
+        education: "B.Tech Computer Science",
+        designation: "Chief Technology Officer",
+        image: "/images/ourTeam/CTO.jpg",
+        email: "rakesh@villamart.com",
+        location: "Bhubaneswar, India",
+        joinedDate: "2020",
+        achievements: ["Technology Innovation", "Platform Development", "Digital Transformation"],
+        about: `I joined as Chief Technology Officer (CTO). I specialize in leading and scaling high-performance technology teams, driving innovation, and executing visionary tech strategies to propel business success. My core strengths lie in aligning technology with business goals, optimizing product development cycles, and implementing systems that enhance operational efficiency.
 
-Her goal is to inspire and help customers create the look they want while ensuring sustainable and ethical business practices.`,
-  },
+I have a proven track record in key areas such as software development, AI integration, cloud architecture, data security, etc., where I've successfully managed and executed projects or milestones. I'm passionate about staying ahead of the tech curve, cultivating a collaborative culture, and ensuring that my teams remain agile in a rapidly changing tech landscape.
+
+In my role as CTO, I focus on:
+
+• Leadership and team development
+• Innovation and tech strategy
+• Product development and system optimization
+• Stakeholder management and cross-functional collaboration
+• Driving operational scalability and efficiency
+
+I thrive on problem-solving, strategic planning, and fostering environments where technology-driven solutions transform businesses and improve customer experiences.`,
+    },
+    "Sangita Behura": {
+        name: "Sangita Behura",
+        education: "MBA Agribusiness Management, B.Tech Computer Science",
+        designation: "Manager-People, Project & Partnership",
+        image: "/images/ourTeam/MPP.jpg",
+        linkedin: "https://www.linkedin.com/in/sangita-behura-9a07179b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
+        facebook: "https://www.facebook.com/share/162ha5FAr1/?mibextid=wwXIfr",
+        email: "sangita@villamart.com",
+        location: "Bhubaneswar, India",
+        joinedDate: "2021",
+        achievements: ["Agribusiness Excellence", "FPO Development", "Market Linkage Specialist"],
+        about: `Sangita leads projects at Villamart and brings 7+ years experience in Agribusiness, Market development and Rural livelihood promotion. She has worked with leading institutions like NABARD, Odisha Livelihood Mission and other key institutions building FPOs, market linkages and capacity building and DPR preparations.
+
+She holds an MBA in Agribusiness Management and B.Tech in Computer Science, bringing a unique blend of technical and agricultural expertise to her role. Her extensive experience spans across various aspects of rural development and agricultural value chain enhancement.
+
+Key areas of expertise:
+• FPO (Farmer Producer Organization) development and capacity building
+• Market linkage creation and supply chain optimization
+• Rural livelihood promotion and farmer empowerment
+• Project management and stakeholder coordination
+• DPR (Detailed Project Report) preparation and implementation
+
+Her work focuses on creating sustainable agricultural ecosystems that benefit farmers while driving organizational growth and impact in the agricultural sector.`,
+    },
+    "Harishankar Pal": {
+        name: "Harishankar Pal",
+        education: "B.Sc Agriculture",
+        designation: "Farmer Success Manager",
+        image: "/images/ourTeam/FS.jpg",
+        linkedin: "https://www.linkedin.com/in/harishankar-pal-8a05822aa?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+        facebook: "https://www.facebook.com/share/1BG3jLPL2d/",
+        email: "harishankar@villamart.com",
+        location: "Rural Odisha, India",
+        joinedDate: "2022",
+        achievements: ["Farmer Partnership Building", "Supply Chain Optimization", "Market Development"],
+        about: `I joined as Farmer Success Manager (FSM). I specialize in working closely with farmers to build strong partnerships, enhance agricultural practices, and create sustainable market linkages that drive both farmer prosperity and business growth. My core strengths lie in aligning farmer needs with organizational goals, streamlining procurement and supply processes, and implementing strategies that ensure quality produce and fair value for farmers.
+
+I have a proven track record in key areas such as farmer engagement, crop planning, supply chain optimization, quality assurance, and market development, where I've successfully managed and executed impactful initiatives. I'm passionate about empowering farmers with knowledge, fostering collaboration, and ensuring that they remain competitive in a rapidly evolving agri-business landscape.
+
+In my role as Farmer Success Manager, I focus on:
+
+• Farmer relationship building and support
+• Market linkage and procurement strategies
+• Quality assurance and product optimization
+• Stakeholder management and collaboration with FPOs, NGOs, and companies
+• Driving scalability and efficiency in agri-supply chains
+
+I thrive on problem-solving, strategic planning, and creating ecosystems where farmer-centric solutions transform livelihoods and strengthen the agri-value chain.`,
+    },
+    "Kamal Kumar Mohanty": {
+        name: "Kamal Kumar Mohanty",
+        education: "Master of Science (MSc) in Agriculture",
+        designation: "Farm Resource Manager",
+        image: "/images/ourTeam/FR.jpg",
+        linkedin: "https://www.linkedin.com/in/kamal-kumar-mohanty-62a01b283/",
+        facebook: "https://www.facebook.com/share/1FQwW4krpz/",
+        email: "kamal@villamart.com",
+        location: "Rural Odisha, India",
+        joinedDate: "2022",
+        achievements: ["Modern Agricultural Practices", "Sustainable Farming Systems", "Agricultural Innovation"],
+        about: `Kamal Kumar Mohanty holds a Master of Science (MSc) degree in Agriculture with hands-on experience in modern agricultural practices and sustainable farming systems. His academic and practical background includes specialization in crop planning, soil health management & implementation of innovative agricultural technologies.
+
+He joined as a Farm Resource Manager and helps in managing resources while being passionate about advancing agricultural operations through continuous innovation and technology. His expertise spans across various aspects of agricultural resource management and sustainable farming practices.
+
+Key areas of focus:
+• Crop planning and agricultural strategy
+• Soil health management and optimization
+• Implementation of innovative agricultural technologies
+• Resource management and allocation
+• Sustainable farming system development
+• Agricultural operations advancement through technology
+
+Kamal is dedicated to transforming traditional farming practices through modern agricultural techniques and ensuring optimal resource utilization for maximum productivity and sustainability.`,
+    },
 };
 
 export default function TeamMemberDetails() {

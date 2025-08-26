@@ -209,10 +209,10 @@ export default function Navbar() {
                 <span className="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-500 after:transition-all after:duration-300 group-hover:after:w-full">Franchise Model</span>
               </a>
               
-              {/* <a href="/team" className={`px-4 py-2 rounded-md flex items-center text-lg ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
+              <a href="/team" className={`px-4 py-2 rounded-md flex items-center text-lg ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
                 <Users size={20} className="mr-2 transition-transform duration-300 group-hover:rotate-12" />
                 <span className="relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-green-500 after:transition-all after:duration-300 group-hover:after:w-full">Our Team</span>
-              </a> */}
+              </a>
               
               {/* Blogs Dropdown */}
               {/* <div className="relative" ref={blogsMenuRef} onMouseEnter={handleBlogsMouseEnter} onMouseLeave={handleBlogsMouseLeave}>

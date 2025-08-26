@@ -14,59 +14,62 @@ const teamMembers = [
 		linkedin: "https://in.linkedin.com/in/dr-ramesh-chandra-biswal-7151b822",
 	},
 	{
-		name: "Jenny Wilson",
-		role: "Design Lead",
-		image: "/images/jenny.jpg",
+		name: "Silarani Mohanty",
+		role: "COO",
+		image: "/images/ourTeam/COO.jpg",
 		quote:
-			"Contemporary design and well-made products are things that we think everybody should be able to have. It's the reason we do what we do",
-		twitter: "https://twitter.com/jennywilson",
-		facebook: "https://facebook.com/jennywilson",
-		linkedin: "https://linkedin.com/in/jennywilson",
+			"Operational excellence drives organizational success. I focus on streamlining processes and fostering collaboration to ensure we deliver value to our farmers and customers consistently.",
+		facebook: "https://www.facebook.com/share/17FHaF1VW9",
+		linkedin: "https://linkedin.com/in/silarani-mohanty",
 	},
 	{
-		name: "Bessie Cooper",
-		role: "Product Manager",
-		image: "/images/bessie.jpg",
+		name: "Shewtaparna Panigrahy",
+		role: "CFO",
+		image: "/images/ourTeam/CFO.jpg",
 		quote:
-			"Our collection is ever-evolving. Yet, it remains consistently relatable and accessible. Our purpose is to inspire and help create the look you want.",
-		twitter: "https://twitter.com/bessiecooper",
-		facebook: "https://facebook.com/bessiecooper",
-		linkedin: "https://linkedin.com/in/bessiecooper",
+			"Financial stewardship and strategic planning are the backbone of sustainable growth. I ensure our resources are optimized to support our mission of empowering farmers and building resilient supply chains.",
+		linkedin: "https://www.linkedin.com/in/swetaparna-panigrahi-a502a0219?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
 	},
-	// Add more team members here as needed...
+	
 
-	// {
-	//   name: "Devon Lane",
-	//   role: "UI/UX Designer",
-	//   image:
-	//     "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
-	//   quote:
-	//     "Innovation meets functionality in every design we create. We believe in crafting experiences that resonate with users on a deeper level.",
-	// },
-	// {
-	//   name: "Marvin McKinney",
-	//   role: "Frontend Developer",
-	//   image:
-	//     "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
-	//   quote:
-	//     "Code is poetry in motion. Every line we write brings ideas to life and creates digital experiences that inspire and engage.",
-	// },
-	// {
-	//   name: "Arlene McCoy",
-	//   role: "Brand Strategist",
-	//   image:
-	//     "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=400&fit=crop&crop=face",
-	//   quote:
-	//     "Brand identity is the soul of every product. We craft stories that connect hearts and minds, creating lasting emotional bonds.",
-	// },
-	// {
-	//   name: "Jerome Bell",
-	//   role: "Technical Lead",
-	//   image:
-	//     "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=face",
-	//   quote:
-	//     "Technology should be invisible yet powerful. We build robust solutions that seamlessly integrate into people's daily lives.",
-	// },
+	{
+	  name: "Rakesh Panda",
+	  role: "CTO",
+	  image:
+	    "/images/ourTeam/CTO.jpg",
+	  quote:
+	    "Technology should serve humanity, especially our farmers. I lead our tech initiatives to create scalable, user-friendly solutions that bridge the gap between traditional farming and modern digital commerce.",
+	},
+	{
+	  name: "Sangita Behura",
+	  role: "Manager-People, Project & Partnership",
+	  image:
+	    "/images/ourTeam/MPP.jpg",
+	  quote:
+	    "People are our greatest asset. I focus on building strong teams, managing impactful projects, and fostering partnerships that create mutual value for all stakeholders in our ecosystem.",
+		facebook: "https://www.facebook.com/share/162ha5FAr1/?mibextid=wwXIfr",
+		linkedin: "https://www.linkedin.com/in/sangita-behura-9a07179b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
+	},
+	{
+	  name: "Harishankar Pal",
+	  role: "Farmer Success Manager",
+	  image:
+	    "/images/ourTeam/FS.jpg",
+	  quote:
+	    "Every farmer's success is our success. I work directly with farming communities to understand their needs, provide support, and ensure they maximize their potential through our platform.",
+		facebook:"https://www.facebook.com/share/1BG3jLPL2d/",
+		linkedin:"https://www.linkedin.com/in/harishankar-pal-8a05822aa?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+	},
+	{
+	  name: "Kamal Kumar Mohanty",
+	  role: "Farm Resource Manager",
+	  image:
+	    "/images/ourTeam/FR.jpg",
+	  quote:
+	    "Efficient resource management is key to sustainable farming. I ensure our farmers have access to the right tools, inputs, and knowledge to optimize their productivity and profitability.",
+		facebook:"https://www.facebook.com/share/1FQwW4krpz/",
+		linkedin:"https://www.linkedin.com/in/kamal-kumar-mohanty-62a01b283/"
+	},
 ];
 
 // Floating particles component
@@ -149,7 +152,7 @@ const teamDetails = {
         name: "Dr Ramesh Chandra Biswal",
         education: "PhD, IIT Khargpur",
         designation: "Founder & CEO",
-        image: "/images/ceo-photo.jpeg",
+        image: "/images/ourTeam/ceo-photo.jpeg",
         linkedin: "https://in.linkedin.com/in/dr-ramesh-chandra-biswal-7151b822",
         facebook: "https://www.facebook.com/rchbiswal/",
         twitter: "https://x.com/rchbiswal",
@@ -166,43 +169,84 @@ Core strengths:
 
 My work is driven by a mission to boost farmer incomes, build transparent supply chains, and bring traceable, quality produce to urban markets — combining grassroots insight with purposeful innovation and scalable execution.`,
     },
-    "Jenny Wilson": {
-        name: "Jenny Wilson",
-        education: "M.Des, NID Ahmedabad",
-        designation: "Design Lead",
-        image: "/images/jenny.jpg",
-        linkedin: "https://linkedin.com/in/jennywilson",
-        facebook: "https://facebook.com/jennywilson",
-        twitter: "https://twitter.com/jennywilson",
-        about: `Jenny is a passionate designer with a keen eye for contemporary aesthetics and usability. She leads the creative team at VillaMart, ensuring every product and experience is both beautiful and functional.
+    "Silarani Mohanty": {
+        name: "Silarani Mohanty",
+        education: "MBA, Operations Management",
+        designation: "Chief Operating Officer",
+        image: "/images/ourTeam/COO.jpg",
+        linkedin: "https://linkedin.com/in/silarani-mohanty",
+        facebook: "https://www.facebook.com/share/17FHaF1VW9",
+        about: `As Chief Operating Officer at VillaMart, I'm passionate about creating operational excellence that drives organizational success. My role involves streamlining processes, fostering collaboration, and ensuring we consistently deliver value to our farmers and customers.
 
-Strengths:
-• UI/UX design
-• Brand identity
-• Product storytelling
-• Team leadership
+I'm obsessed with staying organized and making everyone's life easier. It brings genuine joy to take the burden off my team's shoulders, and I always do anything I can to enhance operational efficiency. Trust and dependability are the foundations that can grow a company, and I pride myself on being dedicated to both.
 
-Jenny believes everyone deserves access to well-made, thoughtfully designed products.`,
+When I'm not optimizing operations, I'm at home nurturing my plants. My plants are my absolute healers and they create a positive environment for me and my surroundings.
+
+I believe in bending over backwards to help others' dreams come true, while understanding the importance of standing your ground and maintaining balance. I am committed to fostering a culture of continuous improvement and operational agility to stay ahead in our rapidly evolving agricultural landscape.`,
     },
-    "Bessie Cooper": {
-        name: "Bessie Cooper",
-        education: "MBA, IIM Bangalore",
-        designation: "Product Manager",
-        image: "/images/bessie.jpg",
-        linkedin: "https://linkedin.com/in/bessiecooper",
-        facebook: "https://facebook.com/bessiecooper",
-        twitter: "https://twitter.com/bessiecooper",
-        about: `Bessie is a dynamic product manager with a knack for building relatable and accessible collections. She ensures VillaMart's offerings evolve with customer needs while staying true to the brand's mission.
+    "Shewtaparna Panigrahy": {
+        name: "Shewtaparna Panigrahy",
+        education: "Semi-Qualified Chartered Accountant",
+        designation: "Chief Financial Officer",
+        image: "/images/ourTeam/CFO.jpg",
+        linkedin: "https://www.linkedin.com/in/swetaparna-panigrahi-a502a0219?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+        about: `As CFO at VillaMart, I bring financial stewardship and strategic planning expertise to support our mission of empowering farmers and building resilient supply chains. With my background as a Semi-Qualified Chartered Accountant and experience with organizations like EY, I've worked in progressively responsible positions before joining VillaMart.
 
-Strengths:
-• Product strategy
-• Market research
-• Team collaboration
-• Customer experience
+My work in the finance domain encompasses comprehensive financial management including planning, budgeting, forecasting, fundraising, and fund management. I ensure our resources are optimized to maximize impact for our farming communities while maintaining sustainable growth.
 
-Her goal is to inspire and help customers create the look they want.`,
+Beyond my love for numbers and financial analysis, I enjoy traveling, reading, and social work. I believe that strong financial foundations enable us to create lasting positive change in the agricultural sector.`,
     },
-    // Add more team members here as needed...
+    "Rakesh Panda": {
+        name: "Rakesh Panda",
+        education: "B.Tech Computer Science",
+        designation: "Chief Technology Officer",
+        image: "/images/ourTeam/CTO.jpg",
+		// linkedin: "https://www.linkedin.com/in/rakesh-panda-927b6215a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+        about: `As CTO at VillaMart, I believe technology should serve humanity, especially our farmers. I lead our technology initiatives to create scalable, user-friendly solutions that bridge the gap between traditional farming practices and modern digital commerce.
+
+My focus is on developing robust technological infrastructure that seamlessly integrates into farmers' daily lives, making their operations more efficient and profitable. I oversee the development of our PhyGital platform, ensuring it remains accessible, reliable, and innovative.
+
+I'm passionate about leveraging technology to solve real-world agricultural challenges, from supply chain optimization to farmer empowerment tools. Every line of code we write serves a purpose: to create meaningful impact in the lives of farming communities.`,
+    },
+    "Sangita Behura": {
+        name: "Sangita Behura",
+        education: "MBA Human Resources",
+        designation: "Manager-People, Project & Partnership",
+        image: "/images/ourTeam/MPP.jpg",
+        linkedin: "https://www.linkedin.com/in/sangita-behura-9a07179b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
+        facebook: "https://www.facebook.com/share/162ha5FAr1/?mibextid=wwXIfr",
+        about: `People are our greatest asset at VillaMart. As Manager of People, Projects & Partnerships, I focus on building strong teams, managing impactful projects, and fostering partnerships that create mutual value for all stakeholders in our ecosystem.
+
+My role encompasses talent management, project coordination, and strategic partnership development. I believe in creating an environment where every team member can thrive while working towards our common goal of transforming agriculture.
+
+I'm passionate about building bridges - between team members, between projects, and between organizations. These connections are what enable us to create lasting impact in the agricultural sector and support farming communities effectively.`,
+    },
+    "Harishankar Pal": {
+        name: "Harishankar Pal",
+        education: "B.Sc Agriculture",
+        designation: "Farmer Success Manager",
+        image: "/images/ourTeam/FS.jpg",
+        linkedin: "https://www.linkedin.com/in/harishankar-pal-8a05822aa?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+        facebook: "https://www.facebook.com/share/1BG3jLPL2d/",
+        about: `Every farmer's success is our success. As Farmer Success Manager, I work directly with farming communities to understand their needs, provide support, and ensure they maximize their potential through our platform.
+
+With my agricultural background, I bridge the gap between traditional farming knowledge and modern agricultural practices. I spend time in the field, listening to farmers, understanding their challenges, and developing solutions that truly serve their needs.
+
+My work involves farmer onboarding, training, ongoing support, and ensuring they achieve better outcomes through VillaMart. I believe that when farmers succeed, entire communities thrive, and that's what drives my passion for this role.`,
+    },
+    "Kamal Kumar Mohanty": {
+        name: "Kamal Kumar Mohanty",
+        education: "B.Sc Agriculture, Diploma in Farm Management",
+        designation: "Farm Resource Manager",
+        image: "/images/ourTeam/FR.jpg",
+        linkedin: "https://www.linkedin.com/in/kamal-kumar-mohanty-62a01b283/",
+        facebook: "https://www.facebook.com/share/1FQwW4krpz/",
+        about: `Efficient resource management is key to sustainable farming. As Farm Resource Manager, I ensure our farmers have access to the right tools, inputs, and knowledge to optimize their productivity and profitability.
+
+I work closely with farming communities to assess their resource needs, coordinate supply chains for agricultural inputs, and implement resource optimization strategies. My goal is to make farming more efficient and profitable while promoting sustainable practices.
+
+With my background in agriculture and farm management, I understand the critical importance of timely access to quality resources. I'm dedicated to building systems that ensure farmers never face resource constraints that could impact their success.`,
+    },
 };
 
 const Card = ({ member, isHovered, setHovered, index }) => {
@@ -566,9 +610,10 @@ function PartnersSection() {
 export default function OurTeam() {
     const [hovered, setHovered] = useState(null);
     const [anyModalOpen, setAnyModalOpen] = useState(false);
+    const [sliderPaused, setSliderPaused] = useState(false);
 
-    // Determine if any card is hovered or any modal is open
-    const isPaused = hovered !== null || anyModalOpen;
+    // Only pause for modals, not for card hovers
+    const isPaused = anyModalOpen || sliderPaused;
 
     // Pass setAnyModalOpen to Card so it can control modal state
     return (
@@ -637,6 +682,8 @@ export default function OurTeam() {
 					className={`flex gap-8 overflow-visible slider ${
 						isPaused ? "paused" : ""
 					}`}
+					onMouseEnter={() => setSliderPaused(true)}
+					onMouseLeave={() => setSliderPaused(false)}
 				>
 					{/* First set */}
 					{teamMembers.map((m, i) => (
@@ -691,7 +738,7 @@ export default function OurTeam() {
 			{/* Enhanced CSS animations */}
 			<style jsx>{`
 				.slider {
-					animation: scroll 10s linear infinite;
+					animation: scroll 30s linear infinite;
 				}
 				.slider.paused {
 					animation-play-state: paused;
@@ -701,7 +748,7 @@ export default function OurTeam() {
 						transform: translateX(0);
 					}
 					100% {
-						transform: translateX(-50%);
+						transform: translateX(-400%);
 					}
 				}
 
