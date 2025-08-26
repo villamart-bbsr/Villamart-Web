@@ -740,7 +740,7 @@ export default function OurTeam() {
 			{/* Enhanced CSS animations */}
 			<style jsx>{`
 				.slider {
-					animation: scroll 30s linear infinite;
+					animation: scroll 65s linear infinite;
 				}
 				.slider.paused {
 					animation-play-state: paused;
