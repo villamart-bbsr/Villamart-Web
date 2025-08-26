@@ -23,7 +23,7 @@ const teamMembers = [
 		linkedin: "https://linkedin.com/in/silarani-mohanty",
 	},
 	{
-		name: "Shewtaparna Panigrahy",
+		name: "Swetaparna Panigrahy",
 		role: "CFO",
 		image: "/images/ourTeam/CFO.jpg",
 		quote:
@@ -184,8 +184,8 @@ When I'm not optimizing operations, I'm at home nurturing my plants. My plants a
 
 I believe in bending over backwards to help others' dreams come true, while understanding the importance of standing your ground and maintaining balance. I am committed to fostering a culture of continuous improvement and operational agility to stay ahead in our rapidly evolving agricultural landscape.`,
     },
-    "Shewtaparna Panigrahy": {
-        name: "Shewtaparna Panigrahy",
+    "Swetaparna Panigrahy": {
+        name: "Swetaparna Panigrahy",
         education: "Semi-Qualified Chartered Accountant",
         designation: "Chief Financial Officer",
         image: "/images/ourTeam/CFO.jpg",
@@ -376,7 +376,9 @@ const Card = ({ member, isHovered, setHovered, index }) => {
                                 src={member.image}
                                 alt={member.name}
                                 className={`w-full h-full object-cover transition-all duration-700 ${
-                                    isHovered
+                                    member.name === "Kamal Kumar Mohanty"
+                                        ? "scale-75" // Zoom out only for Kamal Kumar Mohanty
+                                        : isHovered
                                         ? "scale-125 brightness-110 contrast-110 saturate-125"
                                         : "group-hover:scale-110"
                                 }`}

@@ -14,9 +14,9 @@ const teamDetails = {
         linkedin: "https://in.linkedin.com/in/dr-ramesh-chandra-biswal-7151b822",
         facebook: "https://www.facebook.com/rchbiswal/",
         twitter: "https://x.com/rchbiswal",
-        email: "ramesh@villamart.com",
+        email: "ramesh@villamart.in",
         location: "Bhubaneswar, India",
-        joinedDate: "2016",
+        // joinedDate: "2016",
         achievements: ["Materials Scientist", "Agripreneur", "Innovation Leader"],
         about: `I'm a Materials Scientist turned Agripreneur with 8+ years of experience designing sustainable business models at the intersection of agriculture, technology, and social impact.
 As Founder of VillaMart, I built a PhyGital (Physical + Digital) supply chain platform connecting farmers directly to consumers — delivering fair pricing, reducing post-harvest losses, and ensuring year-round access to healthy, locally sourced produce.
@@ -38,9 +38,9 @@ My work is driven by a mission to boost farmer incomes, build transparent supply
         image: "/images/ourTeam/COO.jpg",
         linkedin: "https://linkedin.com/in/silarani-mohanty",
         facebook: "https://www.facebook.com/share/17FHaF1VW9",
-        email: "silarani@villamart.com",
+        email: "cgo@villamart.com",
         location: "Bhubaneswar, India",
-        joinedDate: "2018",
+        // joinedDate: "2018",
         achievements: ["Operations Excellence", "Process Optimization", "Team Leadership"],
         about: `As Chief Operating Officer at VillaMart, I'm passionate about creating operational excellence that drives organizational success. My role involves streamlining processes, fostering collaboration, and ensuring we consistently deliver value to our farmers and customers.
 
@@ -50,15 +50,15 @@ When I'm not optimizing operations, I'm at home nurturing my plants. My plants a
 
 I believe in bending over backwards to help others' dreams come true, while understanding the importance of standing your ground and maintaining balance. I am committed to fostering a culture of continuous improvement and operational agility to stay ahead in our rapidly evolving agricultural landscape.`,
     },
-    "Shewtaparna Panigrahy": {
-        name: "Shewtaparna Panigrahy",
+    "Swetaparna Panigrahy": {
+        name: "Swetataparna Panigrahy",
         education: "Semi-Qualified Chartered Accountant",
         designation: "Chief Financial Officer",
         image: "/images/ourTeam/CFO.jpg",
         linkedin: "https://www.linkedin.com/in/swetaparna-panigrahi-a502a0219?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-        email: "shewtaparna@villamart.com",
+        email: "cfo@villamart.in",
         location: "Bhubaneswar, India",
-        joinedDate: "2019",
+        // joinedDate: "2019",
         achievements: ["Financial Strategy", "Budget Management", "Fundraising Expert"],
         about: `As CFO at VillaMart, I bring financial stewardship and strategic planning expertise to support our mission of empowering farmers and building resilient supply chains. With my background as a Semi-Qualified Chartered Accountant and experience with organizations like EY, I've worked in progressively responsible positions before joining VillaMart.
 
@@ -71,7 +71,7 @@ Beyond my love for numbers and financial analysis, I enjoy traveling, reading, a
         education: "B.Tech Computer Science",
         designation: "Chief Technology Officer",
         image: "/images/ourTeam/CTO.jpg",
-        email: "rakesh@villamart.com",
+        email: "cto@villamart.in",
         location: "Bhubaneswar, India",
         joinedDate: "2020",
         achievements: ["Technology Innovation", "Platform Development", "Digital Transformation"],
@@ -96,9 +96,9 @@ I thrive on problem-solving, strategic planning, and fostering environments wher
         image: "/images/ourTeam/MPP.jpg",
         linkedin: "https://www.linkedin.com/in/sangita-behura-9a07179b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
         facebook: "https://www.facebook.com/share/162ha5FAr1/?mibextid=wwXIfr",
-        email: "sangita@villamart.com",
+        email: "partnerships@villamart.in",
         location: "Bhubaneswar, India",
-        joinedDate: "2021",
+        // joinedDate: "2021",
         achievements: ["Agribusiness Excellence", "FPO Development", "Market Linkage Specialist"],
         about: `Sangita leads projects at Villamart and brings 7+ years experience in Agribusiness, Market development and Rural livelihood promotion. She has worked with leading institutions like NABARD, Odisha Livelihood Mission and other key institutions building FPOs, market linkages and capacity building and DPR preparations.
 
@@ -120,9 +120,9 @@ Her work focuses on creating sustainable agricultural ecosystems that benefit fa
         image: "/images/ourTeam/FS.jpg",
         linkedin: "https://www.linkedin.com/in/harishankar-pal-8a05822aa?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
         facebook: "https://www.facebook.com/share/1BG3jLPL2d/",
-        email: "harishankar@villamart.com",
+        email: "farmconnect@villamart.in",
         location: "Rural Odisha, India",
-        joinedDate: "2022",
+        // joinedDate: "2022",
         achievements: ["Farmer Partnership Building", "Supply Chain Optimization", "Market Development"],
         about: `I joined as Farmer Success Manager (FSM). I specialize in working closely with farmers to build strong partnerships, enhance agricultural practices, and create sustainable market linkages that drive both farmer prosperity and business growth. My core strengths lie in aligning farmer needs with organizational goals, streamlining procurement and supply processes, and implementing strategies that ensure quality produce and fair value for farmers.
 
@@ -145,9 +145,9 @@ I thrive on problem-solving, strategic planning, and creating ecosystems where f
         image: "/images/ourTeam/FR.jpg",
         linkedin: "https://www.linkedin.com/in/kamal-kumar-mohanty-62a01b283/",
         facebook: "https://www.facebook.com/share/1FQwW4krpz/",
-        email: "kamal@villamart.com",
+        email: "support@villamart.in",
         location: "Rural Odisha, India",
-        joinedDate: "2022",
+        // joinedDate: "2022",
         achievements: ["Modern Agricultural Practices", "Sustainable Farming Systems", "Agricultural Innovation"],
         about: `Kamal Kumar Mohanty holds a Master of Science (MSc) degree in Agriculture with hands-on experience in modern agricultural practices and sustainable farming systems. His academic and practical background includes specialization in crop planning, soil health management & implementation of innovative agricultural technologies.
 
