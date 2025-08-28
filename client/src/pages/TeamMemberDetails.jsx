@@ -50,8 +50,8 @@ When I'm not optimizing operations, I'm at home nurturing my plants. My plants a
 
 I believe in bending over backwards to help others' dreams come true, while understanding the importance of standing your ground and maintaining balance. I am committed to fostering a culture of continuous improvement and operational agility to stay ahead in our rapidly evolving agricultural landscape.`,
     },
-    "Swetaparna Panigrahy": {
-        name: "Swetataparna Panigrahy",
+    "Swetaparna Panigrahi": {
+        name: "Swetaparna Panigrahi",
         education: "Semi-Qualified Chartered Accountant",
         designation: "Chief Financial Officer",
         image: "/images/ourTeam/CFO.jpg",
@@ -66,8 +66,8 @@ My work in the finance domain encompasses comprehensive financial management inc
 
 Beyond my love for numbers and financial analysis, I enjoy traveling, reading, and social work. I believe that strong financial foundations enable us to create lasting positive change in the agricultural sector.`,
     },
-    "Rakesh Panda": {
-        name: "Rakesh Panda",
+    "Rakesh Kumar Panda": {
+        name: "Rakesh Kumar Panda",
         education: "B.Tech Computer Science",
         designation: "Chief Technology Officer",
         image: "/images/ourTeam/CTO.jpg",
@@ -200,6 +200,28 @@ Other activities:
 • RGB color detection system
 
 Dr Mishra bridges research and industry, driving innovation and sustainable solutions at VillaMart.`,
+    },
+    "Ajit Bag": {
+        name: "Ajit Bag",
+        education: "MBA, Marketing & Strategy",
+        designation: "Chief Growth Officer (CGO)",
+        image: "/images/ourTeam/CGO.jpeg",
+        linkedin: "https://www.linkedin.com/in/ajit-bag?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+        email: "coo@villamart.in",
+        location: "Bhubaneswar, India",
+        achievements: [
+            "Growth Strategy Expert",
+            "Market Expansion Leader",
+            "Partnership Builder",
+            "Innovation Champion"
+        ],
+        about: `As Chief Growth Officer at VillaMart, I am passionate about driving sustainable growth and expanding our impact across new markets and communities. My role focuses on identifying strategic opportunities, building strong partnerships, and fostering a culture of innovation that empowers our team and stakeholders.
+
+With a background in marketing and strategy, I bring a data-driven approach to scaling operations and unlocking new revenue streams. I thrive on solving complex challenges, developing creative solutions, and leading cross-functional teams to achieve ambitious goals.
+
+I believe that true growth comes from collaboration, adaptability, and a relentless pursuit of excellence. At VillaMart, I am committed to building lasting relationships, enhancing our brand presence, and ensuring we deliver meaningful value to farmers, partners, and customers alike.
+
+Let's grow together and make a positive difference in the agri-business ecosystem.`,
     },
 };
 
