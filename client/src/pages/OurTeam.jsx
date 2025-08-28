@@ -3,73 +3,83 @@ import { useNavigate } from "react-router-dom"; // Add this import
 
 // Example: Add social links to each member (customize per member as needed)
 const teamMembers = [
-	{
-		name: "Dr Ramesh Chandra Biswal",
-		role: "Founder & CEO",
-		image: "/images/ceo-photo.jpeg", // Place your image in public/images/
-		quote:
-			"Together, we challenge ourselves for a better tomorrow by meaningful designs that help live our best life and maintain lasting relevance",
-		twitter: "https://twitter.com/rchbiswal",
-		facebook: "https://www.facebook.com/rchbiswal/",
-		linkedin: "https://in.linkedin.com/in/dr-ramesh-chandra-biswal-7151b822",
-	},
-	{
-		name: "Silarani Mohanty",
-		role: "COO",
-		image: "/images/ourTeam/COO.jpg",
-		quote:
-			"Operational excellence drives organizational success. I focus on streamlining processes and fostering collaboration to ensure we deliver value to our farmers and customers consistently.",
-		facebook: "https://www.facebook.com/share/17FHaF1VW9",
-		linkedin: "https://linkedin.com/in/silarani-mohanty",
-	},
-	{
-		name: "Swetaparna Panigrahy",
-		role: "CFO",
-		image: "/images/ourTeam/CFO.jpg",
-		quote:
-			"Financial stewardship and strategic planning are the backbone of sustainable growth. I ensure our resources are optimized to support our mission of empowering farmers and building resilient supply chains.",
-		linkedin: "https://www.linkedin.com/in/swetaparna-panigrahi-a502a0219?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-	},
-	
+    {
+        name: "Dr Ramesh Chandra Biswal",
+        role: "Founder & CEO",
+        image: "/images/ceo-photo.jpeg",
+        quote:
+            "Together, we challenge ourselves for a better tomorrow by meaningful designs that help live our best life and maintain lasting relevance",
+        twitter: "https://twitter.com/rchbiswal",
+        facebook: "https://www.facebook.com/rchbiswal/",
+        linkedin: "https://in.linkedin.com/in/dr-ramesh-chandra-biswal-7151b822",
+    },
+    {
+        name: "Dr Dillip Kumar Mishra",
+        role: "Co-Founder",
+        image: "/images/ourTeam/co-founder.jpeg", // Add this image to public/images/ourTeam/
+        quote:
+            "Science and innovation drive sustainable progress. I strive to bridge research and industry for real-world impact.",
+        twitter: "",
+        facebook: "",
+        linkedin: "https://www.linkedin.com/in/dr-dillip-kumar-mishra-82a5a6104",
+    },
+    {
+        name: "Silarani Mohanty",
+        role: "COO",
+        image: "/images/ourTeam/COO.jpg",
+        quote:
+            "Operational excellence drives organizational success. I focus on streamlining processes and fostering collaboration to ensure we deliver value to our farmers and customers consistently.",
+        facebook: "https://www.facebook.com/share/17FHaF1VW9",
+        linkedin: "https://linkedin.com/in/silarani-mohanty",
+    },
+    {
+        name: "Swetaparna Panigrahy",
+        role: "CFO",
+        image: "/images/ourTeam/CFO.jpg",
+        quote:
+            "Financial stewardship and strategic planning are the backbone of sustainable growth. I ensure our resources are optimized to support our mission of empowering farmers and building resilient supply chains.",
+        linkedin: "https://www.linkedin.com/in/swetaparna-panigrahi-a502a0219?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    },
+    
 
-	{
-	  name: "Rakesh Panda",
-	  role: "CTO",
-	  image:
-	    "/images/ourTeam/CTO.jpg",
-	  quote:
-	    "Technology should serve humanity, especially our farmers. I lead our tech initiatives to create scalable, user-friendly solutions that bridge the gap between traditional farming and modern digital commerce.",
-	},
-	{
-	  name: "Sangita Behura",
-	  role: "Manager-People, Project & Partnership",
-	  image:
-	    "/images/ourTeam/MPP.jpg",
-	  quote:
-	    "People are our greatest asset. I focus on building strong teams, managing impactful projects, and fostering partnerships that create mutual value for all stakeholders in our ecosystem.",
-		facebook: "https://www.facebook.com/share/162ha5FAr1/?mibextid=wwXIfr",
-		linkedin: "https://www.linkedin.com/in/sangita-behura-9a07179b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
-	},
-	{
-	  name: "Harishankar Pal",
-	  role: "Farmer Success Manager",
-	  image:
-	    "/images/ourTeam/FS.jpg",
-	  quote:
-	    "Every farmer's success is our success. I work directly with farming communities to understand their needs, provide support, and ensure they maximize their potential through our platform.",
-		facebook:"https://www.facebook.com/share/1BG3jLPL2d/",
-		linkedin:"https://www.linkedin.com/in/harishankar-pal-8a05822aa?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-	},
-	{
-	  name: "Kamal Kumar Mohanty",
-	  role: "Farm Resource Manager",
-	  image:
-	    "/images/ourTeam/FR.jpg",
-	  quote:
-	    "Efficient resource management is key to sustainable farming. I ensure our farmers have access to the right tools, inputs, and knowledge to optimize their productivity and profitability.",
-		facebook:"https://www.facebook.com/share/1FQwW4krpz/",
-		linkedin:"https://www.linkedin.com/in/kamal-kumar-mohanty-62a01b283/"
-	},
+    {
+      name: "Rakesh Panda",
+      role: "CTO",
+      image:
+        "/images/ourTeam/CTO.jpg",
+      quote:
+        "Technology should serve humanity, especially our farmers. I lead our tech initiatives to create scalable, user-friendly solutions that bridge the gap between traditional farming and modern digital commerce.",
+    },
+    {
+      name: "Sangita Behura",
+      role: "Manager-People, Project & Partnership",
+      image:
+        "/images/ourTeam/MPP.jpg",
+      quote:
+        "People are our greatest asset. I focus on building strong teams, managing impactful projects, and fostering partnerships that create mutual value for all stakeholders in our ecosystem.",
+      facebook: "https://www.facebook.com/share/162ha5FAr1/?mibextid=wwXIfr",
+      linkedin: "https://www.linkedin.com/in/sangita-behura-9a07179b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
+    },
+    {
+      name: "Harishankar Pal",
+      role: "Farmer Success Manager",
+      image:
+        "/images/ourTeam/FS.jpg",
+      quote:
+        "Every farmer's success is our success. I work directly with farming communities to understand their needs, provide support, and ensure they maximize their potential through our platform.",
+      facebook:"https://www.facebook.com/share/1BG3jLPL2d/",
+      linkedin:"https://www.linkedin.com/in/harishankar-pal-8a05822aa?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+    },
+    {
+      name: "Kamal Kumar Mohanty",
+      role: "Farm Resource Manager",
+      image:
+        "/images/ourTeam/FR.jpg",
+      quote:
+        "Efficient resource management is key to sustainable farming. I ensure our farmers have access to the right tools, inputs, and knowledge to optimize their productivity and profitability.",
+      facebook:"https://www.facebook.com/share/1FQwW4krpz/",
+      linkedin:"https://www.linkedin.com/in/kamal-kumar-mohanty-62a01b283/"
+    },
 ];
 
 // Floating particles component
@@ -168,6 +178,36 @@ Core strengths:
 • Deploying post-harvest technology & traceability tools
 
 My work is driven by a mission to boost farmer incomes, build transparent supply chains, and bring traceable, quality produce to urban markets — combining grassroots insight with purposeful innovation and scalable execution.`,
+    },
+    "Dr Dillip Kumar Mishra": {
+        name: "Dr Dillip Kumar Mishra",
+        education: "PhD, IIT Bombay; M.Tech, NIT Jamshedpur; M.Sc, Berhampur University",
+        designation: "Co-Founder",
+        image: "/images/ourTeam/dillip-mishra.jpg",
+        email: "dillip@villamart.in",
+        about: `Dr Dillip Kumar Mishra is a materials scientist with 10+ years of industrial and research experience in solar cells, carbon fiber, nanotube, graphene, and advanced composites. He has published 16 research articles and holds a US patent (US8617507B2).
+
+He has led major projects in Chemical Vapor Deposition (CVD), pulsed laser ablation, dye-sensitized solar cells, and carbon composites, and has reviewed over 20 manuscripts for international journals.
+
+Technical expertise includes:
+• CVD growth of carbon fiber/nanotube/graphene
+• Sputtering target preparation
+• Nanomaterial analysis using SEM, Raman spectroscopy, XPS, UV-VIS-NIR
+• 3D design and printing (100+ hours)
+• Automation and yield improvement in fiber production
+• Thermal management for electronics
+
+Industrial Experience:
+• Project Leader (R&D), Advanced International Multitech Co. Ltd, Taiwan
+• Post-Doctoral Researcher, Dept. of Materials Science & Engg., NCKU, Taiwan
+
+Other activities:
+• Bluetooth-connected sensor apps
+• Obstacle-avoiding toy car
+• Smart trash can
+• RGB color detection system
+
+Dr Mishra bridges research and industry, driving innovation and sustainable solutions at VillaMart.`,
     },
     "Silarani Mohanty": {
         name: "Silarani Mohanty",

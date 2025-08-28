@@ -163,6 +163,44 @@ Key areas of focus:
 
 Kamal is dedicated to transforming traditional farming practices through modern agricultural techniques and ensuring optimal resource utilization for maximum productivity and sustainability.`,
     },
+    "Dr Dillip Kumar Mishra": {
+        name: "Dr Dillip Kumar Mishra",
+        education: "PhD, IIT Bombay; M.Tech, NIT Jamshedpur; M.Sc, Berhampur University",
+        designation: "Co-Founder",
+        image: "/images/ourTeam/co-founder.jpeg",
+        email: "dillip@villamart.in",
+        location: "Bhubaneswar, India",
+        achievements: [
+            "US Patent Holder",
+            "16 Research Publications",
+            "Industrial R&D Leader",
+            "Nanomaterials Expert",
+            "3D Printing Innovator"
+        ],
+        about: `Dr Dillip Kumar Mishra is a materials scientist with 10+ years of industrial and research experience in solar cells, carbon fiber, nanotube, graphene, and advanced composites. He has published 16 research articles and holds a US patent (US8617507B2).
+
+He has led major projects in Chemical Vapor Deposition (CVD), pulsed laser ablation, dye-sensitized solar cells, and carbon composites, and has reviewed over 20 manuscripts for international journals.
+
+Technical expertise includes:
+• CVD growth of carbon fiber/nanotube/graphene
+• Sputtering target preparation
+• Nanomaterial analysis using SEM, Raman spectroscopy, XPS, UV-VIS-NIR
+• 3D design and printing (100+ hours)
+• Automation and yield improvement in fiber production
+• Thermal management for electronics
+
+Industrial Experience:
+• Project Leader (R&D), Advanced International Multitech Co. Ltd, Taiwan
+• Post-Doctoral Researcher, Dept. of Materials Science & Engg., NCKU, Taiwan
+
+Other activities:
+• Bluetooth-connected sensor apps
+• Obstacle-avoiding toy car
+• Smart trash can
+• RGB color detection system
+
+Dr Mishra bridges research and industry, driving innovation and sustainable solutions at VillaMart.`,
+    },
 };
 
 export default function TeamMemberDetails() {
@@ -357,7 +395,7 @@ export default function TeamMemberDetails() {
                 <div className="mb-8">
                   <h2 className="text-3xl font-bold text-gray-800 mb-4 flex items-center gap-3">
                     <div className="w-1 h-8 bg-gradient-to-b from-emerald-500 to-teal-500 rounded-full"></div>
-                    About {details.name.split(' ')[0]}
+                    About {details.name}
                   </h2>
                 </div>
                 
