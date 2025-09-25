@@ -26,7 +26,7 @@ const teamMembers = [
   },
   {
     name: "Silarani Mohanty", // 3-COO
-    role: "COO",
+    role: "Chief Operating Officer (COO)",
     image: "/images/ourTeam/COO.jpg",
     quote:
       "Operational excellence drives organizational success. I focus on streamlining processes and fostering collaboration to ensure we deliver value to our farmers and customers consistently.",
@@ -45,14 +45,14 @@ const teamMembers = [
   },
   {
     name: "Rakesh Kumar Panda", // 5-CTO
-    role: "CTO",
+    role: "Chief Technology Officer (CTO)",
     image: "/images/ourTeam/CTO.jpg",
     quote:
       "Technology should serve humanity, especially our farmers. I lead our tech initiatives to create scalable, user-friendly solutions that bridge the gap between traditional farming and modern digital commerce.",
   },
   {
     name: "Swetaparna Panigrahi", // 6-CFO
-    role: "CFO",
+    role: "Chief Financial Officer (CFO) ",
     image: "/images/ourTeam/CFO.jpg",
     quote:
       "Financial stewardship and strategic planning are the backbone of sustainable growth. I ensure our resources are optimized to support our mission of empowering farmers and building resilient supply chains.",
@@ -346,7 +346,7 @@ const Card = ({ member, isHovered, setHovered, index }) => {
       animate={{
         scale: isHovered ? 1.05 : 1,
         y: isHovered ? -20 : 0,
-        rotate: isHovered ? 1 : 0,
+        // rotate: isHovered ? 1 : 0,
         zIndex: isHovered ? 50 : 10,
       }}
       transition={{ 

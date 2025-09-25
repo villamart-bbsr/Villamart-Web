@@ -18,18 +18,18 @@ const teamDetails = {
         location: "Bhubaneswar, India",
         // joinedDate: "2016",
         achievements: ["Materials Scientist", "Agripreneur", "Innovation Leader"],
-        about: `I'm a Materials Scientist turned Agripreneur with 8+ years of experience designing sustainable business models at the intersection of agriculture, technology, and social impact.
-As Founder of VillaMart, I built a PhyGital (Physical + Digital) supply chain platform connecting farmers directly to consumers — delivering fair pricing, reducing post-harvest losses, and ensuring year-round access to healthy, locally sourced produce.
+        about: `He is a Materials Scientist turned Agripreneur with over 8 years of experience designing sustainable business models at the intersection of agriculture, technology, and social impact. As the Founder of VillaMart, he built a PhyGital (Physical + Digital) supply chain platform that connects farmers directly to consumers — delivering fair pricing, reducing post-harvest losses, and ensuring year-round access to healthy, locally sourced produce.
 
-Core strengths:
+His core strengths include:
+
 • Assessing and implementing technology solutions for farmers
-• Rural value chain design and optimization
-• FPO & SHG capacity building
-• Retail & franchise model development
-• Strategic partnerships with quick commerce platforms, retail chains, and institutions
+• Designing and optimizing rural value chains
+• Building capacity for FPOs & SHGs
+• Developing retail & franchise models
+• Forging strategic partnerships with quick commerce platforms, retail chains, and institutions
 • Deploying post-harvest technology & traceability tools
 
-My work is driven by a mission to boost farmer incomes, build transparent supply chains, and bring traceable, quality produce to urban markets — combining grassroots insight with purposeful innovation and scalable execution.`,
+His work is driven by a mission to boost farmer incomes, build transparent supply chains, and bring traceable, quality produce to urban markets — combining grassroots insight with purposeful innovation and scalable execution.`,
     },
     "Silarani Mohanty": {
         name: "Silarani Mohanty",
@@ -42,13 +42,13 @@ My work is driven by a mission to boost farmer incomes, build transparent supply
         location: "Bhubaneswar, India",
         // joinedDate: "2018",
         achievements: ["Operations Excellence", "Process Optimization", "Team Leadership"],
-        about: `As Chief Operating Officer at VillaMart, I'm passionate about creating operational excellence that drives organizational success. My role involves streamlining processes, fostering collaboration, and ensuring we consistently deliver value to our farmers and customers.
+        about: `She is the Chief Operating Officer at VillaMart, passionate about creating operational excellence that drives organizational success. Her role involves streamlining processes, fostering collaboration, and ensuring consistent value delivery to both farmers and customers.
 
-I'm obsessed with staying organized and making everyone's life easier. It brings genuine joy to take the burden off my team's shoulders, and I always do anything I can to enhance operational efficiency. Trust and dependability are the foundations that can grow a company, and I pride myself on being dedicated to both.
+Highly organized and committed to easing the workload of her team, she finds genuine joy in enhancing operational efficiency and removing obstacles. Trust and dependability are qualities she considers essential for growth, and she takes pride in being dedicated to both.
 
-When I'm not optimizing operations, I'm at home nurturing my plants. My plants are my absolute healers and they create a positive environment for me and my surroundings.
+Beyond her professional role, she nurtures her plants at home, which serve as her healers and create a positive environment for her and her surroundings.
 
-I believe in bending over backwards to help others' dreams come true, while understanding the importance of standing your ground and maintaining balance. I am committed to fostering a culture of continuous improvement and operational agility to stay ahead in our rapidly evolving agricultural landscape.`,
+She believes in going the extra mile to help others achieve their dreams while maintaining balance and standing her ground when needed. Dedicated to continuous improvement and operational agility, she is committed to ensuring that VillaMart stays ahead in the rapidly evolving agricultural landscape.`,
     },
     "Swetaparna Panigrahi": {
         name: "Swetaparna Panigrahi",
@@ -60,11 +60,11 @@ I believe in bending over backwards to help others' dreams come true, while unde
         location: "Bhubaneswar, India",
         // joinedDate: "2019",
         achievements: ["Financial Strategy", "Budget Management", "Fundraising Expert"],
-        about: `As CFO at VillaMart, I bring financial stewardship and strategic planning expertise to support our mission of empowering farmers and building resilient supply chains. With my background as a Semi-Qualified Chartered Accountant and experience with organizations like EY, I've worked in progressively responsible positions before joining VillaMart.
+        about: `She is the Chief Financial Officer at VillaMart, bringing financial stewardship and strategic planning expertise to support the organization's mission of empowering farmers and building resilient supply chains. With a background as a Semi-Qualified Chartered Accountant and experience with organizations like EY, she has held progressively responsible positions before joining VillaMart.
 
-My work in the finance domain encompasses comprehensive financial management including planning, budgeting, forecasting, fundraising, and fund management. I ensure our resources are optimized to maximize impact for our farming communities while maintaining sustainable growth.
+Her work in the finance domain encompasses comprehensive financial management, including planning, budgeting, forecasting, fundraising, and fund management. She ensures that resources are optimized to maximize impact for farming communities while maintaining sustainable growth.
 
-Beyond my love for numbers and financial analysis, I enjoy traveling, reading, and social work. I believe that strong financial foundations enable us to create lasting positive change in the agricultural sector.`,
+Beyond her passion for numbers and financial analysis, she enjoys traveling, reading, and engaging in social work. She firmly believes that strong financial foundations enable lasting positive change in the agricultural sector.`,
     },
     "Rakesh Kumar Panda": {
         name: "Rakesh Kumar Panda",
@@ -75,20 +75,7 @@ Beyond my love for numbers and financial analysis, I enjoy traveling, reading, a
         location: "Bhubaneswar, India",
         joinedDate: "2020",
         achievements: ["Technology Innovation", "Platform Development", "Digital Transformation"],
-        about: `I joined as Chief Technology Officer (CTO). I specialize in leading and scaling high-performance technology teams, driving innovation, and executing visionary tech strategies to propel business success. My core strengths lie in aligning technology with business goals, optimizing product development cycles, and implementing systems that enhance operational efficiency.
-
-I have a proven track record in key areas such as software development, AI integration, cloud architecture, data security, etc., where I've successfully managed and executed projects or milestones. I'm passionate about staying ahead of the tech curve, cultivating a collaborative culture, and ensuring that my teams remain agile in a rapidly changing tech landscape.
-
-In my role as CTO, I focus on:
-
-• Leadership and team development
-• Innovation and tech strategy
-• Product development and system optimization
-• Stakeholder management and cross-functional collaboration
-• Driving operational scalability and efficiency
-
-I thrive on problem-solving, strategic planning, and fostering environments where technology-driven solutions transform businesses and improve customer experiences.`,
-    },
+        "about": "He is the Chief Technology Officer (CTO) at VillaMart, specializing in leading and scaling high-performance technology teams, driving innovation, and executing visionary tech strategies to propel business success. His core strengths lie in aligning technology with business goals, optimizing product development cycles, and implementing systems that enhance operational efficiency.\n\nHe has a proven track record in key areas such as software development, AI integration, cloud architecture, and data security, where he has successfully managed and executed projects and milestones. Passionate about staying ahead of the tech curve, he cultivates a collaborative culture and ensures that his teams remain agile in a rapidly changing tech landscape.\n\nIn his role as CTO, he focuses on:\n- Leadership and team development\n- Innovation and technology strategy\n- Product development and system optimization\n- Stakeholder management and cross-functional collaboration\n- Driving operational scalability and efficiency\n\nHe thrives on problem-solving, strategic planning, and fostering environments where technology-driven solutions transform businesses and improve customer experiences."   },
     "Sangita Behura": {
         name: "Sangita Behura",
         education: "MBA Agribusiness Management, B.Tech Computer Science",
@@ -124,19 +111,18 @@ Her work focuses on creating sustainable agricultural ecosystems that benefit fa
         location: "Rural Odisha, India",
         // joinedDate: "2022",
         achievements: ["Farmer Partnership Building", "Supply Chain Optimization", "Market Development"],
-        about: `I joined as Farmer Success Manager (FSM). I specialize in working closely with farmers to build strong partnerships, enhance agricultural practices, and create sustainable market linkages that drive both farmer prosperity and business growth. My core strengths lie in aligning farmer needs with organizational goals, streamlining procurement and supply processes, and implementing strategies that ensure quality produce and fair value for farmers.
+        about: `He is the Farmer Success Manager (FSM) at VillaMart, specializing in working closely with farmers to build strong partnerships, enhance agricultural practices, and create sustainable market linkages that drive both farmer prosperity and business growth. His core strengths lie in aligning farmer needs with organizational goals, streamlining procurement and supply processes, and implementing strategies that ensure quality produce and fair value for farmers.
 
-I have a proven track record in key areas such as farmer engagement, crop planning, supply chain optimization, quality assurance, and market development, where I've successfully managed and executed impactful initiatives. I'm passionate about empowering farmers with knowledge, fostering collaboration, and ensuring that they remain competitive in a rapidly evolving agri-business landscape.
+He has a proven track record in key areas such as farmer engagement, crop planning, supply chain optimization, quality assurance, and market development, where he has successfully managed and executed impactful initiatives. He is passionate about empowering farmers with knowledge, fostering collaboration, and ensuring that they remain competitive in a rapidly evolving agri-business landscape.
 
-In my role as Farmer Success Manager, I focus on:
-
+In his role as Farmer Success Manager, he focuses on:
 • Farmer relationship building and support
 • Market linkage and procurement strategies
 • Quality assurance and product optimization
 • Stakeholder management and collaboration with FPOs, NGOs, and companies
 • Driving scalability and efficiency in agri-supply chains
 
-I thrive on problem-solving, strategic planning, and creating ecosystems where farmer-centric solutions transform livelihoods and strengthen the agri-value chain.`,
+He thrives on problem-solving, strategic planning, and creating ecosystems where farmer-centric solutions transform livelihoods and strengthen the agri-value chain."`,
     },
     "Kamal Kumar Mohanty": {
         name: "Kamal Kumar Mohanty",
@@ -215,14 +201,63 @@ Dr Mishra bridges research and industry, driving innovation and sustainable solu
             "Partnership Builder",
             "Innovation Champion"
         ],
-        about: `As Chief Growth Officer at VillaMart, I am passionate about driving sustainable growth and expanding our impact across new markets and communities. My role focuses on identifying strategic opportunities, building strong partnerships, and fostering a culture of innovation that empowers our team and stakeholders.
+        about: `Ajit Bag is the Chief Growth Officer (CGO) at VillaMart, passionate about driving sustainable growth and expanding the company's impact across new markets and communities. His role focuses on identifying strategic opportunities, building strong partnerships, and fostering a culture of innovation that empowers the team and stakeholders.
 
-With a background in marketing and strategy, I bring a data-driven approach to scaling operations and unlocking new revenue streams. I thrive on solving complex challenges, developing creative solutions, and leading cross-functional teams to achieve ambitious goals.
+With a background in marketing and strategy, he brings a data-driven approach to scaling operations and unlocking new revenue streams. He thrives on solving complex challenges, developing creative solutions, and leading cross-functional teams to achieve ambitious goals.
 
-I believe that true growth comes from collaboration, adaptability, and a relentless pursuit of excellence. At VillaMart, I am committed to building lasting relationships, enhancing our brand presence, and ensuring we deliver meaningful value to farmers, partners, and customers alike.
+He believes that true growth comes from collaboration, adaptability, and a relentless pursuit of excellence. At VillaMart, he is committed to building lasting relationships, enhancing the brand presence, and ensuring meaningful value is delivered to farmers, partners, and customers alike.
 
-Let's grow together and make a positive difference in the agri-business ecosystem.`,
+He works to grow the business while making a positive difference in the agri-business ecosystem.`,
     },
+};
+
+// Custom component to render formatted text with better structure
+const FormattedAbout = ({ text, name }) => {
+  const paragraphs = text.split('\n\n').filter(p => p.trim());
+  
+  return (
+    <div className="space-y-6">
+      {paragraphs.map((paragraph, index) => {
+        // Check if it's a bullet list section
+        if (paragraph.includes('•') || paragraph.includes('-')) {
+          const lines = paragraph.split('\n');
+          const title = lines[0];
+          const listItems = lines.slice(1).filter(line => line.trim() && (line.includes('•') || line.includes('-')));
+          
+          if (listItems.length > 0) {
+            return (
+              <div key={index} className="space-y-4">
+                {title && !title.includes('•') && !title.includes('-') && (
+                  <p className="text-gray-700 leading-relaxed font-medium text-lg">
+                    {title.trim()}
+                  </p>
+                )}
+                <div className="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl p-6">
+                  <ul className="space-y-3">
+                    {listItems.map((item, itemIndex) => (
+                      <li key={itemIndex} className="flex items-start gap-3">
+                        <div className="w-2 h-2 bg-emerald-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <span className="text-gray-700 leading-relaxed">
+                          {item.replace(/^[•\-]\s*/, '').trim()}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            );
+          }
+        }
+        
+        // Regular paragraph
+        return (
+          <p key={index} className="text-gray-700 leading-relaxed text-lg">
+            {paragraph.trim()}
+          </p>
+        );
+      })}
+    </div>
+  );
 };
 
 export default function TeamMemberDetails() {
@@ -248,8 +283,8 @@ export default function TeamMemberDetails() {
           <div className="w-24 h-24 mx-auto mb-6 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
             <Award className="w-12 h-12 text-white/70" />
           </div>
-          <h2 className="text-3xl font-bold mb-4">Team Member Not Found</h2>
-          <p className="text-white/80 mb-8">Sorry, we couldn't find the team member you're looking for.</p>
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">Team Member Not Found</h2>
+          <p className="text-white/80 mb-8 text-center max-w-md">Sorry, we couldn't find the team member you're looking for.</p>
           <button
             className="btn btn-primary bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white gap-2"
             onClick={() => navigate(-1)}
@@ -279,39 +314,39 @@ export default function TeamMemberDetails() {
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-teal-400/10 rounded-full blur-3xl"></div>
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 py-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           {/* Back button */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-8"
+            className="mb-6 sm:mb-8"
           >
             <button
-              className="btn btn-ghost gap-2 text-gray-600 hover:text-emerald-600"
+              className="btn btn-ghost gap-2 text-gray-600 hover:text-emerald-600 text-sm sm:text-base"
               onClick={() => navigate(-1)}
             >
-              <ArrowLeft size={20} />
+              <ArrowLeft size={18} className="sm:w-5 sm:h-5" />
               Back to Team
             </button>
           </motion.div>
 
           {/* Main content */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
             {/* Profile card */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="lg:col-span-1 "
+              className="xl:col-span-1"
             >
-              <div className="bg-white rounded-3xl shadow-xl overflow-hidden sticky top-17">
+              <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden xl:sticky xl:top-24">
                 {/* Header with gradient */}
-                <div className="bg-gradient-to-br from-emerald-600 to-teal-600 p-8 text-white relative">
+                <div className="bg-gradient-to-br from-emerald-600 to-teal-600 p-6 sm:p-8 text-white relative">
                   <div className="absolute inset-0 bg-black/10"></div>
                   
                   <div className="relative z-10 text-center">
-                    <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white/20 shadow-xl">
+                    <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-4 sm:mb-6 rounded-full overflow-hidden border-4 border-white/20 shadow-xl">
                       <img
                         src={details.image}
                         alt={details.name}
@@ -319,10 +354,10 @@ export default function TeamMemberDetails() {
                       />
                     </div>
                     
-                    <h1 className="text-2xl font-bold mb-2">{details.name}</h1>
-                    <p className="text-emerald-100 font-medium mb-2">{details.designation}</p>
+                    <h1 className="text-xl sm:text-2xl font-bold mb-2 leading-tight">{details.name}</h1>
+                    <p className="text-emerald-100 font-medium mb-2 text-sm sm:text-base">{details.designation}</p>
                     {details.education && (
-                      <p className="text-emerald-200/80 text-sm bg-white/10 px-3 py-1 rounded-full inline-block">
+                      <p className="text-emerald-200/80 text-xs sm:text-sm bg-white/10 px-3 py-1 rounded-full inline-block max-w-full">
                         {details.education}
                       </p>
                     )}
@@ -330,38 +365,38 @@ export default function TeamMemberDetails() {
                 </div>
 
                 {/* Contact info */}
-                <div className="p-6">
-                  <div className="space-y-4 mb-6">
+                <div className="p-4 sm:p-6">
+                  <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
                     {details.email && (
-                      <div className="flex items-center gap-3 text-gray-600">
-                        <Mail size={18} className="text-emerald-600" />
-                        <span className="text-sm">{details.email}</span>
+                      <div className="flex items-start gap-3 text-gray-600">
+                        <Mail size={16} className="text-emerald-600 mt-1 flex-shrink-0 sm:w-[18px] sm:h-[18px]" />
+                        <span className="text-xs sm:text-sm break-all">{details.email}</span>
                       </div>
                     )}
                     {details.location && (
                       <div className="flex items-center gap-3 text-gray-600">
-                        <MapPin size={18} className="text-emerald-600" />
-                        <span className="text-sm">{details.location}</span>
+                        <MapPin size={16} className="text-emerald-600 flex-shrink-0 sm:w-[18px] sm:h-[18px]" />
+                        <span className="text-xs sm:text-sm">{details.location}</span>
                       </div>
                     )}
                     {details.joinedDate && (
                       <div className="flex items-center gap-3 text-gray-600">
-                        <Calendar size={18} className="text-emerald-600" />
-                        <span className="text-sm">Joined {details.joinedDate}</span>
+                        <Calendar size={16} className="text-emerald-600 flex-shrink-0 sm:w-[18px] sm:h-[18px]" />
+                        <span className="text-xs sm:text-sm">Joined {details.joinedDate}</span>
                       </div>
                     )}
                   </div>
 
                   {/* Social links */}
-                  <div className="flex gap-3 mb-6 text-gray-500">
+                  <div className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6 text-gray-500">
                     {details.linkedin && (
                       <a
                         href={details.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn btn-circle btn-outline btn-sm border-emerald-200 hover:bg-emerald-600 hover:border-emerald-600"
+                        className="btn btn-circle btn-outline btn-sm border-emerald-200 hover:bg-emerald-600 hover:border-emerald-600 w-8 h-8 min-h-8"
                       >
-                        <Linkedin size={16} />
+                        <Linkedin size={14} />
                       </a>
                     )}
                     {details.twitter && (
@@ -369,9 +404,9 @@ export default function TeamMemberDetails() {
                         href={details.twitter}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn btn-circle btn-outline btn-sm border-emerald-200 hover:bg-emerald-600 hover:border-emerald-600"
+                        className="btn btn-circle btn-outline btn-sm border-emerald-200 hover:bg-emerald-600 hover:border-emerald-600 w-8 h-8 min-h-8"
                       >
-                        <Twitter size={16} />
+                        <Twitter size={14} />
                       </a>
                     )}
                     {details.facebook && (
@@ -379,9 +414,9 @@ export default function TeamMemberDetails() {
                         href={details.facebook}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn btn-circle btn-outline btn-sm border-emerald-200 hover:bg-emerald-600 hover:border-emerald-600"
+                        className="btn btn-circle btn-outline btn-sm border-emerald-200 hover:bg-emerald-600 hover:border-emerald-600 w-8 h-8 min-h-8"
                       >
-                        <Facebook size={16} />
+                        <Facebook size={14} />
                       </a>
                     )}
                   </div>
@@ -389,13 +424,13 @@ export default function TeamMemberDetails() {
                   {/* Achievements */}
                   {details.achievements && (
                     <div>
-                      <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
-                        <Award size={18} className="text-emerald-600" />
+                      <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2 text-sm sm:text-base">
+                        <Award size={16} className="text-emerald-600 sm:w-[18px] sm:h-[18px]" />
                         Key Achievements
                       </h3>
-                      <div className="space-y-2">
+                      <div className="flex flex-wrap gap-2">
                         {details.achievements.map((achievement, index) => (
-                          <div key={index} className="badge badge-outline badge-primary text-xs">
+                          <div key={index} className="badge badge-outline badge-primary text-xs px-2 py-1">
                             {achievement}
                           </div>
                         ))}
@@ -411,48 +446,46 @@ export default function TeamMemberDetails() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="lg:col-span-2"
+              className="xl:col-span-2"
             >
-              <div className="bg-white rounded-3xl shadow-xl p-8">
-                <div className="mb-8">
-                  <h2 className="text-3xl font-bold text-gray-800 mb-4 flex items-center gap-3">
-                    <div className="w-1 h-8 bg-gradient-to-b from-emerald-500 to-teal-500 rounded-full"></div>
-                    About {details.name}
+              <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8">
+                <div className="mb-6 sm:mb-8">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 flex items-center gap-3">
+                    <div className="w-1 h-6 sm:h-8 bg-gradient-to-b from-emerald-500 to-teal-500 rounded-full"></div>
+                    <span className="leading-tight">About {details.name.split(' ')[0]}</span>
                   </h2>
                 </div>
                 
-                <div className="prose prose-lg max-w-none">
-                  <div className="text-gray-700 leading-relaxed whitespace-pre-line">
-                    {details.about}
-                  </div>
+                <div className="max-w-none">
+                  <FormattedAbout text={details.about} name={details.name} />
                 </div>
 
                 {/* Call to action */}
-                <div className="mt-12 p-6 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-2xl">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                <div className="mt-8 sm:mt-12 p-4 sm:p-6 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl sm:rounded-2xl">
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3">
                     Want to connect?
                   </h3>
-                  <p className="text-gray-600 mb-4">
+                  <p className="text-gray-600 mb-4 text-sm sm:text-base">
                     Feel free to reach out for collaboration opportunities or just to say hello!
                   </p>
-                  <div className="flex gap-3">
+                  <div className="flex flex-col sm:flex-row gap-3">
                     {details.linkedin && (
                       <a
                         href={details.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn btn-primary bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white gap-2"
+                        className="btn btn-primary bg-emerald-600 hover:bg-emerald-700 border-emerald-600 hover:border-emerald-700 text-white gap-2 btn-sm sm:btn-md"
                       >
-                        <Linkedin size={18} />
+                        <Linkedin size={16} className="sm:w-[18px] sm:h-[18px]" />
                         Connect on LinkedIn
                       </a>
                     )}
                     {details.email && (
                       <a
                         href={`mailto:${details.email}`}
-                        className="btn btn-outline btn-primary border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white gap-2"
+                        className="btn btn-outline btn-primary border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white gap-2 btn-sm sm:btn-md"
                       >
-                        <Mail size={18} />
+                        <Mail size={16} className="sm:w-[18px] sm:h-[18px]" />
                         Send Email
                       </a>
                     )}

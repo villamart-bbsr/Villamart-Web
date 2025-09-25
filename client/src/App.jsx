@@ -33,7 +33,6 @@ const FranchisePage = lazy(() => import("./pages/FranchiseModel.jsx"));
 const ContactUs = lazy(() => import("./pages/ContactUs.jsx"));
 const MediaPage = lazy(() => import("./pages/mediaPage.jsx"));
 const GalleryPage = lazy(() => import("./pages/GalleryPage.jsx"));
-const OurTeam = lazy(() => import("./pages/OurTeam.jsx"));
 const EmployeeLayout = lazy(() => import("./pages/employee/EmployeeLayout"));
 const EmployeePosts = lazy(() => import("./pages/employee/screens/posts/EmployeePosts"));
 const EditEmployeePost = lazy(() => import("./pages/employee/screens/posts/EditEmployeePost"));
@@ -41,6 +40,7 @@ const CreateEmployeePost = lazy(() => import("./pages/employee/screens/posts/Cre
 const OTPVerificationPage = lazy(() => import("./pages/register/OTPVerificationPage"));
 const ForgotPasswordPage = lazy(() => import("./pages/forgotPassword/ForgotPasswordPage"));
 const ResetPasswordPage = lazy(() => import("./pages/forgotPassword/ResetPasswordPage"));
+const OurTeam = lazy(() => import("./pages/OurTeam.jsx"));
 const TeamMemberDetails = lazy(() => import("./pages/TeamMemberDetails.jsx"));
 
 function App() {
@@ -60,8 +60,6 @@ function App() {
             <Route path="/contact" element={<PageTransition><ContactUs /></PageTransition>} />
             <Route path="/media" element={<PageTransition><MediaPage /></PageTransition>} />
             <Route path="/gallery" element={<PageTransition><GalleryPage /></PageTransition>} />
-            <Route path="/team" element={<PageTransition><OurTeam /></PageTransition>} />
-            <Route path="/team/:name" element={<PageTransition><TeamMemberDetails /></PageTransition>} />
             
             {/* <Route index path="/blogPage" element={<PageTransition><HomePage /></PageTransition>} />
             <Route path="/blog" element={<PageTransition><BlogPage /></PageTransition>} />
@@ -89,6 +87,9 @@ function App() {
               <Route path="posts/manage/edit/:slug" element={<PageTransition><EditEmployeePost /></PageTransition>} />
               <Route path="posts/manage/create" element={<PageTransition><CreateEmployeePost /></PageTransition>} />
             </Route>
+
+            <Route path="/team" element={<PageTransition><OurTeam /></PageTransition>} />
+            <Route path="/team/:name" element={<PageTransition><TeamMemberDetails /></PageTransition>} />
           </Routes>
         </AnimatePresence>
       </Suspense>

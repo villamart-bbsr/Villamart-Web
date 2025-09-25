@@ -268,14 +268,14 @@ export default function Navbar() {
                 <Users size={20} />
                 <span>Franchise</span>
               </a>
-              {/* <a href="/team" className={`flex flex-col items-center px-2 py-1 mx-1 rounded-md text-xs ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
+              <a href="/team" className={`flex flex-col items-center px-2 py-1 mx-1 rounded-md text-xs ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
                 <Users size={20} />
                 <span>Our Team</span>
-              </a> */}
-              <a href="/blogs" className={`flex flex-col items-center px-2 py-1 mx-1 rounded-md text-xs ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
+              </a>
+              {/* <a href="/blogs" className={`flex flex-col items-center px-2 py-1 mx-1 rounded-md text-xs ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
                 <BookOpen size={20} />
                 <span>Blogs</span>
-              </a>
+              </a> */}
               <a href="/contact" className={`flex flex-col items-center px-2 py-1 mx-1 rounded-md text-xs ${hoverColor} ${buttonHoverEffect} transition duration-300 hover:text-green-600 cursor-pointer`}>
                 <Phone size={20} />
                 <span>Contact</span>
@@ -317,10 +317,10 @@ export default function Navbar() {
               Franchise Model
             </a>
             
-            {/* <a href="/team" className={`block px-3 py-2 rounded-md ${hoverColor} flex items-center transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`}>
+            <a href="/team" className={`block px-3 py-2 rounded-md ${hoverColor} flex items-center transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`}>
               <Users size={16} className="mr-2" />
               Our Team
-            </a> */}
+            </a>
             
             {/* Mobile Blogs */}
             {/* <div>
@@ -337,10 +337,10 @@ export default function Navbar() {
               </div>
             </div> */}
 
-            <a href="/blogs" className={`block px-3 py-2 rounded-md ${hoverColor} flex items-center transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`}>
+            {/* <a href="/blogs" className={`block px-3 py-2 rounded-md ${hoverColor} flex items-center transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`}>
               <BookOpen size={16} className="mr-2" />
               Blogs
-            </a>
+            </a> */}
             
             <a href="/contact" className={`block px-3 py-2 rounded-md ${hoverColor} flex items-center transition-all duration-300 hover:translate-x-2 hover:text-green-600 cursor-pointer`}>
               <Phone size={16} className="mr-2" />
